@@ -1,52 +1,32 @@
 [
+  {
+    "question": "2 + 2 is ?",
+    "options": ["4", "6", "8", "12"],
+    "correct": "4",
+    "explanation": "Basic Arithmetic"
+  }
  {
-  "S.N.": 1,
-  "Question": "What is 6+6 ?",
-  "Option A": 11,
-  "Option B": 221,
-  "Option C": 22,
-  "Option D": 12,
-  "Correct Answer": 12,
-  "Explanation": "Yeti pani audaina ?"
- },
+    "question": "What is your name?",
+    "options": ["Ram", "Shyam", "Hari", "Sita"],
+    "correct": "Ram",
+    "explanation": "Ram is God."
+  }
  {
-  "S.N.": 2,
-  "Question": "Determinant of Zero matrix is ?",
-  "Option A": 1,
-  "Option B": 2,
-  "Option C": 3,
-  "Option D": 0,
-  "Correct Answer": 0,
-  "Explanation": "Zero is rule."
- },
- {
-  "S.N.": 3,
-  "Question": "What is 16*3 ?",
-  "Option A": 33,
-  "Option B": 122,
-  "Option C": 48,
-  "Option D": 32,
-  "Correct Answer": 48,
-  "Explanation": "Basic Rule"
- },
- {
-  "S.N.": 4,
-  "Question": "What is 6 + 20198 ?",
-  "Option A": 323424,
-  "Option B": 20204,
-  "Option C": 234324,
-  "Option D": 23234,
-  "Correct Answer": 20204,
-  "Explanation": "Basic Rule"
- },
- {
-  "S.N.": 5,
-  "Question": "36435*231361 = ?",
-  "Option A": 8429638035,
-  "Option B": 3213234123,
-  "Option C": 34123423,
-  "Option D": 342421425,
-  "Correct Answer": 8429638035,
-  "Explanation": "Multiply last digits"
- }
+    "question": "What is the unit of stress?",
+    "options": ["N/m", "N/m²", "N/m³", "N"],
+    "correct": "N/m²",
+    "explanation": "Stress is force per unit area."
+  },
+  {
+    "question": "What does Young's modulus measure?",
+    "options": ["Stiffness", "Ductility", "Toughness", "Hardness"],
+    "correct": "Stiffness",
+    "explanation": "Young's modulus measures stiffness."
+  }
+  {
+    "question": "Who are you?",
+    "options": ["Sexy", "Lovely", "Tough", "Hard"],
+    "correct": "Sexy",
+    "explanation": "You are good."
+  }
 ]
