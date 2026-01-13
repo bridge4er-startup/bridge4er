@@ -1,29 +1,64 @@
 [
-   {
+  {
+    "question": "What is the SI unit of stress?",
+    "options": ["Newton (N)", "Pascal (Pa)", "Joule (J)", "Watt (W)"],
+    "correct": "Pascal (Pa)",
+    "explanation": "Stress is force per unit area, so its SI unit is Pascal (Pa) which equals N/m²."
+  },
+  {
+    "question": "Which of the following materials has the highest Young's modulus?",
+    "options": ["Rubber", "Aluminum", "Steel", "Wood"],
+    "correct": "Steel",
+    "explanation": "Steel has a Young's modulus of about 200 GPa, which is higher than aluminum (70 GPa), wood (10 GPa), and rubber (0.01-0.1 GPa)."
+  },
+  {
+    "question": "The point where bending moment changes sign is called:",
+    "options": ["Neutral axis", "Shear center", "Point of contraflexure", "Elastic limit"],
+    "correct": "Point of contraflexure",
+    "explanation": "Point of contraflexure is where bending moment is zero and changes from positive to negative or vice versa."
+  },
+  {
+    "question": "Poisson's ratio for most metals ranges between:",
+    "options": ["0 to 0.1", "0.1 to 0.2", "0.2 to 0.5", "0.5 to 1.0"],
+    "correct": "0.2 to 0.5",
+    "explanation": "Most metals have Poisson's ratio between 0.2 and 0.5. For example, steel is about 0.3."
+  },
+  {
+    "question": "Factor of safety is defined as:",
+    "options": [
+      "Ultimate stress / Working stress",
+      "Working stress / Ultimate stress", 
+      "Yield stress / Ultimate stress",
+      "Ultimate stress / Yield stress"
+    ],
+    "correct": "Ultimate stress / Working stress",
+    "explanation": "Factor of safety = Ultimate stress (or yield stress) divided by Allowable (working) stress."
+  }
+  {
     "question": "x+x is ?",
     "options": ["4x", "6x", "2x", "x"],
     "correct": "2x",
     "explanation": "Basic Arithmetic"
   } 
- {
+  {
     "question": "Bheri Babai is in ",
     "options": ["Surkhet", "I don't know", "Kathmandu", "Huh"],
     "correct": "Surkhet",
     "explanation": "Chiple Surkhet"
   }
- {
+  {
     "question": "Bheri Babai Capacity is",
     "options": ["46.8", "48.6", "32", "3"],
     "correct": "46.8",
     "explanation": "See Website"
   }
- {
+  {
     "question": "What is your name?",
     "options": ["Ram", "Shyam", "Hari", "Sita"],
     "correct": "Ram",
     "explanation": "Ram is God."
   }
- {
+  {
     "question": "What is the unit of stress?",
     "options": ["N/m", "N/m²", "N/m³", "N"],
     "correct": "N/m²",
