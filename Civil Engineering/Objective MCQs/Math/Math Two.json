@@ -1,0 +1,22 @@
+[
+ {
+  "S.N.": 1,
+  "Question": "Capital of Nepal ?",
+  "Option A": "Pokhara",
+  "Option B": "Lumbini",
+  "Option C": "Dang",
+  "Option D": "Kathmandu",
+  "Correct Answer": "Kathmandu",
+  "Explanation": "Ktm is Capital"
+ },
+ {
+  "S.N.": 2,
+  "Question": "A for apple, B for --------?",
+  "Option A": "Dog",
+  "Option B": "Cat",
+  "Option C": "Ball",
+  "Option D": "Elephant",
+  "Correct Answer": "Ball",
+  "Explanation": "Bhakundo"
+ }
+]
