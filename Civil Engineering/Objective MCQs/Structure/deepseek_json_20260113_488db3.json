@@ -1,0 +1,32 @@
+[
+  {
+    "question": "What is the primary function of any structure?",
+    "options": ["To look aesthetically pleasing", "To resist applied loads safely", "To be cost-effective", "To be easy to construct"],
+    "correct": "To resist applied loads safely",
+    "explanation": "The fundamental purpose of any structure is to safely resist all applied loads (dead, live, wind, seismic, etc.) without failure or excessive deformation."
+  },
+  {
+    "question": "Which of the following is NOT a primary structural element?",
+    "options": ["Beam", "Column", "Slab", "Wall paint"],
+    "correct": "Wall paint",
+    "explanation": "Wall paint is a finishing material, not a structural element. Beams, columns, and slabs are primary load-bearing elements."
+  },
+  {
+    "question": "What does the term 'dead load' refer to?",
+    "options": ["Loads that move or change magnitude", "Permanent, stationary loads", "Wind and earthquake loads", "Temporary construction loads"],
+    "correct": "Permanent, stationary loads",
+    "explanation": "Dead loads are permanent, stationary loads including the weight of the structure itself, permanent fixtures, and fixed equipment."
+  },
+  {
+    "question": "The ratio of ultimate strength to allowable stress is called:",
+    "options": ["Safety factor", "Load factor", "Stress ratio", "Strength reduction factor"],
+    "correct": "Safety factor",
+    "explanation": "Safety factor = Ultimate strength / Allowable stress. It provides a margin of safety against uncertainties in materials, loads, and construction."
+  },
+  {
+    "question": "Which material has the highest strength-to-weight ratio?",
+    "options": ["Concrete", "Steel", "Timber", "Aluminum"],
+    "correct": "Aluminum",
+    "explanation": "Aluminum has the highest strength-to-weight ratio among common construction materials, making it ideal for applications where weight is critical."
+  }
+]

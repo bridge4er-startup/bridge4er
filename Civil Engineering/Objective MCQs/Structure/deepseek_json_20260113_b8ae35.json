@@ -1,0 +1,32 @@
+[
+  {
+    "question": "For a simply supported beam with central point load, maximum bending moment occurs at:",
+    "options": ["Supports", "Quarter points", "Center", "Throughout the beam"],
+    "correct": "Center",
+    "explanation": "For simply supported beam with central point load W, maximum bending moment = WL/4 at center."
+  },
+  {
+    "question": "The point where bending moment changes sign is called:",
+    "options": ["Neutral axis", "Shear center", "Point of contraflexure", "Elastic center"],
+    "correct": "Point of contraflexure",
+    "explanation": "Point of contraflexure (inflection point) is where bending moment is zero and changes from positive to negative or vice versa."
+  },
+  {
+    "question": "In bending equation σ/y = M/I = E/R, 'y' represents:",
+    "options": ["Young's modulus", "Distance from neutral axis", "Radius of curvature", "Moment of inertia"],
+    "correct": "Distance from neutral axis",
+    "explanation": "y = distance from neutral axis to the fiber where stress σ is calculated. Stress varies linearly with y."
+  },
+  {
+    "question": "For a rectangular beam, maximum shear stress occurs at:",
+    "options": ["Top fiber", "Bottom fiber", "Neutral axis", "Quarter height"],
+    "correct": "Neutral axis",
+    "explanation": "Shear stress distribution is parabolic with maximum at neutral axis and zero at top/bottom fibers."
+  },
+  {
+    "question": "Section modulus Z is defined as:",
+    "options": ["I/y_max", "EI", "M/σ", "σ/y"],
+    "correct": "I/y_max",
+    "explanation": "Section modulus Z = I/y_max, where I = moment of inertia, y_max = distance to extreme fiber. Used in bending formula M = σZ."
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "question": "In a truss, members carrying zero force under specific loading are called:",
+    "options": ["Redundant members", "Zero-force members", "Critical members", "Primary members"],
+    "correct": "Zero-force members",
+    "explanation": "Zero-force members carry no load under given conditions. They provide stability and may carry load if loading changes."
+  },
+  {
+    "question": "Method of joints is based on:",
+    "options": ["Equilibrium of entire truss", "Equilibrium of individual joints", "Deformation compatibility", "Energy principles"],
+    "correct": "Equilibrium of individual joints",
+    "explanation": "Method of joints analyzes forces by applying equilibrium equations (ΣFx=0, ΣFy=0) at each joint."
+  },
+  {
+    "question": "A perfect truss satisfies:",
+    "options": ["m = 2j - 3", "m = 2j - 2", "m = 2j", "m = 3j - 2"],
+    "correct": "m = 2j - 3",
+    "explanation": "For perfect truss: m = 2j - 3, where m = number of members, j = number of joints. For plane trusses only."
+  },
+  {
+    "question": "In method of sections, the cut should pass through:",
+    "options": ["Exactly 2 members", "Exactly 3 members", "Maximum 3 members", "Any number of members"],
+    "correct": "Maximum 3 members",
+    "explanation": "Method of sections cuts through not more than 3 members (with unknown forces) to allow solving with 3 equilibrium equations."
+  },
+  {
+    "question": "A member in compression is called:",
+    "options": ["Tie", "Strut", "Beam", "Column"],
+    "correct": "Strut",
+    "explanation": "Strut = compression member (push), Tie = tension member (pull). In trusses, vertical/horizontal members may be struts or ties."
+  }
+]
