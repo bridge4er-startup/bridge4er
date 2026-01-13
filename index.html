@@ -14,13 +14,6 @@
             --dark-color: #2d3436;
             --border-radius: 8px;
             --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            
-            /* Field-specific colors */
-            --civil-color: #1a5f7a;
-            --mechanical-color: #e74c3c;
-            --electrical-color: #f39c12;
-            --electronics-color: #9b59b6;
-            --computer-color: #3498db;
         }
 
         * {
@@ -48,13 +41,14 @@
             color: white;
             padding: 1.2rem 0;
             box-shadow: var(--box-shadow);
-            transition: all 0.3s ease;
         }
 
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .logo {
@@ -174,7 +168,7 @@
             color: white;
         }
 
-        /* Navigation Styles */
+        /* Navigation */
         .main-nav {
             background-color: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -186,17 +180,13 @@
 
         .nav-container {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            justify-content: center;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-        }
-
-        .nav-links li {
-            position: relative;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
@@ -222,7 +212,7 @@
             margin-right: 8px;
         }
 
-        /* Main Content Styles */
+        /* Main Content */
         main {
             padding-bottom: 3rem;
             min-height: 70vh;
@@ -273,7 +263,7 @@
             margin-left: 10px;
         }
 
-        /* File List Styles */
+        /* File List */
         .file-list {
             list-style: none;
             padding-left: 0;
@@ -400,9 +390,9 @@
             margin-top: 0.5rem;
         }
 
-        /* MCQ Section */
-        .mcq-container {
-            max-width: 800px;
+        /* MCQ Section - NEW PAGINATED STYLE */
+        .mcq-paginated-container {
+            max-width: 1000px;
             margin: 0 auto;
         }
 
@@ -416,28 +406,55 @@
             border-radius: var(--border-radius);
         }
 
-        .mcq-counter {
+        .mcq-pagination-info {
             font-weight: bold;
             color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .questions-per-page-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .questions-per-page-selector select {
+            padding: 0.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid #ddd;
+        }
+
+        .mcq-question-container {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            border: 1px solid #eee;
+            border-radius: var(--border-radius);
+            background-color: #f8f9fa;
+        }
+
+        .question-number-badge {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
         }
 
         .mcq-question {
-            background-color: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
+            font-size: 1.1rem;
             margin-bottom: 1.5rem;
-            border-left: 4px solid var(--primary-color);
-        }
-
-        .mcq-question h3 {
-            margin-bottom: 1rem;
+            line-height: 1.5;
             color: var(--dark-color);
         }
 
         .mcq-options {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
             margin-bottom: 1.5rem;
         }
 
@@ -449,7 +466,7 @@
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .mcq-option:hover {
@@ -482,20 +499,20 @@
             justify-content: center;
             font-weight: bold;
             color: var(--dark-color);
+            flex-shrink: 0;
         }
 
         .mcq-explanation {
             padding: 1rem;
             background-color: #e7f5ff;
             border-radius: var(--border-radius);
-            margin-top: 1.5rem;
-            display: none;
+            margin-top: 1rem;
             border-left: 4px solid #4dabf7;
+            display: none;
         }
 
         .mcq-explanation.show {
             display: block;
-            animation: fadeIn 0.5s ease;
         }
 
         .mcq-explanation h4 {
@@ -503,10 +520,106 @@
             margin-bottom: 0.5rem;
         }
 
-        .mcq-navigation {
+        /* Pagination Controls */
+        .pagination-controls {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+
+        .pagination-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .page-indicator {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .page-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .page-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Subjective Exam Display */
+        .subjective-exam-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .subjective-question-item {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .subjective-question-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .question-number-circle {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .subjective-question-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--dark-color);
+            flex: 1;
+        }
+
+        .question-marks {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 0.5rem;
+        }
+
+        .category-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0 1rem 0;
+            font-size: 1.2rem;
+            font-weight: bold;
         }
 
         /* Exam Timer */
@@ -548,46 +661,28 @@
             border-radius: var(--border-radius);
         }
 
-        /* Subjective Reading */
-        .subjective-content {
-            background-color: #f8f9fa;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            margin-top: 1.5rem;
-            max-height: 500px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
+        /* Loading Spinner */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
         }
 
-        /* Exam Questions */
-        .question-paper {
-            background-color: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            border: 1px solid #ddd;
-        }
-
-        .question-item {
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px dashed #ddd;
-        }
-
-        .question-item:last-child {
-            border-bottom: none;
-        }
-
-        .question-number {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            width: 30px;
-            height: 30px;
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
             border-radius: 50%;
-            text-align: center;
-            line-height: 30px;
-            margin-right: 10px;
-            font-weight: bold;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Footer */
@@ -642,63 +737,11 @@
             color: #aaa;
         }
 
-        /* Loading Spinner */
-        .loading {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 3rem;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 1rem;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Pagination */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-top: 2rem;
-        }
-
-        .page-btn {
-            padding: 0.5rem 1rem;
-            border: 1px solid #ddd;
-            background: white;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .page-btn.active {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-
-        .page-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 1200px) {
+        /* Responsive */
+        @media (max-width: 768px) {
             .header-container {
-                flex-wrap: wrap;
-                gap: 15px;
+                flex-direction: column;
+                text-align: center;
             }
             
             .field-selector-container {
@@ -706,34 +749,19 @@
                 width: 100%;
                 justify-content: center;
             }
-        }
-
-        @media (max-width: 992px) {
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
+            
+            .subject-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             }
             
             .exam-header {
                 flex-direction: column;
                 gap: 15px;
             }
-        }
-
-        @media (max-width: 768px) {
-            .subject-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            }
             
-            .footer-content {
+            .pagination-controls {
                 flex-direction: column;
-                text-align: center;
-            }
-            
-            .mcq-header {
-                flex-direction: column;
-                gap: 15px;
-                align-items: flex-start;
+                gap: 1rem;
             }
             
             .file-list li {
@@ -749,7 +777,7 @@
     </style>
 </head>
 <body>
-    <!-- Header Section -->
+    <!-- Header -->
     <header>
         <div class="container header-container">
             <div class="logo">
@@ -790,7 +818,7 @@
             </div>
             
             <div class="user-info">
-                <div class="user-avatar">JS</div>
+                <div class="user-avatar">PT</div>
                 <div>
                     <div>Pannu Tiwari</div>
                     <small id="user-field">Civil Engineering</small>
@@ -830,9 +858,7 @@
                 <p>Loading notices...</p>
             </div>
             
-            <ul class="file-list" id="notice-list" style="display: none;">
-                <!-- Dynamic content -->
-            </ul>
+            <ul class="file-list" id="notice-list" style="display: none;"></ul>
         </section>
 
         <!-- Syllabus Section -->
@@ -850,9 +876,7 @@
                 <p>Loading syllabus...</p>
             </div>
             
-            <ul class="file-list" id="syllabus-list" style="display: none;">
-                <!-- Dynamic content -->
-            </ul>
+            <ul class="file-list" id="syllabus-list" style="display: none;"></ul>
         </section>
 
         <!-- Old Questions Section -->
@@ -870,9 +894,7 @@
                 <p>Loading old questions...</p>
             </div>
             
-            <ul class="file-list" id="old-questions-list" style="display: none;">
-                <!-- Dynamic content -->
-            </ul>
+            <ul class="file-list" id="old-questions-list" style="display: none;"></ul>
         </section>
 
         <!-- Objective MCQs Section -->
@@ -891,40 +913,52 @@
                     <div class="spinner"></div>
                     <p>Loading subjects...</p>
                 </div>
-                <div class="subject-grid" id="subject-grid" style="display: none;">
-                    <!-- Dynamic content -->
-                </div>
+                <div class="subject-grid" id="subject-grid" style="display: none;"></div>
             </div>
             
-            <!-- MCQ Practice Area -->
+            <!-- MCQ Practice Area - PAGINATED -->
             <div id="mcq-practice" style="display: none;">
                 <div class="mcq-header">
                     <div>
                         <h3 id="mcq-subject-title">Subject MCQs</h3>
-                        <div class="mcq-counter">Question <span id="current-question">1</span> of <span id="total-questions">10</span></div>
+                        <div class="mcq-pagination-info">
+                            Page <span id="current-page">1</span> of <span id="total-pages">1</span>
+                            | Questions <span id="questions-range">1-5</span> of <span id="total-questions-count">0</span>
+                        </div>
                     </div>
                     <div>
                         <button class="btn btn-secondary" id="back-to-subjects"><i class="fas fa-arrow-left"></i> Back to Subjects</button>
                     </div>
                 </div>
                 
-                <div class="mcq-container">
-                    <div class="mcq-question">
-                        <h3 id="question-text">Loading question...</h3>
+                <div class="questions-per-page-selector">
+                    <span>Questions per page:</span>
+                    <select id="questions-per-page">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+                
+                <div class="mcq-paginated-container" id="mcq-questions-container">
+                    <!-- Questions will be populated here -->
+                </div>
+                
+                <div class="pagination-controls">
+                    <div class="pagination-buttons">
+                        <button class="btn btn-primary" id="first-page" disabled>First</button>
+                        <button class="btn btn-primary" id="prev-page" disabled>Previous</button>
                     </div>
                     
-                    <div class="mcq-options" id="mcq-options-container">
-                        <!-- Options will be populated by JavaScript -->
+                    <div class="page-indicator" id="page-indicators">
+                        <!-- Page buttons will be added here -->
                     </div>
                     
-                    <div class="mcq-explanation" id="explanation">
-                        <h4><i class="fas fa-lightbulb"></i> Explanation</h4>
-                        <p id="explanation-text">Explanation will appear here.</p>
-                    </div>
-                    
-                    <div class="mcq-navigation">
-                        <button class="btn btn-primary" id="prev-question"><i class="fas fa-chevron-left"></i> Previous</button>
-                        <button class="btn btn-primary" id="next-question">Next <i class="fas fa-chevron-right"></i></button>
+                    <div class="pagination-buttons">
+                        <button class="btn btn-primary" id="next-page">Next</button>
+                        <button class="btn btn-primary" id="last-page">Last</button>
                     </div>
                 </div>
             </div>
@@ -935,9 +969,7 @@
                     <h3 id="chapter-selection-title">Select Chapter</h3>
                     <button class="btn btn-secondary" id="back-to-subjects-from-chapter"><i class="fas fa-arrow-left"></i> Back to Subjects</button>
                 </div>
-                <div class="subject-grid" id="chapter-grid">
-                    <!-- Dynamic content -->
-                </div>
+                <div class="subject-grid" id="chapter-grid"></div>
             </div>
         </section>
 
@@ -949,7 +981,7 @@
                     <i class="fas fa-building"></i> Civil
                 </span>
             </h2>
-            <p>Select a set to read subjective questions and answers.</p>
+            <p>Select a subject to read subjective questions and answers.</p>
             
             <div class="subject-selection">
                 <h3>Choose a Subject:</h3>
@@ -957,9 +989,7 @@
                     <div class="spinner"></div>
                     <p>Loading subjects...</p>
                 </div>
-                <div class="subject-grid" id="subjective-set-grid" style="display: none;">
-                    <!-- Dynamic content -->
-                </div>
+                <div class="subject-grid" id="subjective-set-grid" style="display: none;"></div>
             </div>
             
             <!-- Subjective Content Area -->
@@ -985,9 +1015,7 @@
                     <h3 id="subjective-chapter-title">Select Chapter</h3>
                     <button class="btn btn-secondary" id="back-to-subjective-subjects"><i class="fas fa-arrow-left"></i> Back to Subjects</button>
                 </div>
-                <div class="subject-grid" id="subjective-chapter-grid">
-                    <!-- Dynamic content -->
-                </div>
+                <div class="subject-grid" id="subjective-chapter-grid"></div>
             </div>
         </section>
 
@@ -1003,13 +1031,13 @@
             
             <div class="exam-type-selection" id="exam-type-selection">
                 <h3>Select Exam Type:</h3>
-                <div style="display: flex; gap: 2rem; margin-top: 1.5rem;">
-                    <div class="subject-card" style="flex: 1;" data-exam-type="subjective">
+                <div style="display: flex; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                    <div class="subject-card" style="flex: 1; min-width: 250px;" data-exam-type="subjective">
                         <i class="fas fa-edit"></i>
                         <h3>Subjective Exam</h3>
                         <p>3-hour timer, all questions displayed at once</p>
                     </div>
-                    <div class="subject-card" style="flex: 1;" data-exam-type="multiple-choice">
+                    <div class="subject-card" style="flex: 1; min-width: 250px;" data-exam-type="multiple-choice">
                         <i class="fas fa-check-circle"></i>
                         <h3>Multiple Choice Exam</h3>
                         <p>30-minute timer, view answers after submission</p>
@@ -1034,7 +1062,7 @@
                     </div>
                 </div>
                 
-                <div class="question-paper" id="subjective-exam-questions">
+                <div class="subjective-exam-container" id="subjective-exam-questions">
                     <!-- Questions will be populated by JavaScript -->
                 </div>
                 
@@ -1066,27 +1094,28 @@
                     </div>
                 </div>
                 
-                <div class="mcq-container" id="multiple-choice-container">
-                    <div class="mcq-question">
-                        <h3 id="mcq-exam-question-text">Question will appear here</h3>
-                    </div>
-                    
-                    <div class="mcq-options" id="mcq-exam-options-container">
-                        <!-- Options will be populated by JavaScript -->
-                    </div>
-                    
-                    <div class="mcq-navigation" style="justify-content: space-between; margin-top: 2rem;">
+                <div class="mcq-paginated-container" id="multiple-choice-container">
+                    <!-- Questions will be populated by JavaScript -->
+                </div>
+                
+                <div class="pagination-controls">
+                    <div class="pagination-buttons">
                         <button class="btn btn-primary" id="prev-exam-question">
                             <i class="fas fa-chevron-left"></i> Previous
                         </button>
-                        <div>
-                            <button class="btn btn-secondary" id="flag-question">
-                                <i class="far fa-flag"></i> Flag
-                            </button>
-                            <button class="btn btn-primary" id="next-exam-question" style="margin-left: 10px;">
-                                Next <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
+                        <button class="btn btn-secondary" id="flag-exam-question">
+                            <i class="far fa-flag"></i> Flag
+                        </button>
+                    </div>
+                    
+                    <div class="page-indicator">
+                        Question <span id="current-exam-question">1</span> of <span id="total-exam-questions">0</span>
+                    </div>
+                    
+                    <div class="pagination-buttons">
+                        <button class="btn btn-primary" id="next-exam-question">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
                     </div>
                 </div>
                 
@@ -1112,7 +1141,7 @@
                     <div style="font-size: 3rem; color: var(--secondary-color); font-weight: bold; margin: 1.5rem 0;" id="exam-score">85%</div>
                     <p>Your score: <strong id="exam-correct-answers">17</strong> out of <strong id="exam-total-questions">20</strong> questions correct</p>
                     
-                    <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 2rem;">
+                    <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap;">
                         <div style="text-align: center;">
                             <div style="font-size: 2rem; color: var(--secondary-color);" id="correct-count">17</div>
                             <div>Correct</div>
@@ -1170,7 +1199,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Engineering Exam Platform. All rights reserved. | Version 2.0</p>
+                <p>&copy; 2023 Engineering Exam Platform. All rights reserved. | Version 3.0</p>
                 <p style="margin-top: 0.5rem; font-size: 0.8rem;">Powered by GitHub Repository</p>
             </div>
         </div>
@@ -1241,9 +1270,11 @@
             mcqState: {
                 currentSubject: null,
                 currentChapter: null,
-                currentQuestionIndex: 0,
+                currentPage: 1,
+                questionsPerPage: 5,
                 questions: [],
-                userAnswers: {}
+                userAnswers: {},
+                currentQuestions: []
             },
             subjectiveState: {
                 currentSubject: null,
@@ -1272,7 +1303,7 @@
         // ==============================================
 
         const DOM = {
-            // Field selector
+            // Header elements
             currentField: document.getElementById('current-field'),
             fieldDropdown: document.querySelector('.field-dropdown-content'),
             fieldDropdownBtn: document.querySelector('.field-dropdown-btn'),
@@ -1292,7 +1323,7 @@
             navLinks: document.querySelectorAll('.nav-link'),
             sections: document.querySelectorAll('.section'),
 
-            // Loading elements
+            // Loading indicators
             loading: {
                 notice: document.getElementById('notice-loading'),
                 syllabus: document.getElementById('syllabus-loading'),
@@ -1306,25 +1337,28 @@
             syllabusList: document.getElementById('syllabus-list'),
             oldQuestionsList: document.getElementById('old-questions-list'),
 
-            // MCQ Section
+            // MCQ elements
             subjectGrid: document.getElementById('subject-grid'),
             mcqPractice: document.getElementById('mcq-practice'),
             chapterSelection: document.getElementById('chapter-selection'),
             chapterGrid: document.getElementById('chapter-grid'),
             chapterSelectionTitle: document.getElementById('chapter-selection-title'),
             mcqSubjectTitle: document.getElementById('mcq-subject-title'),
-            currentQuestion: document.getElementById('current-question'),
-            totalQuestions: document.getElementById('total-questions'),
-            questionText: document.getElementById('question-text'),
-            mcqOptionsContainer: document.getElementById('mcq-options-container'),
-            explanation: document.getElementById('explanation'),
-            explanationText: document.getElementById('explanation-text'),
-            prevQuestionBtn: document.getElementById('prev-question'),
-            nextQuestionBtn: document.getElementById('next-question'),
+            mcqQuestionsContainer: document.getElementById('mcq-questions-container'),
+            questionsPerPageSelect: document.getElementById('questions-per-page'),
+            currentPage: document.getElementById('current-page'),
+            totalPages: document.getElementById('total-pages'),
+            questionsRange: document.getElementById('questions-range'),
+            totalQuestionsCount: document.getElementById('total-questions-count'),
+            pageIndicators: document.getElementById('page-indicators'),
+            firstPageBtn: document.getElementById('first-page'),
+            prevPageBtn: document.getElementById('prev-page'),
+            nextPageBtn: document.getElementById('next-page'),
+            lastPageBtn: document.getElementById('last-page'),
             backToSubjectsBtn: document.getElementById('back-to-subjects'),
             backToSubjectsFromChapterBtn: document.getElementById('back-to-subjects-from-chapter'),
 
-            // Subjective Section
+            // Subjective elements
             subjectiveSetGrid: document.getElementById('subjective-set-grid'),
             subjectiveContent: document.getElementById('subjective-content'),
             subjectiveChapterSelection: document.getElementById('subjective-chapter-selection'),
@@ -1335,151 +1369,94 @@
             backToSubjectiveSetsBtn: document.getElementById('back-to-subjective-sets'),
             backToSubjectiveSubjectsBtn: document.getElementById('back-to-subjective-subjects'),
 
-            // Exam Section
+            // Exam elements
             examTypeSelection: document.getElementById('exam-type-selection'),
             examSetSelection: document.getElementById('exam-set-selection'),
             subjectiveExam: document.getElementById('subjective-exam'),
             multipleChoiceExam: document.getElementById('multiple-choice-exam'),
             examResults: document.getElementById('exam-results'),
-            
-            // Exam buttons
             prevExamQuestion: document.getElementById('prev-exam-question'),
             nextExamQuestion: document.getElementById('next-exam-question'),
+            flagExamQuestion: document.getElementById('flag-exam-question'),
             backToExamTypeBtn: document.getElementById('back-to-exam-type'),
             backToExamTypeMcqBtn: document.getElementById('back-to-exam-type-mcq'),
             backToExamTypeResultsBtn: document.getElementById('back-to-exam-type-results'),
             submitSubjectiveExamBtn: document.getElementById('submit-subjective-exam'),
             submitMcqExamBtn: document.getElementById('submit-mcq-exam'),
             viewAnswersBtn: document.getElementById('view-answers'),
-            
-            // Exam elements
-            mcqExamQuestionText: document.getElementById('mcq-exam-question-text'),
-            mcqExamOptionsContainer: document.getElementById('mcq-exam-options-container'),
+            subjectiveExamTitle: document.getElementById('subjective-exam-title'),
+            subjectiveExamQuestions: document.getElementById('subjective-exam-questions'),
+            multipleChoiceExamTitle: document.getElementById('multiple-choice-exam-title'),
+            currentExamQuestion: document.getElementById('current-exam-question'),
+            totalExamQuestions: document.getElementById('total-exam-questions'),
+            multipleChoiceContainer: document.getElementById('multiple-choice-container'),
             mcqTotalQuestions: document.getElementById('mcq-total-questions'),
             mcqAnsweredQuestions: document.getElementById('mcq-answered-questions'),
-            mcqRemainingQuestions: document.getElementById('mcq-remaining-questions'),
-            multipleChoiceExamTitle: document.getElementById('multiple-choice-exam-title'),
-            subjectiveExamTitle: document.getElementById('subjective-exam-title')
+            mcqRemainingQuestions: document.getElementById('mcq-remaining-questions')
         };
 
         // ==============================================
         // GITHUB API FUNCTIONS
         // ==============================================
         
-        // Get GitHub API URL for a folder
         function getGitHubApiUrl(path) {
             const encodedPath = encodeURIComponent(path);
             return `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${encodedPath}?ref=${GITHUB_CONFIG.branch}`;
         }
         
-        // Get raw file URL
         function getRawFileUrl(path) {
             const encodedPath = encodeURIComponent(path);
             return `https://raw.githubusercontent.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/${GITHUB_CONFIG.branch}/${encodedPath}`;
         }
         
-        // List files in a folder from GitHub
         async function listFilesFromGitHub(folderPath) {
             try {
                 const apiUrl = getGitHubApiUrl(folderPath);
                 const response = await fetch(apiUrl);
                 
                 if (!response.ok) {
+                    if (response.status === 404) {
+                        console.log(`Folder not found: ${folderPath}`);
+                        return [];
+                    }
                     throw new Error(`GitHub API error: ${response.status}`);
                 }
                 
                 const data = await response.json();
+                const items = Array.isArray(data) ? data : [data];
+                const files = items.filter(item => item.type === 'file');
                 
-                // Filter out directories and only return files
-                const files = data.filter(item => item.type === 'file');
-                
-                // Convert GitHub API response to our format
                 return files.map(file => ({
                     name: file.name,
                     path: file.path,
                     size: file.size,
                     download_url: file.download_url,
                     html_url: file.html_url,
-                    type: file.type,
-                    uploadTimestamp: Date.now()
+                    type: file.type
                 }));
                 
             } catch (error) {
                 console.error('Error fetching from GitHub:', error);
-                
-                // Fallback: Try to list files from a pre-defined structure
-                return getFallbackFiles(folderPath);
+                return [];
             }
         }
         
-        // Fallback files in case GitHub API fails
-        function getFallbackFiles(folderPath) {
-            const field = AppState.currentField;
-            const fieldName = FIELD_CONFIG[field].name;
-            
-            // Define fallback file structures for each folder
-            const fallbackFiles = {
-                'Civil Engineering/Notice': [
-                    { name: 'Exam_Schedule_2024.pdf', size: 1024000 },
-                    { name: 'Important_Dates.pdf', size: 512000 },
-                    { name: 'Admission_Notice.pdf', size: 768000 }
-                ],
-                'Civil Engineering/Syllabus': [
-                    { name: 'Complete_Syllabus.pdf', size: 2048000 },
-                    { name: 'Course_Structure.pdf', size: 1024000 }
-                ],
-                'Civil Engineering/Old Questions': [
-                    { name: '2023_Final_Exam.pdf', size: 1536000 },
-                    { name: '2022_Midterm.pdf', size: 1024000 },
-                    { name: '2021_Final_Exam.pdf', size: 1536000 }
-                ],
-                'Mechanical Engineering/Notice': [
-                    { name: 'Exam_Schedule_2024.pdf', size: 1024000 },
-                    { name: 'Lab_Schedule.pdf', size: 512000 }
-                ],
-                'Mechanical Engineering/Syllabus': [
-                    { name: 'Complete_Syllabus.pdf', size: 2048000 }
-                ],
-                'Mechanical Engineering/Old Questions': [
-                    { name: '2023_Final_Exam.pdf', size: 1536000 },
-                    { name: '2022_Midterm.pdf', size: 1024000 }
-                ],
-                'Electrical Engineering/Notice': [
-                    { name: 'Exam_Schedule_2024.pdf', size: 1024000 }
-                ],
-                'Electrical Engineering/Syllabus': [
-                    { name: 'Complete_Syllabus.pdf', size: 2048000 }
-                ],
-                'Electrical Engineering/Old Questions': [
-                    { name: '2023_Final_Exam.pdf', size: 1536000 }
-                ],
-                'Electronics Engineering/Notice': [
-                    { name: 'Exam_Schedule_2024.pdf', size: 1024000 }
-                ],
-                'Electronics Engineering/Syllabus': [
-                    { name: 'Complete_Syllabus.pdf', size: 2048000 }
-                ],
-                'Electronics Engineering/Old Questions': [
-                    { name: '2023_Final_Exam.pdf', size: 1536000 }
-                ],
-                'Computer Engineering/Notice': [
-                    { name: 'Exam_Schedule_2024.pdf', size: 1024000 }
-                ],
-                'Computer Engineering/Syllabus': [
-                    { name: 'Complete_Syllabus.pdf', size: 2048000 }
-                ],
-                'Computer Engineering/Old Questions': [
-                    { name: '2023_Final_Exam.pdf', size: 1536000 }
-                ]
-            };
-            
-            const files = fallbackFiles[folderPath] || [];
-            return files.map(file => ({
-                ...file,
-                path: `${folderPath}/${file.name}`,
-                download_url: getRawFileUrl(`${folderPath}/${file.name}`),
-                uploadTimestamp: Date.now()
-            }));
+        async function getJsonFileFromGitHub(filePath) {
+            try {
+                const rawUrl = getRawFileUrl(filePath);
+                const response = await fetch(rawUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch JSON: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                return data;
+                
+            } catch (error) {
+                console.error('Error fetching JSON file:', error);
+                return null;
+            }
         }
 
         // ==============================================
@@ -1487,6 +1464,7 @@
         // ==============================================
 
         function formatFileSize(bytes) {
+            if (!bytes || bytes === 0) return '0 Bytes';
             if (bytes < 1024) return bytes + ' Bytes';
             if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
             return (bytes / 1048576).toFixed(1) + ' MB';
@@ -1503,8 +1481,11 @@
                 case 'doc': case 'docx': return 'fa-file-word';
                 case 'xls': case 'xlsx': return 'fa-file-excel';
                 case 'ppt': case 'pptx': return 'fa-file-powerpoint';
-                case 'jpg': case 'jpeg': case 'png': case 'gif': return 'fa-file-image';
-                default: return 'fa-file-alt';
+                case 'jpg': case 'jpeg': case 'png': case 'gif': case 'bmp': case 'svg': return 'fa-file-image';
+                case 'txt': return 'fa-file-alt';
+                case 'zip': case 'rar': case '7z': return 'fa-file-archive';
+                case 'json': return 'fa-file-code';
+                default: return 'fa-file';
             }
         }
 
@@ -1515,11 +1496,6 @@
             const G = (num >> 8 & 0x00FF) + amt;
             const B = (num & 0x0000FF) + amt;
             return "#" + (0x1000000 + (R<255?R<1?0:R:255)*0x10000 + (G<255?G<1?0:G:255)*0x100 + (B<255?B<1?0:B:255)).toString(16).slice(1);
-        }
-
-        function showError(message) {
-            console.error(message);
-            // Could implement a toast notification system here
         }
 
         function hideLoading(element) {
@@ -1540,8 +1516,6 @@
             
             try {
                 const files = await listFilesFromGitHub(folderPath);
-                
-                // Sort by name (assuming newest first in naming)
                 files.sort((a, b) => b.name.localeCompare(a.name));
                 
                 hideLoading(DOM.loading.notice);
@@ -1554,13 +1528,7 @@
                 
                 DOM.noticeList.innerHTML = files.map(file => {
                     const fileName = file.name;
-                    const friendlyName = fileName;
-                    const uploadDate = new Date();
-                    const fileDate = uploadDate.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric'
-                    });
+                    const friendlyName = fileName.replace(/\.(pdf|docx|doc|txt)$/i, '').replace(/_/g, ' ');
                     const fileSize = formatFileSize(file.size || 0);
                     const fileExt = fileName.split('.').pop().toLowerCase();
                     const iconClass = getFileIconClass(fileExt);
@@ -1572,7 +1540,7 @@
                                     <i class="fas ${iconClass}"></i>
                                 </div>
                                 <div class="file-details">
-                                    <h4>${friendlyName.replace(/\.(pdf|docx|doc)$/i, '').replace(/_/g, ' ')}</h4>
+                                    <h4>${friendlyName}</h4>
                                     <p>File | Size: ${fileSize}</p>
                                 </div>
                             </div>
@@ -1591,7 +1559,7 @@
             } catch (error) {
                 console.error('Error loading notice files:', error);
                 hideLoading(DOM.loading.notice);
-                DOM.noticeList.innerHTML = '<li style="text-align: center; padding: 2rem; color: #e74c3c;"><p>Error loading notice files. Please try again later.</p></li>';
+                DOM.noticeList.innerHTML = '<li style="text-align: center; padding: 2rem; color: #e74c3c;"><p>Error loading notice files.</p></li>';
                 showContent(DOM.noticeList);
             }
         }
@@ -1602,8 +1570,6 @@
             
             try {
                 const files = await listFilesFromGitHub(folderPath);
-                
-                // Sort alphabetically
                 files.sort((a, b) => a.name.localeCompare(b.name));
                 
                 hideLoading(DOM.loading.syllabus);
@@ -1616,23 +1582,19 @@
                 
                 DOM.syllabusList.innerHTML = files.map(file => {
                     const fileName = file.name;
-                    const friendlyName = fileName;
-                    const uploadDate = new Date();
-                    const fileDate = uploadDate.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric'
-                    });
+                    const friendlyName = fileName.replace(/\.(pdf|docx|doc)$/i, '').replace(/_/g, ' ');
                     const fileSize = formatFileSize(file.size || 0);
+                    const fileExt = fileName.split('.').pop().toLowerCase();
+                    const iconClass = getFileIconClass(fileExt);
                     
                     return `
                         <li>
                             <div class="file-info">
                                 <div class="file-icon">
-                                    <i class="fas fa-file-pdf"></i>
+                                    <i class="fas ${iconClass}"></i>
                                 </div>
                                 <div class="file-details">
-                                    <h4>${friendlyName.replace(/\.pdf$/i, '').replace(/_/g, ' ')}</h4>
+                                    <h4>${friendlyName}</h4>
                                     <p>File | Size: ${fileSize}</p>
                                 </div>
                             </div>
@@ -1651,7 +1613,7 @@
             } catch (error) {
                 console.error('Error loading syllabus files:', error);
                 hideLoading(DOM.loading.syllabus);
-                DOM.syllabusList.innerHTML = '<li style="text-align: center; padding: 2rem; color: #e74c3c;"><p>Error loading syllabus files. Please try again later.</p></li>';
+                DOM.syllabusList.innerHTML = '<li style="text-align: center; padding: 2rem; color: #e74c3c;"><p>Error loading syllabus files.</p></li>';
                 showContent(DOM.syllabusList);
             }
         }
@@ -1663,7 +1625,6 @@
             try {
                 const files = await listFilesFromGitHub(folderPath);
                 
-                // Extract year from filename and sort (newest first)
                 files.sort((a, b) => {
                     const yearA = extractYearFromFilename(a.name);
                     const yearB = extractYearFromFilename(b.name);
@@ -1680,24 +1641,20 @@
                 
                 DOM.oldQuestionsList.innerHTML = files.map(file => {
                     const fileName = file.name;
-                    const friendlyName = fileName;
-                    const uploadDate = new Date();
-                    const fileDate = uploadDate.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric'
-                    });
+                    const friendlyName = fileName.replace(/\.(pdf|docx|doc)$/i, '').replace(/_/g, ' ');
                     const fileSize = formatFileSize(file.size || 0);
                     const year = extractYearFromFilename(fileName);
+                    const fileExt = fileName.split('.').pop().toLowerCase();
+                    const iconClass = getFileIconClass(fileExt);
                     
                     return `
                         <li>
                             <div class="file-info">
                                 <div class="file-icon">
-                                    <i class="fas fa-file-pdf"></i>
+                                    <i class="fas ${iconClass}"></i>
                                 </div>
                                 <div class="file-details">
-                                    <h4>${friendlyName.replace(/\.pdf$/i, '').replace(/_/g, ' ')}</h4>
+                                    <h4>${friendlyName}</h4>
                                     <p>Year: ${year} | Size: ${fileSize}</p>
                                 </div>
                             </div>
@@ -1716,21 +1673,36 @@
             } catch (error) {
                 console.error('Error loading old questions:', error);
                 hideLoading(DOM.loading.oldQuestions);
-                DOM.oldQuestionsList.innerHTML = '<li style="text-align: center; padding: 2rem; color: #e74c3c;"><p>Error loading old questions. Please try again later.</p></li>';
+                DOM.oldQuestionsList.innerHTML = '<li style="text-align: center; padding: 2rem; color: #e74c3c;"><p>Error loading old questions.</p></li>';
                 showContent(DOM.oldQuestionsList);
             }
         }
 
         // ==============================================
-        // MCQ FUNCTIONS
+        // MCQ FUNCTIONS - PAGINATED DISPLAY
         // ==============================================
 
         async function loadMCQSubjects() {
             const field = AppState.currentField;
+            const folderPath = `${FIELD_CONFIG[field].folderPrefix}Objective MCQs`;
             
             try {
-                // Use predefined subjects from FIELD_CONFIG
-                const subjects = FIELD_CONFIG[field].subjects || [];
+                const apiUrl = getGitHubApiUrl(folderPath);
+                const response = await fetch(apiUrl);
+                
+                let subjects = [];
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    subjects = data
+                        .filter(item => item.type === 'dir')
+                        .map(item => item.name)
+                        .sort();
+                }
+                
+                if (subjects.length === 0) {
+                    subjects = FIELD_CONFIG[field].subjects || [];
+                }
                 
                 hideLoading(DOM.loading.mcqSubjects);
                 showContent(DOM.subjectGrid);
@@ -1792,16 +1764,21 @@
 
         async function loadMCQChapters(subject) {
             const field = AppState.currentField;
+            const folderPath = `${FIELD_CONFIG[field].folderPrefix}Objective MCQs/${subject}`;
             
             try {
-                // For GitHub implementation, we'll use a predefined list of chapters
-                const chapters = [
-                    "Chapter 1: Introduction",
-                    "Chapter 2: Fundamentals",
-                    "Chapter 3: Advanced Concepts",
-                    "Chapter 4: Applications",
-                    "Chapter 5: Case Studies"
-                ];
+                const files = await listFilesFromGitHub(folderPath);
+                
+                const chapters = files
+                    .filter(file => file.name.toLowerCase().endsWith('.json'))
+                    .map(file => {
+                        return {
+                            name: file.name.replace(/\.json$/i, '').replace(/_/g, ' '),
+                            fileName: file.name,
+                            path: file.path
+                        };
+                    })
+                    .sort((a, b) => a.name.localeCompare(b.name));
                 
                 return chapters;
                 
@@ -1811,25 +1788,60 @@
             }
         }
 
-        async function loadMCQQuestions(subject, chapter) {
+        async function loadMCQQuestions(subject, chapterFileName, chapterDisplayName) {
+            const field = AppState.currentField;
+            const fileName = `${FIELD_CONFIG[field].folderPrefix}Objective MCQs/${subject}/${chapterFileName}`;
+            
             try {
-                // For GitHub implementation, generate sample questions
-                return generateSampleMCQs(10, subject, chapter);
+                const jsonData = await getJsonFileFromGitHub(fileName);
+                
+                if (!jsonData) {
+                    throw new Error('No JSON data received');
+                }
+                
+                let questions = [];
+                
+                if (Array.isArray(jsonData)) {
+                    questions = jsonData.map((q, index) => ({
+                        id: `${subject}_${chapterDisplayName}_${index}`,
+                        question: q.question || `Question ${index + 1}`,
+                        options: q.options || ["Option A", "Option B", "Option C", "Option D"],
+                        correct: q.correct || "A",
+                        explanation: q.explanation || "No explanation provided"
+                    }));
+                } else {
+                    console.warn('Unexpected JSON format, expected simple array');
+                    questions = [{
+                        id: `${subject}_${chapterDisplayName}_0`,
+                        question: "Check your JSON file format. Expected simple array.",
+                        options: ["Should be: [{question:'', options:[], correct:'', explanation:''}, ...]", "Not nested objects", "Direct array format", "Check documentation"],
+                        correct: "Should be: [{question:'', options:[], correct:'', explanation:''}, ...]",
+                        explanation: "Your JSON should be a direct array of question objects with question, options, correct, and explanation fields."
+                    }];
+                }
+                
+                if (questions.length === 0) {
+                    questions = [{
+                        id: `${subject}_${chapterDisplayName}_0`,
+                        question: "No questions found in the JSON file.",
+                        options: ["Check file format", "Add questions to JSON", "Verify file path", "Contact admin"],
+                        correct: "Check file format",
+                        explanation: "Make sure your JSON file follows the correct format with an array of question objects."
+                    }];
+                }
+                
+                return questions;
                 
             } catch (error) {
-                console.error(`Error loading MCQ questions for ${subject}/${chapter}:`, error);
-                return generateSampleMCQs(10, subject, chapter);
+                console.error(`Error loading MCQ questions for ${subject}/${chapterFileName}:`, error);
+                return [{
+                    id: `${subject}_${chapterDisplayName}_0`,
+                    question: `Error loading questions for ${subject} - ${chapterDisplayName}`,
+                    options: ["JSON file not found", "Check GitHub path", "Verify file exists", "Contact admin"],
+                    correct: "JSON file not found",
+                    explanation: `Could not load ${chapterFileName} from your GitHub repository.`
+                }];
             }
-        }
-
-        function generateSampleMCQs(count, subject, chapter) {
-            return Array.from({length: count}, (_, i) => ({
-                id: `sample_${subject}_${chapter}_${i}`,
-                question: `Sample question ${i+1} from ${subject} - ${chapter}: What is the correct answer?`,
-                options: ["Option A", "Option B", "Option C", "Option D"],
-                correct: i % 4 === 0 ? "Option A" : i % 4 === 1 ? "Option B" : i % 4 === 2 ? "Option C" : "Option D",
-                explanation: `This is a sample explanation for question ${i+1}. In a real scenario, this would explain why the correct answer is right.`
-            }));
         }
 
         function showChapterSelection(subject) {
@@ -1839,85 +1851,204 @@
             
             loadMCQChapters(subject).then(chapters => {
                 if (chapters.length === 0) {
-                    DOM.chapterGrid.innerHTML = '<div style="text-align: center; padding: 2rem; grid-column: 1 / -1;"><p>No chapters available for this subject.</p></div>';
+                    DOM.chapterGrid.innerHTML = '<div style="text-align: center; padding: 2rem; grid-column: 1 / -1;"><p>No JSON files found for this subject.</p></div>';
                     return;
                 }
                 
                 DOM.chapterGrid.innerHTML = chapters.map(chapter => `
-                    <div class="subject-card" data-chapter="${chapter}" data-subject="${subject}">
+                    <div class="subject-card" data-chapter="${chapter.name}" data-subject="${subject}" data-filename="${chapter.fileName}">
                         <i class="fas fa-file-alt"></i>
-                        <h3>${chapter}</h3>
-                        <p>MCQ questions for ${chapter}</p>
+                        <h3>${chapter.name}</h3>
+                        <p>MCQ questions for ${chapter.name}</p>
                     </div>
                 `).join('');
             });
         }
 
-        async function startMCQPractice(subject, chapter) {
+        async function startMCQPractice(subject, chapterDisplayName, chapterFileName) {
             try {
                 AppState.mcqState.currentSubject = subject;
-                AppState.mcqState.currentChapter = chapter;
-                AppState.mcqState.currentQuestionIndex = 0;
+                AppState.mcqState.currentChapter = chapterDisplayName;
+                AppState.mcqState.currentPage = 1;
                 AppState.mcqState.userAnswers = {};
                 
-                // Load questions for selected chapter
-                AppState.mcqState.questions = await loadMCQQuestions(subject, chapter);
+                DOM.mcqQuestionsContainer.innerHTML = '<div style="text-align: center; padding: 2rem;">Loading questions from GitHub...</div>';
                 
-                if (AppState.mcqState.questions.length === 0) {
+                const questions = await loadMCQQuestions(subject, chapterFileName, chapterDisplayName);
+                
+                if (questions.length === 0) {
                     alert('No questions found in this chapter.');
                     return;
                 }
                 
-                // Hide chapter selection and show MCQ practice
+                AppState.mcqState.questions = questions;
+                
                 DOM.chapterSelection.style.display = 'none';
                 DOM.mcqPractice.style.display = 'block';
-                DOM.mcqSubjectTitle.textContent = `${subject} - ${chapter}`;
+                DOM.mcqSubjectTitle.textContent = `${subject} - ${chapterDisplayName}`;
                 
-                loadMCQQuestion();
+                setupPagination();
+                renderCurrentPage();
                 
             } catch (error) {
                 console.error('Error loading chapter questions:', error);
-                alert('Failed to load questions. Please try again.');
+                alert('Failed to load questions. Please check your GitHub repository.');
             }
         }
 
-        function loadMCQQuestion() {
+        function setupPagination() {
+            const questionsPerPage = AppState.mcqState.questionsPerPage;
+            const totalQuestions = AppState.mcqState.questions.length;
+            const totalPages = questionsPerPage === 'all' ? 1 : Math.ceil(totalQuestions / questionsPerPage);
+            
+            // Update pagination info
+            DOM.totalQuestionsCount.textContent = totalQuestions;
+            DOM.totalPages.textContent = totalPages;
+            
+            // Update questions per page selector
+            DOM.questionsPerPageSelect.value = questionsPerPage;
+            
+            // Generate page indicators
+            updatePageIndicators();
+            
+            // Update pagination buttons state
+            updatePaginationButtons();
+        }
+
+        function updatePageIndicators() {
+            const currentPage = AppState.mcqState.currentPage;
+            const totalPages = DOM.totalPages.textContent;
+            
+            DOM.pageIndicators.innerHTML = '';
+            
+            // Show max 5 page indicators
+            const startPage = Math.max(1, currentPage - 2);
+            const endPage = Math.min(parseInt(totalPages), startPage + 4);
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+                pageBtn.textContent = i;
+                pageBtn.addEventListener('click', () => {
+                    AppState.mcqState.currentPage = i;
+                    renderCurrentPage();
+                });
+                DOM.pageIndicators.appendChild(pageBtn);
+            }
+        }
+
+        function updatePaginationButtons() {
+            const currentPage = AppState.mcqState.currentPage;
+            const totalPages = parseInt(DOM.totalPages.textContent);
+            
+            DOM.firstPageBtn.disabled = currentPage === 1;
+            DOM.prevPageBtn.disabled = currentPage === 1;
+            DOM.nextPageBtn.disabled = currentPage === totalPages;
+            DOM.lastPageBtn.disabled = currentPage === totalPages;
+        }
+
+        function renderCurrentPage() {
             const state = AppState.mcqState;
-            if (state.questions.length === 0) return;
+            const questionsPerPage = state.questionsPerPage;
+            const currentPage = state.currentPage;
+            const totalQuestions = state.questions.length;
             
-            const question = state.questions[state.currentQuestionIndex];
+            let startIndex, endIndex;
             
-            DOM.currentQuestion.textContent = state.currentQuestionIndex + 1;
-            DOM.totalQuestions.textContent = state.questions.length;
-            DOM.questionText.textContent = question.question;
+            if (questionsPerPage === 'all') {
+                startIndex = 0;
+                endIndex = totalQuestions;
+            } else {
+                startIndex = (currentPage - 1) * questionsPerPage;
+                endIndex = Math.min(startIndex + questionsPerPage, totalQuestions);
+            }
             
-            // Clear and render options
-            DOM.mcqOptionsContainer.innerHTML = '';
-            const optionLetters = ['A', 'B', 'C', 'D'];
+            // Update pagination info
+            DOM.currentPage.textContent = currentPage;
+            DOM.questionsRange.textContent = `${startIndex + 1}-${endIndex}`;
             
-            question.options.forEach((option, index) => {
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'mcq-option';
-                optionDiv.dataset.option = optionLetters[index];
-                optionDiv.dataset.optionValue = option;
-                optionDiv.innerHTML = `
-                    <div class="option-letter">${optionLetters[index]}</div>
-                    <div>${option}</div>
+            // Render questions
+            DOM.mcqQuestionsContainer.innerHTML = '';
+            
+            for (let i = startIndex; i < endIndex; i++) {
+                const question = state.questions[i];
+                const questionNumber = i + 1;
+                const userAnswer = state.userAnswers[i];
+                
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'mcq-question-container';
+                questionDiv.innerHTML = `
+                    <div class="question-number-badge">Question ${questionNumber}</div>
+                    <div class="mcq-question">${question.question}</div>
+                    <div class="mcq-options" id="options-${i}">
+                        ${question.options.map((option, optIndex) => {
+                            const optionLetter = String.fromCharCode(65 + optIndex);
+                            const isSelected = userAnswer === option;
+                            let optionClass = 'mcq-option';
+                            if (isSelected) optionClass += ' selected';
+                            
+                            return `
+                                <div class="${optionClass}" data-question-index="${i}" data-option="${option}">
+                                    <div class="option-letter">${optionLetter}</div>
+                                    <div>${option}</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    <div class="mcq-explanation" id="explanation-${i}">
+                        <h4><i class="fas fa-lightbulb"></i> Explanation</h4>
+                        <p>${question.explanation}</p>
+                    </div>
                 `;
-                DOM.mcqOptionsContainer.appendChild(optionDiv);
-            });
+                
+                DOM.mcqQuestionsContainer.appendChild(questionDiv);
+                
+                // Add event listeners to options
+                questionDiv.querySelectorAll('.mcq-option').forEach(option => {
+                    option.addEventListener('click', function() {
+                        const questionIndex = parseInt(this.dataset.questionIndex);
+                        const selectedOption = this.dataset.option;
+                        handleMCQOptionClick(questionIndex, selectedOption, this);
+                    });
+                });
+            }
             
-            // Hide explanation
-            DOM.explanation.classList.remove('show');
+            // Update pagination controls
+            updatePageIndicators();
+            updatePaginationButtons();
+        }
+
+        function handleMCQOptionClick(questionIndex, selectedOption, optionElement) {
+            const question = AppState.mcqState.questions[questionIndex];
+            const optionsContainer = optionElement.parentElement;
+            const explanationElement = document.getElementById(`explanation-${questionIndex}`);
             
-            // Update navigation buttons
-            DOM.prevQuestionBtn.disabled = state.currentQuestionIndex === 0;
-            DOM.nextQuestionBtn.disabled = state.currentQuestionIndex === state.questions.length - 1;
-            
-            // Clear any previous selections
-            document.querySelectorAll('.mcq-option').forEach(opt => {
+            // Remove all selected/correct/incorrect classes
+            optionsContainer.querySelectorAll('.mcq-option').forEach(opt => {
                 opt.classList.remove('selected', 'correct', 'incorrect');
             });
+            
+            // Add selected class to clicked option
+            optionElement.classList.add('selected');
+            
+            // Store user answer
+            AppState.mcqState.userAnswers[questionIndex] = selectedOption;
+            
+            // Show explanation
+            explanationElement.classList.add('show');
+            
+            // Mark correct/incorrect
+            if (selectedOption === question.correct) {
+                optionElement.classList.add('correct');
+            } else {
+                optionElement.classList.add('incorrect');
+                // Highlight correct answer
+                optionsContainer.querySelectorAll('.mcq-option').forEach(opt => {
+                    if (opt.dataset.option === question.correct) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
         }
 
         // ==============================================
@@ -1926,29 +2057,54 @@
 
         async function loadSubjectiveSubjects() {
             const field = AppState.currentField;
+            const folderPath = `${FIELD_CONFIG[field].folderPrefix}Subjective`;
             
             try {
-                // For GitHub implementation, use predefined subjects
-                return FIELD_CONFIG[field].subjects || [];
+                const apiUrl = getGitHubApiUrl(folderPath);
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) {
+                    return FIELD_CONFIG[field].subjects || [];
+                }
+                
+                const data = await response.json();
+                
+                const subjects = data
+                    .filter(item => item.type === 'dir')
+                    .map(item => item.name)
+                    .sort();
+                
+                return subjects.length > 0 ? subjects : FIELD_CONFIG[field].subjects;
                 
             } catch (error) {
                 console.error('Error loading subjective subjects:', error);
-                return [];
+                return FIELD_CONFIG[field].subjects || [];
             }
         }
 
         async function loadSubjectiveChapters(subject) {
             const field = AppState.currentField;
+            const folderPath = `${FIELD_CONFIG[field].folderPrefix}Subjective/${subject}`;
             
             try {
-                // For GitHub implementation, we'll use a predefined list of chapters
-                const chapters = [
-                    "Chapter 1: Introduction",
-                    "Chapter 2: Fundamentals",
-                    "Chapter 3: Advanced Concepts",
-                    "Chapter 4: Applications",
-                    "Chapter 5: Case Studies"
-                ];
+                const files = await listFilesFromGitHub(folderPath);
+                
+                const validExtensions = ['.pdf', '.ppt', '.pptx', '.doc', '.docx', '.xls', '.xlsx', '.jpg', '.jpeg', '.png', '.gif'];
+                const chapters = files
+                    .filter(file => {
+                        const ext = file.name.toLowerCase();
+                        return validExtensions.some(validExt => ext.endsWith(validExt));
+                    })
+                    .map(file => {
+                        const fileName = file.name;
+                        const baseName = fileName.replace(/\.[^/.]+$/, '').replace(/_/g, ' ');
+                        return {
+                            name: baseName,
+                            fileName: fileName,
+                            extension: fileName.split('.').pop().toLowerCase()
+                        };
+                    })
+                    .sort((a, b) => a.name.localeCompare(b.name));
                 
                 return chapters;
                 
@@ -1985,54 +2141,91 @@
             
             loadSubjectiveChapters(subject).then(chapters => {
                 if (chapters.length === 0) {
-                    DOM.subjectiveChapterGrid.innerHTML = '<div style="text-align: center; padding: 2rem; grid-column: 1 / -1;"><p>No chapters available for this subject.</p></div>';
+                    DOM.subjectiveChapterGrid.innerHTML = '<div style="text-align: center; padding: 2rem; grid-column: 1 / -1;"><p>No files found for this subject.</p></div>';
                     return;
                 }
                 
-                DOM.subjectiveChapterGrid.innerHTML = chapters.map(chapter => `
-                    <div class="subject-card" data-chapter="${chapter}" data-subject="${subject}">
-                        <i class="fas fa-file-pdf"></i>
-                        <h3>${chapter}</h3>
-                        <p>${subject} - ${chapter}</p>
-                    </div>
-                `).join('');
+                DOM.subjectiveChapterGrid.innerHTML = chapters.map(chapter => {
+                    const iconClass = getFileIconClass(chapter.extension);
+                    return `
+                        <div class="subject-card" data-chapter="${chapter.name}" data-subject="${subject}" data-filename="${chapter.fileName}">
+                            <i class="fas ${iconClass}"></i>
+                            <h3>${chapter.name}</h3>
+                            <p>${subject} - ${chapter.name}</p>
+                        </div>
+                    `;
+                }).join('');
             });
         }
 
-        async function viewSubjectiveContent(subject, chapter) {
+        async function viewSubjectiveContent(subject, chapter, fileName) {
+            const field = AppState.currentField;
+            const filePath = `${FIELD_CONFIG[field].folderPrefix}Subjective/${subject}/${fileName}`;
+            
             AppState.subjectiveState.currentSubject = subject;
             AppState.subjectiveState.currentChapter = chapter;
             
             try {
-                // For GitHub implementation, show a message
+                const fileUrl = getRawFileUrl(filePath);
+                const fileExt = fileName ? fileName.split('.').pop().toLowerCase() : 'pdf';
+                
                 DOM.subjectiveChapterSelection.style.display = 'none';
                 DOM.subjectiveContent.style.display = 'block';
                 DOM.subjectiveSetTitle.textContent = `${subject} - ${chapter}`;
                 
-                // Display message instead of PDF viewer
-                DOM.subjectiveQuestionsContainer.innerHTML = `
-                    <div style="text-align: center; padding: 2rem;">
-                        <h4><i class="fas fa-info-circle"></i> Subjective Questions Viewer</h4>
-                        <p>In a complete implementation, this would display PDF content for ${subject} - ${chapter}.</p>
-                        <p>For now, this serves as a demonstration of the interface.</p>
-                        <div style="background-color: #f8f9fa; padding: 1.5rem; border-radius: var(--border-radius); margin-top: 1rem; text-align: left;">
-                            <h5>Sample Questions:</h5>
-                            <ol>
-                                <li>Explain the fundamental concepts of ${subject}.</li>
-                                <li>Describe the applications of ${chapter} in real-world scenarios.</li>
-                                <li>Solve the following problem related to ${subject}.</li>
-                                <li>Compare and contrast different approaches in ${chapter}.</li>
-                                <li>Discuss the future trends in ${subject}.</li>
-                            </ol>
+                let contentHtml = '';
+                
+                if (['pdf'].includes(fileExt)) {
+                    contentHtml = `
+                        <div style="background-color: white; padding: 1rem; border-radius: var(--border-radius); height: 500px;">
+                            <iframe src="${fileUrl}" width="100%" height="100%" frameborder="0">
+                                Your browser does not support PDF viewing. 
+                                <a href="${fileUrl}" target="_blank">Download PDF</a>
+                            </iframe>
                         </div>
+                    `;
+                } else if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExt)) {
+                    contentHtml = `
+                        <div style="text-align: center;">
+                            <img src="${fileUrl}" alt="${chapter}" style="max-width: 100%; max-height: 500px; border-radius: var(--border-radius);">
+                        </div>
+                    `;
+                } else if (['ppt', 'pptx', 'doc', 'docx', 'xls', 'xlsx'].includes(fileExt)) {
+                    contentHtml = `
+                        <div style="text-align: center; padding: 2rem;">
+                            <i class="fas fa-file-${fileExt === 'ppt' || fileExt === 'pptx' ? 'powerpoint' : fileExt === 'doc' || fileExt === 'docx' ? 'word' : 'excel'} fa-5x" style="color: var(--primary-color); margin-bottom: 1rem;"></i>
+                            <h4>${chapter}</h4>
+                            <p>This is a ${fileExt.toUpperCase()} file. You can download it to view the content.</p>
+                            <button class="btn btn-primary" onclick="downloadFile('${fileUrl}', '${fileName}')">
+                                <i class="fas fa-download"></i> Download ${fileExt.toUpperCase()} File
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    contentHtml = `
+                        <div style="text-align: center; padding: 2rem;">
+                            <i class="fas fa-file fa-5x" style="color: var(--primary-color); margin-bottom: 1rem;"></i>
+                            <h4>${chapter}</h4>
+                            <p>This file format cannot be previewed directly. Please download it to view.</p>
+                            <button class="btn btn-primary" onclick="downloadFile('${fileUrl}', '${fileName}')">
+                                <i class="fas fa-download"></i> Download File
+                            </button>
+                        </div>
+                    `;
+                }
+                
+                DOM.subjectiveQuestionsContainer.innerHTML = `
+                    <div style="text-align: center; margin-bottom: 1rem;">
+                        <p><i class="fas fa-info-circle"></i> Reading subjective questions for ${subject} - ${chapter}</p>
                     </div>
+                    ${contentHtml}
                 `;
                 
             } catch (error) {
                 console.error('Error loading subjective content:', error);
                 DOM.subjectiveQuestionsContainer.innerHTML = `
                     <div style="text-align: center; padding: 2rem; color: #e74c3c;">
-                        <p><i class="fas fa-exclamation-triangle"></i> Unable to load subjective content.</p>
+                        <p><i class="fas fa-exclamation-triangle"></i> Unable to load file from GitHub.</p>
                         <button class="btn btn-primary" onclick="goBackToSubjectiveChapters()">
                             <i class="fas fa-arrow-left"></i> Back to Chapters
                         </button>
@@ -2046,9 +2239,29 @@
         // ==============================================
 
         async function discoverMCQExamSets() {
+            const field = AppState.currentField;
+            const folderPath = `${FIELD_CONFIG[field].folderPrefix}Take Exam/Multiple Choice Exam`;
+            
             try {
-                // For GitHub implementation, return sample exam sets
-                return ["Set 1", "Set 2", "Set 3", "Set 4", "Set 5"];
+                const files = await listFilesFromGitHub(folderPath);
+                
+                const examSets = [];
+                
+                files.forEach(file => {
+                    const fileName = file.name;
+                    if (fileName.toLowerCase().endsWith('.json')) {
+                        const setName = fileName.replace(/\.json$/i, '').replace(/_/g, ' ').trim();
+                        examSets.push({
+                            name: setName || fileName.replace('.json', ''),
+                            fileName: fileName,
+                            displayName: setName || fileName.replace('.json', '')
+                        });
+                    }
+                });
+                
+                examSets.sort((a, b) => a.displayName.localeCompare(b.displayName));
+                
+                return examSets;
                 
             } catch (error) {
                 console.error('Error discovering MCQ sets:', error);
@@ -2056,21 +2269,194 @@
             }
         }
 
-        async function loadMCQExam(setNumber) {
+        async function discoverSubjectiveExamSets() {
+            const field = AppState.currentField;
+            const folderPath = `${FIELD_CONFIG[field].folderPrefix}Take Exam/Subjective Exam`;
+            
             try {
-                // For GitHub implementation, generate sample exam questions
-                return generateSampleMCQs(20, 'Exam', `Set ${setNumber}`);
+                const files = await listFilesFromGitHub(folderPath);
+                
+                const examSets = [];
+                
+                files.forEach(file => {
+                    const fileName = file.name;
+                    if (fileName.toLowerCase().endsWith('.json')) {
+                        const setName = fileName.replace(/\.json$/i, '').replace(/_/g, ' ').trim();
+                        examSets.push({
+                            name: setName || fileName.replace('.json', ''),
+                            fileName: fileName,
+                            displayName: setName || fileName.replace('.json', '')
+                        });
+                    }
+                });
+                
+                examSets.sort((a, b) => a.displayName.localeCompare(b.displayName));
+                
+                return examSets;
+                
+            } catch (error) {
+                console.error('Error discovering subjective exam sets:', error);
+                return [];
+            }
+        }
+
+        async function loadMCQExam(fileName, displayName) {
+            const field = AppState.currentField;
+            const filePath = `${FIELD_CONFIG[field].folderPrefix}Take Exam/Multiple Choice Exam/${fileName}`;
+            
+            try {
+                const jsonData = await getJsonFileFromGitHub(filePath);
+                
+                if (!jsonData) {
+                    throw new Error('No JSON data received');
+                }
+                
+                let questions = [];
+                
+                if (Array.isArray(jsonData)) {
+                    questions = jsonData.map((q, index) => ({
+                        id: `exam_${fileName}_${index}`,
+                        question: q.question || `Question ${index + 1}`,
+                        options: q.options || ["Option A", "Option B", "Option C", "Option D"],
+                        correct: q.correct || "A",
+                        explanation: q.explanation || "No explanation provided"
+                    }));
+                } else {
+                    questions = [{
+                        id: `exam_${fileName}_0`,
+                        question: "Check your exam JSON file format.",
+                        options: ["Should be direct array", "Not nested objects", "Simple array format", "Check documentation"],
+                        correct: "Should be direct array",
+                        explanation: "Your exam JSON should be a direct array of question objects."
+                    }];
+                }
+                
+                if (questions.length === 0) {
+                    questions = [{
+                        id: `exam_${fileName}_0`,
+                        question: "No questions found in exam set.",
+                        options: ["Check JSON format", "Add questions", "Verify file", "Contact admin"],
+                        correct: "Check JSON format",
+                        explanation: "Make sure your exam JSON file contains questions."
+                    }];
+                }
+                
+                return questions;
                 
             } catch (error) {
                 console.error('Error loading MCQ exam:', error);
-                return generateSampleMCQs(20, 'Exam', `Set ${setNumber}`);
+                return [{
+                    id: `exam_${fileName}_0`,
+                    question: `Error loading exam: ${displayName}`,
+                    options: ["JSON file not found", "Check GitHub", "Verify file exists", "Contact admin"],
+                    correct: "JSON file not found",
+                    explanation: `Could not load ${fileName} from your GitHub repository.`
+                }];
+            }
+        }
+
+        async function loadSubjectiveExamContent(fileName, displayName) {
+            const field = AppState.currentField;
+            const filePath = `${FIELD_CONFIG[field].folderPrefix}Take Exam/Subjective Exam/${fileName}`;
+            
+            try {
+                const jsonData = await getJsonFileFromGitHub(filePath);
+                
+                if (!jsonData) {
+                    throw new Error('No JSON data received');
+                }
+                
+                let contentHtml = '';
+                let totalQuestions = 0;
+                let totalMarks = 0;
+                
+                if (Array.isArray(jsonData)) {
+                    // Exam instructions
+                    contentHtml = `
+                        <div style="margin-bottom: 2rem; padding: 1.5rem; background-color: #f8f9fa; border-radius: var(--border-radius);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">Exam Instructions:</h4>
+                            <ul style="padding-left: 1.5rem; margin-bottom: 1rem;">
+                                <li>Answer all questions in the answer booklet provided</li>
+                                <li>Write your roll number on every answer sheet</li>
+                                <li>Time: 3 hours (180 minutes)</li>
+                                <li>Use black or blue pen only</li>
+                                <li>Show all calculations and assumptions clearly</li>
+                            </ul>
+                        </div>
+                    `;
+                    
+                    let currentCategory = 'General Questions';
+                    
+                    jsonData.forEach((item, index) => {
+                        if (typeof item['S.N.'] === 'string') {
+                            // Category header
+                            currentCategory = item['S.N.'];
+                            contentHtml += `
+                                <div class="category-header">
+                                    ${currentCategory}
+                                </div>
+                            `;
+                        } else if (typeof item['S.N.'] === 'number') {
+                            // Question
+                            totalQuestions++;
+                            const marks = item['Marks'] || 0;
+                            totalMarks += marks;
+                            
+                            contentHtml += `
+                                <div class="subjective-question-item">
+                                    <div class="subjective-question-header">
+                                        <div class="question-number-circle">${item['S.N.']}</div>
+                                        <div class="subjective-question-text">${item['Questions ?'] || 'Question'}</div>
+                                    </div>
+                                    <div class="question-marks">
+                                        <i class="fas fa-star"></i> Marks: ${marks}
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    });
+                    
+                    if (totalQuestions === 0) {
+                        contentHtml += `
+                            <div style="text-align: center; padding: 3rem; color: #666;">
+                                <i class="fas fa-exclamation-triangle fa-3x" style="margin-bottom: 1rem; color: #e74c3c;"></i>
+                                <h4>No Questions Found</h4>
+                                <p>The JSON file format might be incorrect.</p>
+                            </div>
+                        `;
+                    }
+                } else {
+                    contentHtml = `
+                        <div style="text-align: center; padding: 3rem;">
+                            <i class="fas fa-exclamation-triangle fa-3x" style="color: #e74c3c; margin-bottom: 1rem;"></i>
+                            <h4>Invalid JSON Format</h4>
+                            <p>The file doesn't contain a valid array of questions.</p>
+                        </div>
+                    `;
+                }
+                
+                DOM.subjectiveExamQuestions.innerHTML = contentHtml;
+                
+                document.getElementById('subjective-total-questions').textContent = totalQuestions;
+                document.getElementById('subjective-total-marks').textContent = totalMarks;
+                
+            } catch (error) {
+                console.error('Error loading exam content:', error);
+                DOM.subjectiveExamQuestions.innerHTML = `
+                    <div style="text-align: center; padding: 3rem; color: #e74c3c;">
+                        <i class="fas fa-exclamation-triangle fa-3x" style="margin-bottom: 1rem;"></i>
+                        <h4>Unable to Load Exam</h4>
+                        <p>Error: ${error.message}</p>
+                        <p>File: ${fileName}</p>
+                    </div>
+                `;
             }
         }
 
         function showMCQExamSetSelection() {
             discoverMCQExamSets().then(examSets => {
                 if (examSets.length === 0) {
-                    alert('No exam sets available. Please upload Exam_Set_X.json files.');
+                    alert('No exam sets found. Please upload JSON files to your "Take Exam/Multiple Choice Exam/" folder.');
                     resetExamTypeSelection();
                     return;
                 }
@@ -2081,54 +2467,53 @@
                 DOM.examSetSelection.innerHTML = `
                     <h3>Select Exam Set:</h3>
                     <div class="subject-grid" style="margin-top: 1.5rem;" id="mcq-exam-set-grid">
-                        ${examSets.map(set => {
-                            const setNumber = set.replace('Set ', '');
-                            return `
-                                <div class="subject-card" data-exam-set="${setNumber}">
-                                    <i class="fas fa-file-alt"></i>
-                                    <h3>${set}</h3>
-                                    <p>Multiple Choice Exam</p>
-                                    <small>30 minutes, 20 questions</small>
-                                </div>
-                            `;
-                        }).join('')}
+                        ${examSets.map((set, index) => `
+                            <div class="subject-card" data-exam-index="${index}">
+                                <i class="fas fa-file-alt"></i>
+                                <h3>${set.displayName}</h3>
+                                <p>Multiple Choice Exam</p>
+                                <small>30 minutes</small>
+                            </div>
+                        `).join('')}
                     </div>
                     <button class="btn btn-secondary" id="back-to-exam-type-from-set" style="margin-top: 1.5rem;">
                         <i class="fas fa-arrow-left"></i> Back to Exam Type
                     </button>
                 `;
                 
-                // Add event listeners
+                AppState.examState.mcqSets = examSets;
+                
                 setTimeout(() => {
                     document.querySelectorAll('#mcq-exam-set-grid .subject-card').forEach(card => {
                         card.addEventListener('click', async () => {
-                            const setNumber = card.dataset.examSet;
+                            const setIndex = parseInt(card.dataset.examIndex);
+                            const selectedSet = examSets[setIndex];
                             
                             try {
                                 AppState.examState.type = 'multiple-choice';
-                                AppState.examState.currentSet = `Set ${setNumber}`;
+                                AppState.examState.currentSet = selectedSet.displayName;
+                                AppState.examState.currentFileName = selectedSet.fileName;
                                 AppState.examState.currentQuestionIndex = 0;
                                 AppState.examState.answers = {};
                                 AppState.examState.flagged = {};
-                                AppState.examState.totalTime = 30 * 60; // 30 minutes
+                                AppState.examState.totalTime = 30 * 60;
                                 
-                                // Load exam questions
-                                AppState.examState.questions = await loadMCQExam(setNumber);
+                                AppState.examState.questions = await loadMCQExam(selectedSet.fileName, selectedSet.displayName);
                                 
-                                if (!AppState.examState.questions || AppState.examState.questions.length === 0) {
+                                if (AppState.examState.questions.length === 0) {
                                     throw new Error('No questions loaded');
                                 }
                                 
                                 DOM.examSetSelection.style.display = 'none';
                                 DOM.multipleChoiceExam.style.display = 'block';
-                                DOM.multipleChoiceExamTitle.textContent = `Multiple Choice Exam - Set ${setNumber}`;
+                                DOM.multipleChoiceExamTitle.textContent = `Multiple Choice Exam - ${selectedSet.displayName}`;
                                 
                                 loadMCQExamQuestion();
                                 startTimer('mcq');
                                 
                             } catch (error) {
                                 console.error('Error loading exam set:', error);
-                                alert('Failed to load exam questions. Please try again.');
+                                alert(`Failed to load exam questions from ${selectedSet.fileName}.`);
                             }
                         });
                     });
@@ -2138,37 +2523,10 @@
             });
         }
 
-        async function discoverSubjectiveExamSets() {
-            try {
-                // For GitHub implementation, return sample exam sets
-                const subjects = FIELD_CONFIG[AppState.currentField].subjects || [];
-                const examSets = [];
-                
-                subjects.forEach(subject => {
-                    examSets.push({
-                        name: `${subject} - Final Exam`,
-                        subject: subject,
-                        chapter: "Final Exam"
-                    });
-                    examSets.push({
-                        name: `${subject} - Midterm`,
-                        subject: subject,
-                        chapter: "Midterm"
-                    });
-                });
-                
-                return examSets;
-                
-            } catch (error) {
-                console.error('Error discovering subjective exam sets:', error);
-                return [];
-            }
-        }
-
         function showSubjectiveExamSetSelection() {
             discoverSubjectiveExamSets().then(examSets => {
                 if (examSets.length === 0) {
-                    alert('No subjective exam sets available. Please upload PDF files.');
+                    alert('No subjective exam sets available. Please upload JSON files to your "Take Exam/Subjective Exam/" folder.');
                     resetExamTypeSelection();
                     return;
                 }
@@ -2182,9 +2540,9 @@
                         ${examSets.map((set, index) => `
                             <div class="subject-card" data-exam-index="${index}">
                                 <i class="fas fa-file-pdf"></i>
-                                <h3>${set.name}</h3>
+                                <h3>${set.displayName}</h3>
                                 <p>Subjective Exam</p>
-                                <small>3 hours, open-ended questions</small>
+                                <small>3 hours</small>
                             </div>
                         `).join('')}
                     </div>
@@ -2193,10 +2551,8 @@
                     </button>
                 `;
                 
-                // Store exam sets in AppState for later reference
                 AppState.examState.subjectiveSets = examSets;
                 
-                // Add event listeners
                 setTimeout(() => {
                     document.querySelectorAll('#subjective-exam-set-grid .subject-card').forEach(card => {
                         card.addEventListener('click', async () => {
@@ -2204,16 +2560,15 @@
                             const selectedSet = examSets[setIndex];
                             
                             AppState.examState.type = 'subjective';
-                            AppState.examState.currentSet = selectedSet.name;
-                            AppState.examState.currentSubject = selectedSet.subject;
-                            AppState.examState.currentChapter = selectedSet.chapter;
-                            AppState.examState.totalTime = 3 * 60 * 60; // 3 hours
+                            AppState.examState.currentSet = selectedSet.displayName;
+                            AppState.examState.currentFileName = selectedSet.fileName;
+                            AppState.examState.totalTime = 3 * 60 * 60;
                             
                             DOM.examSetSelection.style.display = 'none';
                             DOM.subjectiveExam.style.display = 'block';
-                            DOM.subjectiveExamTitle.textContent = `Subjective Exam - ${selectedSet.name}`;
+                            DOM.subjectiveExamTitle.textContent = `Subjective Exam - ${selectedSet.displayName}`;
                             
-                            await loadSubjectiveExamContent(selectedSet.subject, selectedSet.chapter);
+                            await loadSubjectiveExamContent(selectedSet.fileName, selectedSet.displayName);
                             startTimer('subjective');
                         });
                     });
@@ -2223,91 +2578,41 @@
             });
         }
 
-        async function loadSubjectiveExamContent(subject, chapter) {
-            try {
-                DOM.subjectiveExamQuestions.innerHTML = `
-                    <div style="text-align: center; margin-bottom: 1rem;">
-                        <p><i class="fas fa-info-circle"></i> Answer all questions in the answer booklet provided.</p>
-                    </div>
-                    <div style="background-color: white; padding: 2rem; border-radius: var(--border-radius); margin-bottom: 2rem;">
-                        <h4>${subject} - ${chapter}</h4>
-                        <div style="margin-top: 1.5rem; text-align: left;">
-                            <h5>Instructions:</h5>
-                            <ul>
-                                <li>Answer all questions</li>
-                                <li>Write clearly and legibly</li>
-                                <li>Show all your work</li>
-                                <li>Time limit: 3 hours</li>
-                            </ul>
-                            
-                            <h5 style="margin-top: 1.5rem;">Questions:</h5>
-                            <ol>
-                                <li>Explain the fundamental principles of ${subject} and provide examples. (20 marks)</li>
-                                <li>Discuss the applications of ${chapter} in engineering practice. (20 marks)</li>
-                                <li>Solve the following problem related to ${subject}. Show all calculations. (30 marks)</li>
-                                <li>Compare different methodologies in ${chapter} and discuss their advantages. (15 marks)</li>
-                                <li>Write a short essay on future developments in ${subject}. (15 marks)</li>
-                            </ol>
-                        </div>
-                    </div>
-                    <div style="text-align: center; color: #666; font-size: 0.9rem;">
-                        <p><i class="fas fa-exclamation-triangle"></i> Note: This is a timed exam. Answers must be submitted before time runs out.</p>
-                    </div>
-                `;
-                
-                // Set question and mark counts
-                document.getElementById('subjective-total-questions').textContent = '5';
-                document.getElementById('subjective-total-marks').textContent = '100';
-                
-            } catch (error) {
-                console.error('Error loading exam content:', error);
-                DOM.subjectiveExamQuestions.innerHTML = `
-                    <div style="text-align: center; padding: 2rem; color: #e74c3c;">
-                        <p><i class="fas fa-exclamation-triangle"></i> Unable to load exam questions.</p>
-                        <button class="btn btn-primary" onclick="resetExamTypeSelection()">
-                            <i class="fas fa-redo"></i> Try Another Exam
-                        </button>
-                    </div>
-                `;
-            }
-        }
-
         function loadMCQExamQuestion() {
             const state = AppState.examState;
             if (state.questions.length === 0) return;
             
             const question = state.questions[state.currentQuestionIndex];
             
-            DOM.mcqExamQuestionText.textContent = question.question;
+            DOM.multipleChoiceContainer.innerHTML = `
+                <div class="mcq-question-container">
+                    <div class="question-number-badge">Question ${state.currentQuestionIndex + 1}</div>
+                    <div class="mcq-question">${question.question}</div>
+                    <div class="mcq-options" id="exam-options-container">
+                        ${question.options.map((option, index) => {
+                            const optionLetter = String.fromCharCode(65 + index);
+                            const isSelected = state.answers[state.currentQuestionIndex] === option;
+                            let optionClass = 'mcq-option';
+                            if (isSelected) optionClass += ' selected';
+                            
+                            return `
+                                <div class="${optionClass}" data-exam-option="${option}">
+                                    <div class="option-letter">${optionLetter}</div>
+                                    <div>${option}</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
             
-            // Clear and render options
-            DOM.mcqExamOptionsContainer.innerHTML = '';
-            const optionLetters = ['A', 'B', 'C', 'D'];
+            DOM.currentExamQuestion.textContent = state.currentQuestionIndex + 1;
+            DOM.totalExamQuestions.textContent = state.questions.length;
             
-            question.options.forEach((option, index) => {
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'mcq-option';
-                optionDiv.dataset.examOption = optionLetters[index];
-                optionDiv.dataset.optionValue = option;
-                
-                // Check if this option was previously selected
-                if (state.answers[state.currentQuestionIndex] === option) {
-                    optionDiv.classList.add('selected');
-                }
-                
-                optionDiv.innerHTML = `
-                    <div class="option-letter">${optionLetters[index]}</div>
-                    <div>${option}</div>
-                `;
-                DOM.mcqExamOptionsContainer.appendChild(optionDiv);
-            });
-            
-            // Update navigation buttons
             DOM.prevExamQuestion.disabled = state.currentQuestionIndex === 0;
             DOM.nextExamQuestion.disabled = state.currentQuestionIndex === state.questions.length - 1;
             
-            // Update flag button
-            const flagBtn = document.getElementById('flag-question');
+            const flagBtn = DOM.flagExamQuestion;
             if (state.flagged[state.currentQuestionIndex]) {
                 flagBtn.innerHTML = '<i class="fas fa-flag"></i> Unflag';
                 flagBtn.style.backgroundColor = '#e74c3c';
@@ -2316,7 +2621,6 @@
                 flagBtn.style.backgroundColor = '';
             }
             
-            // Update progress
             updateMCQExamProgress();
         }
 
@@ -2334,10 +2638,10 @@
             
             if (type === 'subjective') {
                 timerElement = document.getElementById('subjective-timer');
-                totalTime = 3 * 60 * 60; // 3 hours
+                totalTime = 3 * 60 * 60;
             } else {
                 timerElement = document.getElementById('mcq-exam-timer');
-                totalTime = 30 * 60; // 30 minutes
+                totalTime = 30 * 60;
             }
             
             let remaining = totalTime;
@@ -2362,7 +2666,7 @@
                 remaining--;
             };
             
-            updateTimer(); // Initial call
+            updateTimer();
             const timer = setInterval(updateTimer, 1000);
             
             if (type === 'subjective') {
@@ -2378,7 +2682,6 @@
             let wrong = 0;
             let skipped = 0;
             
-            // Calculate score
             state.questions.forEach((question, index) => {
                 const userAnswer = state.answers[index];
                 if (userAnswer) {
@@ -2392,13 +2695,10 @@
                 }
             });
             
-            // Calculate percentage
             const percentage = Math.round((correct / state.questions.length) * 100);
             
-            // Stop timer
             if (AppState.timers.mcqExam) clearInterval(AppState.timers.mcqExam);
             
-            // Display results
             DOM.multipleChoiceExam.style.display = 'none';
             DOM.examResults.style.display = 'block';
             
@@ -2417,21 +2717,22 @@
             DOM.examResults.style.display = 'none';
             DOM.examTypeSelection.style.display = 'block';
             
-            // Clear any timers
             if (AppState.timers.subjectiveExam) clearInterval(AppState.timers.subjectiveExam);
             if (AppState.timers.mcqExam) clearInterval(AppState.timers.mcqExam);
             
-            // Reset exam state
             AppState.examState = {
                 type: null,
                 currentSet: null,
+                currentFileName: null,
                 currentQuestionIndex: 0,
                 questions: [],
                 answers: {},
                 flagged: {},
                 timer: null,
                 startTime: null,
-                totalTime: 0
+                totalTime: 0,
+                mcqSets: [],
+                subjectiveSets: []
             };
         }
 
@@ -2449,27 +2750,21 @@
             AppState.currentField = field;
             const config = FIELD_CONFIG[field];
             
-            // Update UI
             DOM.currentField.innerHTML = `<i class="fas ${config.icon}"></i> ${config.name}`;
             DOM.userField.textContent = config.name;
             
-            // Update CSS variables
             document.documentElement.style.setProperty('--primary-color', config.color);
             
-            // Update header background
             document.querySelector('header').style.background = `linear-gradient(to right, ${config.color}, ${lightenColor(config.color, 20)})`;
             
-            // Update field indicators
             updateFieldIndicators();
             
-            // Load dynamic content for the field
             loadNoticeFiles();
             loadSyllabusFiles();
             loadOldQuestionFiles();
             loadMCQSubjects();
             renderSubjectiveSets();
             
-            // Reset any active sessions
             resetPracticeSessions();
         }
 
@@ -2482,26 +2777,24 @@
         }
 
         function resetPracticeSessions() {
-            // Reset MCQ practice
             DOM.mcqPractice.style.display = 'none';
             DOM.chapterSelection.style.display = 'none';
             DOM.subjectGrid.style.display = 'block';
             
-            // Reset subjective view
             DOM.subjectiveContent.style.display = 'none';
             DOM.subjectiveChapterSelection.style.display = 'none';
             DOM.subjectiveSetGrid.style.display = 'block';
             
-            // Reset exam views
             resetExamTypeSelection();
             
-            // Reset states
             AppState.mcqState = {
                 currentSubject: null,
                 currentChapter: null,
-                currentQuestionIndex: 0,
+                currentPage: 1,
+                questionsPerPage: 5,
                 questions: [],
-                userAnswers: {}
+                userAnswers: {},
+                currentQuestions: []
             };
             AppState.subjectiveState = {
                 currentSubject: null,
@@ -2516,7 +2809,6 @@
                 DOM.fieldDropdown.classList.toggle('show');
             });
 
-            // Field selection
             document.querySelectorAll('.field-option').forEach(option => {
                 option.addEventListener('click', () => {
                     const field = option.dataset.field;
@@ -2525,7 +2817,6 @@
                 });
             });
 
-            // Field change from footer
             document.querySelectorAll('.field-change').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -2533,7 +2824,6 @@
                 });
             });
 
-            // Close dropdown when clicking outside
             document.addEventListener('click', (e) => {
                 if (!DOM.fieldDropdownBtn.contains(e.target) && !DOM.fieldDropdown.contains(e.target)) {
                     DOM.fieldDropdown.classList.remove('show');
@@ -2546,34 +2836,27 @@
                     e.preventDefault();
                     const section = link.dataset.section;
                     
-                    // Update active nav
                     DOM.navLinks.forEach(l => l.classList.remove('active'));
                     link.classList.add('active');
                     
-                    // Show selected section
                     DOM.sections.forEach(s => s.classList.remove('active'));
                     document.getElementById(section).classList.add('active');
                     
-                    // Reset practice sessions when changing sections
                     resetPracticeSessions();
                 });
             });
 
-            // Footer navigation
             document.querySelectorAll('.footer-nav').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const section = link.dataset.section;
                     
-                    // Update active nav
                     DOM.navLinks.forEach(l => l.classList.remove('active'));
                     document.querySelector(`.nav-link[data-section="${section}"]`).classList.add('active');
                     
-                    // Show selected section
                     DOM.sections.forEach(s => s.classList.remove('active'));
                     document.getElementById(section).classList.add('active');
                     
-                    // Reset practice sessions
                     resetPracticeSessions();
                 });
             });
@@ -2581,7 +2864,7 @@
             // MCQ subject selection
             document.addEventListener('click', (e) => {
                 const subjectCard = e.target.closest('.subject-card[data-subject]');
-                if (subjectCard && !subjectCard.dataset.chapter && !subjectCard.dataset.examSet && !subjectCard.dataset.examIndex) {
+                if (subjectCard && !subjectCard.dataset.chapter && !subjectCard.dataset.examIndex) {
                     e.preventDefault();
                     const subject = subjectCard.dataset.subject;
                     showChapterSelection(subject);
@@ -2591,90 +2874,50 @@
             // MCQ chapter selection
             document.addEventListener('click', (e) => {
                 const chapterCard = e.target.closest('.subject-card[data-chapter]');
-                if (chapterCard && chapterCard.dataset.subject) {
+                if (chapterCard && chapterCard.dataset.subject && chapterCard.dataset.filename) {
                     e.preventDefault();
                     const subject = chapterCard.dataset.subject;
-                    const chapter = chapterCard.dataset.chapter;
-                    startMCQPractice(subject, chapter);
+                    const chapterDisplayName = chapterCard.dataset.chapter;
+                    const chapterFileName = chapterCard.dataset.filename;
+                    startMCQPractice(subject, chapterDisplayName, chapterFileName);
                 }
             });
 
-            // MCQ option selection (practice)
-            document.addEventListener('click', (e) => {
-                if (e.target.closest('.mcq-option') && !e.target.closest('.mcq-option[data-exam-option]')) {
-                    const option = e.target.closest('.mcq-option');
-                    const optionValue = option.dataset.optionValue;
-                    const question = AppState.mcqState.questions[AppState.mcqState.currentQuestionIndex];
-                    
-                    // Remove previous selections
-                    document.querySelectorAll('.mcq-option').forEach(opt => {
-                        opt.classList.remove('selected', 'correct', 'incorrect');
-                    });
-                    
-                    // Mark selected option
-                    option.classList.add('selected');
-                    
-                    // Store answer
-                    AppState.mcqState.userAnswers[AppState.mcqState.currentQuestionIndex] = optionValue;
-                    
-                    // Show explanation
-                    DOM.explanationText.textContent = question.explanation;
-                    DOM.explanation.classList.add('show');
-                    
-                    // Check if answer is correct
-                    if (optionValue === question.correct) {
-                        option.classList.add('correct');
-                    } else {
-                        option.classList.add('incorrect');
-                        // Show correct answer
-                        document.querySelectorAll('.mcq-option').forEach(opt => {
-                            if (opt.dataset.optionValue === question.correct) {
-                                opt.classList.add('correct');
-                            }
-                        });
-                    }
+            // MCQ pagination
+            DOM.firstPageBtn.addEventListener('click', () => {
+                AppState.mcqState.currentPage = 1;
+                renderCurrentPage();
+            });
+
+            DOM.prevPageBtn.addEventListener('click', () => {
+                if (AppState.mcqState.currentPage > 1) {
+                    AppState.mcqState.currentPage--;
+                    renderCurrentPage();
                 }
             });
 
-            // MCQ exam option selection
-            document.addEventListener('click', (e) => {
-                if (e.target.closest('.mcq-option[data-exam-option]')) {
-                    const option = e.target.closest('.mcq-option[data-exam-option]');
-                    const optionValue = option.dataset.optionValue;
-                    const questionIndex = AppState.examState.currentQuestionIndex;
-                    
-                    // Remove previous selections for this question
-                    document.querySelectorAll('#mcq-exam-options-container .mcq-option').forEach(opt => {
-                        opt.classList.remove('selected');
-                    });
-                    
-                    // Mark selected option
-                    option.classList.add('selected');
-                    
-                    // Store answer
-                    AppState.examState.answers[questionIndex] = optionValue;
-                    
-                    // Update progress
-                    updateMCQExamProgress();
+            DOM.nextPageBtn.addEventListener('click', () => {
+                const totalPages = parseInt(DOM.totalPages.textContent);
+                if (AppState.mcqState.currentPage < totalPages) {
+                    AppState.mcqState.currentPage++;
+                    renderCurrentPage();
                 }
             });
 
-            // MCQ navigation (practice)
-            DOM.prevQuestionBtn.addEventListener('click', () => {
-                if (AppState.mcqState.currentQuestionIndex > 0) {
-                    AppState.mcqState.currentQuestionIndex--;
-                    loadMCQQuestion();
-                }
+            DOM.lastPageBtn.addEventListener('click', () => {
+                AppState.mcqState.currentPage = parseInt(DOM.totalPages.textContent);
+                renderCurrentPage();
             });
 
-            DOM.nextQuestionBtn.addEventListener('click', () => {
-                if (AppState.mcqState.currentQuestionIndex < AppState.mcqState.questions.length - 1) {
-                    AppState.mcqState.currentQuestionIndex++;
-                    loadMCQQuestion();
-                }
+            DOM.questionsPerPageSelect.addEventListener('change', (e) => {
+                const value = e.target.value;
+                AppState.mcqState.questionsPerPage = value === 'all' ? 'all' : parseInt(value);
+                AppState.mcqState.currentPage = 1;
+                setupPagination();
+                renderCurrentPage();
             });
 
-            // Back buttons
+            // MCQ navigation
             DOM.backToSubjectsBtn.addEventListener('click', () => {
                 DOM.mcqPractice.style.display = 'none';
                 DOM.chapterSelection.style.display = 'block';
@@ -2685,7 +2928,7 @@
                 DOM.subjectGrid.style.display = 'block';
             });
 
-            // Subjective subject selection
+            // Subjective navigation
             document.addEventListener('click', (e) => {
                 const subjectCard = e.target.closest('.subject-card[data-subject]');
                 if (subjectCard && subjectCard.parentElement === DOM.subjectiveSetGrid) {
@@ -2695,18 +2938,17 @@
                 }
             });
 
-            // Subjective chapter selection
             document.addEventListener('click', (e) => {
                 const chapterCard = e.target.closest('.subject-card[data-chapter]');
                 if (chapterCard && chapterCard.parentElement === DOM.subjectiveChapterGrid) {
                     e.preventDefault();
                     const subject = chapterCard.dataset.subject;
                     const chapter = chapterCard.dataset.chapter;
-                    viewSubjectiveContent(subject, chapter);
+                    const fileName = chapterCard.dataset.filename;
+                    viewSubjectiveContent(subject, chapter, fileName);
                 }
             });
 
-            // Subjective back buttons
             DOM.backToSubjectiveSetsBtn.addEventListener('click', () => {
                 DOM.subjectiveContent.style.display = 'none';
                 DOM.subjectiveChapterSelection.style.display = 'block';
@@ -2717,7 +2959,7 @@
                 DOM.subjectiveSetGrid.style.display = 'block';
             });
 
-            // Exam type selection (delegated)
+            // Exam type selection
             document.addEventListener('click', (e) => {
                 const examTypeCard = e.target.closest('.subject-card[data-exam-type]');
                 if (examTypeCard && examTypeCard.parentElement.parentElement === DOM.examTypeSelection) {
@@ -2747,17 +2989,35 @@
                 }
             });
 
-            // Flag question
-            document.getElementById('flag-question').addEventListener('click', () => {
+            DOM.flagExamQuestion.addEventListener('click', () => {
                 const index = AppState.examState.currentQuestionIndex;
                 AppState.examState.flagged[index] = !AppState.examState.flagged[index];
                 loadMCQExamQuestion();
             });
 
+            // Exam option selection
+            document.addEventListener('click', (e) => {
+                const option = e.target.closest('.mcq-option[data-exam-option]');
+                if (option && option.parentElement === document.getElementById('exam-options-container')) {
+                    const optionValue = option.dataset.examOption;
+                    const questionIndex = AppState.examState.currentQuestionIndex;
+                    
+                    document.querySelectorAll('#exam-options-container .mcq-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    option.classList.add('selected');
+                    
+                    AppState.examState.answers[questionIndex] = optionValue;
+                    
+                    updateMCQExamProgress();
+                }
+            });
+
             // Exam submission
             DOM.submitSubjectiveExamBtn.addEventListener('click', () => {
                 if (confirm('Are you sure you want to submit your subjective exam?')) {
-                    alert('Subjective exam submitted! In a real application, this would be sent to the server for grading.');
+                    alert('Subjective exam submitted!');
                     if (AppState.timers.subjectiveExam) clearInterval(AppState.timers.subjectiveExam);
                     resetExamTypeSelection();
                 }
@@ -2769,19 +3029,78 @@
                 }
             });
             
-            // View answers button
             DOM.viewAnswersBtn.addEventListener('click', () => {
-                alert('In a real application, this would show the correct answers for each question with explanations.');
+                const state = AppState.examState;
+                let answersHtml = '<h4>Correct Answers:</h4><ol>';
+                
+                state.questions.forEach((question, index) => {
+                    const userAnswer = state.answers[index];
+                    const isCorrect = userAnswer === question.correct;
+                    answersHtml += `
+                        <li style="margin-bottom: 1rem; padding: 0.5rem; background-color: ${isCorrect ? '#d4edda' : '#f8d7da'}; border-radius: 4px;">
+                            <strong>${question.question}</strong><br>
+                            Your answer: <span style="color: ${isCorrect ? 'green' : 'red'}">${userAnswer || 'Not answered'}</span><br>
+                            Correct answer: <span style="color: green">${question.correct}</span><br>
+                            Explanation: ${question.explanation}
+                        </li>
+                    `;
+                });
+                
+                answersHtml += '</ol>';
+                
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.7);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                `;
+                
+                const modalContent = document.createElement('div');
+                modalContent.style.cssText = `
+                    background: white;
+                    padding: 2rem;
+                    border-radius: var(--border-radius);
+                    max-width: 800px;
+                    max-height: 80vh;
+                    overflow-y: auto;
+                    position: relative;
+                `;
+                
+                modalContent.innerHTML = `
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Exam Review - ${state.currentSet}</h3>
+                    <button style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+                    ${answersHtml}
+                `;
+                
+                modal.appendChild(modalContent);
+                document.body.appendChild(modal);
+                
+                modalContent.querySelector('button').addEventListener('click', () => {
+                    document.body.removeChild(modal);
+                });
+                
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        document.body.removeChild(modal);
+                    }
+                });
             });
 
-            // Exam back buttons
+            // Exam navigation back buttons
             DOM.backToExamTypeBtn.addEventListener('click', resetExamTypeSelection);
             DOM.backToExamTypeMcqBtn.addEventListener('click', resetExamTypeSelection);
             DOM.backToExamTypeResultsBtn.addEventListener('click', resetExamTypeSelection);
         }
 
         // ==============================================
-        // GLOBAL FUNCTIONS (for button onclick handlers)
+        // GLOBAL FUNCTIONS
         // ==============================================
 
         window.viewFile = function(fileUrl, fileName) {
@@ -2812,7 +3131,6 @@
             DOM.subjectiveChapterSelection.style.display = 'block';
         };
 
-        // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
