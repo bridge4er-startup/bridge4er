@@ -1,22 +1,38 @@
 [
  {
-  "S.N.": 1,
-  "Question": "Capital of Nepal ?",
-  "Option A": "Pokhara",
-  "Option B": "Lumbini",
-  "Option C": "Dang",
-  "Option D": "Kathmandu",
-  "Correct Answer": "Kathmandu",
-  "Explanation": "Ktm is Capital"
- },
+    "question": "3x+3x is ?",
+    "options": ["4x", "6x", "2x", "x"],
+    "correct": "6x",
+    "explanation": "Basic Arithmetic"
+  }
+  {
+    "question": "x+x is ?",
+    "options": ["4x", "6x", "2x", "x"],
+    "correct": "2x",
+    "explanation": "Basic Arithmetic"
+  }
  {
-  "S.N.": 2,
-  "Question": "A for apple, B for --------?",
-  "Option A": "Dog",
-  "Option B": "Cat",
-  "Option C": "Ball",
-  "Option D": "Elephant",
-  "Correct Answer": "Ball",
-  "Explanation": "Bhakundo"
- }
+    "question": "What is your name?",
+    "options": ["Ram", "Shyam", "Hari", "Sita"],
+    "correct": "Ram",
+    "explanation": "Ram is God."
+  }
+ {
+    "question": "What is the unit of stress?",
+    "options": ["N/m", "N/m²", "N/m³", "N"],
+    "correct": "N/m²",
+    "explanation": "Stress is force per unit area."
+  },
+  {
+    "question": "What does Young's modulus measure?",
+    "options": ["Stiffness", "Ductility", "Toughness", "Hardness"],
+    "correct": "Stiffness",
+    "explanation": "Young's modulus measures stiffness."
+  }
+  {
+    "question": "Who are you?",
+    "options": ["Sexy", "Lovely", "Tough", "Hard"],
+    "correct": "Sexy",
+    "explanation": "You are good."
+  }
 ]
