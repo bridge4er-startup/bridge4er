@@ -1,0 +1,28 @@
+[
+  {
+    "S.N.": "Test Section A"
+  },
+  {
+    "S.N.": 1,
+    "Questions ?": "What is stress? Write its formula and unit.",
+    "Marks": 5
+  },
+  {
+    "S.N.": 2,
+    "Questions ?": "Define Young's modulus.",
+    "Marks": 5
+  },
+  {
+    "S.N.": "Test Section B"
+  },
+  {
+    "S.N.": 3,
+    "Questions ?": "Calculate bending moment for simply supported beam with central load 10kN and span 4m.",
+    "Marks": 10
+  },
+  {
+    "S.N.": 4,
+    "Questions ?": "Explain concept of neutral axis.",
+    "Marks": 10
+  }
+]

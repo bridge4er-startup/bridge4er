@@ -1,0 +1,54 @@
+[
+  {
+    "S.N.": "Category A: Soil Properties"
+  },
+  {
+    "S.N.": 1,
+    "Questions ?": "Define: (a) Void ratio (b) Porosity (c) Degree of saturation (d) Water content",
+    "Marks": 8
+  },
+  {
+    "S.N.": 2,
+    "Questions ?": "Explain Atterberg limits and their significance in soil classification.",
+    "Marks": 7
+  },
+  {
+    "S.N.": "Category B: Soil Mechanics"
+  },
+  {
+    "S.N.": 3,
+    "Questions ?": "Derive Terzaghi's one-dimensional consolidation equation with assumptions.",
+    "Marks": 10
+  },
+  {
+    "S.N.": 4,
+    "Questions ?": "Explain Mohr-Coulomb failure criterion for soils.",
+    "Marks": 10
+  },
+  {
+    "S.N.": "Category C: Foundation Engineering"
+  },
+  {
+    "S.N.": 5,
+    "Questions ?": "Compare shallow and deep foundations with examples.",
+    "Marks": 10
+  },
+  {
+    "S.N.": 6,
+    "Questions ?": "Calculate bearing capacity of square footing 2m×2m at depth 1.5m in clay soil with cohesion 50kN/m², unit weight 18kN/m³. Use Terzaghi's equation.",
+    "Marks": 15
+  },
+  {
+    "S.N.": "Category D: Earth Retaining Structures"
+  },
+  {
+    "S.N.": 7,
+    "Questions ?": "Derive expression for active earth pressure using Rankine's theory.",
+    "Marks": 15
+  },
+  {
+    "S.N.": 8,
+    "Questions ?": "Design cantilever retaining wall for height 5m. Backfill soil: φ=30°, γ=18kN/m³. Base soil: bearing capacity 200kN/m².",
+    "Marks": 25
+  }
+]

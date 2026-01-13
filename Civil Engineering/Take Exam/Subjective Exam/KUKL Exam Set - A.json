@@ -1,0 +1,54 @@
+[
+  {
+    "S.N.": "Group 1: Chain Surveying"
+  },
+  {
+    "S.N.": 1,
+    "Questions ?": "Explain principles of surveying. Differentiate between plane and geodetic surveying.",
+    "Marks": 8
+  },
+  {
+    "S.N.": 2,
+    "Questions ?": "Describe procedure for chaining on sloping ground with example.",
+    "Marks": 7
+  },
+  {
+    "S.N.": "Group 2: Levelling"
+  },
+  {
+    "S.N.": 3,
+    "Questions ?": "Define: (a) Benchmark (b) Reduced level (c) Back sight (d) Fore sight (e) Change point",
+    "Marks": 10
+  },
+  {
+    "S.N.": 4,
+    "Questions ?": "Reduce levels by height of instrument method and rise and fall method from given data.",
+    "Marks": 15
+  },
+  {
+    "S.N.": "Group 3: Theodolite"
+  },
+  {
+    "S.N.": 5,
+    "Questions ?": "Explain temporary adjustments of theodolite.",
+    "Marks": 10
+  },
+  {
+    "S.N.": 6,
+    "Questions ?": "Measure horizontal angle by repetition method.",
+    "Marks": 10
+  },
+  {
+    "S.N.": "Group 4: Modern Surveying"
+  },
+  {
+    "S.N.": 7,
+    "Questions ?": "Explain working principle of Total Station with its advantages.",
+    "Marks": 15
+  },
+  {
+    "S.N.": 8,
+    "Questions ?": "What is GPS? Explain its components and applications in civil engineering.",
+    "Marks": 15
+  }
+]

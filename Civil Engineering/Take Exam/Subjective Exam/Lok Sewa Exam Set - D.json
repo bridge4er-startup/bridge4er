@@ -1,0 +1,49 @@
+[
+  {
+    "S.N.": "Part A: Pavement Design (Compulsory)"
+  },
+  {
+    "S.N.": 1,
+    "Questions ?": "Explain different types of pavements with their components and functions.",
+    "Marks": 10
+  },
+  {
+    "S.N.": 2,
+    "Questions ?": "What is CBR test? How is it used in flexible pavement design?",
+    "Marks": 10
+  },
+  {
+    "S.N.": "Part B: Geometric Design"
+  },
+  {
+    "S.N.": 3,
+    "Questions ?": "Design horizontal curve for national highway with design speed 80km/hr, radius 300m. Calculate superelevation and extra widening required.",
+    "Marks": 15
+  },
+  {
+    "S.N.": 4,
+    "Questions ?": "Calculate length of summit curve for stopping sight distance 120m. Grades: +3% and -2%.",
+    "Marks": 15
+  },
+  {
+    "S.N.": "Part C: Materials and Construction"
+  },
+  {
+    "S.N.": 5,
+    "Questions ?": "Explain Marshall method of bituminous mix design with flow chart.",
+    "Marks": 15
+  },
+  {
+    "S.N.": 6,
+    "Questions ?": "Design flexible pavement using IRC method for cumulative standard axle load = 50 msa, CBR of subgrade = 5%.",
+    "Marks": 20
+  },
+  {
+    "S.N.": "Part D: Maintenance"
+  },
+  {
+    "S.N.": 7,
+    "Questions ?": "Discuss common distresses in rigid and flexible pavements with their causes and repair methods.",
+    "Marks": 15
+  }
+]

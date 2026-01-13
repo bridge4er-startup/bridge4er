@@ -1,0 +1,49 @@
+[
+  {
+    "S.N.": "A: Design Philosophy"
+  },
+  {
+    "S.N.": 1,
+    "Questions ?": "Explain limit state design method as per IS 800:2007.",
+    "Marks": 10
+  },
+  {
+    "S.N.": 2,
+    "Questions ?": "Differentiate between plastic, compact, semi-compact and slender sections.",
+    "Marks": 10
+  },
+  {
+    "S.N.": "B: Tension Members"
+  },
+  {
+    "S.N.": 3,
+    "Questions ?": "Design single angle tension member to carry factored load of 300kN. Length=3m. Use Fe410 steel.",
+    "Marks": 15
+  },
+  {
+    "S.N.": 4,
+    "Questions ?": "Explain concept of shear lag in tension members.",
+    "Marks": 10
+  },
+  {
+    "S.N.": "C: Compression Members"
+  },
+  {
+    "S.N.": 5,
+    "Questions ?": "Design built-up column with two channels back to back to carry axial load of 1200kN. Effective length=4m. Use Fe410 steel.",
+    "Marks": 20
+  },
+  {
+    "S.N.": 6,
+    "Questions ?": "What is lacing and battening? Design lacing system for built-up column.",
+    "Marks": 15
+  },
+  {
+    "S.N.": "D: Connections"
+  },
+  {
+    "S.N.": 7,
+    "Questions ?": "Design bolted connection for tension member using bearing type bolts.",
+    "Marks": 20
+  }
+]

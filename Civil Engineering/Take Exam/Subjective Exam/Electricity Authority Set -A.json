@@ -1,0 +1,46 @@
+[
+  {
+    "S.N.": "Part I: Theory Questions"
+  },
+  {
+    "S.N.": 1,
+    "Questions ?": "Explain stress-strain curve for mild steel with all important points.",
+    "Marks": 10
+  },
+  {
+    "S.N.": 2,
+    "Questions ?": "What is composite section? Derive expression for equivalent area and moment of inertia for composite beam.",
+    "Marks": 10
+  },
+  {
+    "S.N.": 3,
+    "Questions ?": "Explain concept of plastic hinge and plastic moment capacity in plastic analysis.",
+    "Marks": 10
+  },
+  {
+    "S.N.": "Part II: Numerical Problems"
+  },
+  {
+    "S.N.": 4,
+    "Questions ?": "A rectangular beam 250mm wide and 500mm deep is subjected to bending moment of 100kNm and shear force of 80kN. Calculate maximum bending stress and average shear stress.",
+    "Marks": 15
+  },
+  {
+    "S.N.": 5,
+    "Questions ?": "Determine forces in members AB, AC, and BC of the truss shown using method of joints. All triangles are equilateral with side 3m. Loads: 20kN at B, 30kN at C.",
+    "Marks": 15
+  },
+  {
+    "S.N.": 6,
+    "Questions ?": "Calculate deflection at free end of cantilever beam with varying cross-section using moment-area method.",
+    "Marks": 15
+  },
+  {
+    "S.N.": "Part III: Design Problem"
+  },
+  {
+    "S.N.": 7,
+    "Questions ?": "Design a steel beam for a span of 8m to carry dead load 20kN/m and live load 15kN/m. Use Fe350 steel. Check for deflection (limit = span/300) and shear.",
+    "Marks": 25
+  }
+]

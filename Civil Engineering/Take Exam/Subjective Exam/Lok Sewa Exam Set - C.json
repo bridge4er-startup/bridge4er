@@ -1,0 +1,54 @@
+[
+  {
+    "S.N.": "Module 1: Materials"
+  },
+  {
+    "S.N.": 1,
+    "Questions ?": "Explain chemical composition and hydration process of Portland cement.",
+    "Marks": 10
+  },
+  {
+    "S.N.": 2,
+    "Questions ?": "What are admixtures? Classify with examples and uses.",
+    "Marks": 10
+  },
+  {
+    "S.N.": "Module 2: Mix Design"
+  },
+  {
+    "S.N.": 3,
+    "Questions ?": "Design M25 concrete mix using IS 10262 method. Materials: Cement OPC 43 grade, Specific gravity: cement=3.15, fine aggregate=2.6, coarse aggregate=2.7, Slump=75mm, Exposure=moderate.",
+    "Marks": 20
+  },
+  {
+    "S.N.": 4,
+    "Questions ?": "Calculate quantities of materials for 10 cubic meters of M20 concrete.",
+    "Marks": 10
+  },
+  {
+    "S.N.": "Module 3: Properties and Testing"
+  },
+  {
+    "S.N.": 5,
+    "Questions ?": "Explain factors affecting strength of concrete.",
+    "Marks": 10
+  },
+  {
+    "S.N.": 6,
+    "Questions ?": "Describe procedure for compression test of concrete cubes as per IS code.",
+    "Marks": 10
+  },
+  {
+    "S.N.": "Module 4: Special Concretes"
+  },
+  {
+    "S.N.": 7,
+    "Questions ?": "What is self-compacting concrete? Explain its properties and applications.",
+    "Marks": 15
+  },
+  {
+    "S.N.": 8,
+    "Questions ?": "Discuss durability problems in concrete and preventive measures.",
+    "Marks": 15
+  }
+]

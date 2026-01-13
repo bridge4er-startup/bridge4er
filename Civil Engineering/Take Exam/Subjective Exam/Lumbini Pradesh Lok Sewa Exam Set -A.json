@@ -1,0 +1,56 @@
+[
+  {
+    "S.N.": "Section A: Short Questions (Compulsory)"
+  },
+  {
+    "S.N.": 1,
+    "Questions ?": "Define factor of safety. Why is it important in structural design?",
+    "Marks": 5
+  },
+  {
+    "S.N.": 2,
+    "Questions ?": "Differentiate between ductility and brittleness with examples.",
+    "Marks": 5
+  },
+  {
+    "S.N.": 3,
+    "Questions ?": "List and explain different types of loads acting on a structure.",
+    "Marks": 5
+  },
+  {
+    "S.N.": 4,
+    "Questions ?": "What is Poisson's ratio? Give typical values for steel and concrete.",
+    "Marks": 5
+  },
+  {
+    "S.N.": "Section B: Analysis and Design (Answer Any Two)"
+  },
+  {
+    "S.N.": 5,
+    "Questions ?": "Derive the bending equation σ/y = M/I = E/R with necessary assumptions and explain each term.",
+    "Marks": 10
+  },
+  {
+    "S.N.": 6,
+    "Questions ?": "A simply supported beam of length 6m carries a uniformly distributed load of 20 kN/m over its entire length. Calculate maximum bending moment and shear force. Draw SFD and BMD.",
+    "Marks": 10
+  },
+  {
+    "S.N.": 7,
+    "Questions ?": "Explain Euler's buckling formula for columns. What are its limitations?",
+    "Marks": 10
+  },
+  {
+    "S.N.": "Section C: Long Questions (Answer Any One)"
+  },
+  {
+    "S.N.": 8,
+    "Questions ?": "Design a singly reinforced rectangular beam for a bending moment of 150 kNm. Use M25 concrete and Fe415 steel. Assume width = 300mm, effective cover = 50mm.",
+    "Marks": 15
+  },
+  {
+    "S.N.": 9,
+    "Questions ?": "Analyze the truss shown in figure using method of joints or method of sections. Calculate forces in all members and identify zero-force members.",
+    "Marks": 15
+  }
+]

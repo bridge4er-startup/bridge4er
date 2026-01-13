@@ -1,0 +1,49 @@
+[
+  {
+    "S.N.": "Section I: Basic Concepts"
+  },
+  {
+    "S.N.": 1,
+    "Questions ?": "Explain components of a typical hydropower plant with neat sketch.",
+    "Marks": 10
+  },
+  {
+    "S.N.": 2,
+    "Questions ?": "Differentiate between: (a) Impulse and reaction turbines (b) High head and low head plants",
+    "Marks": 10
+  },
+  {
+    "S.N.": "Section II: Design and Calculation"
+  },
+  {
+    "S.N.": 3,
+    "Questions ?": "A hydropower plant has gross head 100m, discharge 50m³/s, overall efficiency 85%. Calculate power generated. If load factor is 60%, find annual energy generation.",
+    "Marks": 15
+  },
+  {
+    "S.N.": 4,
+    "Questions ?": "Design penstock for a hydropower plant with: Head=150m, Discharge=40m³/s, Length=500m, Manning's n=0.013. Calculate diameter and head loss.",
+    "Marks": 15
+  },
+  {
+    "S.N.": "Section III: Structures"
+  },
+  {
+    "S.N.": 5,
+    "Questions ?": "Explain types of dams with advantages and disadvantages of each.",
+    "Marks": 15
+  },
+  {
+    "S.N.": 6,
+    "Questions ?": "Design ogee spillway for maximum flood discharge of 5000m³/s. Crest length=50m. Calculate crest profile and energy dissipation arrangements.",
+    "Marks": 20
+  },
+  {
+    "S.N.": "Section IV: Project Planning"
+  },
+  {
+    "S.N.": 7,
+    "Questions ?": "Discuss environmental and social impacts of hydropower projects in Nepal. Suggest mitigation measures.",
+    "Marks": 15
+  }
+]

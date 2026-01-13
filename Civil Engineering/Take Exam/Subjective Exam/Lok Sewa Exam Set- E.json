@@ -1,0 +1,61 @@
+[
+  {
+    "S.N.": "Group A: Fundamentals (Compulsory)"
+  },
+  {
+    "S.N.": 1,
+    "Questions ?": "What is Hooke's Law? State its limitations.",
+    "Marks": 4
+  },
+  {
+    "S.N.": 2,
+    "Questions ?": "Define: (a) Moment of inertia (b) Section modulus (c) Radius of gyration",
+    "Marks": 6
+  },
+  {
+    "S.N.": 3,
+    "Questions ?": "Differentiate between determinate and indeterminate structures.",
+    "Marks": 5
+  },
+  {
+    "S.N.": "Group B: Mechanics (Answer Any Three)"
+  },
+  {
+    "S.N.": 4,
+    "Questions ?": "Explain Mohr's circle for biaxial stress system. Derive expressions for principal stresses and maximum shear stress.",
+    "Marks": 8
+  },
+  {
+    "S.N.": 5,
+    "Questions ?": "A cantilever beam 3m long carries a point load of 10kN at free end and UDL of 5kN/m over entire length. Find maximum deflection. Take EI = 15000 kNm².",
+    "Marks": 8
+  },
+  {
+    "S.N.": 6,
+    "Questions ?": "Calculate stresses at different points in a circular shaft subjected to combined bending and torsion.",
+    "Marks": 8
+  },
+  {
+    "S.N.": 7,
+    "Questions ?": "Explain concept of shear center with example of channel section.",
+    "Marks": 8
+  },
+  {
+    "S.N.": "Group C: Design (Answer Any Two)"
+  },
+  {
+    "S.N.": 8,
+    "Questions ?": "Design a rectangular column to carry axial load of 1500kN. Use M30 concrete and Fe500 steel. Assume column is 4m long with both ends hinged.",
+    "Marks": 12
+  },
+  {
+    "S.N.": 9,
+    "Questions ?": "Explain working stress method and limit state method of design. Compare their advantages.",
+    "Marks": 12
+  },
+  {
+    "S.N.": 10,
+    "Questions ?": "Design foundation for a column carrying 2000kN load. Safe bearing capacity of soil is 200kN/m².",
+    "Marks": 12
+  }
+]
