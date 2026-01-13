@@ -1,20 +1,14 @@
 [
- {
-    "question": "What is the unit of stress?",
-    "options": ["N/m", "N/m²", "N/m³", "N"],
-    "correct": "N/m²",
-    "explanation": "Stress is force per unit area."
+  {
+    "question": "What is the primary function of a structure?",
+    "options": ["To look beautiful", "To resist loads", "To be expensive", "To be heavy"],
+    "correct": "To resist loads",
+    "explanation": "The primary function of any structure is to resist applied loads safely."
   },
   {
-    "question": "What does Young's modulus measure?",
-    "options": ["Stiffness", "Ductility", "Toughness", "Hardness"],
-    "correct": "Stiffness",
-    "explanation": "Young's modulus measures stiffness."
-  }
-  {
-    "question": "Who are you?",
-    "options": ["Sexy", "Lovely", "Tough", "Hard"],
-    "correct": "Sexy",
-    "explanation": "You are good."
+    "question": "Which is NOT a type of structural load?",
+    "options": ["Dead load", "Live load", "Wind load", "Color load"],
+    "correct": "Color load",
+    "explanation": "Color is not a load; dead, live, and wind loads are actual structural loads."
   }
 ]
