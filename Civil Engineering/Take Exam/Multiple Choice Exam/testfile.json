@@ -1,0 +1,32 @@
+[
+  {
+    "question": "Euler's formula for critical buckling load is valid for:",
+    "options": ["Short columns", "Long columns", "All columns", "Intermediate columns"],
+    "correct": "Long columns",
+    "explanation": "Euler's formula P_cr = π²EI/(KL)² applies to long slender columns where buckling occurs before yielding."
+  },
+  {
+    "question": "The slenderness ratio is defined as:",
+    "options": ["L/r", "r/L", "L²/r", "r²/L"],
+    "correct": "L/r",
+    "explanation": "Slenderness ratio = Effective length / Radius of gyration = KL/r. Determines whether column is short or long."
+  },
+  {
+    "question": "For a column with both ends fixed, effective length factor K is:",
+    "options": ["0.5", "0.7", "1.0", "2.0"],
+    "correct": "0.5",
+    "explanation": "Effective length factors: Both ends fixed K=0.5, Both ends pinned K=1.0, One fixed-one free K=2.0."
+  },
+  {
+    "question": "Rankine's formula combines:",
+    "options": ["Euler and crushing loads", "Shear and bending", "Tension and compression", "Elastic and plastic loads"],
+    "correct": "Euler and crushing loads",
+    "explanation": "Rankine's formula: 1/P = 1/P_crushing + 1/P_Euler, valid for all slenderness ratios."
+  },
+  {
+    "question": "Local buckling in columns occurs in:",
+    "options": ["Entire column length", "Thin plate elements", "Concrete core", "Reinforcement"],
+    "correct": "Thin plate elements",
+    "explanation": "Local buckling = buckling of thin plate elements (flanges, webs) before overall column buckling. Common in steel sections."
+  }
+]
