@@ -1,0 +1,44 @@
+[
+  {
+    "question": "Which of the following is the largest lake in Nepal?",
+    "options": ["Phewa Lake", "Rara Lake", "Begnas Lake", "Tilicho Lake"],
+    "correct": "Rara Lake",
+    "explanation": "Rara Lake in Mugu district is the largest lake in Nepal with an area of 10.8 square kilometers."
+  },
+  {
+    "question": "According to the 2021 census, what is the approximate population of Nepal?",
+    "options": ["26.5 million", "29.1 million", "31.5 million", "33.8 million"],
+    "correct": "29.1 million",
+    "explanation": "The 2021 census recorded Nepal's population as 29,164,578 people."
+  },
+  {
+    "question": "Which ethnic group has the highest population in Nepal according to the 2021 census?",
+    "options": ["Chhetri", "Brahmin", "Magar", "Tharu"],
+    "correct": "Chhetri",
+    "explanation": "Chhetri is the largest ethnic group in Nepal comprising about 16.6% of the total population."
+  },
+  {
+    "question": "What percentage of Nepal's total land area is covered by mountains?",
+    "options": ["15%", "35%", "65%", "85%"],
+    "correct": "35%",
+    "explanation": "Nepal's topography is divided into three regions: Mountains (35%), Hills (42%), and Terai (23%)."
+  },
+  {
+    "question": "Which is the most densely populated district in Nepal?",
+    "options": ["Kathmandu", "Bhaktapur", "Lalitpur", "Morang"],
+    "correct": "Kathmandu",
+    "explanation": "Kathmandu district has the highest population density with approximately 5,108 people per square kilometer."
+  },
+  {
+    "question": "What is the literacy rate of Nepal according to the 2021 census?",
+    "options": ["67.9%", "71.2%", "76.2%", "80.4%"],
+    "correct": "76.2%",
+    "explanation": "The literacy rate of Nepal is 76.2% with male literacy at 83.6% and female literacy at 69.4%."
+  },
+  {
+    "question": "Which river system has the largest drainage area in Nepal?",
+    "options": ["Koshi", "Gandaki", "Karnali", "Mahakali"],
+    "correct": "Koshi",
+    "explanation": "The Koshi River system has the largest drainage basin covering about 45% of Nepal's total area."
+  }
+]
