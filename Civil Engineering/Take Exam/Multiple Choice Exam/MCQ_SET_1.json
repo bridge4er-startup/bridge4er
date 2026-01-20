@@ -1,5 +1,11 @@
 [
   {
+    "question": "राष्ट्रिय भूकम्प सुरक्षा दिवस कहिले मनाइन्छ?",
+    "options": ["बैशाख ११", "असर १५", "पुष ३ ", "माघ २"],
+    "correct": "माघ २",
+    "explanation": " १९९० माघ २ गते गएको भूकम्पको सम्झनामा."
+  },
+  {
     "question": "The instrument used to measure the consistency of cement paste is:",
     "options": ["Vicat apparatus", "Le Chatelier apparatus", "Flow table", "Compaction factor apparatus"],
     "correct": "Vicat apparatus",
