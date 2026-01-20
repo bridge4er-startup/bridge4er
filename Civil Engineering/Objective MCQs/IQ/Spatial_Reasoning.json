@@ -1,0 +1,68 @@
+[
+  {
+    "question": "Which figure completes the series? [Imagine sequence: square, circle, triangle, square, circle, ?]",
+    "options": ["Triangle", "Square", "Circle", "Rectangle"],
+    "correct": "Triangle",
+    "explanation": "Pattern: Square → Circle → Triangle repeats every 3 figures. After square, circle comes triangle."
+  },
+  {
+    "question": "Figure analogy: Cube is to Square as Sphere is to _____",
+    "options": ["Circle", "Point", "Line", "Ellipse"],
+    "correct": "Circle",
+    "explanation": "A cube is made from squares extended in 3D, similarly sphere is made from circles rotated in 3D."
+  },
+  {
+    "question": "Odd one out in shapes: Cube, Cylinder, Pyramid, Prism",
+    "options": ["Cylinder", "Pyramid", "Prism", "All are 3D"],
+    "correct": "Cylinder",
+    "explanation": "Cube, pyramid, prism are polyhedrons (flat faces), cylinder has curved surface."
+  },
+  {
+    "question": "Which figure completes the matrix? [Imagine 2x2: top-left has dot in corner, top-right has dot center, bottom-left has dot edge, bottom-right?]",
+    "options": ["Dot in opposite corner", "No dot", "Two dots", "Dot middle of side"],
+    "correct": "Dot middle of side",
+    "explanation": "Pattern: Position changes systematically: corner→center→edge→middle of side completes rotation."
+  },
+  {
+    "question": "Which part completes the pattern? [Imagine missing quarter of symmetrical design]",
+    "options": ["Option A mirror", "Option B rotate", "Option C same", "Option D different"],
+    "correct": "Option A mirror",
+    "explanation": "Pattern shows reflection symmetry, missing part should mirror adjacent part."
+  },
+  {
+    "question": "How many triangles are embedded in this figure? [Imagine star shape]",
+    "options": ["10", "12", "14", "16"],
+    "correct": "12",
+    "explanation": "Count small triangles: 6, medium: 6, large: 0, total 12."
+  },
+  {
+    "question": "If you fold this net, which cube can be formed? [Imagine cross-shaped net]",
+    "options": ["Cube with opposite faces same color", "Cube with adjacent faces different", "Impossible cube", "Two options possible"],
+    "correct": "Cube with opposite faces same color",
+    "explanation": "Cross net has opposite faces separated by one face, will become opposite sides on cube."
+  },
+  {
+    "question": "Mirror image of 'p∧q' placed on left side of vertical mirror?",
+    "options": ["b∧d", "d∧b", "q∧p", "p∧q"],
+    "correct": "b∧d",
+    "explanation": "Vertical mirror reverses left-right: 'p' becomes 'b', '∧' stays same, 'q' becomes 'd'."
+  },
+  {
+    "question": "Water image of 'WATER' (word placed horizontally on water surface)?",
+    "options": ["ɹƎ┴∀M", "WATƎɹ", "ɹƎTAW", "M∀┴Ǝɹ"],
+    "correct": "WATƎɹ",
+    "explanation": "Water image shows upside-down reflection: W stays, A stays, T stays, E becomes Ǝ, R becomes ɹ."
+  },
+  {
+    "question": "A cube has dots: opposite faces sum to 7. Face with 3 dots opposite to?",
+    "options": ["4", "5", "6", "Cannot determine"],
+    "correct": "4",
+    "explanation": "Standard dice: opposite faces sum to 7. So 3 is opposite to 4 (3+4=7)."
+  },
+  {
+    "question": "Paper folded twice, corner cut. Unfolded pattern?",
+    "options": ["4 symmetric cuts", "2 cuts", "1 cut", "8 cuts"],
+    "correct": "4 symmetric cuts",
+    "explanation": "Folding twice creates 4 layers. Cutting one corner affects all 4 layers symmetrically."
+  }
+]
