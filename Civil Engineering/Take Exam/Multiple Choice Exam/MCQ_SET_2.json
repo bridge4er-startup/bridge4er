@@ -1,14 +1,8 @@
 [
  {
     "question": "Who will win Jhapa-5, 2082 Election ?",
-    "options": ["Balendra Shah", "KP Oli", "Both Loose", "NO Election"],
-    "option_images": [
-      "https://github.com/bridge4er/bridge4er/blob/main/Civil%20Engineering/photos%20for%20iq%20mcq/MCQ%20SET%202/IQ/Balendra%20Shah.jpg",
-      "https://github.com/bridge4er/bridge4er/blob/main/Civil%20Engineering/photos%20for%20iq%20mcq/MCQ%20SET%202/IQ/KP%20OLI.jpg",
-      "https://github.com/bridge4er/bridge4er/blob/main/Civil%20Engineering/photos%20for%20iq%20mcq/MCQ%20SET%202/IQ/Balendra%20Shah.jpg",
-      "https://github.com/bridge4er/bridge4er/blob/main/Civil%20Engineering/photos%20for%20iq%20mcq/MCQ%20SET%202/IQ/Balendra%20Shah.jpg"
-    ],
-    "correct": "Balendra Shah",
+    "options": ["https://english.pardafas.com/wp-content/uploads/2024/07/kp-oli-2-1024x576.jpg", "KP Oli", "Both Loose", "NO Election"],
+    "correct": "https://english.pardafas.com/wp-content/uploads/2024/07/kp-oli-2-1024x576.jpg",
     "explanation": "Young Leader."
   },
   {
