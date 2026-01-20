@@ -1,311 +1,266 @@
 [
   {
-    "question": "Construction planning primarily aims to:",
-    "options": ["Increase cost", "Reduce uncertainty", "Delay project", "Increase manpower"],
-    "correct": "Reduce uncertainty",
-    "explanation": "Planning helps foresee activities and resources to minimize uncertainty."
+    "question": "Which of the following is the largest lake in Nepal?",
+    "options": ["Phewa Lake", "Rara Lake", "Begnas Lake", "Tilicho Lake"],
+    "correct": "Rara Lake",
+    "explanation": "Rara Lake in Mugu district is the largest lake in Nepal with an area of 10.8 square kilometers."
   },
   {
-    "question": "CPM stands for:",
-    "options": ["Critical Path Method", "Construction Planning Method", "Cost Performance Method", "Control Path Method"],
-    "correct": "Critical Path Method",
-    "explanation": "CPM is used for scheduling and time control."
+    "question": "According to the 2021 census, what is the approximate population of Nepal?",
+    "options": ["26.5 million", "29.1 million", "31.5 million", "33.8 million"],
+    "correct": "29.1 million",
+    "explanation": "The 2021 census recorded Nepal's population as 29,164,578 people."
   },
   {
-    "question": "PERT stands for:",
-    "options": ["Program Evaluation and Review Technique", "Project Estimation Review Tool", "Planning Evaluation Resource Technique", "Performance Evaluation Review Tool"],
-    "correct": "Program Evaluation and Review Technique",
-    "explanation": "PERT is used for probabilistic time estimation."
+    "question": "Which ethnic group has the highest population in Nepal according to the 2021 census?",
+    "options": ["Chhetri", "Brahmin", "Magar", "Tharu"],
+    "correct": "Chhetri",
+    "explanation": "Chhetri is the largest ethnic group in Nepal comprising about 16.6% of the total population."
   },
   {
-    "question": "Critical path in a network represents:",
-    "options": ["Shortest path", "Longest duration path", "Least cost path", "Random path"],
-    "correct": "Longest duration path",
-    "explanation": "Any delay on critical path delays the project."
+    "question": "What percentage of Nepal's total land area is covered by mountains?",
+    "options": ["15%", "35%", "65%", "85%"],
+    "correct": "35%",
+    "explanation": "Nepal's topography is divided into three regions: Mountains (35%), Hills (42%), and Terai (23%)."
   },
   {
-    "question": "Float is defined as:",
-    "options": ["Extra cost", "Extra time available for an activity", "Idle labor", "Free resource"],
-    "correct": "Extra time available for an activity",
-    "explanation": "Float indicates scheduling flexibility."
-  },
-
-  {
-    "question": "Total float is the difference between:",
-    "options": ["ES and EF", "LS and ES", "LF and EF", "Project start and finish"],
-    "correct": "LS and ES",
-    "explanation": "Total float = LS − ES or LF − EF."
+    "question": "Which is the most densely populated district in Nepal?",
+    "options": ["Kathmandu", "Bhaktapur", "Lalitpur", "Morang"],
+    "correct": "Kathmandu",
+    "explanation": "Kathmandu district has the highest population density with approximately 5,108 people per square kilometer."
   },
   {
-    "question": "Free float is the time by which an activity can be delayed without:",
-    "options": ["Affecting project cost", "Affecting successor start", "Affecting predecessor finish", "Affecting resources"],
-    "correct": "Affecting successor start",
-    "explanation": "Free float does not affect subsequent activities."
+    "question": "What is the literacy rate of Nepal according to the 2021 census?",
+    "options": ["67.9%", "71.2%", "76.2%", "80.4%"],
+    "correct": "76.2%",
+    "explanation": "The literacy rate of Nepal is 76.2% with male literacy at 83.6% and female literacy at 69.4%."
   },
   {
-    "question": "Bar charts are also known as:",
-    "options": ["Gantt charts", "Network charts", "Flow charts", "Line diagrams"],
-    "correct": "Gantt charts",
-    "explanation": "Bar charts visually represent schedules."
+    "question": "Which river system has the largest drainage area in Nepal?",
+    "options": ["Koshi", "Gandaki", "Karnali", "Mahakali"],
+    "correct": "Koshi",
+    "explanation": "The Koshi River system has the largest drainage basin covering about 45% of Nepal's total area."
+  }
+  {
+    "question": "Which mineral resource is found in significant quantity in Nepal?",
+    "options": ["Limestone", "Coal", "Iron ore", "Gold"],
+    "correct": "Limestone",
+    "explanation": "Limestone is one of the most abundant mineral resources in Nepal, found mainly in the Himalayan region."
   },
   {
-    "question": "Main limitation of bar chart is:",
-    "options": ["Complexity", "No interdependence shown", "High cost", "Difficult to read"],
-    "correct": "No interdependence shown",
-    "explanation": "Bar charts do not show logical relationships."
+    "question": "What is Nepal's estimated hydroelectric potential?",
+    "options": ["43,000 MW", "83,000 MW", "25,000 MW", "60,000 MW"],
+    "correct": "83,000 MW",
+    "explanation": "Nepal has an estimated hydroelectric potential of 83,000 MW, of which about 42,000 MW is economically feasible."
   },
   {
-    "question": "CPM is best suited for:",
-    "options": ["Uncertain activities", "Research projects", "Construction projects", "Exploratory work"],
-    "correct": "Construction projects",
-    "explanation": "CPM uses deterministic time estimates."
-  },
-
-  {
-    "question": "A contract is an agreement enforceable by:",
-    "options": ["Owner", "Contractor", "Law", "Engineer"],
-    "correct": "Law",
-    "explanation": "Contracts are legally binding."
+    "question": "Which district is known for petroleum deposit exploration in Nepal?",
+    "options": ["Dailekh", "Nawalparasi", "Dang", "Dhankuta"],
+    "correct": "Dailekh",
+    "explanation": "Dailekh district has shown indications of petroleum deposits and has been a focus for exploration activities."
   },
   {
-    "question": "Bid notice is issued to:",
-    "options": ["Award contract", "Invite contractors", "Reject tenders", "Sign agreement"],
-    "correct": "Invite contractors",
-    "explanation": "It invites bids from eligible contractors."
+    "question": "What percentage of Nepal's total energy consumption comes from traditional sources?",
+    "options": ["45%", "65%", "75%", "85%"],
+    "correct": "65%",
+    "explanation": "Approximately 65% of Nepal's total energy consumption comes from traditional sources like firewood and agricultural residues."
   },
   {
-    "question": "Tender document generally includes:",
-    "options": ["Drawings only", "Specifications only", "BOQ only", "All of these"],
-    "correct": "All of these",
-    "explanation": "Tender documents provide complete project details."
+    "question": "Which region of Nepal has the largest forest coverage?",
+    "options": ["Hill region", "Mountain region", "Terai region", "All regions equally"],
+    "correct": "Hill region",
+    "explanation": "The Hill region has the largest forest coverage (around 39%) followed by Mountain (35%) and Terai (26%) regions."
   },
   {
-    "question": "Pre-qualification of contractors is done to:",
-    "options": ["Increase competition", "Ensure capability", "Reduce cost", "Delay project"],
-    "correct": "Ensure capability",
-    "explanation": "Ensures competent contractors participate."
+    "question": "What is Nepal's main export commodity?",
+    "options": ["Tea", "Cardamom", "Palm oil", "Woolen carpets"],
+    "correct": "Woolen carpets",
+    "explanation": "Woolen carpets (hand-knotted) are one of Nepal's main export commodities, particularly to European markets."
+  }
+  {
+    "question": "Which climate zone in Nepal experiences alpine climate?",
+    "options": ["Terai", "Siwalik", "Middle Mountains", "High Himalayas"],
+    "correct": "High Himalayas",
+    "explanation": "The High Himalayas (above 4,000m) experience alpine climate with temperatures often below freezing."
   },
   {
-    "question": "Lowest bidder is selected based on:",
-    "options": ["Experience", "Technical score", "Quoted price", "Negotiation"],
-    "correct": "Quoted price",
-    "explanation": "Provided all technical requirements are satisfied."
-  },
-
-  {
-    "question": "Contract acceptance occurs when:",
-    "options": ["Bid is submitted", "Bid is evaluated", "Bid is approved", "Letter of acceptance is issued"],
-    "correct": "Letter of acceptance is issued",
-    "explanation": "Acceptance completes contract formation."
+    "question": "What is the main occupation of people in the Terai region?",
+    "options": ["Animal husbandry", "Agriculture", "Tourism", "Mining"],
+    "correct": "Agriculture",
+    "explanation": "Agriculture is the main occupation in the Terai region due to fertile plains and favorable climate."
   },
   {
-    "question": "Conditions of contract define:",
-    "options": ["Work sequence", "Rights and obligations", "Material rates", "Labor wages"],
-    "correct": "Rights and obligations",
-    "explanation": "They govern legal relationships."
+    "question": "Which region experiences the highest rainfall in Nepal?",
+    "options": ["Pokhara Valley", "Kathmandu Valley", "Chitwan", "Eastern Terai"],
+    "correct": "Pokhara Valley",
+    "explanation": "Pokhara Valley receives the highest rainfall in Nepal due to its location in the rain shadow area of the Annapurna range."
   },
   {
-    "question": "Lump sum contract is suitable when:",
-    "options": ["Scope is uncertain", "Design is complete", "Rates fluctuate", "Emergency works"],
-    "correct": "Design is complete",
-    "explanation": "Quantities and scope must be clear."
+    "question": "What is the traditional lifestyle of the Sherpa community?",
+    "options": ["Fishing", "High-altitude farming and mountaineering", "Nomadic herding", "Trade and commerce"],
+    "correct": "High-altitude farming and mountaineering",
+    "explanation": "Sherpas are traditionally involved in high-altitude farming, animal husbandry, and mountaineering activities."
+  }
+  {
+    "question": "When was democracy first established in Nepal?",
+    "options": ["1951", "1959", "1990", "2008"],
+    "correct": "1951",
+    "explanation": "Democracy was first established in Nepal in 1951 after the end of the Rana regime."
   },
   {
-    "question": "Item rate contract is suitable when:",
-    "options": ["Work is repetitive", "Quantities are uncertain", "Design is incomplete", "Short duration work"],
-    "correct": "Quantities are uncertain",
-    "explanation": "Payment is based on actual quantities."
+    "question": "Who was the first elected Prime Minister of Nepal?",
+    "options": ["B.P. Koirala", "Mohan Shumsher", "Matrika Prasad Koirala", "Tanka Prasad Acharya"],
+    "correct": "B.P. Koirala",
+    "explanation": "Bishweshwar Prasad (B.P.) Koirala became the first elected Prime Minister of Nepal in 1959."
   },
   {
-    "question": "Dispute resolution methods include:",
-    "options": ["Arbitration", "Litigation", "Negotiation", "All of these"],
-    "correct": "All of these",
-    "explanation": "Multiple methods are used to resolve disputes."
-  },
-
-  {
-    "question": "Muster roll is a record of:",
-    "options": ["Materials", "Equipment", "Labor attendance", "Payments"],
-    "correct": "Labor attendance",
-    "explanation": "Used for labor payment verification."
+    "question": "When did Nepal become a Federal Democratic Republic?",
+    "options": ["2006", "2007", "2008", "2015"],
+    "correct": "2008",
+    "explanation": "Nepal was declared a Federal Democratic Republic on May 28, 2008, ending the 240-year-old monarchy."
   },
   {
-    "question": "Material management aims to:",
-    "options": ["Reduce waste", "Ensure availability", "Control cost", "All of these"],
-    "correct": "All of these",
-    "explanation": "Effective material management improves efficiency."
+    "question": "Which treaty established the current boundary between Nepal and India?",
+    "options": ["Sugauli Treaty", "Kathmandu Treaty", "Delhi Treaty", "Calcutta Treaty"],
+    "correct": "Sugauli Treaty",
+    "explanation": "The Sugauli Treaty of 1816 established the current boundary between Nepal and British India, which Nepal later inherited with independent India."
+  }
+  {
+    "question": "What is the current periodic plan of Nepal?",
+    "options": ["14th Plan", "15th Plan", "16th Plan", "17th Plan"],
+    "correct": "16th Plan",
+    "explanation": "Nepal is currently implementing the 16th Periodic Plan (Fiscal Year 2081/82 - 2085/86)."
   },
   {
-    "question": "Procurement refers to:",
-    "options": ["Storage of materials", "Purchase of materials", "Handling of materials", "Disposal of waste"],
-    "correct": "Purchase of materials",
-    "explanation": "Procurement ensures timely supply."
+    "question": "What is the main goal of Nepal's current periodic plan?",
+    "options": ["Poverty reduction", "Graduation from LDC", "Infrastructure development", "All of the above"],
+    "correct": "All of the above",
+    "explanation": "The current periodic plan aims for poverty reduction, LDC graduation, infrastructure development, and sustainable economic growth."
   },
   {
-    "question": "Just-in-time procurement aims to:",
-    "options": ["Increase inventory", "Reduce storage", "Delay delivery", "Increase wastage"],
-    "correct": "Reduce storage",
-    "explanation": "Materials arrive when needed."
+    "question": "What is the target economic growth rate in the current periodic plan?",
+    "options": ["5.5%", "7.2%", "8.5%", "10.2%"],
+    "correct": "7.2%",
+    "explanation": "The current periodic plan targets an average annual economic growth rate of 7.2%."
+  }
+  {
+    "question": "How many Sustainable Development Goals (SDGs) are there?",
+    "options": ["15", "17", "19", "21"],
+    "correct": "17",
+    "explanation": "There are 17 Sustainable Development Goals adopted by United Nations member states in 2015."
   },
   {
-    "question": "Material handling includes:",
-    "options": ["Loading", "Unloading", "Transportation", "All of these"],
-    "correct": "All of these",
-    "explanation": "Handling ensures safe material movement."
-  },
-
-  {
-    "question": "Cost control involves:",
-    "options": ["Estimating only", "Monitoring expenditure", "Payment only", "Billing only"],
-    "correct": "Monitoring expenditure",
-    "explanation": "Ensures project stays within budget."
+    "question": "Which national park in Nepal is a UNESCO World Heritage Site?",
+    "options": ["Chitwan National Park", "Bardia National Park", "Langtang National Park", "Shey-Phoksundo National Park"],
+    "correct": "Chitwan National Park",
+    "explanation": "Chitwan National Park was declared a UNESCO World Heritage Site in 1984 for its unique ecosystem and biodiversity."
   },
   {
-    "question": "Quality control ensures:",
-    "options": ["Fast work", "Low cost", "Specified standards", "High profit"],
-    "correct": "Specified standards",
-    "explanation": "Quality meets design requirements."
+    "question": "What percentage of Nepal's total area is protected as national parks and conservation areas?",
+    "options": ["10.5%", "18.7%", "23.2%", "30.5%"],
+    "correct": "23.2%",
+    "explanation": "Approximately 23.2% of Nepal's total area is under protected areas including national parks, wildlife reserves, and conservation areas."
+  }
+  {
+    "question": "When did Nepal become a member of the United Nations?",
+    "options": ["1950", "1955", "1960", "1965"],
+    "correct": "1955",
+    "explanation": "Nepal became a member of the United Nations on December 14, 1955."
   },
   {
-    "question": "Time control is achieved through:",
-    "options": ["Scheduling", "Monitoring", "Corrective action", "All of these"],
-    "correct": "All of these",
-    "explanation": "Time control ensures timely completion."
+    "question": "Where is the headquarters of SAARC located?",
+    "options": ["New Delhi", "Kathmandu", "Dhaka", "Colombo"],
+    "correct": "Kathmandu",
+    "explanation": "The headquarters of SAARC (South Asian Association for Regional Cooperation) is located in Kathmandu, Nepal."
   },
   {
-    "question": "Cost overrun occurs when:",
-    "options": ["Actual cost < Estimated cost", "Actual cost = Estimated cost", "Actual cost > Estimated cost", "No estimate exists"],
-    "correct": "Actual cost > Estimated cost",
-    "explanation": "Exceeding budget causes cost overrun."
+    "question": "When was BIMSTEC established?",
+    "options": ["1994", "1997", "2000", "2004"],
+    "correct": "1997",
+    "explanation": "BIMSTEC (Bay of Bengal Initiative for Multi-Sectoral Technical and Economic Cooperation) was established on June 6, 1997."
+  }
+  {
+    "question": "When was the current Constitution of Nepal promulgated?",
+    "options": ["2063 BS", "2072 BS", "2075 BS", "2078 BS"],
+    "correct": "2072 BS",
+    "explanation": "The current Constitution of Nepal was promulgated on 3rd Ashwin, 2072 BS (September 20, 2015)."
   },
   {
-    "question": "Quality assurance focuses on:",
-    "options": ["Inspection only", "Prevention of defects", "Testing only", "Correction only"],
-    "correct": "Prevention of defects",
-    "explanation": "QA is proactive in nature."
-  },
-
-  {
-    "question": "Project management involves:",
-    "options": ["Planning", "Execution", "Monitoring", "All of these"],
-    "correct": "All of these",
-    "explanation": "Project management covers entire project life cycle."
+    "question": "How many fundamental rights are guaranteed by the Constitution of Nepal?",
+    "options": ["24", "31", "35", "42"],
+    "correct": "31",
+    "explanation": "The Constitution of Nepal guarantees 31 fundamental rights to its citizens under Part 3, Articles 16-46."
   },
   {
-    "question": "A project is considered successful if it is completed:",
-    "options": ["Late", "Within time, cost, and quality", "With profit only", "With maximum labor"],
-    "correct": "Within time, cost, and quality",
-    "explanation": "Triple constraints define success."
+    "question": "What type of state is Nepal according to the Constitution?",
+    "options": ["Federal Democratic Republic", "Constitutional Monarchy", "People's Republic", "Democratic Republic"],
+    "correct": "Federal Democratic Republic",
+    "explanation": "Article 4(1) of the Constitution declares Nepal as an independent, indivisible, sovereign, secular, inclusive, democratic, socialism-oriented, federal democratic republican state."
+  }
+  {
+    "question": "How many provinces are there in Nepal?",
+    "options": ["5", "6", "7", "8"],
+    "correct": "7",
+    "explanation": "Nepal is divided into 7 provinces as per the federal structure established by the 2015 Constitution."
   },
   {
-    "question": "Project manager is responsible for:",
-    "options": ["Design only", "Execution only", "Overall project coordination", "Billing only"],
-    "correct": "Overall project coordination",
-    "explanation": "Ensures integration of all activities."
+    "question": "What is the term of office for local government representatives in Nepal?",
+    "options": ["4 years", "5 years", "6 years", "7 years"],
+    "correct": "5 years",
+    "explanation": "The term of office for local government representatives (Mayors, Deputy Mayors, Chairpersons, etc.) is 5 years."
   },
   {
-    "question": "Risk management involves:",
-    "options": ["Identifying risks", "Analyzing risks", "Mitigating risks", "All of these"],
-    "correct": "All of these",
-    "explanation": "Risk management minimizes uncertainties."
+    "question": "How many levels of government exist in Nepal's federal system?",
+    "options": ["Two", "Three", "Four", "Five"],
+    "correct": "Three",
+    "explanation": "Nepal's federal system has three levels of government: Federal, Provincial, and Local."
+  }
+  {
+    "question": "What is the minimum educational qualification for Gazetted Third Class officer in Nepal?",
+    "options": ["Bachelor's Degree", "Master's Degree", "Intermediate", "Ph.D."],
+    "correct": "Bachelor's Degree",
+    "explanation": "A Bachelor's Degree is the minimum educational qualification required for Gazetted Third Class officer position in Nepal."
   },
   {
-    "question": "Stakeholders in a project include:",
-    "options": ["Owner", "Contractor", "Consultant", "All of these"],
-    "correct": "All of these",
-    "explanation": "All parties involved are stakeholders."
-  },
-
+    "question": "What is the retirement age for civil servants in Nepal?",
+    "options": ["58 years", "60 years", "63 years", "65 years"],
+    "correct": "58 years",
+    "explanation": "The retirement age for civil servants in Nepal is 58 years as per existing regulations."
+  }
   {
-    "question": "Occupational health and safety aims to:",
-    "options": ["Increase productivity only", "Prevent accidents", "Reduce cost", "Delay work"],
-    "correct": "Prevent accidents",
-    "explanation": "Ensures worker safety."
-  },
+    "question": "Which of the following is NOT a core function of public service?",
+    "options": ["Policy implementation", "Service delivery", "Political campaigning", "Regulation enforcement"],
+    "correct": "Political campaigning",
+    "explanation": "Political campaigning is not a function of public service as civil servants must maintain political neutrality."
+  }
   {
-    "question": "Personal protective equipment includes:",
-    "options": ["Helmet", "Safety shoes", "Gloves", "All of these"],
-    "correct": "All of these",
-    "explanation": "PPE protects workers from hazards."
-  },
+    "question": "What is the main purpose of Public Service Charter?",
+    "options": ["To increase government revenue", "To ensure service quality and accountability", "To reduce government staff", "To promote political parties"],
+    "correct": "To ensure service quality and accountability",
+    "explanation": "Public Service Charter aims to ensure quality service delivery, accountability, and transparency in public institutions."
+  }
   {
-    "question": "Most construction accidents are caused by:",
-    "options": ["Equipment failure", "Unsafe acts", "Weather", "Materials"],
-    "correct": "Unsafe acts",
-    "explanation": "Human error is a major cause."
-  },
+    "question": "What is the first stage in the public policy process?",
+    "options": ["Implementation", "Evaluation", "Agenda setting", "Policy formulation"],
+    "correct": "Agenda setting",
+    "explanation": "Agenda setting is the first stage where issues are identified and prioritized for government action."
+  }
   {
-    "question": "Safety training is important to:",
-    "options": ["Increase wages", "Reduce accidents", "Delay work", "Increase supervision"],
-    "correct": "Reduce accidents",
-    "explanation": "Training improves awareness."
-  },
+    "question": "Which management function involves setting objectives and determining courses of action?",
+    "options": ["Organizing", "Planning", "Controlling", "Directing"],
+    "correct": "Planning",
+    "explanation": "Planning is the management function that involves setting objectives and determining the best course of action to achieve them."
+  }
   {
-    "question": "First aid facilities should be:",
-    "options": ["Optional", "Available on site", "Provided off-site", "Avoided"],
-    "correct": "Available on site",
-    "explanation": "Immediate response saves lives."
-  },
-
+    "question": "When does Nepal's fiscal year begin?",
+    "options": ["January 1", "April 1", "July 16", "October 1"],
+    "correct": "July 16",
+    "explanation": "Nepal's fiscal year begins on Shrawan 1 (mid-July, usually July 16) and ends on Ashadh 31 (mid-July next year)."
+  }
   {
-    "question": "Project monitoring involves:",
-    "options": ["Planning only", "Checking progress", "Billing only", "Design only"],
-    "correct": "Checking progress",
-    "explanation": "Monitoring compares planned and actual performance."
-  },
-  {
-    "question": "Project evaluation is done to:",
-    "options": ["Stop project", "Measure performance", "Increase cost", "Change design"],
-    "correct": "Measure performance",
-    "explanation": "Evaluation assesses project success."
-  },
-  {
-    "question": "Key performance indicators measure:",
-    "options": ["Cost only", "Time only", "Quality only", "Project performance"],
-    "correct": "Project performance",
-    "explanation": "KPIs track progress and efficiency."
-  },
-  {
-    "question": "Quality assurance plan defines:",
-    "options": ["Inspection methods", "Quality procedures", "Responsibilities", "All of these"],
-    "correct": "All of these",
-    "explanation": "QAP ensures consistent quality."
-  },
-  {
-    "question": "Variation in contract refers to:",
-    "options": ["Change in scope", "Delay only", "Payment only", "Termination"],
-    "correct": "Change in scope",
-    "explanation": "Variations modify original contract work."
-  },
-
-  {
-    "question": "Omission in contract means:",
-    "options": ["Addition of work", "Deletion of work", "Change in rate", "Delay in work"],
-    "correct": "Deletion of work",
-    "explanation": "Omission removes part of original scope."
-  },
-  {
-    "question": "Alteration in contract refers to:",
-    "options": ["Change in design or specification", "Delay in payment", "Contract termination", "Bid rejection"],
-    "correct": "Change in design or specification",
-    "explanation": "Alterations modify existing work."
-  },
-  {
-    "question": "Final evaluation of project is done at:",
-    "options": ["Start", "Mid-stage", "Completion", "Tender stage"],
-    "correct": "Completion",
-    "explanation": "Final evaluation measures overall success."
-  },
-  {
-    "question": "Effective construction management results in:",
-    "options": ["Delay", "Cost overrun", "Efficient project delivery", "Poor quality"],
-    "correct": "Efficient project delivery",
-    "explanation": "Good management ensures success."
-  },
-  {
-    "question": "Construction management integrates:",
-    "options": ["Technical and managerial skills", "Only engineering skills", "Only management skills", "Only labor skills"],
-    "correct": "Technical and managerial skills",
-    "explanation": "Both are essential for project success."
+    "question": "Which country hosted the 2023 UN Climate Change Conference (COP28)?",
+    "options": ["Egypt", "UK", "UAE", "Germany"],
+    "correct": "UAE",
+    "explanation": "The 2023 UN Climate Change Conference (COP28) was held in Dubai, United Arab Emirates from November 30 to December 12, 2023."
   }
 ]
