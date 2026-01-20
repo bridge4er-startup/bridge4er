@@ -1,0 +1,280 @@
+[
+  {
+    "question": "An estimate is defined as:",
+    "options": ["Exact cost of project", "Approximate cost of project", "Tender value", "Contract amount"],
+    "correct": "Approximate cost of project",
+    "explanation": "Estimate gives an approximate cost before execution."
+  },
+  {
+    "question": "The main purpose of estimating is to:",
+    "options": ["Delay project", "Determine cost", "Increase profit", "Select contractor"],
+    "correct": "Determine cost",
+    "explanation": "Estimating helps in knowing probable project cost."
+  },
+  {
+    "question": "Preliminary estimate is also known as:",
+    "options": ["Detailed estimate", "Rough cost estimate", "Revised estimate", "Supplementary estimate"],
+    "correct": "Rough cost estimate",
+    "explanation": "It is prepared at planning stage."
+  },
+  {
+    "question": "Detailed estimate is prepared after:",
+    "options": ["Tender approval", "Completion of work", "Final drawings", "Payment"],
+    "correct": "Final drawings",
+    "explanation": "Detailed drawings are essential for accurate quantities."
+  },
+  {
+    "question": "Revised estimate is prepared when:",
+    "options": ["Cost exceeds sanctioned amount", "Work starts", "Tender is invited", "Project ends"],
+    "correct": "Cost exceeds sanctioned amount",
+    "explanation": "Revised estimate is needed for approval of extra cost."
+  },
+
+  {
+    "question": "Supplementary estimate is prepared for:",
+    "options": ["Extra items", "Original work", "Maintenance work", "Valuation"],
+    "correct": "Extra items",
+    "explanation": "It covers additional works not in original estimate."
+  },
+  {
+    "question": "Annual repair estimate is prepared for:",
+    "options": ["New work", "Routine maintenance", "Major repair", "Valuation"],
+    "correct": "Routine maintenance",
+    "explanation": "It covers minor annual repairs."
+  },
+  {
+    "question": "Special repair estimate is required for:",
+    "options": ["Minor repair", "Routine work", "Major damage", "New construction"],
+    "correct": "Major damage",
+    "explanation": "Special repairs restore structure after heavy damage."
+  },
+  {
+    "question": "Plinth area estimate is based on:",
+    "options": ["Carpet area", "Built-up area", "Floor area", "Covered area"],
+    "correct": "Built-up area",
+    "explanation": "Plinth area includes wall thickness."
+  },
+  {
+    "question": "Cubical content estimate considers:",
+    "options": ["Area only", "Volume of building", "Height only", "Foundation only"],
+    "correct": "Volume of building",
+    "explanation": "Cubical content method is volume-based."
+  },
+
+  {
+    "question": "Long wall–short wall method is used for:",
+    "options": ["Valuation", "Rate analysis", "Quantity calculation", "Specification"],
+    "correct": "Quantity calculation",
+    "explanation": "Used in estimating quantities of masonry."
+  },
+  {
+    "question": "Centre line method is suitable for:",
+    "options": ["Asymmetrical buildings", "Circular structures", "Symmetrical buildings", "Steel structures"],
+    "correct": "Symmetrical buildings",
+    "explanation": "Centre line method simplifies calculations."
+  },
+  {
+    "question": "In centre line method, total length is:",
+    "options": ["Sum of outer lengths", "Sum of inner lengths", "Centre-to-centre lengths", "Average lengths"],
+    "correct": "Centre-to-centre lengths",
+    "explanation": "Measurements are taken along centre line."
+  },
+  {
+    "question": "Crossing method is mainly used in:",
+    "options": ["Road works", "Building works", "Earthwork", "Valuation"],
+    "correct": "Building works",
+    "explanation": "Used when walls cross each other."
+  },
+  {
+    "question": "Earthwork quantities are generally calculated in:",
+    "options": ["kg", "sqm", "cum", "ton"],
+    "correct": "cum",
+    "explanation": "Earthwork is measured in cubic meters."
+  },
+
+  {
+    "question": "Rate analysis determines:",
+    "options": ["Total project cost", "Unit cost of item", "Tender value", "Profit"],
+    "correct": "Unit cost of item",
+    "explanation": "It finds cost per unit quantity."
+  },
+  {
+    "question": "Key components of rate analysis include:",
+    "options": ["Material only", "Labor only", "Material, labor, tools", "Drawing"],
+    "correct": "Material, labor, tools",
+    "explanation": "All resources are considered."
+  },
+  {
+    "question": "Overhead charges include:",
+    "options": ["Material cost", "Labor wages", "Office expenses", "Machinery"],
+    "correct": "Office expenses",
+    "explanation": "Overheads cover indirect expenses."
+  },
+  {
+    "question": "Contractor’s profit is usually taken as:",
+    "options": ["2–3%", "5–10%", "15–20%", "25%"],
+    "correct": "5–10%",
+    "explanation": "Standard profit margin in estimates."
+  },
+  {
+    "question": "Lead statement is prepared for:",
+    "options": ["Labor", "Materials", "Earthwork", "Equipment"],
+    "correct": "Earthwork",
+    "explanation": "Lead affects earthwork cost."
+  },
+
+  {
+    "question": "Bill of quantities lists:",
+    "options": ["Rates only", "Quantities only", "Items with quantities", "Specifications"],
+    "correct": "Items with quantities",
+    "explanation": "BOQ details item-wise quantities."
+  },
+  {
+    "question": "BOQ helps in:",
+    "options": ["Tender comparison", "Valuation", "Design", "Planning"],
+    "correct": "Tender comparison",
+    "explanation": "BOQ standardizes bidding."
+  },
+  {
+    "question": "BOQ is prepared based on:",
+    "options": ["Estimate", "Drawings", "Specifications", "All of these"],
+    "correct": "All of these",
+    "explanation": "All documents are required."
+  },
+  {
+    "question": "Purpose of BOQ is to:",
+    "options": ["Increase cost", "Provide uniform basis", "Delay tender", "Change design"],
+    "correct": "Provide uniform basis",
+    "explanation": "Ensures fair competition."
+  },
+  {
+    "question": "Abstract of cost shows:",
+    "options": ["Item quantities", "Item rates", "Total cost", "Specifications"],
+    "correct": "Total cost",
+    "explanation": "It summarizes estimate."
+  },
+
+  {
+    "question": "Specification describes:",
+    "options": ["Quantities", "Rates", "Quality of work", "Cost"],
+    "correct": "Quality of work",
+    "explanation": "Specifications define workmanship and materials."
+  },
+  {
+    "question": "General specification applies to:",
+    "options": ["Specific item", "Whole work", "Extra items", "Valuation"],
+    "correct": "Whole work",
+    "explanation": "It covers overall quality."
+  },
+  {
+    "question": "Detailed specification includes:",
+    "options": ["Item description", "Method of execution", "Quality control", "All of these"],
+    "correct": "All of these",
+    "explanation": "Detailed specs are item-specific."
+  },
+  {
+    "question": "Specification helps in:",
+    "options": ["Avoiding disputes", "Ensuring quality", "Payment", "All of these"],
+    "correct": "All of these",
+    "explanation": "Clear specs reduce conflicts."
+  },
+  {
+    "question": "Specification is part of:",
+    "options": ["Estimate", "Contract document", "Valuation report", "Tender notice"],
+    "correct": "Contract document",
+    "explanation": "It is legally binding."
+  },
+
+  {
+    "question": "Valuation is the process of:",
+    "options": ["Estimating cost", "Determining present value", "Rate analysis", "Tendering"],
+    "correct": "Determining present value",
+    "explanation": "Valuation finds worth of property."
+  },
+  {
+    "question": "Purpose of valuation includes:",
+    "options": ["Sale", "Mortgage", "Taxation", "All of these"],
+    "correct": "All of these",
+    "explanation": "Valuation serves multiple needs."
+  },
+  {
+    "question": "Market value is the price:",
+    "options": ["Fixed by government", "At forced sale", "Buyer willing to pay", "Based on cost"],
+    "correct": "Buyer willing to pay",
+    "explanation": "Market value reflects demand and supply."
+  },
+  {
+    "question": "Book value is calculated after:",
+    "options": ["Adding depreciation", "Subtracting depreciation", "Market survey", "Rate analysis"],
+    "correct": "Subtracting depreciation",
+    "explanation": "Book value accounts for depreciation."
+  },
+  {
+    "question": "Depreciation is the reduction in value due to:",
+    "options": ["Time", "Wear and tear", "Obsolescence", "All of these"],
+    "correct": "All of these",
+    "explanation": "Multiple factors reduce value."
+  },
+
+  {
+    "question": "Scrap value is the value of property at:",
+    "options": ["Beginning", "End of life", "Mid life", "Valuation date"],
+    "correct": "End of life",
+    "explanation": "Scrap value is residual value."
+  },
+  {
+    "question": "Capitalized value is calculated using:",
+    "options": ["Cost", "Income", "Rate of return", "Income and rate"],
+    "correct": "Income and rate",
+    "explanation": "Used in income capitalization method."
+  },
+  {
+    "question": "Rental method of valuation is suitable for:",
+    "options": ["Schools", "Hospitals", "Rental properties", "Roads"],
+    "correct": "Rental properties",
+    "explanation": "Based on rental income."
+  },
+  {
+    "question": "Land value depends on:",
+    "options": ["Location", "Use", "Demand", "All of these"],
+    "correct": "All of these",
+    "explanation": "Multiple factors affect land value."
+  },
+  {
+    "question": "Sinking fund is used to:",
+    "options": ["Increase value", "Replace asset", "Pay tax", "Reduce rent"],
+    "correct": "Replace asset",
+    "explanation": "It accumulates funds for replacement."
+  },
+
+  {
+    "question": "Annuity is:",
+    "options": ["Lump sum", "Annual payment", "Monthly rent", "Interest only"],
+    "correct": "Annual payment",
+    "explanation": "Annuity is recurring yearly payment."
+  },
+  {
+    "question": "Outgoings include:",
+    "options": ["Maintenance", "Taxes", "Insurance", "All of these"],
+    "correct": "All of these",
+    "explanation": "Outgoings reduce net income."
+  },
+  {
+    "question": "Net income is obtained after deducting:",
+    "options": ["Profit", "Outgoings", "Depreciation", "Interest"],
+    "correct": "Outgoings",
+    "explanation": "Net income is actual return."
+  },
+  {
+    "question": "Life of building depends on:",
+    "options": ["Materials", "Maintenance", "Environment", "All of these"],
+    "correct": "All of these",
+    "explanation": "All factors affect durability."
+  },
+  {
+    "question": "Valuation report should be:",
+    "options": ["Biased", "Approximate", "Clear and systematic", "Confidential only"],
+    "correct": "Clear and systematic",
+    "explanation": "Professional reporting is essential."
+  }
+]
