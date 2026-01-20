@@ -1,0 +1,32 @@
+[
+  {
+    "question": "Which figure completes the pattern?",
+    "options": ["A", "B", "C", "D"],
+    "correct": "B",
+    "explanation": "Rotation by 90° clockwise."
+  },
+  {
+    "question": "How many cubes are there in a 3×3×3 cube?",
+    "options": ["9", "18", "27", "36"],
+    "correct": "27",
+    "explanation": "Total cubes = n³."
+  },
+  {
+    "question": "Mirror image of 'b' is:",
+    "options": ["d", "p", "q", "b"],
+    "correct": "d",
+    "explanation": "Horizontal mirror reverses direction."
+  },
+  {
+    "question": "Which figure is odd one out?",
+    "options": ["Square", "Rectangle", "Circle", "Rhombus"],
+    "correct": "Circle",
+    "explanation": "Circle has no sides."
+  },
+  {
+    "question": "If paper is folded twice and one hole is punched, how many holes after unfolding?",
+    "options": ["2", "4", "6", "8"],
+    "correct": "4",
+    "explanation": "Each fold doubles holes."
+  }
+]
