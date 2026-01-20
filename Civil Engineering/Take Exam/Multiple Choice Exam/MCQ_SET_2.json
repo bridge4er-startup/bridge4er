@@ -1,0 +1,296 @@
+[
+  {
+    "question": "The ratio of stress to strain within elastic limit is known as:",
+    "options": ["Young's Modulus", "Bulk Modulus", "Modulus of Rigidity", "Poisson's Ratio"],
+    "correct": "Young's Modulus",
+    "explanation": "Young's Modulus (E) is defined as the ratio of stress to strain within the elastic limit of a material."
+  },
+  {
+    "question": "Which of the following is the most resistant to fire?",
+    "options": ["Timber", "Steel", "Concrete", "Brick masonry"],
+    "correct": "Concrete",
+    "explanation": "Concrete has excellent fire resistance due to its low thermal conductivity and non-combustible nature."
+  },
+  {
+    "question": "The minimum grade of concrete for RCC work according to Nepal Building Code is:",
+    "options": ["M15", "M20", "M25", "M30"],
+    "correct": "M20",
+    "explanation": "Nepal Building Code (NBC) specifies M20 as the minimum grade for reinforced concrete work."
+  },
+  {
+    "question": "For a simply supported beam of span L carrying uniformly distributed load w per unit length, the maximum bending moment is:",
+    "options": ["wL²/8", "wL²/4", "wL²/12", "wL²/16"],
+    "correct": "wL²/8",
+    "explanation": "For a simply supported beam with UDL, maximum bending moment occurs at center and equals wL²/8."
+  },
+  {
+    "question": "The slump value for normal RCC work generally ranges from:",
+    "options": ["25-50 mm", "50-100 mm", "100-150 mm", "150-200 mm"],
+    "correct": "50-100 mm",
+    "explanation": "For normal reinforced concrete work, the slump value typically ranges from 50-100 mm."
+  },
+  {
+    "question": "The number of bricks required per cubic meter of brick masonry is approximately:",
+    "options": ["250", "350", "500", "650"],
+    "correct": "500",
+    "explanation": "Approximately 500 bricks are required per cubic meter of brick masonry with standard brick size (190×90×90 mm)."
+  },
+  {
+    "question": "Which of the following is a flexible pavement?",
+    "options": ["Cement concrete road", "Bituminous road", "Block paving", "Interlocking tiles"],
+    "correct": "Bituminous road",
+    "explanation": "Bituminous roads are flexible pavements that distribute loads through grain-to-grain contact."
+  },
+  {
+    "question": "The minimum cover for reinforcement in columns exposed to moderate environment as per NBC is:",
+    "options": ["25 mm", "40 mm", "50 mm", "75 mm"],
+    "correct": "40 mm",
+    "explanation": "Nepal Building Code specifies minimum 40 mm clear cover for columns in moderate exposure conditions."
+  },
+  {
+    "question": "The process of removing air from concrete is called:",
+    "options": ["Compaction", "Curing", "Vibration", "Finishing"],
+    "correct": "Compaction",
+    "explanation": "Compaction removes entrapped air from concrete to increase density and strength."
+  },
+  {
+    "question": "Which foundation is suitable for expansive soil?",
+    "options": ["Strip foundation", "Raft foundation", "Pile foundation", "Pad foundation"],
+    "correct": "Pile foundation",
+    "explanation": "Pile foundations transfer loads to deeper stable strata, making them suitable for expansive soils."
+  },
+  {
+    "question": "The property of cement that prevents bleeding is:",
+    "options": ["Fineness", "Soundness", "Setting time", "Consistency"],
+    "correct": "Fineness",
+    "explanation": "Finer cement particles reduce water separation and prevent bleeding in concrete."
+  },
+  {
+    "question": "The center of gravity of a triangle lies at the intersection of:",
+    "options": ["Altitudes", "Medians", "Angle bisectors", "Perpendicular bisectors"],
+    "correct": "Medians",
+    "explanation": "The centroid (center of gravity) of a triangle is located at the intersection of its medians."
+  },
+  {
+    "question": "Which beam has both ends fixed?",
+    "options": ["Simply supported beam", "Cantilever beam", "Fixed beam", "Continuous beam"],
+    "correct": "Fixed beam",
+    "explanation": "A fixed beam has both ends rigidly fixed, preventing rotation and translation."
+  },
+  {
+    "question": "The maximum water-cement ratio for reinforced concrete exposed to severe weather is:",
+    "options": ["0.40", "0.45", "0.50", "0.55"],
+    "correct": "0.45",
+    "explanation": "IS 456 recommends maximum water-cement ratio of 0.45 for reinforced concrete in severe exposure conditions."
+  },
+  {
+    "question": "Which test measures the toughness of aggregate?",
+    "options": ["Los Angeles abrasion test", "Impact test", "Crushing test", "Soundness test"],
+    "correct": "Impact test",
+    "explanation": "The aggregate impact test measures the toughness or resistance to sudden impact."
+  },
+  {
+    "question": "The yield strength of Fe415 steel is:",
+    "options": ["250 MPa", "415 MPa", "500 MPa", "550 MPa"],
+    "correct": "415 MPa",
+    "explanation": "Fe415 steel has a minimum yield strength of 415 MPa as per Indian Standards."
+  },
+  {
+    "question": "The maximum spacing of lateral ties in a column should not exceed:",
+    "options": ["Least lateral dimension", "16 times main bar diameter", "300 mm", "All of the above"],
+    "correct": "All of the above",
+    "explanation": "Maximum spacing of ties is minimum of: least lateral dimension, 16×main bar diameter, or 300 mm."
+  },
+  {
+    "question": "Which type of cement is recommended for marine structures?",
+    "options": ["OPC", "PPC", "SRC", "Low heat cement"],
+    "correct": "SRC",
+    "explanation": "Sulfate Resisting Cement (SRC) is recommended for marine structures due to its resistance to sulfate attack."
+  },
+  {
+    "question": "The process of applying load on pre-stressed concrete before casting is called:",
+    "options": ["Pre-tensioning", "Post-tensioning", "Pre-casting", "Pre-loading"],
+    "correct": "Pre-tensioning",
+    "explanation": "In pre-tensioning, tendons are tensioned before concrete is cast, with bond transferring stress after curing."
+  },
+  {
+    "question": "The minimum diameter of longitudinal bars in a column should be:",
+    "options": ["10 mm", "12 mm", "16 mm", "20 mm"],
+    "correct": "12 mm",
+    "explanation": "IS 456 specifies minimum 12 mm diameter for longitudinal reinforcement in columns."
+  },
+  {
+    "question": "Which instrument is used to measure the bearing of a line?",
+    "options": ["Theodolite", "Dumpy level", "Prismatic compass", "Total station"],
+    "correct": "Prismatic compass",
+    "explanation": "A prismatic compass is used to measure the magnetic bearing of survey lines."
+  },
+  {
+    "question": "The curve provided at the summit of a vertical curve is:",
+    "options": ["Simple curve", "Compound curve", "Reverse curve", "Crest curve"],
+    "correct": "Crest curve",
+    "explanation": "A crest curve (or summit curve) is provided at the top of a vertical curve where the gradient changes from rising to falling."
+  },
+  {
+    "question": "The bearing capacity of soil can be determined by:",
+    "options": ["Standard Penetration Test", "Plate Load Test", "CBR Test", "All of the above"],
+    "correct": "All of the above",
+    "explanation": "SPT, plate load test, and CBR test are all methods to determine soil bearing capacity."
+  },
+  {
+    "question": "The liquid limit of soil is determined using:",
+    "options": ["Casagrande apparatus", "Core cutter", "Proctor apparatus", "Sand replacement"],
+    "correct": "Casagrande apparatus",
+    "explanation": "The Casagrande apparatus is used to determine the liquid limit of soil by measuring moisture content at specific blows."
+  },
+  {
+    "question": "Which type of dam is most suitable for narrow valleys?",
+    "options": ["Gravity dam", "Arch dam", "Buttress dam", "Embankment dam"],
+    "correct": "Arch dam",
+    "explanation": "Arch dams are ideal for narrow valleys with strong abutments as they transfer water pressure to canyon walls."
+  },
+  {
+    "question": "The maximum permissible chloride content in concrete for prestressed work is:",
+    "options": ["0.2 kg/m³", "0.4 kg/m³", "0.6 kg/m³", "1.0 kg/m³"],
+    "correct": "0.2 kg/m³",
+    "explanation": "IS 456 limits chloride content to 0.2 kg/m³ for prestressed concrete to prevent corrosion."
+  },
+  {
+    "question": "The standard size of a modular brick in Nepal is:",
+    "options": ["190×90×90 mm", "230×110×75 mm", "250×120×75 mm", "200×100×100 mm"],
+    "correct": "190×90×90 mm",
+    "explanation": "Nepal standard modular brick size is 190×90×90 mm as per Nepal Building Code."
+  },
+  {
+    "question": "The maximum allowable deflection for beams with spans up to 10m is:",
+    "options": ["Span/250", "Span/300", "Span/350", "Span/400"],
+    "correct": "Span/250",
+    "explanation": "IS 456 specifies maximum deflection of span/250 for beams to prevent serviceability issues."
+  },
+  {
+    "question": "Which soil has the highest permeability?",
+    "options": ["Clay", "Silt", "Sand", "Gravel"],
+    "correct": "Gravel",
+    "explanation": "Gravel has the largest particle size and interconnected voids, resulting in highest permeability."
+  },
+  {
+    "question": "The minimum number of samples for concrete cube testing from each batch is:",
+    "options": ["1", "2", "3", "4"],
+    "correct": "3",
+    "explanation": "At least three cubes should be cast from each batch for compressive strength testing."
+  },
+  {
+    "question": "Which type of stair provides maximum headroom?",
+    "options": ["Straight stair", "Dog-legged stair", "Open well stair", "Geometrical stair"],
+    "correct": "Dog-legged stair",
+    "explanation": "Dog-legged stairs with two parallel flights and a landing provide better headroom utilization."
+  },
+  {
+    "question": "The minimum width of a residential staircase should be:",
+    "options": ["750 mm", "900 mm", "1000 mm", "1200 mm"],
+    "correct": "900 mm",
+    "explanation": "NBC specifies minimum 900 mm width for residential staircases for comfortable passage."
+  },
+  {
+    "question": "Which foundation is used for transferring heavy loads to soft strata?",
+    "options": ["Spread footing", "Combined footing", "Mat foundation", "Pile foundation"],
+    "correct": "Mat foundation",
+    "explanation": "Mat (raft) foundations distribute heavy loads over large areas, suitable for soft soils."
+  },
+  {
+    "question": "The ratio of total floor area to total plot area is called:",
+    "options": ["Carpet area", "Floor area ratio", "Plot coverage", "Setback area"],
+    "correct": "Floor area ratio",
+    "explanation": "Floor Area Ratio (FAR) is the ratio of total built-up area to total plot area."
+  },
+  {
+    "question": "Which water is NOT suitable for concrete mixing?",
+    "options": ["Potable water", "Sea water", "Ground water", "Rain water"],
+    "correct": "Sea water",
+    "explanation": "Sea water contains chlorides and sulfates that cause corrosion and should not be used for reinforced concrete."
+  },
+  {
+    "question": "The minimum period for curing of concrete is:",
+    "options": ["3 days", "7 days", "14 days", "28 days"],
+    "correct": "7 days",
+    "explanation": "Minimum 7 days curing is required for ordinary Portland cement concrete to achieve adequate strength."
+  },
+  {
+    "question": "Which beam develops maximum negative moment at supports?",
+    "options": ["Simply supported", "Cantilever", "Fixed", "Continuous"],
+    "correct": "Fixed",
+    "explanation": "Fixed beams develop maximum negative moments at supports due to end restraint."
+  },
+  {
+    "question": "The instrument used to measure horizontal and vertical angles is:",
+    "options": ["Level", "Compass", "Theodolite", "Planimeter"],
+    "correct": "Theodolite",
+    "explanation": "A theodolite measures both horizontal and vertical angles with high precision."
+  },
+  {
+    "question": "Which test determines the workability of concrete?",
+    "options": ["Compression test", "Slump test", "Rebound hammer test", "Split tensile test"],
+    "correct": "Slump test",
+    "explanation": "The slump test is the most common field test to determine concrete workability."
+  },
+  {
+    "question": "The minimum thickness of a slab in a residential building is:",
+    "options": ["75 mm", "100 mm", "125 mm", "150 mm"],
+    "correct": "100 mm",
+    "explanation": "IS 456 specifies minimum 100 mm thickness for slabs in residential buildings."
+  },
+  {
+    "question": "Which cement has the highest heat of hydration?",
+    "options": ["OPC 33", "OPC 43", "OPC 53", "Rapid hardening cement"],
+    "correct": "Rapid hardening cement",
+    "explanation": "Rapid hardening cement generates the highest heat of hydration due to finer grinding and C3S content."
+  },
+  {
+    "question": "The maximum spacing of main bars in a slab should not exceed:",
+    "options": ["3 times effective depth", "300 mm", "450 mm", "Both 1 and 2"],
+    "correct": "Both 1 and 2",
+    "explanation": "Maximum spacing is lesser of 3d or 300 mm, where d is effective depth of slab."
+  },
+  {
+    "question": "Which type of bond is used in brick masonry for better strength?",
+    "options": ["Stretcher bond", "Header bond", "English bond", "Flemish bond"],
+    "correct": "English bond",
+    "explanation": "English bond provides better strength with alternating courses of headers and stretchers."
+  },
+  {
+    "question": "The minimum depth of foundation for ordinary soils is:",
+    "options": ["500 mm", "750 mm", "900 mm", "1200 mm"],
+    "correct": "900 mm",
+    "explanation": "Minimum foundation depth is 900 mm to prevent damage from seasonal moisture changes."
+  },
+  {
+    "question": "Which material has the highest coefficient of thermal expansion?",
+    "options": ["Concrete", "Steel", "Aluminum", "Timber"],
+    "correct": "Aluminum",
+    "explanation": "Aluminum has the highest coefficient of thermal expansion (23×10⁻⁶/°C) among common construction materials."
+  },
+  {
+    "question": "The process of determining elevations is called:",
+    "options": ["Chaining", "Levelling", "Traversing", "Triangulation"],
+    "correct": "Levelling",
+    "explanation": "Levelling is the process of determining relative elevations of points using a level instrument."
+  },
+  {
+    "question": "Which load is NOT considered in limit state design?",
+    "options": ["Dead load", "Live load", "Wind load", "Collapse load"],
+    "correct": "Collapse load",
+    "explanation": "Collapse load is considered in ultimate load method, not in limit state design which uses factored loads."
+  },
+  {
+    "question": "The maximum permissible settlement for isolated foundations on clay is:",
+    "options": ["25 mm", "40 mm", "65 mm", "100 mm"],
+    "correct": "65 mm",
+    "explanation": "IS 1904 permits maximum 65 mm settlement for isolated foundations on clayey soils."
+  },
+  {
+    "question": "Which beam reinforcement resists shear force?",
+    "options": ["Longitudinal bars", "Stirrups", "Distribution bars", "Hanger bars"],
+    "correct": "Stirrups",
+    "explanation": "Stirrups (vertical or inclined) are provided to resist shear forces in beams."
+  }
+]
