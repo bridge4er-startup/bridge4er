@@ -1,0 +1,280 @@
+[
+  {
+    "question": "The standard size of an A0 drawing sheet is:",
+    "options": ["841 × 1189 mm", "594 × 841 mm", "420 × 594 mm", "297 × 420 mm"],
+    "correct": "841 × 1189 mm",
+    "explanation": "A0 is the largest standard ISO drawing sheet."
+  },
+  {
+    "question": "Which of the following is an essential component of a drawing sheet?",
+    "options": ["Legend", "Title block", "Color code", "Scale bar only"],
+    "correct": "Title block",
+    "explanation": "Title block contains important information about the drawing."
+  },
+  {
+    "question": "Title block is generally located at:",
+    "options": ["Top left corner", "Bottom right corner", "Center of sheet", "Top right corner"],
+    "correct": "Bottom right corner",
+    "explanation": "Standard practice places title block at bottom right."
+  },
+  {
+    "question": "Border line in drawing is drawn:",
+    "options": ["Very thin", "Medium thick", "Thick", "Freehand"],
+    "correct": "Thick",
+    "explanation": "Border lines are thick for clear demarcation."
+  },
+  {
+    "question": "Which information is NOT included in a title block?",
+    "options": ["Drawing title", "Scale", "Date", "Material cost"],
+    "correct": "Material cost",
+    "explanation": "Material cost is not part of drawings."
+  },
+
+  {
+    "question": "Scale used when drawing is smaller than actual object is called:",
+    "options": ["Full scale", "Reduced scale", "Enlarged scale", "Graphical scale"],
+    "correct": "Reduced scale",
+    "explanation": "Reduced scale is used for large objects."
+  },
+  {
+    "question": "Which scale is commonly used for site plans?",
+    "options": ["1:1", "1:50", "1:100", "1:1000"],
+    "correct": "1:1000",
+    "explanation": "Site plans require reduced scale."
+  },
+  {
+    "question": "Working drawings are prepared for:",
+    "options": ["Presentation", "Approval", "Construction", "Valuation"],
+    "correct": "Construction",
+    "explanation": "They guide actual execution of work."
+  },
+  {
+    "question": "Preliminary drawings are used to:",
+    "options": ["Construct building", "Explain concept", "Prepare estimate", "Prepare BOQ"],
+    "correct": "Explain concept",
+    "explanation": "They show basic layout and idea."
+  },
+  {
+    "question": "Which drawing shows exact dimensions and details?",
+    "options": ["Preliminary drawing", "Site plan", "Working drawing", "Perspective drawing"],
+    "correct": "Working drawing",
+    "explanation": "Working drawings are detailed."
+  },
+
+  {
+    "question": "Orthographic projection represents object using:",
+    "options": ["One view", "Two views", "Multiple views", "3D view"],
+    "correct": "Multiple views",
+    "explanation": "Front, top and side views are used."
+  },
+  {
+    "question": "Which projection shows true shape of object?",
+    "options": ["Perspective", "Orthographic", "Isometric", "Axonometric"],
+    "correct": "Orthographic",
+    "explanation": "It shows exact dimensions."
+  },
+  {
+    "question": "First angle projection is commonly used in:",
+    "options": ["USA", "UK", "India", "Japan"],
+    "correct": "India",
+    "explanation": "India follows first angle projection."
+  },
+  {
+    "question": "In first angle projection, the top view is placed:",
+    "options": ["Above front view", "Below front view", "Right of front view", "Left of front view"],
+    "correct": "Below front view",
+    "explanation": "Placement follows first angle convention."
+  },
+  {
+    "question": "Third angle projection is mainly used in:",
+    "options": ["India", "UK", "USA", "Nepal"],
+    "correct": "USA",
+    "explanation": "USA uses third angle projection."
+  },
+
+  {
+    "question": "Perspective drawing shows:",
+    "options": ["Exact dimensions", "3D appearance", "Only plan", "Only elevation"],
+    "correct": "3D appearance",
+    "explanation": "Perspective gives realistic view."
+  },
+  {
+    "question": "Isometric projection uses angle of:",
+    "options": ["30°", "45°", "60°", "90°"],
+    "correct": "30°",
+    "explanation": "Axes are inclined at 30° to horizontal."
+  },
+  {
+    "question": "In isometric drawing, dimensions are:",
+    "options": ["True length", "Reduced", "Enlarged", "Distorted"],
+    "correct": "Reduced",
+    "explanation": "Lengths are foreshortened."
+  },
+  {
+    "question": "Axonometric projection includes:",
+    "options": ["Isometric only", "Dimetric only", "Trimetric only", "All of these"],
+    "correct": "All of these",
+    "explanation": "All are axonometric projections."
+  },
+  {
+    "question": "Which drawing is best for presentation?",
+    "options": ["Plan", "Elevation", "Section", "Perspective"],
+    "correct": "Perspective",
+    "explanation": "Perspective looks realistic."
+  },
+
+  {
+    "question": "Which tool is used to draw horizontal lines?",
+    "options": ["Set square", "Compass", "Divider", "French curve"],
+    "correct": "Set square",
+    "explanation": "Set squares assist in drawing straight lines."
+  },
+  {
+    "question": "Compass is used to draw:",
+    "options": ["Straight lines", "Circles", "Curves", "Ellipses"],
+    "correct": "Circles",
+    "explanation": "Compass draws arcs and circles."
+  },
+  {
+    "question": "Divider is used to:",
+    "options": ["Draw lines", "Measure distance", "Draw circles", "Shade areas"],
+    "correct": "Measure distance",
+    "explanation": "Divider transfers measurements."
+  },
+  {
+    "question": "French curve is used for:",
+    "options": ["Straight lines", "Circular arcs", "Irregular curves", "Dimensioning"],
+    "correct": "Irregular curves",
+    "explanation": "French curve helps draw smooth curves."
+  },
+  {
+    "question": "Drawing board is made of:",
+    "options": ["Steel", "Plastic", "Seasoned wood", "Glass"],
+    "correct": "Seasoned wood",
+    "explanation": "Wood resists warping."
+  },
+
+  {
+    "question": "Dimension lines are drawn using:",
+    "options": ["Thick line", "Thin line", "Dashed line", "Freehand"],
+    "correct": "Thin line",
+    "explanation": "Thin lines avoid confusion."
+  },
+  {
+    "question": "Hidden details are shown using:",
+    "options": ["Continuous line", "Dashed line", "Chain line", "Thick line"],
+    "correct": "Dashed line",
+    "explanation": "Dashed lines represent hidden parts."
+  },
+  {
+    "question": "Center lines are represented by:",
+    "options": ["Thick line", "Chain line", "Dashed line", "Freehand line"],
+    "correct": "Chain line",
+    "explanation": "Chain line indicates axis."
+  },
+  {
+    "question": "Section lines are drawn at angle of:",
+    "options": ["30°", "45°", "60°", "90°"],
+    "correct": "45°",
+    "explanation": "Standard section lining angle."
+  },
+  {
+    "question": "Symbol for electrical switch is shown in:",
+    "options": ["Structural drawing", "Plumbing drawing", "Electrical drawing", "Topographic drawing"],
+    "correct": "Electrical drawing",
+    "explanation": "Electrical symbols are standardized."
+  },
+
+  {
+    "question": "Topographic drawings show:",
+    "options": ["Contours", "Electrical layout", "Plumbing layout", "Structural details"],
+    "correct": "Contours",
+    "explanation": "They represent ground surface."
+  },
+  {
+    "question": "Structural drawings include details of:",
+    "options": ["Furniture", "Electrical fittings", "Reinforcement", "Painting"],
+    "correct": "Reinforcement",
+    "explanation": "Structural drawings focus on load-carrying elements."
+  },
+  {
+    "question": "Plumbing drawings show:",
+    "options": ["Beam layout", "Pipe lines", "Lighting points", "Contours"],
+    "correct": "Pipe lines",
+    "explanation": "They show water supply and drainage."
+  },
+  {
+    "question": "Electrical drawings include:",
+    "options": ["Column size", "Pipe diameter", "Wiring layout", "Foundation depth"],
+    "correct": "Wiring layout",
+    "explanation": "Electrical plans show wiring and fixtures."
+  },
+  {
+    "question": "Topographic maps are useful for:",
+    "options": ["Interior design", "Site selection", "Painting", "Furniture layout"],
+    "correct": "Site selection",
+    "explanation": "They show land features."
+  },
+
+  {
+    "question": "Freehand drawing improves:",
+    "options": ["Accuracy", "Speed", "Visualization", "All of these"],
+    "correct": "All of these",
+    "explanation": "Freehand sketches enhance understanding."
+  },
+  {
+    "question": "Freehand drawings are usually made with:",
+    "options": ["Compass", "Scale", "Pencil", "Divider"],
+    "correct": "Pencil",
+    "explanation": "Pencil allows easy corrections."
+  },
+  {
+    "question": "Proportion is important in freehand drawing to:",
+    "options": ["Save time", "Maintain scale", "Improve appearance", "Reduce errors"],
+    "correct": "Improve appearance",
+    "explanation": "Good proportion gives clarity."
+  },
+  {
+    "question": "Freehand sketches are mainly used for:",
+    "options": ["Final drawings", "Working drawings", "Idea communication", "Valuation"],
+    "correct": "Idea communication",
+    "explanation": "They convey concepts quickly."
+  },
+  {
+    "question": "Freehand drawing does not require:",
+    "options": ["Imagination", "Skill", "Drawing instruments", "Practice"],
+    "correct": "Drawing instruments",
+    "explanation": "It is drawn without instruments."
+  },
+
+  {
+    "question": "School buildings should emphasize:",
+    "options": ["Ventilation and lighting", "Luxury", "Complex design", "Minimum area"],
+    "correct": "Ventilation and lighting",
+    "explanation": "Healthy environment is essential."
+  },
+  {
+    "question": "Hospital buildings require special attention to:",
+    "options": ["Decoration", "Sanitation", "Cost", "Height"],
+    "correct": "Sanitation",
+    "explanation": "Hygiene is critical."
+  },
+  {
+    "question": "Corridors in hospital should be:",
+    "options": ["Narrow", "Wide", "Curved", "Dark"],
+    "correct": "Wide",
+    "explanation": "For movement of stretchers."
+  },
+  {
+    "question": "School classrooms should have:",
+    "options": ["Low ceiling", "Poor lighting", "Good natural light", "Small windows"],
+    "correct": "Good natural light",
+    "explanation": "Lighting improves learning."
+  },
+  {
+    "question": "Community buildings design should prioritize:",
+    "options": ["Functionality", "Luxury", "Complexity", "Decoration"],
+    "correct": "Functionality",
+    "explanation": "Design should serve users effectively."
+  }
+]
