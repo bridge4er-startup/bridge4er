@@ -3,30 +3,243 @@
     "question": "Euler's formula for critical buckling load is valid for:",
     "options": ["Short columns", "Long columns", "All columns", "Intermediate columns"],
     "correct": "Long columns",
-    "explanation": "Euler's formula P_cr = π²EI/(KL)² applies to long slender columns where buckling occurs before yielding."
+    "explanation": "Euler's buckling formula applies to long, slender columns where elastic buckling governs."
   },
   {
-    "question": "The slenderness ratio is defined as:",
+    "question": "The slenderness ratio of a column is defined as:",
     "options": ["L/r", "r/L", "L²/r", "r²/L"],
     "correct": "L/r",
-    "explanation": "Slenderness ratio = Effective length / Radius of gyration = KL/r. Determines whether column is short or long."
+    "explanation": "Slenderness ratio is the ratio of effective length to radius of gyration."
   },
   {
-    "question": "For a column with both ends fixed, effective length factor K is:",
+    "question": "For a column with both ends fixed, the effective length factor K is:",
     "options": ["0.5", "0.7", "1.0", "2.0"],
     "correct": "0.5",
-    "explanation": "Effective length factors: Both ends fixed K=0.5, Both ends pinned K=1.0, One fixed-one free K=2.0."
+    "explanation": "Both ends fixed provide maximum restraint, resulting in K = 0.5."
   },
   {
-    "question": "Rankine's formula combines:",
-    "options": ["Euler and crushing loads", "Shear and bending", "Tension and compression", "Elastic and plastic loads"],
-    "correct": "Euler and crushing loads",
-    "explanation": "Rankine's formula: 1/P = 1/P_crushing + 1/P_Euler, valid for all slenderness ratios."
+    "question": "Rankine’s formula is used for:",
+    "options": ["Short columns", "Long columns", "Intermediate columns", "Beams only"],
+    "correct": "Intermediate columns",
+    "explanation": "Rankine’s formula combines crushing and buckling effects."
   },
   {
-    "question": "Local buckling in columns occurs in:",
-    "options": ["Entire column length", "Thin plate elements", "Concrete core", "Reinforcement"],
-    "correct": "Thin plate elements",
-    "explanation": "Local buckling = buckling of thin plate elements (flanges, webs) before overall column buckling. Common in steel sections."
+    "question": "The radius of gyration is given by:",
+    "options": ["√(I/A)", "I/A", "A/I", "√(A/I)"],
+    "correct": "√(I/A)",
+    "explanation": "Radius of gyration represents distribution of area about an axis."
+  },
+  {
+    "question": "Critical buckling load is proportional to:",
+    "options": ["L²", "1/L", "1/L²", "L"],
+    "correct": "1/L²",
+    "explanation": "Euler’s load varies inversely with square of effective length."
+  },
+  {
+    "question": "Plane sections remain plane after bending is assumed in:",
+    "options": ["Euler-Bernoulli theory", "Timoshenko theory", "Plastic theory", "Elastic theory"],
+    "correct": "Euler-Bernoulli theory",
+    "explanation": "This assumption neglects shear deformation."
+  },
+  {
+    "question": "The neutral axis of a beam is the axis where:",
+    "options": ["Shear stress is maximum", "Bending stress is zero", "Strain is maximum", "Moment is zero"],
+    "correct": "Bending stress is zero",
+    "explanation": "At the neutral axis, fibers neither compress nor elongate."
+  },
+  {
+    "question": "Modulus of elasticity is the ratio of:",
+    "options": ["Stress to strain", "Strain to stress", "Load to deformation", "Moment to curvature"],
+    "correct": "Stress to strain",
+    "explanation": "Defined by Hooke’s Law within elastic limit."
+  },
+  {
+    "question": "Poisson’s ratio is the ratio of:",
+    "options": ["Lateral strain to longitudinal strain", "Stress to strain", "Shear strain to normal strain", "Axial strain to volumetric strain"],
+    "correct": "Lateral strain to longitudinal strain",
+    "explanation": "It measures transverse deformation due to axial load."
+  },
+
+  {
+    "question": "Shear force at a section is defined as:",
+    "options": ["Sum of vertical forces to one side", "Sum of moments to one side", "Bending stress", "Axial force"],
+    "correct": "Sum of vertical forces to one side",
+    "explanation": "Shear force represents internal resistance to sliding."
+  },
+  {
+    "question": "Bending moment at a section is:",
+    "options": ["Sum of moments of forces", "Shear force", "Axial load", "Torque"],
+    "correct": "Sum of moments of forces",
+    "explanation": "It causes bending of structural members."
+  },
+  {
+    "question": "Maximum bending moment in a simply supported beam with UDL occurs at:",
+    "options": ["Mid-span", "Support", "Quarter span", "One-third span"],
+    "correct": "Mid-span",
+    "explanation": "For symmetric loading, maximum BM occurs at center."
+  },
+  {
+    "question": "In a cantilever beam, maximum bending moment occurs at:",
+    "options": ["Free end", "Fixed end", "Mid-span", "Quarter span"],
+    "correct": "Fixed end",
+    "explanation": "The fixed end resists maximum moment."
+  },
+  {
+    "question": "Hooke’s law is valid up to:",
+    "options": ["Yield point", "Elastic limit", "Ultimate stress", "Breaking point"],
+    "correct": "Elastic limit",
+    "explanation": "Beyond elastic limit, stress is no longer proportional to strain."
+  },
+  {
+    "question": "Factor of safety is defined as:",
+    "options": ["Ultimate stress / Working stress", "Working stress / Ultimate stress", "Yield stress / Load", "Load / Stress"],
+    "correct": "Ultimate stress / Working stress",
+    "explanation": "Ensures safety against failure."
+  },
+  {
+    "question": "The unit of bending moment is:",
+    "options": ["N", "N/m", "N·m", "N/m²"],
+    "correct": "N·m",
+    "explanation": "Moment = Force × Distance."
+  },
+  {
+    "question": "The section modulus is defined as:",
+    "options": ["I/y", "I/A", "A/y", "y/I"],
+    "correct": "I/y",
+    "explanation": "It indicates bending strength of a section."
+  },
+  {
+    "question": "Torsion produces which type of stress?",
+    "options": ["Shear stress", "Normal stress", "Bending stress", "Axial stress"],
+    "correct": "Shear stress",
+    "explanation": "Twisting induces shear stresses."
+  },
+  {
+    "question": "St. Venant’s theory applies to:",
+    "options": ["Torsion of circular shafts", "Bending of beams", "Buckling of columns", "Shear walls"],
+    "correct": "Torsion of circular shafts",
+    "explanation": "Valid when cross-sections remain plane and circular."
+  },
+
+  {
+    "question": "In reinforced concrete, steel is used mainly to resist:",
+    "options": ["Compression", "Shear", "Tension", "Torsion"],
+    "correct": "Tension",
+    "explanation": "Concrete is weak in tension, steel compensates."
+  },
+  {
+    "question": "Concrete is strongest in:",
+    "options": ["Tension", "Compression", "Shear", "Bending"],
+    "correct": "Compression",
+    "explanation": "Concrete has high compressive strength."
+  },
+  {
+    "question": "Characteristic strength of concrete is:",
+    "options": ["Mean strength", "Minimum strength", "Strength at 5% failure", "Average strength"],
+    "correct": "Strength at 5% failure",
+    "explanation": "Only 5% of samples may fall below this value."
+  },
+  {
+    "question": "The grade of concrete M20 means:",
+    "options": ["20 MPa compressive strength", "20 kN load", "20% cement", "20 days curing"],
+    "correct": "20 MPa compressive strength",
+    "explanation": "Characteristic strength at 28 days."
+  },
+  {
+    "question": "Workability of concrete is measured by:",
+    "options": ["Slump test", "Compression test", "Tension test", "Impact test"],
+    "correct": "Slump test",
+    "explanation": "Indicates ease of placement and compaction."
+  },
+  {
+    "question": "Creep in concrete is:",
+    "options": ["Instant deformation", "Time-dependent deformation", "Elastic recovery", "Plastic failure"],
+    "correct": "Time-dependent deformation",
+    "explanation": "Occurs under sustained load."
+  },
+  {
+    "question": "Shrinkage in concrete occurs due to:",
+    "options": ["Loss of moisture", "Increase in load", "Thermal expansion", "Chemical attack"],
+    "correct": "Loss of moisture",
+    "explanation": "Causes volume reduction."
+  },
+  {
+    "question": "Minimum grade of concrete for RCC is:",
+    "options": ["M10", "M15", "M20", "M25"],
+    "correct": "M20",
+    "explanation": "As per standard codes."
+  },
+  {
+    "question": "Reinforcement bars are commonly made of:",
+    "options": ["Aluminum", "Mild steel", "High tensile steel", "Cast iron"],
+    "correct": "High tensile steel",
+    "explanation": "Provides high strength and ductility."
+  },
+  {
+    "question": "Development length ensures:",
+    "options": ["Bond strength", "Shear resistance", "Bending strength", "Durability"],
+    "correct": "Bond strength",
+    "explanation": "Prevents slippage of bars."
+  },
+
+  {
+    "question": "Limit state design considers:",
+    "options": ["Safety only", "Serviceability only", "Safety and serviceability", "Economy only"],
+    "correct": "Safety and serviceability",
+    "explanation": "Ensures both strength and usability."
+  },
+  {
+    "question": "Partial safety factors are applied to:",
+    "options": ["Loads only", "Materials only", "Loads and materials", "Geometry"],
+    "correct": "Loads and materials",
+    "explanation": "Accounts for uncertainties."
+  },
+  {
+    "question": "Dead load includes:",
+    "options": ["Self weight", "Wind load", "Earthquake load", "Live load"],
+    "correct": "Self weight",
+    "explanation": "Permanent static load."
+  },
+  {
+    "question": "Live load is:",
+    "options": ["Permanent load", "Moving load", "Environmental load", "Thermal load"],
+    "correct": "Moving load",
+    "explanation": "Changes with occupancy."
+  },
+  {
+    "question": "Wind load depends mainly on:",
+    "options": ["Height of structure", "Material strength", "Concrete grade", "Soil type"],
+    "correct": "Height of structure",
+    "explanation": "Wind pressure increases with height."
+  },
+  {
+    "question": "Earthquake load is considered as:",
+    "options": ["Static load", "Dynamic load", "Dead load", "Impact load"],
+    "correct": "Dynamic load",
+    "explanation": "Caused by ground acceleration."
+  },
+  {
+    "question": "Ductility is the ability to:",
+    "options": ["Resist compression", "Deform without failure", "Resist shear", "Increase strength"],
+    "correct": "Deform without failure",
+    "explanation": "Important for seismic resistance."
+  },
+  {
+    "question": "Shear reinforcement in beams is provided in the form of:",
+    "options": ["Stirrups", "Main bars", "Distribution bars", "Dowels"],
+    "correct": "Stirrups",
+    "explanation": "Resists diagonal tension."
+  },
+  {
+    "question": "Footings are provided to:",
+    "options": ["Reduce load", "Distribute load", "Increase height", "Improve aesthetics"],
+    "correct": "Distribute load",
+    "explanation": "Transfers load safely to soil."
+  },
+  {
+    "question": "Bearing capacity of soil is defined as:",
+    "options": ["Maximum pressure soil can carry safely", "Weight of soil", "Depth of soil", "Soil density"],
+    "correct": "Maximum pressure soil can carry safely",
+    "explanation": "Prevents shear failure and settlement."
   }
 ]
