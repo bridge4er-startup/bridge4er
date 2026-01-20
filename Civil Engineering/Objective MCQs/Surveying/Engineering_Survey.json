@@ -1,0 +1,317 @@
+[
+  {
+    "question": "Surveying is defined as:",
+    "options": ["Art of drawing maps", "Science of earth measurement", "Science and art of determining relative positions of points", "Measurement of distances only"],
+    "correct": "Science and art of determining relative positions of points",
+    "explanation": "Surveying determines relative positions of points on or near the earth's surface."
+  },
+  {
+    "question": "Which of the following is NOT a primary division of surveying?",
+    "options": ["Plane surveying", "Geodetic surveying", "Astronomical surveying", "Chain surveying"],
+    "correct": "Chain surveying",
+    "explanation": "Chain surveying is a method, not a primary classification."
+  },
+  {
+    "question": "Plane surveying assumes that:",
+    "options": ["Earth is spherical", "Earth is flat", "Curvature is considered", "Gravity is ignored"],
+    "correct": "Earth is flat",
+    "explanation": "Plane surveying neglects curvature due to small area coverage."
+  },
+  {
+    "question": "Geodetic surveying considers:",
+    "options": ["Plane surface", "Curvature of earth", "Small areas", "Local accuracy only"],
+    "correct": "Curvature of earth",
+    "explanation": "Geodetic surveying accounts for earth's curvature."
+  },
+  {
+    "question": "The most suitable method for small area surveying is:",
+    "options": ["Geodetic surveying", "Plane surveying", "Astronomical surveying", "Hydrographic surveying"],
+    "correct": "Plane surveying",
+    "explanation": "Plane surveying is suitable for small areas."
+  },
+
+  {
+    "question": "Chain surveying is best suited for:",
+    "options": ["Hilly areas", "Large areas", "Open and level ground", "Forested areas"],
+    "correct": "Open and level ground",
+    "explanation": "Chain surveying requires clear visibility and level terrain."
+  },
+  {
+    "question": "The length of a metric chain is:",
+    "options": ["20 m", "30 m", "66 ft", "100 ft"],
+    "correct": "20 m",
+    "explanation": "Metric chains are commonly 20 m or 30 m long."
+  },
+  {
+    "question": "Ranging rods are used for:",
+    "options": ["Measuring angles", "Measuring distances", "Marking survey stations", "Measuring slopes"],
+    "correct": "Marking survey stations",
+    "explanation": "Ranging rods are used to align and mark stations."
+  },
+  {
+    "question": "Arrows in chain surveying are used to:",
+    "options": ["Measure angles", "Mark chain lengths", "Level the ground", "Measure slopes"],
+    "correct": "Mark chain lengths",
+    "explanation": "Arrows mark each chain length during measurement."
+  },
+  {
+    "question": "Correction for slope is required when:",
+    "options": ["Ground is horizontal", "Measurement is along slope", "Chain is too long", "Temperature changes"],
+    "correct": "Measurement is along slope",
+    "explanation": "Slope correction converts sloping distance to horizontal distance."
+  },
+  {
+    "question": "Abney level is used for measuring:",
+    "options": ["Horizontal distance", "Vertical angle", "Bearing", "Azimuth"],
+    "correct": "Vertical angle",
+    "explanation": "Abney level measures vertical angles and slopes."
+  },
+
+  {
+    "question": "Prismatic compass gives bearing with respect to:",
+    "options": ["True meridian", "Magnetic meridian", "Grid meridian", "Arbitrary line"],
+    "correct": "Magnetic meridian",
+    "explanation": "Compass bearings are measured from magnetic north."
+  },
+  {
+    "question": "Whole circle bearing ranges from:",
+    "options": ["0°–90°", "0°–180°", "0°–360°", "90°–270°"],
+    "correct": "0°–360°",
+    "explanation": "Whole circle bearing is measured clockwise from north."
+  },
+  {
+    "question": "Fore bearing and back bearing differ by:",
+    "options": ["90°", "180°", "270°", "360°"],
+    "correct": "180°",
+    "explanation": "Back bearing = Fore bearing ± 180°."
+  },
+  {
+    "question": "Local attraction is caused by:",
+    "options": ["Earth rotation", "Nearby magnetic materials", "Wind", "Temperature"],
+    "correct": "Nearby magnetic materials",
+    "explanation": "Magnetic materials disturb compass readings."
+  },
+  {
+    "question": "Errors due to local attraction affect:",
+    "options": ["Chain length", "Bearings", "Levels", "Distances"],
+    "correct": "Bearings",
+    "explanation": "Local attraction alters compass bearings."
+  },
+
+  {
+    "question": "Plane table surveying is a:",
+    "options": ["Indirect method", "Graphical method", "Numerical method", "Instrumental method"],
+    "correct": "Graphical method",
+    "explanation": "Fieldwork and plotting are done simultaneously."
+  },
+  {
+    "question": "Plane table surveying is most suitable for:",
+    "options": ["Rainy conditions", "Large areas", "Small areas", "Night surveys"],
+    "correct": "Small areas",
+    "explanation": "Accuracy decreases over large areas."
+  },
+  {
+    "question": "The main advantage of plane table surveying is:",
+    "options": ["High accuracy", "No field notes required", "Suitable for hilly terrain", "Works in rain"],
+    "correct": "No field notes required",
+    "explanation": "Plotting is done directly in the field."
+  },
+  {
+    "question": "Alidade is used for:",
+    "options": ["Measuring distances", "Sight and drawing rays", "Leveling table", "Orientation"],
+    "correct": "Sight and drawing rays",
+    "explanation": "Alidade is a sighting and drawing instrument."
+  },
+  {
+    "question": "Orientation of plane table means:",
+    "options": ["Leveling table", "Fixing location", "Setting table parallel to ground", "Aligning with north"],
+    "correct": "Aligning with north",
+    "explanation": "Orientation ensures correct directions."
+  },
+
+  {
+    "question": "Leveling determines:",
+    "options": ["Horizontal distance", "Relative heights", "Angles", "Bearings"],
+    "correct": "Relative heights",
+    "explanation": "Leveling measures vertical distances."
+  },
+  {
+    "question": "Benchmark is a point of:",
+    "options": ["Unknown elevation", "Temporary elevation", "Known elevation", "Zero elevation"],
+    "correct": "Known elevation",
+    "explanation": "Benchmarks have known reduced levels."
+  },
+  {
+    "question": "Temporary adjustment of level includes:",
+    "options": ["Permanent leveling", "Elimination of parallax", "Calibration", "Correction"],
+    "correct": "Elimination of parallax",
+    "explanation": "Temporary adjustments ensure accuracy during use."
+  },
+  {
+    "question": "Back sight is taken to:",
+    "options": ["Determine RL of instrument", "Determine RL of unknown point", "Check error", "Close leveling"],
+    "correct": "Determine RL of instrument",
+    "explanation": "Back sight establishes height of instrument."
+  },
+  {
+    "question": "Reciprocal leveling is used to eliminate:",
+    "options": ["Curvature only", "Refraction only", "Instrument error", "Curvature and refraction"],
+    "correct": "Curvature and refraction",
+    "explanation": "Reciprocal leveling removes systematic errors."
+  },
+
+  {
+    "question": "Contour interval is the:",
+    "options": ["Horizontal distance between contours", "Vertical difference between contours", "Slope distance", "Area between contours"],
+    "correct": "Vertical difference between contours",
+    "explanation": "It represents elevation difference."
+  },
+  {
+    "question": "Closely spaced contours indicate:",
+    "options": ["Flat ground", "Steep slope", "Valley", "Ridge"],
+    "correct": "Steep slope",
+    "explanation": "Closer contours mean rapid change in elevation."
+  },
+  {
+    "question": "Contours never:",
+    "options": ["Cross each other", "Form closed loops", "Represent slopes", "Indicate hills"],
+    "correct": "Cross each other",
+    "explanation": "Contours intersect only in vertical cliffs."
+  },
+  {
+    "question": "Interpolation of contours means:",
+    "options": ["Measuring contours", "Plotting contours", "Estimating intermediate contours", "Removing contours"],
+    "correct": "Estimating intermediate contours",
+    "explanation": "Interpolation finds points between known elevations."
+  },
+  {
+    "question": "Contour maps are used for:",
+    "options": ["Structural design", "Route alignment", "Material testing", "Load calculation"],
+    "correct": "Route alignment",
+    "explanation": "They help select economical routes."
+  },
+
+  {
+    "question": "Traverse is a series of:",
+    "options": ["Triangles", "Circles", "Connected lines", "Arcs"],
+    "correct": "Connected lines",
+    "explanation": "Traverse consists of connected survey lines."
+  },
+  {
+    "question": "Closed traverse starts and ends at:",
+    "options": ["Different points", "Same point", "Unknown point", "Benchmark"],
+    "correct": "Same point",
+    "explanation": "Closed traverse forms a loop."
+  },
+  {
+    "question": "Closing error in traverse indicates:",
+    "options": ["Accuracy", "Mistake", "Misclosure", "Adjustment"],
+    "correct": "Misclosure",
+    "explanation": "Error due to measurement inaccuracies."
+  },
+  {
+    "question": "Theodolite is used for measuring:",
+    "options": ["Distances", "Angles", "Levels", "Slopes only"],
+    "correct": "Angles",
+    "explanation": "Measures horizontal and vertical angles."
+  },
+  {
+    "question": "Adjustment of traverse distributes:",
+    "options": ["Distances", "Errors", "Angles", "Bearings"],
+    "correct": "Errors",
+    "explanation": "Errors are adjusted proportionally."
+  },
+
+  {
+    "question": "Tacheometry is used for:",
+    "options": ["Precise leveling", "Rapid distance measurement", "Chain surveying", "Compass surveying"],
+    "correct": "Rapid distance measurement",
+    "explanation": "Used where chaining is difficult."
+  },
+  {
+    "question": "Stadia method belongs to:",
+    "options": ["Chain surveying", "Tacheometry", "Leveling", "Plane table"],
+    "correct": "Tacheometry",
+    "explanation": "Uses staff intercept readings."
+  },
+  {
+    "question": "Total station measures:",
+    "options": ["Angles only", "Distances only", "Angles and distances electronically", "Levels only"],
+    "correct": "Angles and distances electronically",
+    "explanation": "Combines EDM and theodolite."
+  },
+  {
+    "question": "EDM stands for:",
+    "options": ["Electronic Distance Measurement", "Exact Distance Method", "Earth Distance Measurement", "Elevation Distance Method"],
+    "correct": "Electronic Distance Measurement",
+    "explanation": "Used in modern surveying instruments."
+  },
+  {
+    "question": "Total station improves:",
+    "options": ["Manual work", "Accuracy and speed", "Errors", "Cost only"],
+    "correct": "Accuracy and speed",
+    "explanation": "Reduces human error and time."
+  },
+
+  {
+    "question": "Simple circular curve is used to connect:",
+    "options": ["Two parallel lines", "Two intersecting straight lines", "Two vertical lines", "Two contours"],
+    "correct": "Two intersecting straight lines",
+    "explanation": "Provides smooth transition."
+  },
+  {
+    "question": "Transition curve provides:",
+    "options": ["Sudden change", "Gradual change of curvature", "Sharp turn", "Vertical rise"],
+    "correct": "Gradual change of curvature",
+    "explanation": "Ensures safety and comfort."
+  },
+  {
+    "question": "Vertical curves are provided for:",
+    "options": ["Horizontal alignment", "Elevation changes", "Bearing correction", "Distance measurement"],
+    "correct": "Elevation changes",
+    "explanation": "Used in roads and railways."
+  },
+  {
+    "question": "Elements of simple curve include:",
+    "options": ["Radius and length", "Area and volume", "Height and width", "Slope and bearing"],
+    "correct": "Radius and length",
+    "explanation": "Geometric parameters define the curve."
+  },
+  {
+    "question": "Setting out of curves is done using:",
+    "options": ["Compass", "Chain and theodolite", "Level", "Plane table"],
+    "correct": "Chain and theodolite",
+    "explanation": "Provides accuracy in alignment."
+  },
+
+  {
+    "question": "Area by trapezoidal rule is:",
+    "options": ["More accurate", "Less accurate than Simpson's rule", "Exact", "Graphical"],
+    "correct": "Less accurate than Simpson's rule",
+    "explanation": "Simpson’s rule accounts for curvature."
+  },
+  {
+    "question": "Simpson’s rule requires number of intervals to be:",
+    "options": ["Odd", "Even", "Prime", "Any"],
+    "correct": "Even",
+    "explanation": "Required for parabolic fitting."
+  },
+  {
+    "question": "Volume of earthwork is calculated for:",
+    "options": ["Design", "Cost estimation", "Cut and fill", "All of these"],
+    "correct": "All of these",
+    "explanation": "Used in construction planning."
+  },
+  {
+    "question": "Mass haul diagram represents:",
+    "options": ["Area", "Volume vs distance", "Elevation", "Contours"],
+    "correct": "Volume vs distance",
+    "explanation": "Used for earthwork optimization."
+  },
+  {
+    "question": "Cut and fill calculations are required for:",
+    "options": ["Buildings", "Roads and railways", "Bridges", "Dams only"],
+    "correct": "Roads and railways",
+    "explanation": "Earthwork balance is critical in linear projects."
+  }
+]
