@@ -40,7 +40,7 @@
     "options": ["Koshi", "Gandaki", "Karnali", "Mahakali"],
     "correct": "Koshi",
     "explanation": "The Koshi River system has the largest drainage basin covering about 45% of Nepal's total area."
-  }
+  },
   {
     "question": "Which mineral resource is found in significant quantity in Nepal?",
     "options": ["Limestone", "Coal", "Iron ore", "Gold"],
@@ -76,7 +76,7 @@
     "options": ["Tea", "Cardamom", "Palm oil", "Woolen carpets"],
     "correct": "Woolen carpets",
     "explanation": "Woolen carpets (hand-knotted) are one of Nepal's main export commodities, particularly to European markets."
-  }
+  },
   {
     "question": "Which climate zone in Nepal experiences alpine climate?",
     "options": ["Terai", "Siwalik", "Middle Mountains", "High Himalayas"],
@@ -100,7 +100,7 @@
     "options": ["Fishing", "High-altitude farming and mountaineering", "Nomadic herding", "Trade and commerce"],
     "correct": "High-altitude farming and mountaineering",
     "explanation": "Sherpas are traditionally involved in high-altitude farming, animal husbandry, and mountaineering activities."
-  }
+  },
   {
     "question": "When was democracy first established in Nepal?",
     "options": ["1951", "1959", "1990", "2008"],
@@ -124,7 +124,7 @@
     "options": ["Sugauli Treaty", "Kathmandu Treaty", "Delhi Treaty", "Calcutta Treaty"],
     "correct": "Sugauli Treaty",
     "explanation": "The Sugauli Treaty of 1816 established the current boundary between Nepal and British India, which Nepal later inherited with independent India."
-  }
+  },
   {
     "question": "What is the current periodic plan of Nepal?",
     "options": ["14th Plan", "15th Plan", "16th Plan", "17th Plan"],
@@ -142,7 +142,7 @@
     "options": ["5.5%", "7.2%", "8.5%", "10.2%"],
     "correct": "7.2%",
     "explanation": "The current periodic plan targets an average annual economic growth rate of 7.2%."
-  }
+  },
   {
     "question": "How many Sustainable Development Goals (SDGs) are there?",
     "options": ["15", "17", "19", "21"],
@@ -160,7 +160,7 @@
     "options": ["10.5%", "18.7%", "23.2%", "30.5%"],
     "correct": "23.2%",
     "explanation": "Approximately 23.2% of Nepal's total area is under protected areas including national parks, wildlife reserves, and conservation areas."
-  }
+  },
   {
     "question": "When did Nepal become a member of the United Nations?",
     "options": ["1950", "1955", "1960", "1965"],
@@ -178,7 +178,7 @@
     "options": ["1994", "1997", "2000", "2004"],
     "correct": "1997",
     "explanation": "BIMSTEC (Bay of Bengal Initiative for Multi-Sectoral Technical and Economic Cooperation) was established on June 6, 1997."
-  }
+  },
   {
     "question": "When was the current Constitution of Nepal promulgated?",
     "options": ["2063 BS", "2072 BS", "2075 BS", "2078 BS"],
@@ -196,7 +196,7 @@
     "options": ["Federal Democratic Republic", "Constitutional Monarchy", "People's Republic", "Democratic Republic"],
     "correct": "Federal Democratic Republic",
     "explanation": "Article 4(1) of the Constitution declares Nepal as an independent, indivisible, sovereign, secular, inclusive, democratic, socialism-oriented, federal democratic republican state."
-  }
+  },
   {
     "question": "How many provinces are there in Nepal?",
     "options": ["5", "6", "7", "8"],
@@ -214,7 +214,7 @@
     "options": ["Two", "Three", "Four", "Five"],
     "correct": "Three",
     "explanation": "Nepal's federal system has three levels of government: Federal, Provincial, and Local."
-  }
+  },
   {
     "question": "What is the minimum educational qualification for Gazetted Third Class officer in Nepal?",
     "options": ["Bachelor's Degree", "Master's Degree", "Intermediate", "Ph.D."],
@@ -226,37 +226,37 @@
     "options": ["58 years", "60 years", "63 years", "65 years"],
     "correct": "58 years",
     "explanation": "The retirement age for civil servants in Nepal is 58 years as per existing regulations."
-  }
+  },
   {
     "question": "Which of the following is NOT a core function of public service?",
     "options": ["Policy implementation", "Service delivery", "Political campaigning", "Regulation enforcement"],
     "correct": "Political campaigning",
     "explanation": "Political campaigning is not a function of public service as civil servants must maintain political neutrality."
-  }
+  },
   {
     "question": "What is the main purpose of Public Service Charter?",
     "options": ["To increase government revenue", "To ensure service quality and accountability", "To reduce government staff", "To promote political parties"],
     "correct": "To ensure service quality and accountability",
     "explanation": "Public Service Charter aims to ensure quality service delivery, accountability, and transparency in public institutions."
-  }
+  },
   {
     "question": "What is the first stage in the public policy process?",
     "options": ["Implementation", "Evaluation", "Agenda setting", "Policy formulation"],
     "correct": "Agenda setting",
     "explanation": "Agenda setting is the first stage where issues are identified and prioritized for government action."
-  }
+  },
   {
     "question": "Which management function involves setting objectives and determining courses of action?",
     "options": ["Organizing", "Planning", "Controlling", "Directing"],
     "correct": "Planning",
     "explanation": "Planning is the management function that involves setting objectives and determining the best course of action to achieve them."
-  }
+  },
   {
     "question": "When does Nepal's fiscal year begin?",
     "options": ["January 1", "April 1", "July 16", "October 1"],
     "correct": "July 16",
     "explanation": "Nepal's fiscal year begins on Shrawan 1 (mid-July, usually July 16) and ends on Ashadh 31 (mid-July next year)."
-  }
+  },
   {
     "question": "Which country hosted the 2023 UN Climate Change Conference (COP28)?",
     "options": ["Egypt", "UK", "UAE", "Germany"],
