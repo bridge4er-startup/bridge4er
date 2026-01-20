@@ -1,20 +1,15 @@
 [
-  {
+ {
     "question": "Who will win Jhapa-5, 2082 Election ?",
-    "options": [
-      {
-        "text": "Balendra Shah",
-        "image_url": "https://github.com/bridge4er/bridge4er/blob/main/Civil%20Engineering/photos%20for%20iq%20mcq/MCQ%20SET%202/IQ/Balendra%20Shah.jpg"
-      },
-      {
-        "text": "KP OLI",
-        "image_url": "https://github.com/bridge4er/bridge4er/blob/main/Civil%20Engineering/photos%20for%20iq%20mcq/MCQ%20SET%202/IQ/KP%20OLI.jpg"
-      },
-      {"No One"},
-      {"Election Cancels"},
+    "options": ["Balendra Shah", "KP Oli", "Both Loose", "NO Election"],
+    "option_images": [
+      "https://github.com/bridge4er/bridge4er/blob/main/Civil%20Engineering/photos%20for%20iq%20mcq/MCQ%20SET%202/IQ/Balendra%20Shah.jpg",
+      "https://github.com/bridge4er/bridge4er/blob/main/Civil%20Engineering/photos%20for%20iq%20mcq/MCQ%20SET%202/IQ/KP%20OLI.jpg",
+      "https://github.com/bridge4er/bridge4er/blob/main/Civil%20Engineering/photos%20for%20iq%20mcq/MCQ%20SET%202/IQ/Balendra%20Shah.jpg",
+      "https://github.com/bridge4er/bridge4er/blob/main/Civil%20Engineering/photos%20for%20iq%20mcq/MCQ%20SET%202/IQ/Balendra%20Shah.jpg"
     ],
     "correct": "Balendra Shah",
-    "explanation": "Young Leader Wins"
+    "explanation": "Young Leader."
   },
   {
     "question": "Which of the following is the most resistant to fire?",
