@@ -1,0 +1,280 @@
+[
+  {
+    "question": "Engineering economics primarily deals with:",
+    "options": ["Technical design", "Economic decision making", "Construction planning", "Structural analysis"],
+    "correct": "Economic decision making",
+    "explanation": "It helps engineers choose economically viable alternatives."
+  },
+  {
+    "question": "Cost is defined as:",
+    "options": ["Profit earned", "Money spent for production", "Selling price", "Market value"],
+    "correct": "Money spent for production",
+    "explanation": "Cost includes all expenditures to produce goods or services."
+  },
+  {
+    "question": "Which of the following is a fixed cost?",
+    "options": ["Raw materials", "Wages", "Rent of building", "Fuel"],
+    "correct": "Rent of building",
+    "explanation": "Fixed cost does not vary with production."
+  },
+  {
+    "question": "Variable cost depends on:",
+    "options": ["Time", "Production volume", "Interest rate", "Capital"],
+    "correct": "Production volume",
+    "explanation": "Variable cost increases or decreases with output."
+  },
+  {
+    "question": "Sunk cost is a cost that is:",
+    "options": ["Recoverable", "Future cost", "Already incurred", "Estimated"],
+    "correct": "Already incurred",
+    "explanation": "Sunk costs cannot be recovered."
+  },
+
+  {
+    "question": "Opportunity cost represents:",
+    "options": ["Actual expense", "Lost alternative benefit", "Fixed cost", "Marginal cost"],
+    "correct": "Lost alternative benefit",
+    "explanation": "It is the benefit foregone by choosing one option."
+  },
+  {
+    "question": "Marginal cost is the cost of:",
+    "options": ["Total production", "Producing one additional unit", "Average production", "Initial setup"],
+    "correct": "Producing one additional unit",
+    "explanation": "Marginal cost measures incremental cost."
+  },
+  {
+    "question": "Break-even point occurs when:",
+    "options": ["Profit is maximum", "Cost equals revenue", "Loss is maximum", "Revenue is zero"],
+    "correct": "Cost equals revenue",
+    "explanation": "At break-even, there is no profit or loss."
+  },
+  {
+    "question": "Benefit-cost ratio is calculated as:",
+    "options": ["Cost/Benefit", "Benefit/Cost", "Profit/Cost", "Cost/Profit"],
+    "correct": "Benefit/Cost",
+    "explanation": "BCR compares benefits to costs."
+  },
+  {
+    "question": "A project is acceptable if benefit-cost ratio is:",
+    "options": ["Less than 1", "Equal to 1", "Greater than 1", "Zero"],
+    "correct": "Greater than 1",
+    "explanation": "Benefits must exceed costs."
+  },
+
+  {
+    "question": "Sensitivity analysis examines the effect of:",
+    "options": ["Design change", "Cost variation", "Uncertainty in parameters", "Production increase"],
+    "correct": "Uncertainty in parameters",
+    "explanation": "It tests impact of variable changes."
+  },
+  {
+    "question": "Sensitivity analysis is used to:",
+    "options": ["Reduce cost", "Improve quality", "Assess risk", "Increase profit"],
+    "correct": "Assess risk",
+    "explanation": "It evaluates uncertainty effects."
+  },
+  {
+    "question": "Internal rate of return (IRR) is the rate at which:",
+    "options": ["NPV is maximum", "NPV is zero", "Profit is maximum", "Cost is minimum"],
+    "correct": "NPV is zero",
+    "explanation": "IRR equates present value of costs and benefits."
+  },
+  {
+    "question": "Project is acceptable when IRR is:",
+    "options": ["Less than MARR", "Equal to zero", "Greater than MARR", "Negative"],
+    "correct": "Greater than MARR",
+    "explanation": "IRR must exceed minimum acceptable rate."
+  },
+  {
+    "question": "IRR method considers:",
+    "options": ["Time value of money", "Only cost", "Only benefit", "Accounting profit"],
+    "correct": "Time value of money",
+    "explanation": "IRR is a discounted cash flow method."
+  },
+
+  {
+    "question": "Time value of money states that:",
+    "options": ["Money value is constant", "Money today is worth more", "Future money is more valuable", "Interest is fixed"],
+    "correct": "Money today is worth more",
+    "explanation": "Due to earning potential."
+  },
+  {
+    "question": "Present value is the value of money:",
+    "options": ["In future", "At maturity", "Today", "After depreciation"],
+    "correct": "Today",
+    "explanation": "It discounts future cash flows."
+  },
+  {
+    "question": "Future value is calculated using:",
+    "options": ["Discounting", "Compounding", "Depreciation", "Valuation"],
+    "correct": "Compounding",
+    "explanation": "Future value uses compound interest."
+  },
+  {
+    "question": "Interest earned on interest is called:",
+    "options": ["Simple interest", "Compound interest", "Marginal interest", "Nominal interest"],
+    "correct": "Compound interest",
+    "explanation": "Compound interest grows exponentially."
+  },
+  {
+    "question": "Simple interest is calculated on:",
+    "options": ["Principal only", "Principal + interest", "Profit", "Revenue"],
+    "correct": "Principal only",
+    "explanation": "Interest remains constant."
+  },
+
+  {
+    "question": "Net present value (NPV) is:",
+    "options": ["Future value minus cost", "Present value of benefits minus costs", "Profit", "Revenue minus tax"],
+    "correct": "Present value of benefits minus costs",
+    "explanation": "NPV shows project worth."
+  },
+  {
+    "question": "A project is feasible if NPV is:",
+    "options": ["Negative", "Zero", "Positive", "Infinite"],
+    "correct": "Positive",
+    "explanation": "Positive NPV indicates profit."
+  },
+  {
+    "question": "NPV method assumes:",
+    "options": ["Constant inflation", "Reinvestment at discount rate", "No interest", "No depreciation"],
+    "correct": "Reinvestment at discount rate",
+    "explanation": "Cash flows reinvested at discount rate."
+  },
+  {
+    "question": "Discount rate reflects:",
+    "options": ["Cost of capital", "Profit margin", "Tax rate", "Inflation only"],
+    "correct": "Cost of capital",
+    "explanation": "It represents minimum acceptable return."
+  },
+  {
+    "question": "Which method is best for comparing alternatives?",
+    "options": ["IRR", "Payback period", "NPV", "Accounting profit"],
+    "correct": "NPV",
+    "explanation": "NPV considers scale and time value."
+  },
+
+  {
+    "question": "Economic equilibrium occurs when:",
+    "options": ["Demand exceeds supply", "Supply exceeds demand", "Demand equals supply", "Price is maximum"],
+    "correct": "Demand equals supply",
+    "explanation": "Market is balanced."
+  },
+  {
+    "question": "Demand refers to:",
+    "options": ["Need", "Desire backed by ability to pay", "Production", "Consumption"],
+    "correct": "Desire backed by ability to pay",
+    "explanation": "Demand requires purchasing power."
+  },
+  {
+    "question": "Law of demand states that:",
+    "options": ["Price and demand are directly proportional", "Price and demand are inversely proportional", "Demand is constant", "Supply affects demand"],
+    "correct": "Price and demand are inversely proportional",
+    "explanation": "As price increases, demand decreases."
+  },
+  {
+    "question": "Supply refers to:",
+    "options": ["Quantity demanded", "Quantity produced", "Quantity offered for sale", "Consumption rate"],
+    "correct": "Quantity offered for sale",
+    "explanation": "Supply depends on market price."
+  },
+  {
+    "question": "Law of supply states that:",
+    "options": ["Price and supply are inversely related", "Price and supply are directly related", "Supply is constant", "Demand affects supply"],
+    "correct": "Price and supply are directly related",
+    "explanation": "Higher price encourages more supply."
+  },
+
+  {
+    "question": "Production refers to:",
+    "options": ["Consumption of goods", "Creation of utility", "Selling goods", "Buying materials"],
+    "correct": "Creation of utility",
+    "explanation": "Production increases usefulness."
+  },
+  {
+    "question": "Factors of production include:",
+    "options": ["Land and labor", "Capital and organization", "Enterprise", "All of these"],
+    "correct": "All of these",
+    "explanation": "All contribute to production."
+  },
+  {
+    "question": "Short-run production has:",
+    "options": ["All factors variable", "At least one fixed factor", "No fixed cost", "No variable cost"],
+    "correct": "At least one fixed factor",
+    "explanation": "Usually capital is fixed."
+  },
+  {
+    "question": "Long-run production assumes:",
+    "options": ["All factors fixed", "All factors variable", "No production", "Constant cost"],
+    "correct": "All factors variable",
+    "explanation": "Firms can adjust all inputs."
+  },
+  {
+    "question": "Returns to scale refers to:",
+    "options": ["Change in one input", "Change in all inputs", "Market price", "Demand"],
+    "correct": "Change in all inputs",
+    "explanation": "It studies output response."
+  },
+
+  {
+    "question": "Financial evaluation focuses on:",
+    "options": ["Society benefit", "Environmental impact", "Investor returns", "Employment"],
+    "correct": "Investor returns",
+    "explanation": "It considers private profitability."
+  },
+  {
+    "question": "Economic evaluation considers:",
+    "options": ["Only cost", "Only benefit", "Social costs and benefits", "Private profit"],
+    "correct": "Social costs and benefits",
+    "explanation": "It assesses overall welfare."
+  },
+  {
+    "question": "Shadow price represents:",
+    "options": ["Market price", "Subsidized price", "Economic value", "Selling price"],
+    "correct": "Economic value",
+    "explanation": "Used in economic analysis."
+  },
+  {
+    "question": "Inflation affects:",
+    "options": ["Cost only", "Benefit only", "Value of money", "Demand only"],
+    "correct": "Value of money",
+    "explanation": "Purchasing power decreases."
+  },
+  {
+    "question": "Deflation is:",
+    "options": ["Increase in prices", "Decrease in prices", "Stable prices", "Zero inflation"],
+    "correct": "Decrease in prices",
+    "explanation": "Opposite of inflation."
+  },
+
+  {
+    "question": "Payback period method measures:",
+    "options": ["Profitability", "Risk", "Time to recover investment", "NPV"],
+    "correct": "Time to recover investment",
+    "explanation": "It ignores time value of money."
+  },
+  {
+    "question": "Main drawback of payback period is:",
+    "options": ["Complex", "Ignores cash flow", "Ignores time value", "Costly"],
+    "correct": "Ignores time value",
+    "explanation": "No discounting involved."
+  },
+  {
+    "question": "Discounted payback period considers:",
+    "options": ["Simple interest", "Compound interest", "Time value of money", "Inflation only"],
+    "correct": "Time value of money",
+    "explanation": "Uses discounted cash flows."
+  },
+  {
+    "question": "Which method is easiest to understand?",
+    "options": ["NPV", "IRR", "Payback period", "Sensitivity analysis"],
+    "correct": "Payback period",
+    "explanation": "Simple and intuitive."
+  },
+  {
+    "question": "Engineering economic analysis helps in:",
+    "options": ["Designing structure", "Making investment decisions", "Drafting drawings", "Material testing"],
+    "correct": "Making investment decisions",
+    "explanation": "It supports economic choices."
+  }
+]
