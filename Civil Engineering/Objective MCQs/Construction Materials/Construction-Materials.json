@@ -1,1 +1,281 @@
+[
+  {
+    "question": "Which property of building material relates to its ability to withstand applied loads?",
+    "options": ["Durability", "Strength", "Elasticity", "Workability"],
+    "correct": "Strength",
+    "explanation": "Strength is the capacity of a material to resist applied forces without failure."
+  },
+  {
+    "question": "Thermal conductivity of a building material indicates its ability to:",
+    "options": ["Resist heat flow", "Conduct electricity", "Absorb sound", "Resist fire"],
+    "correct": "Resist heat flow",
+    "explanation": "Lower thermal conductivity means better resistance to heat transfer."
+  },
+  {
+    "question": "Durability of a material refers to its ability to:",
+    "options": ["Carry load", "Resist wear and decay", "Deform elastically", "Conduct heat"],
+    "correct": "Resist wear and decay",
+    "explanation": "Durability ensures long service life under environmental exposure."
+  },
+  {
+    "question": "Which property is related to resistance against sudden loads?",
+    "options": ["Hardness", "Toughness", "Brittleness", "Plasticity"],
+    "correct": "Toughness",
+    "explanation": "Toughness is the ability to absorb energy before fracture."
+  },
+  {
+    "question": "Elasticity is the ability of a material to:",
+    "options": ["Break suddenly", "Regain original shape after unloading", "Deform permanently", "Resist abrasion"],
+    "correct": "Regain original shape after unloading",
+    "explanation": "Elastic materials return to original dimensions after removal of load."
+  },
+
+  {
+    "question": "A good building stone should have:",
+    "options": ["High porosity", "Low compressive strength", "Uniform texture", "Soft structure"],
+    "correct": "Uniform texture",
+    "explanation": "Uniform texture ensures strength and durability."
+  },
+  {
+    "question": "Which stone is commonly used for flooring and cladding?",
+    "options": ["Granite", "Laterite", "Sandstone", "Slate"],
+    "correct": "Granite",
+    "explanation": "Granite is hard, durable, and aesthetically appealing."
+  },
+  {
+    "question": "Weather resistance of stone depends mainly on:",
+    "options": ["Color", "Porosity", "Weight", "Shape"],
+    "correct": "Porosity",
+    "explanation": "Highly porous stones deteriorate faster."
+  },
+  {
+    "question": "Which stone is formed by metamorphism of limestone?",
+    "options": ["Granite", "Marble", "Basalt", "Slate"],
+    "correct": "Marble",
+    "explanation": "Marble is a metamorphic rock derived from limestone."
+  },
+  {
+    "question": "Laterite stone is suitable mainly for:",
+    "options": ["Foundations", "Decorative works", "Road metal", "Heavy load structures"],
+    "correct": "Foundations",
+    "explanation": "Laterite is soft and used where loads are moderate."
+  },
+
+  {
+    "question": "Ceramic materials are manufactured by:",
+    "options": ["Casting metals", "Firing clay products", "Chemical mixing", "Mechanical crushing"],
+    "correct": "Firing clay products",
+    "explanation": "Ceramics are made by firing clay at high temperatures."
+  },
+  {
+    "question": "Which brick type has holes through its body?",
+    "options": ["Solid brick", "Perforated brick", "Fly ash brick", "Facing brick"],
+    "correct": "Perforated brick",
+    "explanation": "Perforations reduce weight and improve bonding."
+  },
+  {
+    "question": "Mosaic tiles are mainly used for:",
+    "options": ["Roofing", "Wall insulation", "Decorative flooring", "Structural work"],
+    "correct": "Decorative flooring",
+    "explanation": "Mosaic tiles provide decorative and durable surfaces."
+  },
+  {
+    "question": "First class bricks should have compressive strength of at least:",
+    "options": ["3.5 MPa", "7 MPa", "10.5 MPa", "15 MPa"],
+    "correct": "10.5 MPa",
+    "explanation": "First class bricks have high strength and low water absorption."
+  },
+  {
+    "question": "Fly ash bricks are preferred because they:",
+    "options": ["Are very porous", "Use industrial waste", "Have low strength", "Are expensive"],
+    "correct": "Use industrial waste",
+    "explanation": "They are eco-friendly and utilize fly ash."
+  },
+
+  {
+    "question": "Lime used for construction is obtained from:",
+    "options": ["Clay", "Limestone", "Gypsum", "Shale"],
+    "correct": "Limestone",
+    "explanation": "Lime is produced by calcining limestone."
+  },
+  {
+    "question": "Which cement sets fastest?",
+    "options": ["Ordinary Portland Cement", "Rapid hardening cement", "Pozzolanic cement", "White cement"],
+    "correct": "Rapid hardening cement",
+    "explanation": "It gains early strength quickly."
+  },
+  {
+    "question": "Cement mortar is a mixture of:",
+    "options": ["Cement and sand", "Cement and lime", "Cement and aggregate", "Lime and sand"],
+    "correct": "Cement and sand",
+    "explanation": "Used for masonry and plastering."
+  },
+  {
+    "question": "Initial setting time of cement should not be less than:",
+    "options": ["10 minutes", "30 minutes", "45 minutes", "60 minutes"],
+    "correct": "30 minutes",
+    "explanation": "Allows sufficient time for mixing and placing."
+  },
+  {
+    "question": "Soundness test of cement checks:",
+    "options": ["Strength", "Durability", "Volume stability", "Setting time"],
+    "correct": "Volume stability",
+    "explanation": "Ensures no excessive expansion after setting."
+  },
+
+  {
+    "question": "Steel used in construction is mainly an alloy of:",
+    "options": ["Iron and copper", "Iron and carbon", "Iron and aluminum", "Iron and zinc"],
+    "correct": "Iron and carbon",
+    "explanation": "Carbon content controls strength and ductility."
+  },
+  {
+    "question": "Mild steel contains carbon percentage of:",
+    "options": ["0.05–0.25%", "0.5–1%", "1–2%", "Above 2%"],
+    "correct": "0.05–0.25%",
+    "explanation": "Low carbon provides ductility."
+  },
+  {
+    "question": "Which property makes steel suitable for earthquake-resistant structures?",
+    "options": ["Hardness", "Ductility", "Brittleness", "Weight"],
+    "correct": "Ductility",
+    "explanation": "Ductility allows large deformations without failure."
+  },
+  {
+    "question": "Corrosion of steel can be reduced by:",
+    "options": ["Painting", "Heating", "Cooling", "Hammering"],
+    "correct": "Painting",
+    "explanation": "Protective coatings prevent exposure to moisture."
+  },
+  {
+    "question": "Alloy steel contains:",
+    "options": ["Only iron", "Iron and carbon only", "Additional alloying elements", "No carbon"],
+    "correct": "Additional alloying elements",
+    "explanation": "Elements like chromium and nickel improve properties."
+  },
+
+  {
+    "question": "Hardwood trees are generally:",
+    "options": ["Fast growing", "Soft and light", "Strong and durable", "Used for pulp only"],
+    "correct": "Strong and durable",
+    "explanation": "Hardwoods are suitable for structural purposes."
+  },
+  {
+    "question": "Seasoning of timber is done to:",
+    "options": ["Increase moisture", "Reduce moisture", "Increase weight", "Change color"],
+    "correct": "Reduce moisture",
+    "explanation": "Improves strength and durability."
+  },
+  {
+    "question": "Teak wood is valued because of its:",
+    "options": ["Low cost", "High moisture content", "Resistance to decay", "Light weight"],
+    "correct": "Resistance to decay",
+    "explanation": "Natural oils make teak durable."
+  },
+  {
+    "question": "Defect in timber caused by fungi is called:",
+    "options": ["Knot", "Warping", "Dry rot", "Split"],
+    "correct": "Dry rot",
+    "explanation": "Fungal attack reduces strength."
+  },
+  {
+    "question": "Plywood is manufactured by:",
+    "options": ["Gluing timber blocks", "Bonding veneers", "Casting wood", "Compressing sawdust"],
+    "correct": "Bonding veneers",
+    "explanation": "Thin layers are glued with grains at right angles."
+  },
+
+  {
+    "question": "Bitumen is obtained from:",
+    "options": ["Coal", "Petroleum", "Wood", "Natural gas"],
+    "correct": "Petroleum",
+    "explanation": "Bitumen is a petroleum by-product."
+  },
+  {
+    "question": "Asphalt is mainly used for:",
+    "options": ["Concrete blocks", "Road surfacing", "Structural beams", "Plastering"],
+    "correct": "Road surfacing",
+    "explanation": "Provides smooth and durable pavement."
+  },
+  {
+    "question": "Paint primarily protects surfaces against:",
+    "options": ["Heat", "Corrosion and weathering", "Load", "Impact"],
+    "correct": "Corrosion and weathering",
+    "explanation": "Paint forms a protective coating."
+  },
+  {
+    "question": "Varnish is mainly applied to:",
+    "options": ["Concrete", "Steel", "Wood", "Brick"],
+    "correct": "Wood",
+    "explanation": "Enhances appearance and protects wood."
+  },
+  {
+    "question": "Polymers are materials with:",
+    "options": ["Metallic bonds", "Large molecular chains", "Crystalline structure", "High density"],
+    "correct": "Large molecular chains",
+    "explanation": "Polymers consist of repeating molecular units."
+  },
+
+  {
+    "question": "Soil property indicating resistance to deformation is:",
+    "options": ["Permeability", "Compressibility", "Shear strength", "Plasticity"],
+    "correct": "Shear strength",
+    "explanation": "Shear strength governs stability."
+  },
+  {
+    "question": "Void ratio of soil is defined as:",
+    "options": ["Volume of solids / total volume", "Volume of voids / volume of solids", "Weight of soil / volume", "Air voids only"],
+    "correct": "Volume of voids / volume of solids",
+    "explanation": "It indicates soil structure."
+  },
+  {
+    "question": "Clay soil has high:",
+    "options": ["Permeability", "Shear strength", "Plasticity", "Grain size"],
+    "correct": "Plasticity",
+    "explanation": "Clay exhibits plastic behavior when wet."
+  },
+  {
+    "question": "Bearing capacity of soil depends on:",
+    "options": ["Color", "Shear strength", "Moisture only", "Temperature"],
+    "correct": "Shear strength",
+    "explanation": "Higher shear strength increases bearing capacity."
+  },
+  {
+    "question": "Permeability of soil refers to its ability to:",
+    "options": ["Resist load", "Transmit water", "Compress", "Expand"],
+    "correct": "Transmit water",
+    "explanation": "Important for drainage characteristics."
+  },
+
+  {
+    "question": "Traditional building materials in Nepal include:",
+    "options": ["Glass and steel", "Mud and stone", "Plastic panels", "Aluminum sheets"],
+    "correct": "Mud and stone",
+    "explanation": "Locally available materials are traditionally used."
+  },
+  {
+    "question": "Modern construction materials in Nepal commonly include:",
+    "options": ["Timber only", "Mud bricks", "Reinforced concrete", "Stone masonry only"],
+    "correct": "Reinforced concrete",
+    "explanation": "RCC is widely used in modern construction."
+  },
+  {
+    "question": "Use of local materials helps in:",
+    "options": ["Increasing cost", "Reducing sustainability", "Reducing cost and promoting sustainability", "Lowering strength"],
+    "correct": "Reducing cost and promoting sustainability",
+    "explanation": "Local materials reduce transportation and environmental impact."
+  },
+  {
+    "question": "Stone masonry is still preferred in Nepal due to:",
+    "options": ["High cost", "Availability and tradition", "Low strength", "Poor durability"],
+    "correct": "Availability and tradition",
+    "explanation": "Stone is locally abundant."
+  },
+  {
+    "question": "Modern materials improve construction mainly by:",
+    "options": ["Increasing labor", "Reducing durability", "Enhancing strength and speed", "Reducing safety"],
+    "correct": "Enhancing strength and speed",
+    "explanation": "Modern materials improve efficiency and performance."
+  }
+]
 
