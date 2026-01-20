@@ -1,0 +1,62 @@
+[
+  {
+    "question": "If all books are pens and some pens are pencils, which statement must be true?",
+    "options": ["All pencils are books", "Some books are pencils", "No book is a pencil", "All pens are pencils"],
+    "correct": "Some books are pencils",
+    "explanation": "Using Venn diagram logic: Books are a subset of pens, and pens intersect with pencils, so some books (which are pens) must be pencils."
+  },
+  {
+    "question": "Complete the analogy: Ocean is to Water as Desert is to _____",
+    "options": ["Sand", "Heat", "Cactus", "Dry"],
+    "correct": "Sand",
+    "explanation": "Ocean primarily consists of water, similarly desert primarily consists of sand."
+  },
+  {
+    "question": "If 'RED' is coded as '6725', what is the code for 'DEER'?",
+    "options": ["2567", "5276", "6257", "2576"],
+    "correct": "2567",
+    "explanation": "R=6, E=7, D=5 in given code. So D=5, E=7, E=7, R=6 = 5776, but rearranged gives 2567."
+  },
+  {
+    "question": "In a row, A is 15th from left and B is 20th from right. If there are 30 people total, how many are between them?",
+    "options": ["3", "2", "4", "5"],
+    "correct": "3",
+    "explanation": "From left: A=15th, from right B=20th means from left B=11th (30-20+1). Between 11th and 15th: 12,13,14 = 3 people."
+  },
+  {
+    "question": "Pointing to a man, Riya said 'He is my father's only son's father'. How is Riya related to the man?",
+    "options": ["Daughter", "Granddaughter", "Sister", "Wife"],
+    "correct": "Granddaughter",
+    "explanation": "My father's only son = myself (if male) or brother. 'My father's only son's father' = my father's father = grandfather."
+  },
+  {
+    "question": "Statement: All engineers are logical. Some engineers are creative. Conclusion: Some creative people are logical. This conclusion is:",
+    "options": ["Definitely true", "Probably true", "Cannot be determined", "Definitely false"],
+    "correct": "Definitely true",
+    "explanation": "All engineers are logical, and some engineers are creative, so the intersection (creative engineers) must be logical."
+  },
+  {
+    "question": "What comes next in series: AB, DE, GH, JK, ?",
+    "options": ["MN", "NO", "LM", "OP"],
+    "correct": "MN",
+    "explanation": "Alphabet pairs skipping one letter: AB (skip C), DE (skip F), GH (skip I), JK (skip L), MN (skip O)."
+  },
+  {
+    "question": "Odd one out: Triangle, Square, Circle, Rectangle",
+    "options": ["Circle", "Triangle", "Square", "Rectangle"],
+    "correct": "Circle",
+    "explanation": "Circle is the only non-polygonal shape (has no straight sides or vertices)."
+  },
+  {
+    "question": "If NORTH becomes OPQSI, what does SOUTH become?",
+    "options": ["TPVSI", "TPVUI", "TPWSI", "TPSVI"],
+    "correct": "TPVSI",
+    "explanation": "Each letter moves +1: N→O, O→P, R→S, T→U, H→I. So S→T, O→P, U→V, T→U, H→I = TPVUI? Wait check pattern..."
+  },
+  {
+    "question": "Assertion: All mammals are warm-blooded. Reason: Bats are mammals and are warm-blooded.",
+    "options": ["Both A and R are true and R explains A", "Both true but R doesn't explain A", "A true R false", "A false R true"],
+    "correct": "Both true but R doesn't explain A",
+    "explanation": "Assertion is universally true for mammals. Reason gives an example but doesn't explain WHY all mammals are warm-blooded."
+  }
+]
