@@ -1,0 +1,249 @@
+[
+  {
+    "question": "Concrete is a composite material made up of:",
+    "options": ["Cement only", "Aggregates only", "Cement, aggregates, and water", "Cement and water"],
+    "correct": "Cement, aggregates, and water",
+    "explanation": "Concrete consists of cement, fine and coarse aggregates, and water."
+  },
+  {
+    "question": "Which constituent of concrete acts as a binding material?",
+    "options": ["Fine aggregate", "Coarse aggregate", "Cement", "Water"],
+    "correct": "Cement",
+    "explanation": "Cement binds aggregates together."
+  },
+  {
+    "question": "Chemical reaction between cement and water is called:",
+    "options": ["Carbonation", "Hydration", "Evaporation", "Crystallization"],
+    "correct": "Hydration",
+    "explanation": "Hydration leads to setting and hardening of concrete."
+  },
+  {
+    "question": "Which compound of cement is responsible for early strength?",
+    "options": ["C2S", "C3S", "C3A", "C4AF"],
+    "correct": "C3S",
+    "explanation": "Tricalcium silicate contributes to early strength."
+  },
+  {
+    "question": "Which cement compound contributes to long-term strength?",
+    "options": ["C3S", "C3A", "C2S", "C4AF"],
+    "correct": "C2S",
+    "explanation": "Dicalcium silicate provides strength at later ages."
+  },
+
+  {
+    "question": "The water-cement ratio is defined as:",
+    "options": ["Weight of cement / weight of water", "Volume of water / volume of cement", "Weight of water / weight of cement", "Water content only"],
+    "correct": "Weight of water / weight of cement",
+    "explanation": "It controls strength and workability."
+  },
+  {
+    "question": "According to Abram's law, strength of concrete is inversely proportional to:",
+    "options": ["Cement content", "Water-cement ratio", "Aggregate size", "Curing time"],
+    "correct": "Water-cement ratio",
+    "explanation": "Lower w/c ratio gives higher strength."
+  },
+  {
+    "question": "Excess water in concrete results in:",
+    "options": ["Higher strength", "Better durability", "Lower strength", "Faster setting"],
+    "correct": "Lower strength",
+    "explanation": "Excess water creates pores after evaporation."
+  },
+  {
+    "question": "Minimum water is required in concrete mainly for:",
+    "options": ["Hydration and workability", "Color", "Durability", "Aggregate coating"],
+    "correct": "Hydration and workability",
+    "explanation": "Water initiates hydration and provides workability."
+  },
+  {
+    "question": "A very low water-cement ratio causes:",
+    "options": ["High workability", "Segregation", "Poor workability", "Bleeding"],
+    "correct": "Poor workability",
+    "explanation": "Insufficient water makes concrete harsh."
+  },
+
+  {
+    "question": "Grade of concrete M25 indicates:",
+    "options": ["25 MPa characteristic strength", "25% cement", "25 days curing", "25 kN load"],
+    "correct": "25 MPa characteristic strength",
+    "explanation": "Strength at 28 days in MPa."
+  },
+  {
+    "question": "Characteristic strength of concrete is obtained at:",
+    "options": ["7 days", "14 days", "21 days", "28 days"],
+    "correct": "28 days",
+    "explanation": "Standard testing age for concrete strength."
+  },
+  {
+    "question": "Concrete mix design aims to achieve:",
+    "options": ["Maximum cost", "Required strength and workability", "Minimum cement", "High water content"],
+    "correct": "Required strength and workability",
+    "explanation": "Ensures economy and performance."
+  },
+  {
+    "question": "Which test determines compressive strength of concrete?",
+    "options": ["Tensile test", "Flexural test", "Cube test", "Slump test"],
+    "correct": "Cube test",
+    "explanation": "Concrete cubes are tested in compression."
+  },
+  {
+    "question": "Standard size of concrete cube used in testing is:",
+    "options": ["100 mm", "150 mm", "200 mm", "300 mm"],
+    "correct": "150 mm",
+    "explanation": "150 mm cube is standard for strength testing."
+  },
+
+  {
+    "question": "Workability of concrete is measured by:",
+    "options": ["Compression test", "Slump test", "Soundness test", "Vicat test"],
+    "correct": "Slump test",
+    "explanation": "Slump test measures ease of placement."
+  },
+  {
+    "question": "Zero slump indicates:",
+    "options": ["Very workable concrete", "Medium workability", "Very stiff concrete", "Segregated concrete"],
+    "correct": "Very stiff concrete",
+    "explanation": "Used in pavements and road works."
+  },
+  {
+    "question": "High slump value indicates:",
+    "options": ["Low workability", "High workability", "Low strength", "No cement"],
+    "correct": "High workability",
+    "explanation": "More fluid concrete."
+  },
+  {
+    "question": "Compaction of concrete is done to:",
+    "options": ["Increase water content", "Remove air voids", "Reduce strength", "Increase setting time"],
+    "correct": "Remove air voids",
+    "explanation": "Air voids reduce strength."
+  },
+  {
+    "question": "Vibrators are used in concrete to:",
+    "options": ["Mix concrete", "Transport concrete", "Compact concrete", "Cure concrete"],
+    "correct": "Compact concrete",
+    "explanation": "Vibration improves density."
+  },
+
+  {
+    "question": "Segregation in concrete refers to:",
+    "options": ["Uniform mix", "Separation of ingredients", "Hydration", "Setting"],
+    "correct": "Separation of ingredients",
+    "explanation": "Causes non-uniform strength."
+  },
+  {
+    "question": "Bleeding in concrete is:",
+    "options": ["Loss of cement", "Upward movement of water", "Cracking", "Shrinkage"],
+    "correct": "Upward movement of water",
+    "explanation": "Occurs due to settlement of solids."
+  },
+  {
+    "question": "Proper curing of concrete helps in:",
+    "options": ["Reducing strength", "Increasing hydration", "Faster drying", "Cracking"],
+    "correct": "Increasing hydration",
+    "explanation": "Curing maintains moisture for hydration."
+  },
+  {
+    "question": "Minimum curing period for OPC concrete is:",
+    "options": ["3 days", "7 days", "14 days", "28 days"],
+    "correct": "7 days",
+    "explanation": "Ensures adequate strength development."
+  },
+  {
+    "question": "Curing is most effective when done by:",
+    "options": ["Heating", "Water retention", "Air drying", "Chemical reaction"],
+    "correct": "Water retention",
+    "explanation": "Prevents moisture loss."
+  },
+
+  {
+    "question": "Admixtures are added to concrete to:",
+    "options": ["Reduce cement", "Improve properties", "Increase aggregate size", "Change color only"],
+    "correct": "Improve properties",
+    "explanation": "They modify fresh or hardened concrete."
+  },
+  {
+    "question": "Plasticizers are used to:",
+    "options": ["Increase water content", "Reduce workability", "Increase workability", "Delay setting"],
+    "correct": "Increase workability",
+    "explanation": "They reduce water demand."
+  },
+  {
+    "question": "Retarding admixtures are used to:",
+    "options": ["Increase setting speed", "Delay setting time", "Increase strength", "Reduce durability"],
+    "correct": "Delay setting time",
+    "explanation": "Useful in hot weather concreting."
+  },
+  {
+    "question": "Accelerators are used to:",
+    "options": ["Delay setting", "Reduce strength", "Increase rate of hydration", "Reduce cement"],
+    "correct": "Increase rate of hydration",
+    "explanation": "They speed up setting and strength gain."
+  },
+  {
+    "question": "Air-entraining agents improve:",
+    "options": ["Compressive strength", "Freeze-thaw resistance", "Density", "Setting time"],
+    "correct": "Freeze-thaw resistance",
+    "explanation": "Entrained air improves durability."
+  },
+
+  {
+    "question": "High strength concrete has compressive strength greater than:",
+    "options": ["20 MPa", "30 MPa", "40 MPa", "10 MPa"],
+    "correct": "40 MPa",
+    "explanation": "High strength concrete exceeds 40 MPa."
+  },
+  {
+    "question": "High strength concrete generally requires:",
+    "options": ["High water content", "Low water-cement ratio", "Low cement content", "No admixtures"],
+    "correct": "Low water-cement ratio",
+    "explanation": "Low w/c ratio increases strength."
+  },
+  {
+    "question": "Silica fume is used in high strength concrete to:",
+    "options": ["Increase porosity", "Reduce strength", "Improve strength and durability", "Delay setting"],
+    "correct": "Improve strength and durability",
+    "explanation": "It fills micro-voids."
+  },
+  {
+    "question": "High strength concrete is commonly used in:",
+    "options": ["Pavements", "High-rise buildings", "Plastering", "Foundations only"],
+    "correct": "High-rise buildings",
+    "explanation": "Provides higher load capacity."
+  },
+  {
+    "question": "One disadvantage of high strength concrete is:",
+    "options": ["Low strength", "High brittleness", "Low durability", "Poor quality"],
+    "correct": "High brittleness",
+    "explanation": "It has reduced ductility."
+  },
+
+  {
+    "question": "Prestressed concrete is used to:",
+    "options": ["Increase tension", "Reduce tensile stress", "Increase cracks", "Reduce durability"],
+    "correct": "Reduce tensile stress",
+    "explanation": "Prestressing counteracts tensile forces."
+  },
+  {
+    "question": "Prestressing is achieved by:",
+    "options": ["Applying load", "Introducing compressive stress", "Reducing reinforcement", "Increasing water"],
+    "correct": "Introducing compressive stress",
+    "explanation": "Compressive stress neutralizes tension."
+  },
+  {
+    "question": "Pre-tensioning is done:",
+    "options": ["After concrete hardens", "Before concrete casting", "During curing", "After service load"],
+    "correct": "Before concrete casting",
+    "explanation": "Tendons are stressed before casting."
+  },
+  {
+    "question": "Post-tensioning is done:",
+    "options": ["Before concreting", "After concrete gains strength", "Before curing", "Without tendons"],
+    "correct": "After concrete gains strength",
+    "explanation": "Tendons are stressed after hardening."
+  },
+  {
+    "question": "Prestressed concrete is most suitable for:",
+    "options": ["Short spans", "Long spans", "Masonry", "Foundations only"],
+    "correct": "Long spans",
+    "explanation": "Reduces deflection and cracking."
+  }
+]
