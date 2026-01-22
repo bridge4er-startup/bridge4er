@@ -1,0 +1,57 @@
+<section id="subjective" class="section">
+    <h2 class="section-title" id="subjective-heading">
+        <i class="fas fa-edit"></i> Subjective Questions
+        <span class="field-indicator" id="subjective-field-indicator">
+            <i class="fas fa-building"></i> Civil
+        </span>
+    </h2>
+    <p>Select a subject to read subjective questions and answers.</p>
+    
+    <div class="subject-selection">
+        <h3>Choose a Subject:</h3>
+        <div class="loading" id="subjective-loading">
+            <div class="spinner"></div>
+            <p>Loading subjects...</p>
+        </div>
+        <div class="subject-grid" id="subjective-set-grid" style="display: none;"></div>
+    </div>
+    
+    <!-- Subjective Reader Interface -->
+    <div id="subjective-reader" style="display: none;">
+        <div class="reader-controls">
+            <div class="zoom-controls">
+                <button id="zoom-out"><i class="fas fa-search-minus"></i></button>
+                <span id="zoom-level">100%</span>
+                <button id="zoom-in"><i class="fas fa-search-plus"></i></button>
+                <button id="reset-zoom"><i class="fas fa-sync-alt"></i></button>
+            </div>
+            <div>
+                <button class="btn btn-secondary keyboard-nav" id="prev-page-subjective"><i class="fas fa-chevron-left"></i> Previous</button>
+                <span style="margin: 0 1rem;">Page <span id="current-page-subjective">1</span> of <span id="total-pages-subjective">1</span></span>
+                <button class="btn btn-secondary keyboard-nav" id="next-page-subjective">Next <i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div>
+                <button class="btn btn-primary keyboard-nav" id="back-to-subjective-sets"><i class="fas fa-arrow-left"></i> Back to Subjects</button>
+            </div>
+        </div>
+        
+        <div class="reader-container">
+            <div class="reader-content" id="subjective-content" style="font-size: 1rem;">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="demo-note">
+            <i class="fas fa-info-circle" aria-hidden="true"></i> This is a read-only interface. Downloading is disabled for copyright protection.
+        </div>
+    </div>
+    
+    <!-- Chapter Selection for Subjective -->
+    <div id="subjective-chapter-selection" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h3 id="subjective-chapter-title">Select Chapter</h3>
+            <button class="btn btn-secondary keyboard-nav" id="back-to-subjective-subjects"><i class="fas fa-arrow-left"></i> Back to Subjects</button>
+        </div>
+        <div class="subject-grid" id="subjective-chapter-grid"></div>
+    </div>
+</section>
