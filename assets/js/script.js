@@ -1126,6 +1126,619 @@ async function viewSubjectiveContent(subject, chapter, fileName) {
 }
 
 // ==============================================
+// ENHANCED SUBJECTIVE LIBRARY FUNCTIONS
+// ==============================================
+
+// Color palette for book covers
+const BOOK_COLORS = [
+    { bg: 'linear-gradient(45deg, #1a237e, #283593)', text: '#ffffff' },
+    { bg: 'linear-gradient(45deg, #b71c1c, #d32f2f)', text: '#ffffff' },
+    { bg: 'linear-gradient(45deg, #1b5e20, #388e3c)', text: '#ffffff' },
+    { bg: 'linear-gradient(45deg, #f57c00, #ff9800)', text: '#ffffff' },
+    { bg: 'linear-gradient(45deg, #6a1b9a, #8e24aa)', text: '#ffffff' },
+    { bg: 'linear-gradient(45deg, #006064, #00838f)', text: '#ffffff' },
+    { bg: 'linear-gradient(45deg, #4a148c, #7b1fa2)', text: '#ffffff' },
+    { bg: 'linear-gradient(45deg, #004d40, #00796b)', text: '#ffffff' }
+];
+
+// State for image gallery
+let imageGalleryState = {
+    currentImageIndex: 0,
+    imageUrls: [],
+    totalImages: 0
+};
+
+async function renderBookshelf() {
+    const subjects = await loadSubjectiveSubjects();
+    
+    if (subjects.length === 0) {
+        document.getElementById('subjective-loading').innerHTML = 
+            '<div style="text-align: center; padding: 3rem;"><p>No books available in the library.</p></div>';
+        return;
+    }
+    
+    // Hide loading, show bookshelf
+    hideLoading(DOM.loading.subjective);
+    showContent(document.getElementById('bookshelf-view'));
+    
+    // Get all books from all subjects
+    const allBooks = [];
+    
+    // Load books from each subject
+    for (const subject of subjects) {
+        const chapters = await loadSubjectiveChapters(subject);
+        
+        chapters.forEach((chapter, index) => {
+            const colorIndex = index % BOOK_COLORS.length;
+            allBooks.push({
+                ...chapter,
+                subject,
+                color: BOOK_COLORS[colorIndex],
+                id: `${subject}_${chapter.name}_${index}`
+            });
+        });
+    }
+    
+    // Render bookshelf
+    const bookshelfGrid = document.getElementById('bookshelf-grid');
+    
+    if (allBooks.length === 0) {
+        bookshelfGrid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                <i class="fas fa-book fa-3x" style="color: #ddd; margin-bottom: 1rem;"></i>
+                <p>No books found in the library.</p>
+            </div>
+        `;
+        return;
+    }
+    
+    // Sort books by name
+    allBooks.sort((a, b) => a.name.localeCompare(b.name));
+    
+    // Render book cards
+    bookshelfGrid.innerHTML = allBooks.map(book => {
+        const fileName = book.fileName;
+        const fileExt = book.extension;
+        const bookAbbr = book.name.split(' ')
+            .filter(word => word.length > 0)
+            .map(word => word[0].toUpperCase())
+            .slice(0, 3)
+            .join('');
+        
+        return `
+            <div class="book-card" 
+                 data-book-id="${book.id}"
+                 data-subject="${book.subject}"
+                 data-chapter="${book.name}"
+                 data-filename="${fileName}"
+                 data-extension="${fileExt}">
+                <div class="book-cover" style="background: ${book.color.bg}; color: ${book.color.text};">
+                    ${bookAbbr}
+                </div>
+                <div class="book-info">
+                    <div class="book-title">${book.name}</div>
+                    <div class="book-subtitle">${book.subject}</div>
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    // Add click event listeners to books
+    bookshelfGrid.querySelectorAll('.book-card').forEach(bookCard => {
+        bookCard.addEventListener('click', () => {
+            const subject = bookCard.dataset.subject;
+            const chapter = bookCard.dataset.chapter;
+            const fileName = bookCard.dataset.filename;
+            const fileExt = bookCard.dataset.extension;
+            
+            openBookReader(subject, chapter, fileName, fileExt);
+        });
+    });
+}
+
+async function openBookReader(subject, chapter, fileName, fileExt) {
+    const field = AppState.currentField;
+    const filePath = `${FIELD_CONFIG[field].folderPrefix}Subjective/${subject}/${fileName}`;
+    const fileUrl = getRawFileUrl(filePath);
+    
+    // Hide bookshelf, show reader
+    document.getElementById('bookshelf-view').style.display = 'none';
+    document.getElementById('book-reader').style.display = 'block';
+    
+    // Update reader header
+    document.getElementById('reader-book-title').textContent = chapter;
+    document.getElementById('reader-book-meta').textContent = 
+        `${subject} • ${fileExt.toUpperCase()} • ${await getFileSize(filePath)}`;
+    
+    // Hide all content containers first
+    document.getElementById('pdf-viewer').style.display = 'none';
+    document.getElementById('image-gallery').style.display = 'none';
+    document.getElementById('file-options').style.display = 'none';
+    
+    // Handle different file types
+    if (fileExt === 'pdf') {
+        // PDF Viewer
+        document.getElementById('pdf-viewer').style.display = 'block';
+        document.getElementById('pdf-frame').src = fileUrl;
+    } else if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExt)) {
+        // Image Viewer
+        document.getElementById('image-gallery').style.display = 'block';
+        
+        // Check if there are multiple images in the same folder
+        const allImages = await getFolderImages(subject, fileName);
+        
+        if (allImages.length > 1) {
+            // Multiple images - show gallery
+            imageGalleryState = {
+                currentImageIndex: allImages.findIndex(img => img.fileName === fileName),
+                imageUrls: allImages.map(img => getRawFileUrl(img.path)),
+                totalImages: allImages.length
+            };
+            
+            document.getElementById('multiple-images').style.display = 'block';
+            document.getElementById('book-image').style.display = 'none';
+            updateImageGallery();
+        } else {
+            // Single image
+            document.getElementById('multiple-images').style.display = 'none';
+            document.getElementById('book-image').style.display = 'block';
+            document.getElementById('book-image').src = fileUrl;
+        }
+    } else {
+        // Other file types - show download option
+        document.getElementById('file-options').style.display = 'block';
+        document.getElementById('file-preview').innerHTML = `
+            <i class="fas fa-file-${getFileIconClass(fileExt)} fa-5x" style="color: var(--primary-color);"></i>
+            <h4 style="margin-top: 1rem;">${chapter}</h4>
+            <p>This is a ${fileExt.toUpperCase()} file. Download to view.</p>
+        `;
+        
+        // Set up download button
+        document.getElementById('download-file-btn').onclick = () => downloadFile(fileUrl, fileName);
+    }
+}
+
+async function getFileSize(filePath) {
+    try {
+        const apiUrl = getGitHubApiUrl(filePath);
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        return formatFileSize(data.size || 0);
+    } catch (error) {
+        return 'Unknown size';
+    }
+}
+
+async function getFolderImages(subject, currentFileName) {
+    const field = AppState.currentField;
+    const folderPath = `${FIELD_CONFIG[field].folderPrefix}Subjective/${subject}`;
+    
+    try {
+        const files = await listFilesFromGitHub(folderPath);
+        const imageFiles = files.filter(file => {
+            const ext = file.name.split('.').pop().toLowerCase();
+            return ['jpg', 'jpeg', 'png', 'gif'].includes(ext);
+        }).sort((a, b) => a.name.localeCompare(b.name));
+        
+        return imageFiles;
+    } catch (error) {
+        return [];
+    }
+}
+
+function updateImageGallery() {
+    const state = imageGalleryState;
+    if (state.totalImages === 0) return;
+    
+    document.getElementById('current-image').src = state.imageUrls[state.currentImageIndex];
+    document.getElementById('current-image-num').textContent = state.currentImageIndex + 1;
+    document.getElementById('total-images').textContent = state.totalImages;
+    
+    // Update button states
+    document.getElementById('prev-image').disabled = state.currentImageIndex === 0;
+    document.getElementById('next-image').disabled = state.currentImageIndex === state.totalImages - 1;
+}
+
+// Initialize enhanced subjective section
+async function initEnhancedSubjective() {
+    // Replace original subjective loading
+    await renderBookshelf();
+    
+    // Setup event listeners
+    setupBookReaderEvents();
+}
+
+function setupBookReaderEvents() {
+    // Close reader button
+    document.getElementById('close-reader')?.addEventListener('click', () => {
+        document.getElementById('book-reader').style.display = 'none';
+        document.getElementById('bookshelf-view').style.display = 'block';
+    });
+    
+    // Back to library button
+    document.getElementById('back-to-library')?.addEventListener('click', () => {
+        document.getElementById('book-reader').style.display = 'none';
+        document.getElementById('bookshelf-view').style.display = 'block';
+    });
+    
+    // Image gallery navigation
+    document.getElementById('prev-image')?.addEventListener('click', () => {
+        if (imageGalleryState.currentImageIndex > 0) {
+            imageGalleryState.currentImageIndex--;
+            updateImageGallery();
+        }
+    });
+    
+    document.getElementById('next-image')?.addEventListener('click', () => {
+        if (imageGalleryState.currentImageIndex < imageGalleryState.totalImages - 1) {
+            imageGalleryState.currentImageIndex++;
+            updateImageGallery();
+        }
+    });
+    
+    // Keyboard navigation for image gallery
+    document.addEventListener('keydown', (e) => {
+        const readerVisible = document.getElementById('book-reader').style.display === 'block';
+        if (!readerVisible) return;
+        
+        if (e.key === 'ArrowLeft' && imageGalleryState.currentImageIndex > 0) {
+            imageGalleryState.currentImageIndex--;
+            updateImageGallery();
+            e.preventDefault();
+        } else if (e.key === 'ArrowRight' && imageGalleryState.currentImageIndex < imageGalleryState.totalImages - 1) {
+            imageGalleryState.currentImageIndex++;
+            updateImageGallery();
+            e.preventDefault();
+        } else if (e.key === 'Escape') {
+            document.getElementById('book-reader').style.display = 'none';
+            document.getElementById('bookshelf-view').style.display = 'block';
+        }
+    });
+}
+
+// ==============================================
+// PROFESSIONAL CATEGORIZED LIBRARY FUNCTIONS
+// ==============================================
+
+// Subject icons and colors (keep as before)
+const SUBJECT_ICONS = {
+    'Structure': 'fa-building',
+    'Geotech': 'fa-mountain',
+    'Hydropower': 'fa-water',
+    'Highway': 'fa-road',
+    'Surveying': 'fa-ruler-combined',
+    'Concrete': 'fa-cube',
+    'Steel': 'fa-industry',
+    'Thermodynamics': 'fa-fire',
+    'Fluid Mechanics': 'fa-tint',
+    'Heat Transfer': 'fa-thermometer-half',
+    'Machine Design': 'fa-cogs',
+    'Manufacturing': 'fa-industry',
+    'Circuit Theory': 'fa-bolt',
+    'Power Systems': 'fa-plug',
+    'Control Systems': 'fa-sliders-h',
+    'Electrical Machines': 'fa-cog',
+    'Power Electronics': 'fa-microchip',
+    'Analog Electronics': 'fa-wave-square',
+    'Digital Electronics': 'fa-microchip',
+    'VLSI Design': 'fa-microchip',
+    'Communication Systems': 'fa-satellite',
+    'Embedded Systems': 'fa-microchip',
+    'Programming': 'fa-code',
+    'Data Structures': 'fa-sitemap',
+    'Algorithms': 'fa-project-diagram',
+    'Database Systems': 'fa-database',
+    'Computer Networks': 'fa-network-wired'
+};
+
+const SUBJECT_COLORS = {
+    'Structure': '#030200',
+    'Geotech': '#8B4513',
+    'Hydropower': '#1e90ff',
+    'Highway': '#655f58',
+    'Surveying': '#32cd32',
+    'Concrete': '#808080',
+    'Steel': '#4682b4',
+    'Thermodynamics': '#ff4500',
+    'Fluid Mechanics': '#00bfff',
+    'Heat Transfer': '#ff6347',
+    'Machine Design': '#4169e1',
+    'Manufacturing': '#696969',
+    'Circuit Theory': '#ffd700',
+    'Power Systems': '#ff8c00',
+    'Control Systems': '#9acd32',
+    'Electrical Machines': '#6495ed',
+    'Power Electronics': '#da70d6',
+    'Analog Electronics': '#9370db',
+    'Digital Electronics': '#ba55d3',
+    'VLSI Design': '#8a2be2',
+    'Communication Systems': '#20b2aa',
+    'Embedded Systems': '#3cb371',
+    'Programming': '#00ced1',
+    'Data Structures': '#66cdaa',
+    'Algorithms': '#48d1cc',
+    'Database Systems': '#7b68ee',
+    'Computer Networks': '#5f9ea0'
+};
+
+async function renderSubjectCategories() {
+    const subjects = await loadSubjectiveSubjects();
+    
+    if (subjects.length === 0) {
+        document.getElementById('subjective-loading').innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-folder-open"></i>
+                <h4>No Subjects Available</h4>
+                <p>Add subjects to your GitHub repository to get started.</p>
+            </div>
+        `;
+        return;
+    }
+    
+    // Hide loading, show categories
+    hideLoading(DOM.loading.subjective);
+    showContent(document.getElementById('subject-categories-view'));
+    
+    const categoriesContainer = document.getElementById('categories-container');
+    
+    // Create category grid
+    let categoriesHTML = '<div class="category-grid-modern">';
+    
+    for (const subject of subjects) {
+        const books = await loadSubjectiveChapters(subject);
+        const bookCount = books.length;
+        const subjectIcon = SUBJECT_ICONS[subject] || 'fa-book';
+        const subjectColor = SUBJECT_COLORS[subject] || '#1a5f7a';
+        
+        categoriesHTML += `
+            <div class="subject-card-modern" data-subject="${subject}">
+                <div class="subject-header-modern">
+                    <div class="subject-icon-circle" style="background: ${subjectColor};">
+                        <i class="fas ${subjectIcon}"></i>
+                    </div>
+                    <div>
+                        <h3 style="color: ${subjectColor}; margin: 0 0 5px 0;">${subject}</h3>
+                        <span style="font-size: 0.9rem; color: #666;">${bookCount} document${bookCount !== 1 ? 's' : ''}</span>
+                    </div>
+                </div>
+                
+                <div class="chapter-list-modern">
+                    ${books.slice(0, 4).map(book => `
+                        <div class="chapter-item-modern" 
+                             data-subject="${subject}" 
+                             data-book="${book.name}" 
+                             data-filename="${book.fileName}">
+                            <i class="fas fa-file-alt chapter-icon-modern"></i>
+                            <span class="chapter-text">${book.name}</span>
+                            <small style="color: #999; font-size: 0.8rem;">${book.extension.toUpperCase()}</small>
+                        </div>
+                    `).join('')}
+                    
+                    ${bookCount > 4 ? `
+                        <div class="chapter-item-modern" style="color: #999; font-style: italic;">
+                            <i class="fas fa-ellipsis-h chapter-icon-modern"></i>
+                            <span class="chapter-text">View ${bookCount - 4} more documents</span>
+                        </div>
+                    ` : ''}
+                    
+                    ${bookCount === 0 ? `
+                        <div class="chapter-item-modern" style="color: #ccc; font-style: italic;">
+                            <i class="fas fa-folder-open chapter-icon-modern"></i>
+                            <span class="chapter-text">No documents yet</span>
+                        </div>
+                    ` : ''}
+                </div>
+                
+                <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;" 
+                        data-subject="${subject}">
+                    <i class="fas fa-book-open"></i> Open ${subject}
+                </button>
+            </div>
+        `;
+    }
+    
+    categoriesHTML += '</div>';
+    categoriesContainer.innerHTML = categoriesHTML;
+    
+    // Add event listeners
+    setupCategoryEvents();
+}
+
+function setupCategoryEvents() {
+    // Open Subject buttons
+    document.querySelectorAll('.subject-card-modern .btn-primary').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const subject = e.target.dataset.subject || e.target.closest('[data-subject]').dataset.subject;
+            openSubjectBooks(subject);
+        });
+    });
+    
+    // Individual chapter items
+    document.querySelectorAll('.chapter-item-modern').forEach(item => {
+        item.addEventListener('click', (e) => {
+            const subject = item.dataset.subject;
+            const bookName = item.dataset.book;
+            const fileName = item.dataset.filename;
+            
+            if (bookName && fileName) {
+                const fileExt = fileName.split('.').pop().toLowerCase();
+                openBookReader(subject, bookName, fileName, fileExt);
+            }
+        });
+    });
+}
+
+async function openSubjectBooks(subject) {
+    // Show loading
+    document.getElementById('subject-categories-view').style.display = 'none';
+    document.getElementById('subject-books-view').style.display = 'block';
+    
+    // Update subject header
+    const subjectIcon = SUBJECT_ICONS[subject] || 'fa-book';
+    const subjectColor = SUBJECT_COLORS[subject] || '#1a5f7a';
+    
+    document.getElementById('subject-header-icon').innerHTML = `<i class="fas ${subjectIcon}"></i>`;
+    document.getElementById('subject-header-icon').style.background = subjectColor;
+    document.getElementById('current-subject-title').textContent = subject;
+    document.getElementById('current-subject-title').style.color = subjectColor;
+    
+    // Load books for this subject
+    const books = await loadSubjectiveChapters(subject);
+    document.getElementById('subject-book-count').textContent = `${books.length} document${books.length !== 1 ? 's' : ''}`;
+    
+    // Render books
+    renderSubjectBooks(subject, books);
+}
+
+function renderSubjectBooks(subject, books) {
+    const booksGrid = document.getElementById('subject-books-grid');
+    
+    if (books.length === 0) {
+        booksGrid.innerHTML = `
+            <div class="empty-state" style="grid-column: 1 / -1;">
+                <i class="fas fa-book"></i>
+                <h4>No Documents Available</h4>
+                <p>This subject doesn't have any documents yet.</p>
+            </div>
+        `;
+        return;
+    }
+    
+    // Color palette for book covers
+    const bookColors = [
+        'linear-gradient(135deg, #93e361, #2a7a9c)',
+        'linear-gradient(135deg, #57cc99, #3fa67a)',
+        'linear-gradient(135deg, #ff6b6b, #ff5252)',
+        'linear-gradient(135deg, #6a11cb, #2575fc)',
+        'linear-gradient(135deg, #f093fb, #f5576c)',
+        'linear-gradient(135deg, #4facfe, #00f2fe)',
+        'linear-gradient(135deg, #43e97b, #38f9d7)',
+        'linear-gradient(135deg, #fa709a, #fee140)'
+    ];
+    
+    booksGrid.innerHTML = books.map((book, index) => {
+        const fileName = book.fileName;
+        const fileExt = book.extension;
+        const colorIndex = index % bookColors.length;
+        const bookAbbr = book.name.split(' ')
+            .filter(word => word.length > 0)
+            .map(word => word[0].toUpperCase())
+            .slice(0, 3)
+            .join('');
+        
+        return `
+            <div class="book-modern" 
+                 data-subject="${subject}"
+                 data-chapter="${book.name}"
+                 data-filename="${fileName}"
+                 data-extension="${fileExt}">
+                <div class="book-cover-modern" style="background: ${bookColors[colorIndex]}">
+                    ${bookAbbr}
+                </div>
+                <div class="book-info-modern">
+                    <div class="book-title-modern">${book.name}</div>
+                    <div class="book-subtitle-modern">${fileExt.toUpperCase()} • ${subject}</div>
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    // Add click events to books
+    booksGrid.querySelectorAll('.book-modern').forEach(bookCard => {
+        bookCard.addEventListener('click', () => {
+            const subject = bookCard.dataset.subject;
+            const chapter = bookCard.dataset.chapter;
+            const fileName = bookCard.dataset.filename;
+            const fileExt = bookCard.dataset.extension;
+            
+            openBookReader(subject, chapter, fileName, fileExt);
+        });
+    });
+}
+
+async function openBookReader(subject, chapter, fileName, fileExt) {
+    const field = AppState.currentField;
+    const filePath = `${FIELD_CONFIG[field].folderPrefix}Subjective/${subject}/${fileName}`;
+    const fileUrl = getRawFileUrl(filePath);
+    
+    // Hide subject books view, show reader
+    document.getElementById('subject-books-view').style.display = 'none';
+    document.getElementById('book-reader').style.display = 'block';
+    
+    // Update reader header
+    document.getElementById('reader-book-title').textContent = chapter;
+    document.getElementById('meta-subject').textContent = subject;
+    document.getElementById('meta-format').textContent = fileExt.toUpperCase();
+    document.getElementById('meta-size').textContent = await getFileSize(filePath);
+    
+    // Hide all content containers first
+    document.getElementById('pdf-viewer').style.display = 'none';
+    document.getElementById('image-gallery').style.display = 'none';
+    document.getElementById('file-options').style.display = 'none';
+    document.getElementById('single-image').style.display = 'none';
+    document.getElementById('multiple-images').style.display = 'none';
+    document.getElementById('file-title').textContent = chapter;
+    
+    // Handle different file types
+    if (fileExt === 'pdf') {
+        // PDF Viewer
+        document.getElementById('pdf-viewer').style.display = 'block';
+        document.getElementById('pdf-frame').src = fileUrl;
+    } else if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExt)) {
+        // Image Viewer
+        document.getElementById('image-gallery').style.display = 'block';
+        
+        // Check if there are multiple images in the same folder
+        const allImages = await getFolderImages(subject, fileName);
+        
+        if (allImages.length > 1) {
+            // Multiple images - show gallery
+            imageGalleryState = {
+                currentImageIndex: allImages.findIndex(img => img.fileName === fileName),
+                imageUrls: allImages.map(img => getRawFileUrl(img.path)),
+                totalImages: allImages.length
+            };
+            
+            document.getElementById('multiple-images').style.display = 'block';
+            updateImageGallery();
+        } else {
+            // Single image
+            document.getElementById('single-image').style.display = 'block';
+            document.getElementById('book-image').src = fileUrl;
+        }
+    } else {
+        // Other file types - show download option
+        document.getElementById('file-options').style.display = 'block';
+        document.getElementById('file-preview').innerHTML = `
+            <i class="fas fa-file-${getFileIconClass(fileExt)} fa-5x" style="color: var(--primary-color); margin-bottom: 1.5rem;"></i>
+            <h4 style="color: var(--dark-color); margin-bottom: 0.5rem;">${chapter}</h4>
+            <p style="color: #666;">This ${fileExt.toUpperCase()} file requires download to view.</p>
+        `;
+        
+        // Set up download button
+        document.getElementById('download-file-btn').onclick = () => downloadFile(fileUrl, fileName);
+    }
+}
+
+// Update initialization function
+async function initEnhancedSubjective() {
+    await renderSubjectCategories();
+    setupBookReaderEvents();
+    
+    // Add back button events
+    document.getElementById('back-to-categories')?.addEventListener('click', () => {
+        document.getElementById('subject-books-view').style.display = 'none';
+        document.getElementById('subject-categories-view').style.display = 'block';
+    });
+    
+    document.getElementById('back-to-subject-books')?.addEventListener('click', () => {
+        document.getElementById('book-reader').style.display = 'none';
+        document.getElementById('subject-books-view').style.display = 'block';
+    });
+}
+
+
+// ==============================================
 // EXAM FUNCTIONS
 // ==============================================
 
@@ -1654,7 +2267,7 @@ function loadField(field) {
     loadSyllabusFiles();
     loadOldQuestionFiles();
     loadMCQSubjects();
-    renderSubjectiveSets();
+    initEnhancedSubjective();
     
     resetPracticeSessions();
 }
