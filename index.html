@@ -263,6 +263,53 @@
             margin-left: 10px;
         }
 
+
+        /* Search Functionality */
+        .search-container {
+            margin: 1.5rem 0;
+            max-width: 500px;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 2px solid #eee;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .search-box input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 95, 122, 0.1);
+        }
+
+        .search-box button {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .search-box button:hover {
+            background-color: #144d63;
+        }
+
+        .search-results-info {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
         /* File List */
         .file-list {
             list-style: none;
@@ -853,6 +900,17 @@
             </h2>
             <p>All notices are displayed in chronological order (newest first).</p>
             
+             <!-- Search Box -->
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="notice-search" placeholder="Search notices...">
+                    <button id="notice-search-btn">
+                        <i class="fas fa-search" ></i> Search
+                    </button>
+                </div>
+                <div class="search-results-info" id="notice-results-info"></div>
+            </div>
+                     
             <div class="loading" id="notice-loading">
                 <div class="spinner"></div>
                 <p>Loading notices...</p>
@@ -871,6 +929,17 @@
             </h2>
             <p>Access all course syllabi. You can open and download any syllabus file.</p>
             
+            <!-- Search Box -->
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="syllabus-search" placeholder="Search syllabus...">
+                    <button id="syllabus-search-btn">
+                        <i class="fas fa-search" ></i> Search
+                    </button>
+                </div>
+                <div class="search-results-info" id="syllabus-results-info"></div>
+            </div>
+
             <div class="loading" id="syllabus-loading">
                 <div class="spinner"></div>
                 <p>Loading syllabus...</p>
@@ -889,6 +958,17 @@
             </h2>
             <p>Previous exam questions organized in chronological order (newest first).</p>
             
+            <!-- Search Box -->
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="old-questions-search" placeholder="Search old questions...">
+                    <button id="old-questions-search-btn">
+                        <i class="fas fa-search" ></i> Search
+                    </button>
+                </div>
+                <div class="search-results-info" id="old-questions-results-info"></div>
+            </div>
+
             <div class="loading" id="old-questions-loading">
                 <div class="spinner"></div>
                 <p>Loading old questions...</p>
@@ -973,12 +1053,12 @@
             </div>
         </section>
 
-        <!-- Subjective Section -->
-        <section id="subjective" class="section">
-            <h2 class="section-title">
-                <i class="fas fa-edit"></i> Subjective Questions
+       <!-- Subjective Section -->
+        <section id="subjective" class="section" >
+            <h2 class="section-title" id="subjective-heading">
+                <i class="fas fa-edit" ></i> Subjective Questions
                 <span class="field-indicator" id="subjective-field-indicator">
-                    <i class="fas fa-building"></i> Civil
+                    <i class="fas fa-building" ></i> Civil
                 </span>
             </h2>
             <p>Select a subject to read subjective questions and answers.</p>
@@ -986,26 +1066,39 @@
             <div class="subject-selection">
                 <h3>Choose a Subject:</h3>
                 <div class="loading" id="subjective-loading">
-                    <div class="spinner"></div>
+                    <div class="spinner" ></div>
                     <p>Loading subjects...</p>
                 </div>
-                <div class="subject-grid" id="subjective-set-grid" style="display: none;"></div>
+                <div class="subject-grid" id="subjective-set-grid" style="display: none;" ></div>
             </div>
             
-            <!-- Subjective Content Area -->
-            <div id="subjective-content" style="display: none;">
-                <div class="subjective-header">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                        <h3 id="subjective-set-title">Subjective Questions</h3>
-                        <button class="btn btn-secondary" id="back-to-subjective-sets"><i class="fas fa-arrow-left"></i> Back to Subjects</button>
+            <!-- Subjective Reader Interface -->
+            <div id="subjective-reader" style="display: none;">
+                <div class="reader-controls">
+                    <div class="zoom-controls">
+                        <button id="zoom-out"><i class="fas fa-search-minus" ></i></button>
+                        <span id="zoom-level">100%</span>
+                        <button id="zoom-in" ><i class="fas fa-search-plus" ></i></button>
+                        <button id="reset-zoom"><i class="fas fa-sync-alt"></i></button>
                     </div>
-                    <div style="background-color: #fff3cd; padding: 1rem; border-radius: var(--border-radius); margin-bottom: 1rem;">
-                        <p><i class="fas fa-info-circle"></i> You can read the content below but downloading is disabled for copyright protection.</p>
+                    <div>
+                        <button class="btn btn-secondary keyboard-nav" id="prev-page-subjective" ><i class="fas fa-chevron-left"></i> Previous</button>
+                        <span style="margin: 0 1rem;">Page <span id="current-page-subjective">1</span> of <span id="total-pages-subjective">1</span></span>
+                        <button class="btn btn-secondary keyboard-nav" id="next-page-subjective">Next <i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary keyboard-nav" id="back-to-subjective-sets"><i class="fas fa-arrow-left"></i> Back to Subjects</button>
                     </div>
                 </div>
                 
-                <div class="subjective-content" id="subjective-questions-container">
-                    <!-- Questions will be populated by JavaScript -->
+                <div class="reader-container">
+                    <div class="reader-content" id="subjective-content" style="font-size: 1rem;">
+                        <!-- Content will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="demo-note">
+                    <i class="fas fa-info-circle" aria-hidden="true"></i> This is a read-only interface. Downloading is disabled for copyright protection.
                 </div>
             </div>
             
@@ -1013,9 +1106,9 @@
             <div id="subjective-chapter-selection" style="display: none;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                     <h3 id="subjective-chapter-title">Select Chapter</h3>
-                    <button class="btn btn-secondary" id="back-to-subjective-subjects"><i class="fas fa-arrow-left"></i> Back to Subjects</button>
+                    <button class="btn btn-secondary keyboard-nav" id="back-to-subjective-subjects"><i class="fas fa-arrow-left" ></i> Back to Subjects</button>
                 </div>
-                <div class="subject-grid" id="subjective-chapter-grid"></div>
+                <div class="subject-grid" id="subjective-chapter-grid" ></div>
             </div>
         </section>
 
@@ -1295,6 +1388,11 @@
             timers: {
                 subjectiveExam: null,
                 mcqExam: null
+            },
+            searchState: {
+                notice: '',
+                syllabus: '',
+                oldQuestions: ''
             }
         };
 
@@ -1505,6 +1603,106 @@
         function showContent(element) {
             if (element) element.style.display = 'block';
         }
+
+         // ==============================================
+        // SEARCH FUNCTIONALITY
+        // ==============================================
+
+        function setupSearch() {
+            // Notice search
+            const noticeSearch = document.getElementById('notice-search');
+            const noticeSearchBtn = document.getElementById('notice-search-btn');
+            
+            if (noticeSearch && noticeSearchBtn) {
+                noticeSearch.addEventListener('input', function() {
+                    AppState.searchState.notice = this.value.toLowerCase();
+                    filterFileList('notice-list', AppState.searchState.notice);
+                });
+                
+                noticeSearchBtn.addEventListener('click', function() {
+                    filterFileList('notice-list', noticeSearch.value.toLowerCase());
+                });
+                
+                // Also trigger on Enter key
+                noticeSearch.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        filterFileList('notice-list', this.value.toLowerCase());
+                    }
+                });
+            }
+            
+            // Syllabus search
+            const syllabusSearch = document.getElementById('syllabus-search');
+            const syllabusSearchBtn = document.getElementById('syllabus-search-btn');
+            
+            if (syllabusSearch && syllabusSearchBtn) {
+                syllabusSearch.addEventListener('input', function() {
+                    AppState.searchState.syllabus = this.value.toLowerCase();
+                    filterFileList('syllabus-list', AppState.searchState.syllabus);
+                });
+                
+                syllabusSearchBtn.addEventListener('click', function() {
+                    filterFileList('syllabus-list', syllabusSearch.value.toLowerCase());
+                });
+                
+                syllabusSearch.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        filterFileList('syllabus-list', this.value.toLowerCase());
+                    }
+                });
+            }
+            
+            // Old questions search
+            const oldQuestionsSearch = document.getElementById('old-questions-search');
+            const oldQuestionsSearchBtn = document.getElementById('old-questions-search-btn');
+            
+            if (oldQuestionsSearch && oldQuestionsSearchBtn) {
+                oldQuestionsSearch.addEventListener('input', function() {
+                    AppState.searchState.oldQuestions = this.value.toLowerCase();
+                    filterFileList('old-questions-list', AppState.searchState.oldQuestions);
+                });
+                
+                oldQuestionsSearchBtn.addEventListener('click', function() {
+                    filterFileList('old-questions-list', oldQuestionsSearch.value.toLowerCase());
+                });
+                
+                oldQuestionsSearch.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        filterFileList('old-questions-list', this.value.toLowerCase());
+                    }
+                });
+            }
+        }
+
+        function filterFileList(listId, searchTerm) {
+            const list = document.getElementById(listId);
+            if (!list) return;
+            
+            const items = list.getElementsByTagName('li');
+            let visibleCount = 0;
+            
+            for (let item of items) {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(searchTerm) || searchTerm === '') {
+                    item.style.display = '';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            }
+            
+            // Update results info
+            const resultsInfo = document.getElementById(`${listId.replace('-list', '')}-results-info`);
+            if (resultsInfo) {
+                if (searchTerm === '') {
+                    resultsInfo.textContent = `Showing all ${visibleCount} items`;
+                } else {
+                    resultsInfo.textContent = `Found ${visibleCount} items matching "${searchTerm}"`;
+                }
+            }
+        }
+
+
 
         // ==============================================
         // FILE LOADING FUNCTIONS
