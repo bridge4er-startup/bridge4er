@@ -602,8 +602,17 @@ function renderMCQSubjects(subjects) {
     const config = FIELD_CONFIG[AppState.currentField];
     const subjectIcons = {
         'Structure': 'fa-building',
+        'Concrete Technology': 'fa-cube',
+        'Construction Management': 'fa-hard-hat',
+        'Construction Materials': 'fa-truck-loading',
+        'Engineering Drawing': 'fa-drafting-compass',
         'Geotech': 'fa-mountain',
         'Hydropower': 'fa-water',
+        'Engineering Economics': 'fa-dollar-sign',
+        'Estimating and Costing': 'fa-calculator',
+        'GK': 'fa-globe',
+        'IQ': 'fa-brain',
+        'Professional Practices': 'fa-briefcase',
         'Highway': 'fa-road',
         'Surveying': 'fa-ruler-combined',
         'Concrete': 'fa-cube',
