@@ -1,0 +1,27 @@
+<section id="notice" class="section active">
+    <h2 class="section-title">
+        <i class="fas fa-bullhorn"></i> Notice Board
+        <span class="field-indicator" id="notice-field-indicator">
+            <i class="fas fa-building"></i> Civil
+        </span>
+    </h2>
+    <p>All notices are displayed in chronological order (newest first).</p>
+    
+    <!-- Search Box -->
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" id="notice-search" placeholder="Search notices...">
+            <button id="notice-search-btn">
+                <i class="fas fa-search"></i> Search
+            </button>
+        </div>
+        <div class="search-results-info" id="notice-results-info"></div>
+    </div>
+             
+    <div class="loading" id="notice-loading">
+        <div class="spinner"></div>
+        <p>Loading notices...</p>
+    </div>
+    
+    <ul class="file-list" id="notice-list" style="display: none;"></ul>
+</section>
