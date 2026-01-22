@@ -1,56 +1,126 @@
-<section id="subjective" class="section">
+<section id="subjective" class="section professional-background">
     <h2 class="section-title" id="subjective-heading">
-        <i class="fas fa-edit"></i> Subjective Questions
+        <i class="fas fa-graduation-cap"></i> Engineering Library
         <span class="field-indicator" id="subjective-field-indicator">
             <i class="fas fa-building"></i> Civil
         </span>
     </h2>
-    <p>Select a subject to read subjective questions and answers.</p>
+    <p>Browse and study engineering materials organized by subject in our professional digital library.</p>
     
-    <div class="subject-selection">
-        <h3>Choose a Subject:</h3>
-        <div class="loading" id="subjective-loading">
-            <div class="spinner"></div>
-            <p>Loading subjects...</p>
-        </div>
-        <div class="subject-grid" id="subjective-set-grid" style="display: none;"></div>
+    <!-- Loading State -->
+    <div class="loading-modern" id="subjective-loading">
+        <div class="book-loader"></div>
+        <p>Loading library materials...</p>
     </div>
     
-    <!-- Subjective Reader Interface -->
-    <div id="subjective-reader" style="display: none;">
-        <div class="reader-controls">
-            <div class="zoom-controls">
-                <button id="zoom-out"><i class="fas fa-search-minus"></i></button>
-                <span id="zoom-level">100%</span>
-                <button id="zoom-in"><i class="fas fa-search-plus"></i></button>
-                <button id="reset-zoom"><i class="fas fa-sync-alt"></i></button>
+    <!-- Subject Categories View -->
+    <div id="subject-categories-view" style="display: none;">
+        <div class="professional-bookshelf">
+            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-folder-open"></i> Subjects
+            </h3>
+            <div id="categories-container">
+                <!-- Subject categories will be populated here -->
             </div>
-            <div>
-                <button class="btn btn-secondary keyboard-nav" id="prev-page-subjective"><i class="fas fa-chevron-left"></i> Previous</button>
-                <span style="margin: 0 1rem;">Page <span id="current-page-subjective">1</span> of <span id="total-pages-subjective">1</span></span>
-                <button class="btn btn-secondary keyboard-nav" id="next-page-subjective">Next <i class="fas fa-chevron-right"></i></button>
-            </div>
-            <div>
-                <button class="btn btn-primary keyboard-nav" id="back-to-subjective-sets"><i class="fas fa-arrow-left"></i> Back to Subjects</button>
-            </div>
-        </div>
-        
-        <div class="reader-container">
-            <div class="reader-content" id="subjective-content" style="font-size: 1rem;">
-                <!-- Content will be populated by JavaScript -->
-            </div>
-        </div>
-        
-        <div class="demo-note">
-            <i class="fas fa-info-circle" aria-hidden="true"></i> This is a read-only interface. Downloading is disabled for copyright protection.
         </div>
     </div>
     
-    <!-- Chapter Selection for Subjective -->
+    <!-- Books in Subject View -->
+    <div id="subject-books-view" style="display: none;">
+        <div class="professional-bookshelf">
+            <div class="subject-category-pro">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div class="subject-icon-pro" id="subject-header-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div>
+                        <h3 id="current-subject-title">Subject Name</h3>
+                        <small style="opacity: 0.9; font-size: 0.9rem;" id="subject-book-count">0 materials</small>
+                    </div>
+                </div>
+                <button class="back-button-modern" id="back-to-categories">
+                    <i class="fas fa-arrow-left"></i> All Subjects
+                </button>
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <div class="books-grid-modern" id="subject-books-grid">
+                    <!-- Books in this subject will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Book Reader Interface -->
+    <div id="book-reader" style="display: none;">
+        <div class="reader-container-modern">
+            <div class="reader-header-modern">
+                <div>
+                    <h2 class="book-title-main" id="reader-book-title">Document Title</h2>
+                    <div class="book-meta-modern" id="reader-book-meta">
+                        <span class="book-meta-item"><i class="fas fa-book"></i> <span id="meta-subject">Subject</span></span>
+                        <span class="book-meta-item"><i class="fas fa-file"></i> <span id="meta-format">PDF</span></span>
+                        <span class="book-meta-item"><i class="fas fa-weight"></i> <span id="meta-size">2.5 MB</span></span>
+                    </div>
+                </div>
+                <button class="back-button-modern" id="close-reader">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+            
+            <!-- PDF Viewer -->
+            <div id="pdf-viewer" class="pdf-viewer-modern" style="display: none;">
+                <iframe id="pdf-frame" width="100%" height="100%" frameborder="0"></iframe>
+            </div>
+            
+            <!-- Image Gallery -->
+            <div id="image-gallery" class="image-gallery-modern" style="display: none;">
+                <div id="multiple-images" style="display: none;">
+                    <img id="current-image" class="gallery-image" alt="Document Page">
+                    <div class="page-controls-modern">
+                        <button class="btn btn-secondary" id="prev-image">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                        <span class="page-info-modern">Page <span id="current-image-num">1</span> of <span id="total-images">1</span></span>
+                        <button class="btn btn-secondary" id="next-image">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="single-image" style="display: none;">
+                    <img id="book-image" class="gallery-image" alt="Document">
+                </div>
+            </div>
+            
+            <!-- File Download Options -->
+            <div id="file-options" style="text-align: center; padding: 3rem; display: none;">
+                <div id="file-preview">
+                    <i class="fas fa-file-alt fa-5x" style="color: var(--primary-color); margin-bottom: 1.5rem;"></i>
+                    <h4 style="color: var(--dark-color); margin-bottom: 0.5rem;" id="file-title">Document Title</h4>
+                    <p style="color: #666;">This file format requires download to view.</p>
+                </div>
+                <div style="margin-top: 2rem;">
+                    <button class="btn btn-primary" id="download-file-btn" style="padding: 0.8rem 2rem;">
+                        <i class="fas fa-download"></i> Download File
+                    </button>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #f0f0f0;">
+                <button class="back-button-modern" id="back-to-subject-books">
+                    <i class="fas fa-arrow-left"></i> Back to Subject
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Chapter Selection (Original - Keep for compatibility) -->
     <div id="subjective-chapter-selection" style="display: none;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
             <h3 id="subjective-chapter-title">Select Chapter</h3>
-            <button class="btn btn-secondary keyboard-nav" id="back-to-subjective-subjects"><i class="fas fa-arrow-left"></i> Back to Subjects</button>
+            <button class="btn btn-secondary" id="back-to-subjective-subjects">
+                <i class="fas fa-arrow-left"></i> Back to Subjects
+            </button>
         </div>
         <div class="subject-grid" id="subjective-chapter-grid"></div>
     </div>
