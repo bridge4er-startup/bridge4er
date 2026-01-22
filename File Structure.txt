@@ -1,0 +1,19 @@
+project/
+├── index.html
+├── assets/
+│   ├── css/
+│   │   └── styles.css
+│   ├── js/
+│   │   └── script.js
+│   └── data/
+│       └── config.js
+└── components/
+    ├── header.html
+    ├── navigation.html
+    ├── notice-section.html
+    ├── syllabus-section.html
+    ├── old-questions-section.html
+    ├── mcq-section.html
+    ├── subjective-section.html
+    ├── take-exam-section.html
+    └── footer.html
