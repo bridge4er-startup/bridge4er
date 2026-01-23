@@ -16,7 +16,8 @@ const FIELD_CONFIG = {
         color: "#1a5f7a",
         subjects: ["Structure", "Geotech", "Hydropower", "Highway", "Surveying", "Concrete", "Steel"],
         folderPrefix: "Civil Engineering/",
-        subjectiveSets: []
+        subjectiveSets: ["Set A", "Set B", "Set C", "Set D"],
+        mcqSets: ["Set A", "Set B", "Set C", "Set D"]
     },
     mechanical: {
         name: "Mechanical Engineering",
@@ -24,7 +25,8 @@ const FIELD_CONFIG = {
         color: "#e74c3c",
         subjects: ["Thermodynamics", "Fluid Mechanics", "Heat Transfer", "Machine Design", "Manufacturing"],
         folderPrefix: "Mechanical Engineering/",
-        subjectiveSets: []
+        subjectiveSets: ["Set A", "Set B", "Set C", "Set D"],
+        mcqSets: ["Set A", "Set B", "Set C", "Set D"]
     },
     electrical: {
         name: "Electrical Engineering",
@@ -32,7 +34,8 @@ const FIELD_CONFIG = {
         color: "#f39c12",
         subjects: ["Circuit Theory", "Power Systems", "Control Systems", "Electrical Machines", "Power Electronics"],
         folderPrefix: "Electrical Engineering/",
-        subjectiveSets: []
+        subjectiveSets: ["Set A", "Set B", "Set C", "Set D"],
+        mcqSets: ["Set A", "Set B", "Set C", "Set D"]
     },
     electronics: {
         name: "Electronics Engineering",
@@ -40,7 +43,8 @@ const FIELD_CONFIG = {
         color: "#9b59b6",
         subjects: ["Analog Electronics", "Digital Electronics", "VLSI Design", "Communication Systems", "Embedded Systems"],
         folderPrefix: "Electronics Engineering/",
-        subjectiveSets: []
+        subjectiveSets: ["Set A", "Set B", "Set C", "Set D"],
+        mcqSets: ["Set A", "Set B", "Set C", "Set D"]
     },
     computer: {
         name: "Computer Engineering",
@@ -48,6 +52,29 @@ const FIELD_CONFIG = {
         color: "#3498db",
         subjects: ["Programming", "Data Structures", "Algorithms", "Database Systems", "Computer Networks"],
         folderPrefix: "Computer Engineering/",
-        subjectiveSets: []
+        subjectiveSets: ["Set A", "Set B", "Set C", "Set D"],
+        mcqSets: ["Set A", "Set B", "Set C", "Set D"]
     }
 };
+
+// Exam configuration
+const EXAM_CONFIG = {
+    subjective: {
+        folder: "Take Exam/Subjective Exam/",
+        freeSets: 2,
+        price: 100,
+        timer: 3 * 60 * 60 // 3 hours in seconds
+    },
+    mcq: {
+        folder: "Take Exam/Multiple Choice Exam/",
+        freeSets: 2,
+        price: 50,
+        timer: 30 * 60 // 30 minutes in seconds
+    }
+};
+
+// Add to FIELD_CONFIG for each field:
+// Example for civil - add subjectiveSets to each field config
+FIELD_CONFIG.civil.subjectiveSets = ["Set A", "Set B", "Set C", "Set D"];
+FIELD_CONFIG.civil.mcqSets = ["Set A", "Set B", "Set C", "Set D"];
+// Repeat for other fields
