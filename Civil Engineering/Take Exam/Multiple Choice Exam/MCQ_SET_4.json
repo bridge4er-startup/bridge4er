@@ -1,0 +1,357 @@
+[
+  {
+    "question": "This is Set ?",
+    "options": ["1", "2", "3", "4"],
+    "correct": "4",
+    "explanation": " Test File for set 4."
+  },
+  {
+    "question": "The instrument used to measure the consistency of cement paste is:",
+    "options": ["Vicat apparatus", "Le Chatelier apparatus", "Flow table", "Compaction factor apparatus"],
+    "correct": "Vicat apparatus",
+    "explanation": "Vicat apparatus determines standard consistency and setting time of cement."
+  },
+  {
+    "question": "The minimum number of longitudinal bars in a rectangular column is:",
+    "options": ["4", "6", "8", "10"],
+    "correct": "4",
+    "explanation": "IS 456 requires minimum 4 longitudinal bars in rectangular columns for proper confinement."
+  },
+  {
+    "question": "Which type of joint allows movement due to temperature changes?",
+    "options": ["Construction joint", "Expansion joint", "Contraction joint", "Isolation joint"],
+    "correct": "Expansion joint",
+    "explanation": "Expansion joints accommodate thermal expansion and contraction in structures."
+  },
+  {
+    "question": "The maximum water absorption for first class bricks is:",
+    "options": ["10%", "15%", "20%", "25%"],
+    "correct": "20%",
+    "explanation": "First class bricks should have water absorption not more than 20% of dry weight."
+  },
+  {
+    "question": "Which foundation is suitable for black cotton soil?",
+    "options": ["Strip foundation", "Raft foundation", "Under-reamed pile", "Well foundation"],
+    "correct": "Under-reamed pile",
+    "explanation": "Under-reamed piles with bulbous bases are ideal for black cotton soil to resist uplift forces."
+  },
+  {
+    "question": "The maximum allowable slope for cut soil is:",
+    "options": ["1:1", "1:1.5", "1:2", "1:2.5"],
+    "correct": "1:1.5",
+    "explanation": "For stable soil, maximum slope of 1:1.5 (vertical:horizontal) is generally safe for excavations."
+  },
+  {
+    "question": "Which cement property is tested using Le Chatelier apparatus?",
+    "options": ["Fineness", "Consistency", "Soundness", "Setting time"],
+    "correct": "Soundness",
+    "explanation": "Le Chatelier apparatus tests soundness of cement to ensure it doesn't expand excessively after setting."
+  },
+  {
+    "question": "The minimum width of a corridor in a public building is:",
+    "options": ["1.2 m", "1.5 m", "1.8 m", "2.0 m"],
+    "correct": "1.8 m",
+    "correct": "1.5 m",
+    "explanation": "NBC specifies minimum 1.5 m width for corridors in public buildings for evacuation purposes."
+  },
+  {
+    "question": "Which type of roof is most economical for large spans?",
+    "options": ["Flat roof", "Pitched roof", "Shell roof", "Dome roof"],
+    "correct": "Shell roof",
+    "explanation": "Shell roofs are thin curved structures that are highly efficient for large spans with minimal material."
+  },
+  {
+    "question": "The minimum cement content for M25 grade concrete is:",
+    "options": ["300 kg/m³", "320 kg/m³", "340 kg/m³", "360 kg/m³"],
+    "correct": "320 kg/m³",
+    "explanation": "IS 456 specifies minimum cement content of 320 kg/m³ for M25 concrete in moderate exposure."
+  },
+  {
+    "question": "Which type of paint is most suitable for exterior surfaces?",
+    "options": ["Enamel paint", "Emulsion paint", "Cement paint", "Distemper"],
+    "correct": "Cement paint",
+    "explanation": "Cement paint provides good weather resistance and breathability for exterior masonry surfaces."
+  },
+  {
+    "question": "The instrument used to measure the roughness of a road surface is:",
+    "options": ["Bump integrator", "Skid resistance tester", "Profilometer", "Deflectometer"],
+    "correct": "Profilometer",
+    "explanation": "Profilometer measures road surface profile and roughness characteristics."
+  },
+  {
+    "question": "The minimum thickness of damp proof course is:",
+    "options": ["15 mm", "25 mm", "40 mm", "50 mm"],
+    "correct": "25 mm",
+    "explanation": "DPC should have minimum 25 mm thickness to effectively prevent moisture rise."
+  },
+  {
+    "question": "Which type of door is most suitable for bathrooms?",
+    "options": ["Flush door", "Paneled door", "Ledged door", "Battened door"],
+    "correct": "Flush door",
+    "explanation": "Flush doors with waterproof cores are most suitable for bathrooms due to moisture resistance."
+  },
+  {
+    "question": "The maximum spacing of expansion joints in cement concrete roads is:",
+    "options": ["30 m", "45 m", "60 m", "90 m"],
+    "correct": "45 m",
+    "explanation": "Expansion joints in cement concrete roads are typically provided at 30-45 m intervals."
+  },
+  {
+    "question": "Which soil has the highest compressibility?",
+    "options": ["Gravel", "Sand", "Clay", "Silt"],
+    "correct": "Clay",
+    "explanation": "Clay has high compressibility due to its fine particles and high water retention capacity."
+  },
+  {
+    "question": "The minimum curing period for concrete with mineral admixtures is:",
+    "options": ["7 days", "10 days", "14 days", "21 days"],
+    "correct": "10 days",
+    "explanation": "Concrete with mineral admixtures requires minimum 10 days curing for proper hydration."
+  },
+  {
+    "question": "Which type of beam has maximum stiffness?",
+    "options": ["Rectangular beam", "T-beam", "L-beam", "I-beam"],
+    "correct": "I-beam",
+    "explanation": "I-beams have maximum stiffness due to their shape that concentrates material away from neutral axis."
+  },
+  {
+    "question": "The instrument used to measure horizontal distances precisely is:",
+    "options": ["Tape", "Chain", "EDM", "Ranging rod"],
+    "correct": "EDM",
+    "explanation": "Electronic Distance Measurement (EDM) devices provide precise horizontal distance measurements."
+  },
+  {
+    "question": "Which type of foundation is used for bridges?",
+    "options": ["Spread footing", "Well foundation", "Mat foundation", "Pile foundation"],
+    "correct": "Well foundation",
+    "explanation": "Well foundations (caissons) are commonly used for bridge piers in rivers and soft soils."
+  },
+  {
+    "question": "The minimum cover for reinforcement in footings is:",
+    "options": ["40 mm", "50 mm", "75 mm", "100 mm"],
+    "correct": "50 mm",
+    "explanation": "Minimum 50 mm clear cover is required for reinforcement in footings as per IS 456."
+  },
+  {
+    "question": "Which cement is recommended for mass concrete works?",
+    "options": ["OPC", "PPC", "Low heat cement", "Rapid hardening cement"],
+    "correct": "Low heat cement",
+    "explanation": "Low heat cement generates less heat during hydration, preventing thermal cracks in mass concrete."
+  },
+  {
+    "question": "The maximum particle size for coarse aggregate in RCC is:",
+    "options": ["20 mm", "25 mm", "40 mm", "50 mm"],
+    "correct": "20 mm",
+    "explanation": "Maximum 20 mm aggregate size is commonly used for reinforced concrete work."
+  },
+  {
+    "question": "Which type of staircase is most space-efficient?",
+    "options": ["Straight stair", "Dog-legged stair", "Spiral stair", "Circular stair"],
+    "correct": "Spiral stair",
+    "explanation": "Spiral stairs occupy minimum floor space and are suitable where space is limited."
+  },
+  {
+    "question": "The process of improving load bearing capacity of soil is called:",
+    "options": ["Compaction", "Consolidation", "Soil stabilization", "Grouting"],
+    "correct": "Soil stabilization",
+    "explanation": "Soil stabilization involves improving soil properties through mechanical or chemical means."
+  },
+  {
+    "question": "The minimum width of a tread in a residential staircase is:",
+    "options": ["200 mm", "250 mm", "300 mm", "350 mm"],
+    "correct": "250 mm",
+    "explanation": "NBC specifies minimum 250 mm tread width for comfortable stair climbing."
+  },
+  {
+    "question": "Which type of pile is suitable for cohesive soils?",
+    "options": ["End bearing pile", "Friction pile", "Compaction pile", "Sheet pile"],
+    "correct": "Friction pile",
+    "explanation": "Friction piles develop load capacity through skin friction, suitable for cohesive soils."
+  },
+  {
+    "question": "The instrument used to measure the strength of hardened concrete is:",
+    "options": ["Slump cone", "Compression testing machine", "Vicat apparatus", "Le Chatelier apparatus"],
+    "correct": "Compression testing machine",
+    "explanation": "Compression testing machine measures compressive strength of concrete cubes/cylinders."
+  },
+  {
+    "question": "The minimum width of a highway lane in Nepal is:",
+    "options": ["3.0 m", "3.5 m", "3.75 m", "4.0 m"],
+    "correct": "3.5 m",
+    "explanation": "Standard highway lane width in Nepal is 3.5 m for single lanes."
+  },
+  {
+    "question": "Which type of bond has alternate courses of headers and stretchers?",
+    "options": ["English bond", "Flemish bond", "Stretcher bond", "Header bond"],
+    "correct": "English bond",
+    "explanation": "English bond has alternating courses of headers and stretchers for better strength."
+  },
+  {
+    "question": "The maximum permissible chloride content in drinking water for concrete mixing is:",
+    "options": ["200 mg/L", "500 mg/L", "1000 mg/L", "2000 mg/L"],
+    "correct": "500 mg/L",
+    "explanation": "IS 456 limits chloride content to 500 mg/L in mixing water for reinforced concrete."
+  },
+  {
+    "question": "Which type of window provides maximum ventilation?",
+    "options": ["Casement window", "Sliding window", "Pivoted window", "Louvered window"],
+    "correct": "Louvered window",
+    "explanation": "Louvered windows provide maximum ventilation while maintaining privacy and weather protection."
+  },
+  {
+    "question": "The process of compacting soil by removing air voids is called:",
+    "options": ["Consolidation", "Compaction", "Stabilization", "Dewatering"],
+    "correct": "Compaction",
+    "explanation": "Compaction increases soil density by mechanically reducing air voids."
+  },
+  {
+    "question": "The minimum depth of beam for a span of 5m is approximately:",
+    "options": ["300 mm", "400 mm", "500 mm", "600 mm"],
+    "correct": "400 mm",
+    "explanation": "For spans up to 5m, beam depth is typically span/12 to span/15, i.e., 400-500 mm."
+  },
+  {
+    "question": "Which material is most resistant to acid attack?",
+    "options": ["Concrete", "Steel", "Timber", "Glass"],
+    "correct": "Glass",
+    "explanation": "Glass is highly resistant to acid attack compared to other construction materials."
+  },
+  {
+    "question": "The instrument used to measure the viscosity of bitumen is:",
+    "options": ["Penetrometer", "Ductilometer", "Viscometer", "Flash point tester"],
+    "correct": "Viscometer",
+    "explanation": "Viscometer measures the viscosity (flow resistance) of bitumen at specific temperatures."
+  },
+  {
+    "question": "The minimum area of steel in a slab is:",
+    "options": ["0.12% of gross area", "0.15% of gross area", "0.20% of gross area", "0.25% of gross area"],
+    "correct": "0.12% of gross area",
+    "explanation": "IS 456 specifies minimum 0.12% of gross cross-sectional area for mild steel in slabs."
+  },
+  {
+    "question": "Which type of foundation is used for transmission towers?",
+    "options": ["Spread footing", "Raft foundation", "Pile foundation", "Grillage foundation"],
+    "correct": "Grillage foundation",
+    "explanation": "Grillage foundations with steel beams are used for transmission towers to resist uplift forces."
+  },
+  {
+    "question": "The maximum slope for a ramp in a public building is:",
+    "options": ["1:6", "1:8", "1:10", "1:12"],
+    "correct": "1:12",
+    "explanation": "Maximum slope for ramps in public buildings is 1:12 for wheelchair accessibility."
+  },
+  {
+    "question": "Which type of joint is provided in concrete roads to control cracking?",
+    "options": ["Expansion joint", "Contraction joint", "Construction joint", "Warping joint"],
+    "correct": "Contraction joint",
+    "explanation": "Contraction joints are provided in concrete pavements to control cracking due to shrinkage."
+  },
+  {
+    "question": "The minimum number of days for removal of formwork for slabs is:",
+    "options": ["3 days", "7 days", "14 days", "21 days"],
+    "correct": "7 days",
+    "explanation": "Formwork for slabs can generally be removed after 7 days when concrete achieves sufficient strength."
+  },
+  {
+    "question": "Which test determines the toughness of bitumen?",
+    "options": ["Penetration test", "Softening point test", "Ductility test", "Flash point test"],
+    "correct": "Ductility test",
+    "explanation": "Ductility test measures the ability of bitumen to stretch without breaking, indicating toughness."
+  },
+  {
+    "question": "The process of removing water from construction sites is called:",
+    "options": ["Drainage", "Dewatering", "Seepage", "Filtration"],
+    "correct": "Dewatering",
+    "explanation": "Dewatering involves removing groundwater from excavations and construction sites."
+  },
+  {
+    "question": "The minimum thickness of a load bearing wall is:",
+    "options": ["100 mm", "150 mm", "200 mm", "230 mm"],
+    "correct": "200 mm",
+    "explanation": "Minimum 200 mm thickness is required for load bearing brick walls in residential buildings."
+  },
+  {
+    "question": "Which type of paint dries by evaporation of solvent?",
+    "options": ["Oil paint", "Enamel paint", "Emulsion paint", "Cement paint"],
+    "correct": "Enamel paint",
+    "explanation": "Enamel paint dries by evaporation of solvent followed by oxidation of binder."
+  },
+  {
+    "question": "The instrument used to measure verticality of structures is:",
+    "options": ["Theodolite", "Plumb bob", "Level", "Clinometer"],
+    "correct": "Plumb bob",
+    "explanation": "Plumb bob is a simple and accurate tool to check vertical alignment of structures."
+  },
+  {
+    "question": "Which soil has maximum bearing capacity?",
+    "options": ["Soft clay", "Medium sand", "Dense gravel", "Organic soil"],
+    "correct": "Dense gravel",
+    "explanation": "Dense gravel has maximum bearing capacity due to high density and interlocking of particles."
+  },
+  {
+    "question": "The minimum compressive strength of first class brick is:",
+    "options": ["3.5 MPa", "5.0 MPa", "7.5 MPa", "10.5 MPa"],
+    "correct": "10.5 MPa",
+    "explanation": "First class bricks should have minimum compressive strength of 10.5 MPa (105 kg/cm²)."
+  },
+  {
+    "question": "Which type of beam is commonly used in bridge decks?",
+    "options": ["Rectangular beam", "T-beam", "Box beam", "L-beam"],
+    "correct": "Box beam",
+    "explanation": "Box beams provide high torsional stiffness and are commonly used in bridge decks."
+  },
+  {
+    "question": "The process of protecting reinforcement from corrosion is called:",
+    "options": ["Curing", "Compaction", "Passivation", "Galvanization"],
+    "correct": "Passivation",
+    "explanation": "Passivation creates a protective oxide layer on steel surface to prevent corrosion."
+  },
+  {
+    "question": "The minimum height of a parapet wall is:",
+    "options": ["600 mm", "750 mm", "900 mm", "1050 mm"],
+    "correct": "900 mm",
+    "explanation": "Minimum 900 mm parapet height is required for safety on roof edges and balconies."
+  },
+  {
+    "question": "Which cement property is tested using Vicat apparatus?",
+    "options": ["Fineness", "Soundness", "Consistency", "Compressive strength"],
+    "correct": "Consistency",
+    "explanation": "Vicat apparatus determines standard consistency of cement paste for setting time tests."
+  },
+  {
+    "question": "The maximum spacing of bars in a slab should not exceed:",
+    "options": ["2 times slab thickness", "3 times effective depth", "450 mm", "Both 2 and 3"],
+    "correct": "Both 2 and 3",
+    "explanation": "Maximum spacing is lesser of 3d or 450 mm, where d is effective depth of slab."
+  },
+  {
+    "question": "Which type of dam is most economical for wide valleys?",
+    "options": ["Gravity dam", "Arch dam", "Buttress dam", "Embankment dam"],
+    "correct": "Embankment dam",
+    "explanation": "Embankment dams using local earth materials are most economical for wide river valleys."
+  },
+  {
+    "question": "The instrument used to measure the hardness of aggregate is:",
+    "options": ["Los Angeles abrasion machine", "Impact testing machine", "Crushing value apparatus", "Soundness test apparatus"],
+    "correct": "Los Angeles abrasion machine",
+    "explanation": "Los Angeles abrasion test measures hardness and abrasion resistance of aggregates."
+  },
+  {
+    "question": "The minimum cement content for concrete exposed to sea water is:",
+    "options": ["300 kg/m³", "350 kg/m³", "400 kg/m³", "450 kg/m³"],
+    "correct": "400 kg/m³",
+    "explanation": "Minimum 400 kg/m³ cement content is required for concrete exposed to sea water."
+  },
+  {
+    "question": "Which type of pile is driven using a drop hammer?",
+    "options": ["Bored pile", "Driven pile", "Screw pile", "Jacked pile"],
+    "correct": "Driven pile",
+    "explanation": "Driven piles are installed using impact hammers (drop hammers or diesel hammers)."
+  },
+  {
+    "question": "The process of checking levels in construction is called:",
+    "options": ["Surveying", "Setting out", "Levelling", "Alignment"],
+    "correct": "Levelling",
+    "explanation": "Levelling determines relative heights of points to establish correct levels in construction."
+  }
+]
