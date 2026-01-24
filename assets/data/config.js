@@ -57,7 +57,7 @@ const FIELD_CONFIG = {
     }
 };
 
-// Exam configuration
+// In config.js, make sure you have this structure:
 const EXAM_CONFIG = {
     subjective: {
         folder: "Take Exam/Subjective Exam/",
@@ -73,8 +73,15 @@ const EXAM_CONFIG = {
     }
 };
 
-// Add to FIELD_CONFIG for each field:
-// Example for civil - add subjectiveSets to each field config
+// Make sure each field has subjectiveSets and mcqSets:
 FIELD_CONFIG.civil.subjectiveSets = ["Set A", "Set B", "Set C", "Set D"];
 FIELD_CONFIG.civil.mcqSets = ["Set A", "Set B", "Set C", "Set D"];
-// Repeat for other fields
+// Add for other fields too...
+FIELD_CONFIG.mechanical.subjectiveSets = ["Set A", "Set B", "Set C", "Set D"];
+FIELD_CONFIG.mechanical.mcqSets = ["Set A", "Set B", "Set C", "Set D"];
+FIELD_CONFIG.electrical.subjectiveSets = ["Set A", "Set B", "Set C", "Set D"];
+FIELD_CONFIG.electrical.mcqSets = ["Set A", "Set B", "Set C", "Set D"];
+FIELD_CONFIG.electronics.subjectiveSets = ["Set A", "Set B", "Set C", "Set D"];
+FIELD_CONFIG.electronics.mcqSets = ["Set A", "Set B", "Set C", "Set D"];
+FIELD_CONFIG.computer.subjectiveSets = ["Set A", "Set B", "Set C", "Set D"];
+FIELD_CONFIG.computer.mcqSets = ["Set A", "Set B", "Set C", "Set D"];
