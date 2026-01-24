@@ -2056,7 +2056,7 @@ function showMCQExamSetSelection() {
                 });
             });
             
-            document.getElementById('back-to-exam-type-from-set').addEventListener('click', resetExamTypeSelection);
+            document.getElementById('back-to-exam-type-from-mcq-set').addEventListener('click', resetExamTypeSelection);
         }, 100);
     });
 }
