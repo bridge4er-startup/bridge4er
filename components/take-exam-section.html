@@ -9,18 +9,23 @@
     
     <div class="exam-type-selection" id="exam-type-selection">
         <h3>Select Exam Type:</h3>
-        <div style="display: flex; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap;">
-            <div class="subject-card" style="flex: 1; min-width: 250px;" data-exam-type="subjective">
+        <div style="display: flex; gap: 2 rem; margin-top: 1.5 rem; flex-wrap: wrap;">
+            <div class="subject-card" style="flex: 1; min-width: 250 px;" data-exam-type="subjective">
                 <i class="fas fa-edit"></i>
                 <h3>Subjective Exam</h3>
                 <p>3-hour timer, all questions displayed at once</p>
             </div>
-            <div class="subject-card" style="flex: 1; min-width: 250px;" data-exam-type="multiple-choice">
+            <div class="subject-card" style="flex: 1; min-width: 250 px;" data-exam-type="multiple-choice">
                 <i class="fas fa-check-circle"></i>
                 <h3>Multiple Choice Exam</h3>
                 <p>30-minute timer, view answers after submission</p>
             </div>
         </div>
+    </div>
+    
+    <!-- Exam Set Selection (Dynamic Content) -->
+    <div id="exam-set-selection" style="display: none;">
+        <!-- Content will be dynamically added by JavaScript -->
     </div>
     
     <!-- Subjective Exam -->
@@ -42,10 +47,14 @@
         
         <div class="subjective-exam-container" id="subjective-exam-questions">
             <!-- Questions will be populated by JavaScript -->
+            <div class="loading-state">
+                <div class="spinner"></div>
+                <p>Loading exam questions...</p>
+            </div>
         </div>
         
-        <div style="margin-top: 2rem; text-align: center;">
-            <button class="btn btn-primary" id="submit-subjective-exam" style="padding: 0.8rem 2rem; font-size: 1.1rem;">
+        <div style="margin-top: 2 rem; text-align: center;">
+            <button class="btn btn-primary" id="submit-subjective-exam" style="padding: 0.8 rem 2 rem; font-size: 1.1 rem;">
                 <i class="fas fa-paper-plane"></i> Submit Exam
             </button>
             <button class="btn btn-secondary" id="back-to-exam-type">
@@ -74,6 +83,10 @@
         
         <div class="mcq-paginated-container" id="multiple-choice-container">
             <!-- Questions will be populated by JavaScript -->
+            <div class="loading-state">
+                <div class="spinner"></div>
+                <p>Loading exam questions...</p>
+            </div>
         </div>
         
         <div class="pagination-controls">
@@ -97,8 +110,8 @@
             </div>
         </div>
         
-        <div style="margin-top: 2rem; text-align: center;">
-            <button class="btn btn-primary" id="submit-mcq-exam" style="padding: 0.8rem 2rem; font-size: 1.1rem;">
+        <div style="margin-top: 2 rem; text-align: center;">
+            <button class="btn btn-primary" id="submit-mcq-exam" style="padding: 0.8 rem 2 rem; font-size: 1.1 rem;">
                 <i class="fas fa-paper-plane"></i> Submit Exam
             </button>
             <button class="btn btn-secondary" id="back-to-exam-type-mcq">
@@ -107,39 +120,39 @@
         </div>
     </div>
     
-    <!-- Exam Set Selection -->
-    <div id="exam-set-selection" style="display: none;">
-        <!-- Content will be dynamically added -->
-    </div>
-    
     <!-- Exam Results -->
     <div id="exam-results" style="display: none;">
-        <div style="background-color: #e7f5ff; padding: 2rem; border-radius: var(--border-radius); text-align: center; margin-top: 2rem;">
+        <div style="background-color: #e7f5ff; padding: 2 rem; border-radius: var (--border-radius); text-align: center; margin-top: 2 rem;">
             <h3><i class="fas fa-trophy"></i> Exam Submitted Successfully!</h3>
-            <div style="font-size: 3rem; color: var(--secondary-color); font-weight: bold; margin: 1.5rem 0;" id="exam-score">85%</div>
+            <div style="font-size: 3 rem; color: var (--secondary-color); font-weight: bold; margin: 1.5 rem 0;" id="exam-score">85%</div>
             <p>Your score: <strong id="exam-correct-answers">17</strong> out of <strong id="exam-total-questions">20</strong> questions correct</p>
             
-            <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap;">
+            <div style="display: flex; justify-content: center; gap: 2 rem; margin-top: 2 rem; flex-wrap: wrap;">
                 <div style="text-align: center;">
-                    <div style="font-size: 2rem; color: var(--secondary-color);" id="correct-count">17</div>
+                    <div style="font-size: 2 rem; color: var (--secondary-color);" id="correct-count">17</div>
                     <div>Correct</div>
                 </div>
                 <div style="text-align: center;">
-                    <div style="font-size: 2rem; color: var(--accent-color);" id="wrong-count">2</div>
+                    <div style="font-size: 2 rem; color: var (--accent-color);" id="wrong-count">2</div>
                     <div>Wrong</div>
                 </div>
                 <div style="text-align: center;">
-                    <div style="font-size: 2rem; color: #6c757d;" id="skipped-count">1</div>
+                    <div style="font-size: 2 rem; color: #6c757d;" id="skipped-count">1</div>
                     <div>Skipped</div>
                 </div>
             </div>
             
-            <button class="btn btn-primary" id="view-answers" style="margin-top: 2rem;">
-                <i class="fas fa-eye"></i> View Correct Answers
-            </button>
-            <button class="btn btn-secondary" id="back-to-exam-type-results" style="margin-left: 1rem;">
-                <i class="fas fa-redo"></i> Take Another Exam
-            </button>
+            <div style="margin-top: 2 rem;">
+                <button class="btn btn-primary" id="view-answers" style="margin-right: 1 rem;">
+                    <i class="fas fa-eye"></i> View Correct Answers
+                </button>
+                <button class="btn btn-secondary" id="back-to-exam-type-results">
+                    <i class="fas fa-redo"></i> Take Another Exam
+                </button>
+            </div>
         </div>
     </div>
+    
+    <!-- Payment Modal (will be dynamically inserted by JavaScript) -->
+    <!-- Modal HTML structure is created in JavaScript -->
 </section>
