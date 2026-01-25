@@ -2814,14 +2814,7 @@ function setupEventListeners() {
        
     // Event delegation for MCQ and Subjective sections
     document.addEventListener('click', (e) => {
-        // MCQ Subject Cards
-        if (e.target.closest('.subject-card[data-subject][data-type="mcq"]')) {
-            const card = e.target.closest('.subject-card[data-subject][data-type="mcq"]');
-            const subject = card.dataset.subject;
-            e.preventDefault();
-            showChapterSelection(subject);
-        }
-        
+                
         // Exam Type Cards
         if (e.target.closest('.exam-type-card[data-exam-type]')) {
             const card = e.target.closest('.exam-type-card[data-exam-type]');
@@ -3103,7 +3096,7 @@ function loadSectionData(section) {
             loadMCQSubjects();
             break;
         case 'subjective':
-            // initEnhancedSubjective();
+            initEnhancedSubjective();
             break;
         case 'take-exam':
             // Already handled by resetExamTypeSelection
