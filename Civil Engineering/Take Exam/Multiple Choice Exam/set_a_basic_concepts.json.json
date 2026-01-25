@@ -1,0 +1,35 @@
+[
+  {
+    "question": "What is the unit of stress in the SI system?",
+    "options": [
+      "Newton (N)",
+      "Pascal (Pa)",
+      "Joule (J)",
+      "Watt (W)"
+    ],
+    "correct": "Pascal (Pa)",
+    "explanation": "Stress is defined as force per unit area. In SI units, force is in Newtons and area in square meters, so stress is N/m² which is Pascal."
+  },
+  {
+    "question": "Which of the following is NOT a type of structural load?",
+    "options": [
+      "Dead load",
+      "Live load",
+      "Wind load",
+      "Material load"
+    ],
+    "correct": "Material load",
+    "explanation": "The main types of structural loads are dead load, live load, wind load, earthquake load, snow load, etc. 'Material load' is not a standard term."
+  },
+  {
+    "question": "The Young's modulus of a material is a measure of its:",
+    "options": [
+      "Ductility",
+      "Stiffness",
+      "Toughness",
+      "Hardness"
+    ],
+    "correct": "Stiffness",
+    "explanation": "Young's modulus (E) represents the stiffness of a material, defined as the ratio of stress to strain in the elastic region."
+  }
+]
