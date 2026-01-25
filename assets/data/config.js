@@ -57,7 +57,7 @@ const FIELD_CONFIG = {
     }
 };
 
-// In config.js, make sure you have this structure:
+// Exam configuration
 const EXAM_CONFIG = {
     subjective: {
         folder: "Take Exam/Subjective Exam/",
@@ -73,21 +73,67 @@ const EXAM_CONFIG = {
     }
 };
 
-FIELD_CONFIG.civil.subjectiveSets = ["Set A", "Set B", "Set C", "Set D"];
-FIELD_CONFIG.civil.mcqSets = ["Set A", "Set B", "Set C", "Set D"];
-
-FIELD_CONFIG.mechanical.subjectiveSets = ["Set A", "Set B", "Set C", "Set D"];
-FIELD_CONFIG.mechanical.mcqSets = ["Set A", "Set B", "Set C", "Set D"];
-
-FIELD_CONFIG.electrical.subjectiveSets = ["Set A", "Set B", "Set C", "Set D"];
-FIELD_CONFIG.electrical.mcqSets = ["Set A", "Set B", "Set C", "Set D"];
-
-FIELD_CONFIG.electronics.subjectiveSets = ["Set A", "Set B", "Set C", "Set D"];
-FIELD_CONFIG.electronics.mcqSets = ["Set A", "Set B", "Set C", "Set D"];
-
-FIELD_CONFIG.computer.subjectiveSets = ["Set A", "Set B", "Set C", "Set D"];
-FIELD_CONFIG.computer.mcqSets = ["Set A", "Set B", "Set C", "Set D"];
+// Payment configuration
+const PAYMENT_CONFIG = {
+    prices: {
+        subjective: 100,
+        mcq: 50
+    },
+    esewa: {
+        merchantId: 'EPAYTEST',
+        serviceCode: 'EPAYTEST',
+        endpoint: 'https://uat.esewa.com.np/epay/main',
+        testMode: true
+    },
+    khalti: {
+        publicKey: 'test_public_key_dc74e0fd57cb46cd93832aee0a507256',
+        endpoint: 'https://a.khalti.com/api/v2/epayment/initiate/',
+        testMode: true
+    }
+};
 
 // ==============================================
-// END OF CONFIGURATION
+// APPLICATION STATE MANAGEMENT
 // ==============================================
+
+const AppState = {
+    currentField: 'civil',
+    currentSection: 'notice',
+    mcqState: {
+        currentSubject: null,
+        currentChapter: null,
+        currentPage: 1,
+        questionsPerPage: 5,
+        questions: [],
+        userAnswers: {},
+        currentQuestions: []
+    },
+    subjectiveState: {
+        currentSubject: null,
+        currentChapter: null,
+        chapters: []
+    },
+    examState: {
+        type: null,
+        currentSet: null,
+        currentFileName: null,
+        currentQuestionIndex: 0,
+        questions: [],
+        answers: {},
+        flagged: {},
+        timer: null,
+        startTime: null,
+        totalTime: 0,
+        mcqSets: [],
+        subjectiveSets: []
+    },
+    timers: {
+        subjectiveExam: null,
+        mcqExam: null
+    },
+    searchState: {
+        notice: '',
+        syllabus: '',
+        oldQuestions: ''
+    }
+};
