@@ -34,6 +34,15 @@
       "free": false,
       "features": ["Challenging questions", "Performance analytics"]
     }
+     "MCQ_SET_1.json": {
+      "displayName": "Practice Set",
+      "price": 1000,
+      "time": 3600,
+      "questions": 50,
+      "difficulty": "Expert",
+      "free": false,
+      "features": ["PSC Based Questions", "Performance analytics"]
+    }
   },
   "defaults": {
     "price": 50,
