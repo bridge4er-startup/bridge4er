@@ -88,10 +88,6 @@ FIELD_CONFIG.electronics.mcqSets = ["Set A", "Set B", "Set C", "Set D"];
 FIELD_CONFIG.computer.subjectiveSets = ["Set A", "Set B", "Set C", "Set D"];
 FIELD_CONFIG.computer.mcqSets = ["Set A", "Set B", "Set C", "Set D"];
 
-
-
-export { GITHUB_CONFIG, FIELD_CONFIG, EXAM_CONFIG };
-
 // ==============================================
 // END OF CONFIGURATION
 // ==============================================
