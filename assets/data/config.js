@@ -73,6 +73,23 @@ const EXAM_CONFIG = {
     }
 };
 
+FIELD_CONFIG.civil.subjectiveSets = ["Set A", "Set B", "Set C", "Set D"];
+FIELD_CONFIG.civil.mcqSets = ["Set A", "Set B", "Set C", "Set D"];
+
+FIELD_CONFIG.mechanical.subjectiveSets = ["Set A", "Set B", "Set C", "Set D"];
+FIELD_CONFIG.mechanical.mcqSets = ["Set A", "Set B", "Set C", "Set D"];
+
+FIELD_CONFIG.electrical.subjectiveSets = ["Set A", "Set B", "Set C", "Set D"];
+FIELD_CONFIG.electrical.mcqSets = ["Set A", "Set B", "Set C", "Set D"];
+
+FIELD_CONFIG.electronics.subjectiveSets = ["Set A", "Set B", "Set C", "Set D"];
+FIELD_CONFIG.electronics.mcqSets = ["Set A", "Set B", "Set C", "Set D"];
+
+FIELD_CONFIG.computer.subjectiveSets = ["Set A", "Set B", "Set C", "Set D"];
+FIELD_CONFIG.computer.mcqSets = ["Set A", "Set B", "Set C", "Set D"];
+
+
+
 export { GITHUB_CONFIG, FIELD_CONFIG, EXAM_CONFIG };
 
 // ==============================================
