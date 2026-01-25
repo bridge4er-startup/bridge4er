@@ -1,96 +1,3 @@
-// ==============================================
-// COMPONENT LOADING (OPTIMIZED)
-// ==============================================
-
-// DOM Element Cache
-const DOMCache = new Map();
-
-// Load components with error handling
-async function loadComponents() {
-    const components = [
-        { id: 'header-container', file: 'components/header.html' },
-        { id: 'navigation-container', file: 'components/navigation.html' },
-        { id: 'notice-container', file: 'components/notice-section.html' },
-        { id: 'syllabus-container', file: 'components/syllabus-section.html' },
-        { id: 'old-questions-container', file: 'components/old-questions-section.html' },
-        { id: 'mcq-container', file: 'components/mcq-section.html' },
-        { id: 'subjective-container', file: 'components/subjective-section.html' },
-        { id: 'take-exam-container', file: 'components/take-exam-section.html' },
-        { id: 'footer-container', file: 'components/footer.html' }
-    ];
-
-    // Load components with parallel requests
-    const loadPromises = components.map(async (component) => {
-        try {
-            const response = await fetch(component.file);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            const html = await response.text();
-            const element = document.getElementById(component.id);
-            if (element) {
-                element.innerHTML = html;
-            }
-        } catch (error) {
-            console.error(`Error loading ${component.file}:`, error);
-            const element = document.getElementById(component.id);
-            if (element) {
-                element.innerHTML = `<div class="error-message">Failed to load component</div>`;
-            }
-        }
-    });
-
-    await Promise.all(loadPromises);
-    
-    // Initialize DOM references after components are loaded
-    initializeDOMReferences();
-    // Then initialize the app
-    init();
-}
-
-// ==============================================
-// APPLICATION STATE MANAGEMENT
-// ==============================================
-
-const AppState = {
-    currentField: 'civil',
-    currentSection: 'notice',
-    mcqState: {
-        currentSubject: null,
-        currentChapter: null,
-        currentPage: 1,
-        questionsPerPage: 5,
-        questions: [],
-        userAnswers: {},
-        currentQuestions: []
-    },
-    subjectiveState: {
-        currentSubject: null,
-        currentChapter: null,
-        chapters: []
-    },
-    examState: {
-        type: null,
-        currentSet: null,
-        currentFileName: null,
-        currentQuestionIndex: 0,
-        questions: [],
-        answers: {},
-        flagged: {},
-        timer: null,
-        startTime: null,
-        totalTime: 0,
-        mcqSets: [],
-        subjectiveSets: []
-    },
-    timers: {
-        subjectiveExam: null,
-        mcqExam: null
-    },
-    searchState: {
-        notice: '',
-        syllabus: '',
-        oldQuestions: ''
-    }
-};
 
 // ==============================================
 // ENHANCED CACHE MANAGEMENT
@@ -116,6 +23,50 @@ function clearGitHubCache() {
     GITHUB_CACHE.list.clear();
     GITHUB_CACHE.json.clear();
     GITHUB_CACHE.lastCleared = Date.now();
+}
+
+// ==============================================
+// COMPONENT LOADING (OPTIMIZED)
+// ==============================================
+
+// DOM Element Cache
+const DOMCache = new Map();
+
+async function loadComponents() {
+    const components = [
+        { id: 'header-container', file: 'components/header.html' },
+        { id: 'navigation-container', file: 'components/navigation.html' },
+        { id: 'notice-container', file: 'components/notice-section.html' },
+        { id: 'syllabus-container', file: 'components/syllabus-section.html' },
+        { id: 'old-questions-container', file: 'components/old-questions-section.html' },
+        { id: 'mcq-container', file: 'components/mcq-section.html' },
+        { id: 'subjective-container', file: 'components/subjective-section.html' },
+        { id: 'take-exam-container', file: 'components/take-exam-section.html' },
+        { id: 'footer-container', file: 'components/footer.html' }
+    ];
+
+    const loadPromises = components.map(async (component) => {
+        try {
+            const response = await fetch(component.file);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const html = await response.text();
+            const element = document.getElementById(component.id);
+            if (element) {
+                element.innerHTML = html;
+            }
+        } catch (error) {
+            console.error(`Error loading ${component.file}:`, error);
+            const element = document.getElementById(component.id);
+            if (element) {
+                element.innerHTML = `<div class="error-message">Failed to load component</div>`;
+            }
+        }
+    });
+
+    await Promise.all(loadPromises);
+    
+    initializeDOMReferences();
+    init();
 }
 
 // ==============================================
@@ -146,7 +97,6 @@ function querySelectorAll(selector) {
 function initializeDOMReferences() {
     DOMCache.clear();
     
-    // Store commonly used elements
     const elements = [
         'current-field', 'field-dropdown-content', 'field-dropdown-btn', 'user-field',
         'notice-field-indicator', 'syllabus-field-indicator', 'old-questions-field-indicator',
@@ -172,6 +122,68 @@ function initializeDOMReferences() {
     ];
 
     elements.forEach(id => getDOMElement(id));
+}
+
+// ==============================================
+// UTILITY FUNCTIONS
+// ==============================================
+
+function formatFileSize(bytes) {
+    if (!bytes || bytes === 0) return '0 Bytes';
+    
+    const units = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(1024));
+    
+    return `${(bytes / Math.pow(1024, i)).toFixed(i > 0 ? 1 : 0)} ${units[i]}`;
+}
+
+function extractYearFromFilename(filename) {
+    const match = filename.match(/(20\d{2})/);
+    return match ? parseInt(match[1]) : new Date().getFullYear();
+}
+
+function getFileIconClass(extension) {
+    const iconMap = {
+        'pdf': 'fa-file-pdf',
+        'doc': 'fa-file-word',
+        'docx': 'fa-file-word',
+        'xls': 'fa-file-excel',
+        'xlsx': 'fa-file-excel',
+        'ppt': 'fa-file-powerpoint',
+        'pptx': 'fa-file-powerpoint',
+        'jpg': 'fa-file-image',
+        'jpeg': 'fa-file-image',
+        'png': 'fa-file-image',
+        'gif': 'fa-file-image',
+        'bmp': 'fa-file-image',
+        'svg': 'fa-file-image',
+        'txt': 'fa-file-alt',
+        'zip': 'fa-file-archive',
+        'rar': 'fa-file-archive',
+        '7z': 'fa-file-archive',
+        'json': 'fa-file-code'
+    };
+    
+    return iconMap[extension.toLowerCase()] || 'fa-file';
+}
+
+function lightenColor(color, percent) {
+    const num = parseInt(color.replace("#", ""), 16);
+    const amt = Math.round(2.55 * percent);
+    
+    const R = Math.min(255, Math.max(0, (num >> 16) + amt));
+    const G = Math.min(255, Math.max(0, (num >> 8 & 0x00FF) + amt));
+    const B = Math.min(255, Math.max(0, (num & 0x0000FF) + amt));
+    
+    return "#" + ((1 << 24) + (R << 16) + (G << 8) + B).toString(16).slice(1);
+}
+
+function hideElement(element) {
+    if (element) element.style.display = 'none';
+}
+
+function showElement(element, display = 'block') {
+    if (element) element.style.display = display;
 }
 
 // ==============================================
@@ -253,68 +265,6 @@ async function getJsonFileFromGitHub(filePath) {
 }
 
 // ==============================================
-// UTILITY FUNCTIONS
-// ==============================================
-
-function formatFileSize(bytes) {
-    if (!bytes || bytes === 0) return '0 Bytes';
-    
-    const units = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(1024));
-    
-    return `${(bytes / Math.pow(1024, i)).toFixed(i > 0 ? 1 : 0)} ${units[i]}`;
-}
-
-function extractYearFromFilename(filename) {
-    const match = filename.match(/(20\d{2})/);
-    return match ? parseInt(match[1]) : new Date().getFullYear();
-}
-
-function getFileIconClass(extension) {
-    const iconMap = {
-        'pdf': 'fa-file-pdf',
-        'doc': 'fa-file-word',
-        'docx': 'fa-file-word',
-        'xls': 'fa-file-excel',
-        'xlsx': 'fa-file-excel',
-        'ppt': 'fa-file-powerpoint',
-        'pptx': 'fa-file-powerpoint',
-        'jpg': 'fa-file-image',
-        'jpeg': 'fa-file-image',
-        'png': 'fa-file-image',
-        'gif': 'fa-file-image',
-        'bmp': 'fa-file-image',
-        'svg': 'fa-file-image',
-        'txt': 'fa-file-alt',
-        'zip': 'fa-file-archive',
-        'rar': 'fa-file-archive',
-        '7z': 'fa-file-archive',
-        'json': 'fa-file-code'
-    };
-    
-    return iconMap[extension.toLowerCase()] || 'fa-file';
-}
-
-function lightenColor(color, percent) {
-    const num = parseInt(color.replace("#", ""), 16);
-    const amt = Math.round(2.55 * percent);
-    
-    const R = Math.min(255, Math.max(0, (num >> 16) + amt));
-    const G = Math.min(255, Math.max(0, (num >> 8 & 0x00FF) + amt));
-    const B = Math.min(255, Math.max(0, (num & 0x0000FF) + amt));
-    
-    return "#" + ((1 << 24) + (R << 16) + (G << 8) + B).toString(16).slice(1);
-}
-
-function hideElement(element) {
-    if (element) element.style.display = 'none';
-}
-
-function showElement(element, display = 'block') {
-    if (element) element.style.display = display;
-}
-
-// ==============================================
 // FILE LOADING FUNCTIONS
 // ==============================================
 
@@ -338,8 +288,7 @@ async function loadNoticeFiles() {
         showElement(list);
         
         if (files.length === 0) {
-            list.innerHTML = 
-                '<li style="text-align: center; padding: 2rem;"><p>No notice files available.</p></li>';
+            list.innerHTML = '<li style="text-align: center; padding: 2rem;"><p>No notice files available.</p></li>';
             return;
         }
         
@@ -403,8 +352,7 @@ async function loadSyllabusFiles() {
         showElement(list);
         
         if (files.length === 0) {
-            list.innerHTML = 
-                '<li style="text-align: center; padding: 2rem;"><p>No syllabus files available.</p></li>';
+            list.innerHTML = '<li style="text-align: center; padding: 2rem;"><p>No syllabus files available.</p></li>';
             return;
         }
         
@@ -473,8 +421,7 @@ async function loadOldQuestionFiles() {
         showElement(list);
         
         if (files.length === 0) {
-            list.innerHTML = 
-                '<li style="text-align: center; padding: 2rem;"><p>No old question papers available.</p></li>';
+            list.innerHTML = '<li style="text-align: center; padding: 2rem;"><p>No old question papers available.</p></li>';
             return;
         }
         
@@ -520,7 +467,7 @@ async function loadOldQuestionFiles() {
 }
 
 // ==============================================
-// DEBOUNCED SEARCH FUNCTIONALITY
+// SEARCH FUNCTIONALITY
 // ==============================================
 
 function debounce(func, wait) {
@@ -589,20 +536,10 @@ function filterFileList(listId, searchTerm) {
         const isVisible = searchTerm === '' || text.includes(searchTerm);
         item.style.display = isVisible ? '' : 'none';
     });
-
-    // Update results info
-    const resultsInfo = document.getElementById(`${listId.replace('-list', '')}-results-info`);
-    if (resultsInfo) {
-        if (searchTerm === '') {
-            resultsInfo.textContent = `Showing all ${visibleCount} items`;
-        } else {
-            resultsInfo.textContent = `Found ${visibleCount} items matching "${searchTerm}"`;
-        }
-    }
 }
 
 // ==============================================
-// MCQ FUNCTIONS
+// MCQ FUNCTIONS - PAGINATED DISPLAY (FROM SCRIPT 1)
 // ==============================================
 
 async function loadMCQSubjects() {
@@ -691,8 +628,7 @@ function renderMCQSubjects(subjects) {
     };
 
     if (subjects.length === 0) {
-        subjectGrid.innerHTML = 
-            '<div style="text-align: center; padding: 2rem; grid-column: 1 / -1;"><p>No MCQ subjects available.</p></div>';
+        subjectGrid.innerHTML = '<div style="text-align: center; padding: 2rem; grid-column: 1 / -1;"><p>No MCQ subjects available.</p></div>';
         return;
     }
 
@@ -788,17 +724,26 @@ async function loadMCQQuestions(subject, chapterFileName, chapterDisplayName) {
 }
 
 function showChapterSelection(subject) {
-    DOM.subjectGrid.style.display = 'none';
-    DOM.chapterSelection.style.display = 'block';
-    DOM.chapterSelectionTitle.textContent = `Select Chapter - ${subject}`;
+    const subjectGrid = getDOMElement('subject-grid');
+    const chapterSelection = getDOMElement('chapter-selection');
+    const chapterSelectionTitle = getDOMElement('chapter-selection-title');
+    
+    if (!subjectGrid || !chapterSelection || !chapterSelectionTitle) return;
+    
+    subjectGrid.style.display = 'none';
+    chapterSelection.style.display = 'block';
+    chapterSelectionTitle.textContent = `Select Chapter - ${subject}`;
     
     loadMCQChapters(subject).then(chapters => {
+        const chapterGrid = getDOMElement('chapter-grid');
+        if (!chapterGrid) return;
+        
         if (chapters.length === 0) {
-            DOM.chapterGrid.innerHTML = '<div style="text-align: center; padding: 2rem; grid-column: 1 / -1;"><p>No JSON files found for this subject.</p></div>';
+            chapterGrid.innerHTML = '<div style="text-align: center; padding: 2rem; grid-column: 1 / -1;"><p>No JSON files found for this subject.</p></div>';
             return;
         }
         
-        DOM.chapterGrid.innerHTML = chapters.map(chapter => `
+        chapterGrid.innerHTML = chapters.map(chapter => `
             <div class="subject-card" data-chapter="${chapter.name}" data-subject="${subject}" data-filename="${chapter.fileName}">
                 <i class="fas fa-file-alt"></i>
                 <h3>${chapter.name}</h3>
@@ -815,7 +760,10 @@ async function startMCQPractice(subject, chapterDisplayName, chapterFileName) {
         AppState.mcqState.currentPage = 1;
         AppState.mcqState.userAnswers = {};
         
-        DOM.mcqQuestionsContainer.innerHTML = '<div style="text-align: center; padding: 2rem;">Loading questions from GitHub...</div>';
+        const mcqQuestionsContainer = getDOMElement('mcq-questions-container');
+        if (mcqQuestionsContainer) {
+            mcqQuestionsContainer.innerHTML = '<div style="text-align: center; padding: 2rem;">Loading questions from GitHub...</div>';
+        }
         
         const questions = await loadMCQQuestions(subject, chapterFileName, chapterDisplayName);
         
@@ -826,9 +774,15 @@ async function startMCQPractice(subject, chapterDisplayName, chapterFileName) {
         
         AppState.mcqState.questions = questions;
         
-        DOM.chapterSelection.style.display = 'none';
-        DOM.mcqPractice.style.display = 'block';
-        DOM.mcqSubjectTitle.textContent = `${subject} - ${chapterDisplayName}`;
+        const chapterSelection = getDOMElement('chapter-selection');
+        const mcqPractice = getDOMElement('mcq-practice');
+        const mcqSubjectTitle = getDOMElement('mcq-subject-title');
+        
+        if (!chapterSelection || !mcqPractice || !mcqSubjectTitle) return;
+        
+        chapterSelection.style.display = 'none';
+        mcqPractice.style.display = 'block';
+        mcqSubjectTitle.textContent = `${subject} - ${chapterDisplayName}`;
         
         setupPagination();
         renderCurrentPage();
@@ -844,29 +798,31 @@ function setupPagination() {
     const totalQuestions = AppState.mcqState.questions.length;
     const totalPages = questionsPerPage === 'all' ? 1 : Math.ceil(totalQuestions / questionsPerPage);
     
-    // Update pagination info
-    DOM.totalQuestionsCount.textContent = totalQuestions;
-    DOM.totalPages.textContent = totalPages;
+    const totalQuestionsCount = getDOMElement('total-questions-count');
+    const totalPagesElement = getDOMElement('total-pages');
+    const questionsPerPageSelect = getDOMElement('questions-per-page');
     
-    // Update questions per page selector
-    DOM.questionsPerPageSelect.value = questionsPerPage;
+    if (totalQuestionsCount) totalQuestionsCount.textContent = totalQuestions;
+    if (totalPagesElement) totalPagesElement.textContent = totalPages;
+    if (questionsPerPageSelect) questionsPerPageSelect.value = questionsPerPage;
     
-    // Generate page indicators
     updatePageIndicators();
-    
-    // Update pagination buttons state
     updatePaginationButtons();
 }
 
 function updatePageIndicators() {
     const currentPage = AppState.mcqState.currentPage;
-    const totalPages = DOM.totalPages.textContent;
+    const totalPagesElement = getDOMElement('total-pages');
+    const pageIndicators = getDOMElement('page-indicators');
     
-    DOM.pageIndicators.innerHTML = '';
+    if (!totalPagesElement || !pageIndicators) return;
     
-    // Show max 5 page indicators
+    const totalPages = parseInt(totalPagesElement.textContent);
+    
+    pageIndicators.innerHTML = '';
+    
     const startPage = Math.max(1, currentPage - 2);
-    const endPage = Math.min(parseInt(totalPages), startPage + 4);
+    const endPage = Math.min(totalPages, startPage + 4);
     
     for (let i = startPage; i <= endPage; i++) {
         const pageBtn = document.createElement('button');
@@ -876,18 +832,26 @@ function updatePageIndicators() {
             AppState.mcqState.currentPage = i;
             renderCurrentPage();
         });
-        DOM.pageIndicators.appendChild(pageBtn);
+        pageIndicators.appendChild(pageBtn);
     }
 }
 
 function updatePaginationButtons() {
     const currentPage = AppState.mcqState.currentPage;
-    const totalPages = parseInt(DOM.totalPages.textContent);
+    const totalPagesElement = getDOMElement('total-pages');
+    const firstPageBtn = getDOMElement('first-page');
+    const prevPageBtn = getDOMElement('prev-page');
+    const nextPageBtn = getDOMElement('next-page');
+    const lastPageBtn = getDOMElement('last-page');
     
-    DOM.firstPageBtn.disabled = currentPage === 1;
-    DOM.prevPageBtn.disabled = currentPage === 1;
-    DOM.nextPageBtn.disabled = currentPage === totalPages;
-    DOM.lastPageBtn.disabled = currentPage === totalPages;
+    if (!totalPagesElement || !firstPageBtn || !prevPageBtn || !nextPageBtn || !lastPageBtn) return;
+    
+    const totalPages = parseInt(totalPagesElement.textContent);
+    
+    firstPageBtn.disabled = currentPage === 1;
+    prevPageBtn.disabled = currentPage === 1;
+    nextPageBtn.disabled = currentPage === totalPages;
+    lastPageBtn.disabled = currentPage === totalPages;
 }
 
 function renderCurrentPage() {
@@ -906,12 +870,16 @@ function renderCurrentPage() {
         endIndex = Math.min(startIndex + questionsPerPage, totalQuestions);
     }
     
-    // Update pagination info
-    DOM.currentPage.textContent = currentPage;
-    DOM.questionsRange.textContent = `${startIndex + 1}-${endIndex}`;
+    const currentPageElement = getDOMElement('current-page');
+    const questionsRange = getDOMElement('questions-range');
+    const mcqQuestionsContainer = getDOMElement('mcq-questions-container');
     
-    // Render questions
-    DOM.mcqQuestionsContainer.innerHTML = '';
+    if (currentPageElement) currentPageElement.textContent = currentPage;
+    if (questionsRange) questionsRange.textContent = `${startIndex + 1}-${endIndex}`;
+    
+    if (!mcqQuestionsContainer) return;
+    
+    mcqQuestionsContainer.innerHTML = '';
     
     for (let i = startIndex; i < endIndex; i++) {
         const question = state.questions[i];
@@ -944,9 +912,8 @@ function renderCurrentPage() {
             </div>
         `;
         
-        DOM.mcqQuestionsContainer.appendChild(questionDiv);
+        mcqQuestionsContainer.appendChild(questionDiv);
         
-        // Add event listeners to options
         questionDiv.querySelectorAll('.mcq-option').forEach(option => {
             option.addEventListener('click', function() {
                 const questionIndex = parseInt(this.dataset.questionIndex);
@@ -956,7 +923,6 @@ function renderCurrentPage() {
         });
     }
     
-    // Update pagination controls
     updatePageIndicators();
     updatePaginationButtons();
 }
@@ -966,26 +932,20 @@ function handleMCQOptionClick(questionIndex, selectedOption, optionElement) {
     const optionsContainer = optionElement.parentElement;
     const explanationElement = document.getElementById(`explanation-${questionIndex}`);
     
-    // Remove all selected/correct/incorrect classes
     optionsContainer.querySelectorAll('.mcq-option').forEach(opt => {
         opt.classList.remove('selected', 'correct', 'incorrect');
     });
     
-    // Add selected class to clicked option
     optionElement.classList.add('selected');
     
-    // Store user answer
     AppState.mcqState.userAnswers[questionIndex] = selectedOption;
     
-    // Show explanation
-    explanationElement.classList.add('show');
+    if (explanationElement) explanationElement.classList.add('show');
     
-    // Mark correct/incorrect
     if (selectedOption === question.correct) {
         optionElement.classList.add('correct');
     } else {
         optionElement.classList.add('incorrect');
-        // Highlight correct answer
         optionsContainer.querySelectorAll('.mcq-option').forEach(opt => {
             if (opt.dataset.option === question.correct) {
                 opt.classList.add('correct');
@@ -995,10 +955,9 @@ function handleMCQOptionClick(questionIndex, selectedOption, optionElement) {
 }
 
 // ==============================================
-// SUBJECTIVE FUNCTIONS
+// SUBJECTIVE FUNCTIONS (FROM SCRIPT 1 & 2)
 // ==============================================
 
-// Subject icons and colors for professional library
 const SUBJECT_ICONS = {
     'Structure': 'fa-building',
     'Geotech': 'fa-mountain',
@@ -1059,7 +1018,6 @@ const SUBJECT_COLORS = {
     'Computer Networks': '#5f9ea0'
 };
 
-// State for image gallery
 let imageGalleryState = {
     currentImageIndex: 0,
     imageUrls: [],
@@ -1139,13 +1097,15 @@ async function renderSubjectCategories() {
         return;
     }
     
-    // Hide loading, show categories
-    hideLoading(DOM.loading.subjective);
-    showContent(document.getElementById('subject-categories-view'));
+    const loading = getDOMElement('subjective-loading');
+    const categoriesView = document.getElementById('subject-categories-view');
+    
+    hideElement(loading);
+    if (categoriesView) showElement(categoriesView);
     
     const categoriesContainer = document.getElementById('categories-container');
+    if (!categoriesContainer) return;
     
-    // Create category grid
     let categoriesHTML = '<div class="category-grid-modern">';
     
     for (const subject of subjects) {
@@ -1204,12 +1164,10 @@ async function renderSubjectCategories() {
     categoriesHTML += '</div>';
     categoriesContainer.innerHTML = categoriesHTML;
     
-    // Add event listeners
     setupCategoryEvents();
 }
 
 function setupCategoryEvents() {
-    // Open Subject buttons
     document.querySelectorAll('.subject-card-modern .btn-primary').forEach(button => {
         button.addEventListener('click', (e) => {
             const subject = e.target.dataset.subject || e.target.closest('[data-subject]').dataset.subject;
@@ -1217,7 +1175,6 @@ function setupCategoryEvents() {
         });
     });
     
-    // Individual chapter items
     document.querySelectorAll('.chapter-item-modern').forEach(item => {
         item.addEventListener('click', (e) => {
             const subject = item.dataset.subject;
@@ -1233,29 +1190,40 @@ function setupCategoryEvents() {
 }
 
 async function openSubjectBooks(subject) {
-    // Show loading
-    document.getElementById('subject-categories-view').style.display = 'none';
-    document.getElementById('subject-books-view').style.display = 'block';
+    const categoriesView = document.getElementById('subject-categories-view');
+    const booksView = document.getElementById('subject-books-view');
     
-    // Update subject header
+    if (!categoriesView || !booksView) return;
+    
+    categoriesView.style.display = 'none';
+    booksView.style.display = 'block';
+    
     const subjectIcon = SUBJECT_ICONS[subject] || 'fa-book';
     const subjectColor = SUBJECT_COLORS[subject] || '#1a5f7a';
     
-    document.getElementById('subject-header-icon').innerHTML = `<i class="fas ${subjectIcon}"></i>`;
-    document.getElementById('subject-header-icon').style.background = subjectColor;
-    document.getElementById('current-subject-title').textContent = subject;
-    document.getElementById('current-subject-title').style.color = subjectColor;
+    const headerIcon = document.getElementById('subject-header-icon');
+    const title = document.getElementById('current-subject-title');
+    const bookCount = document.getElementById('subject-book-count');
     
-    // Load books for this subject
+    if (headerIcon) {
+        headerIcon.innerHTML = `<i class="fas ${subjectIcon}"></i>`;
+        headerIcon.style.background = subjectColor;
+    }
+    
+    if (title) {
+        title.textContent = subject;
+        title.style.color = subjectColor;
+    }
+    
     const books = await loadSubjectiveChapters(subject);
-    document.getElementById('subject-book-count').textContent = `${books.length} document${books.length !== 1 ? 's' : ''}`;
+    if (bookCount) bookCount.textContent = `${books.length} document${books.length !== 1 ? 's' : ''}`;
     
-    // Render books
     renderSubjectBooks(subject, books);
 }
 
 function renderSubjectBooks(subject, books) {
     const booksGrid = document.getElementById('subject-books-grid');
+    if (!booksGrid) return;
     
     if (books.length === 0) {
         booksGrid.innerHTML = `
@@ -1268,7 +1236,6 @@ function renderSubjectBooks(subject, books) {
         return;
     }
     
-    // Color palette for book covers
     const bookColors = [
         'linear-gradient(135deg, #1a5f7a, #2a7a9c)',
         'linear-gradient(135deg, #57cc99, #3fa67a)',
@@ -1307,7 +1274,6 @@ function renderSubjectBooks(subject, books) {
         `;
     }).join('');
     
-    // Add click events to books
     booksGrid.querySelectorAll('.book-modern').forEach(bookCard => {
         bookCard.addEventListener('click', () => {
             const subject = bookCard.dataset.subject;
@@ -1352,13 +1318,17 @@ function updateImageGallery() {
     const state = imageGalleryState;
     if (state.totalImages === 0) return;
     
-    document.getElementById('current-image').src = state.imageUrls[state.currentImageIndex];
-    document.getElementById('current-image-num').textContent = state.currentImageIndex + 1;
-    document.getElementById('total-images').textContent = state.totalImages;
+    const currentImage = document.getElementById('current-image');
+    const currentImageNum = document.getElementById('current-image-num');
+    const totalImages = document.getElementById('total-images');
+    const prevImage = document.getElementById('prev-image');
+    const nextImage = document.getElementById('next-image');
     
-    // Update button states
-    document.getElementById('prev-image').disabled = state.currentImageIndex === 0;
-    document.getElementById('next-image').disabled = state.currentImageIndex === state.totalImages - 1;
+    if (currentImage) currentImage.src = state.imageUrls[state.currentImageIndex];
+    if (currentImageNum) currentImageNum.textContent = state.currentImageIndex + 1;
+    if (totalImages) totalImages.textContent = state.totalImages;
+    if (prevImage) prevImage.disabled = state.currentImageIndex === 0;
+    if (nextImage) nextImage.disabled = state.currentImageIndex === state.totalImages - 1;
 }
 
 async function openBookReader(subject, chapter, fileName, fileExt) {
@@ -1366,62 +1336,84 @@ async function openBookReader(subject, chapter, fileName, fileExt) {
     const filePath = `${FIELD_CONFIG[field].folderPrefix}Subjective/${subject}/${fileName}`;
     const fileUrl = getRawFileUrl(filePath);
     
-    // Hide subject books view, show reader
-    document.getElementById('subject-books-view').style.display = 'none';
-    document.getElementById('book-reader').style.display = 'block';
+    const booksView = document.getElementById('subject-books-view');
+    const bookReader = document.getElementById('book-reader');
     
-    // Update reader header
-    document.getElementById('reader-book-title').textContent = chapter;
-    document.getElementById('meta-subject').textContent = subject;
-    document.getElementById('meta-format').textContent = fileExt.toUpperCase();
-    document.getElementById('meta-size').textContent = await getFileSize(filePath);
+    if (!booksView || !bookReader) return;
     
-    // Hide all content containers first
-    document.getElementById('pdf-viewer').style.display = 'none';
-    document.getElementById('image-gallery').style.display = 'none';
-    document.getElementById('file-options').style.display = 'none';
-    document.getElementById('single-image').style.display = 'none';
-    document.getElementById('multiple-images').style.display = 'none';
-    document.getElementById('file-title').textContent = chapter;
+    booksView.style.display = 'none';
+    bookReader.style.display = 'block';
     
-    // Handle different file types
+    const readerBookTitle = document.getElementById('reader-book-title');
+    const metaSubject = document.getElementById('meta-subject');
+    const metaFormat = document.getElementById('meta-format');
+    const metaSize = document.getElementById('meta-size');
+    
+    if (readerBookTitle) readerBookTitle.textContent = chapter;
+    if (metaSubject) metaSubject.textContent = subject;
+    if (metaFormat) metaFormat.textContent = fileExt.toUpperCase();
+    if (metaSize) metaSize.textContent = await getFileSize(filePath);
+    
+    const contentElements = [
+        'pdf-viewer', 'image-gallery', 'file-options', 'single-image', 'multiple-images'
+    ];
+    
+    contentElements.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) element.style.display = 'none';
+    });
+    
+    const fileTitle = document.getElementById('file-title');
+    if (fileTitle) fileTitle.textContent = chapter;
+    
     if (fileExt === 'pdf') {
-        // PDF Viewer
-        document.getElementById('pdf-viewer').style.display = 'block';
-        document.getElementById('pdf-frame').src = fileUrl;
+        const pdfViewer = document.getElementById('pdf-viewer');
+        const pdfFrame = document.getElementById('pdf-frame');
+        if (pdfViewer && pdfFrame) {
+            pdfViewer.style.display = 'block';
+            pdfFrame.src = fileUrl;
+        }
     } else if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExt)) {
-        // Image Viewer
-        document.getElementById('image-gallery').style.display = 'block';
+        const imageGallery = document.getElementById('image-gallery');
+        if (imageGallery) imageGallery.style.display = 'block';
         
-        // Check if there are multiple images in the same folder
         const allImages = await getFolderImages(subject, fileName);
         
         if (allImages.length > 1) {
-            // Multiple images - show gallery
             imageGalleryState = {
                 currentImageIndex: allImages.findIndex(img => img.fileName === fileName),
                 imageUrls: allImages.map(img => getRawFileUrl(img.path)),
                 totalImages: allImages.length
             };
             
-            document.getElementById('multiple-images').style.display = 'block';
-            updateImageGallery();
+            const multipleImages = document.getElementById('multiple-images');
+            if (multipleImages) {
+                multipleImages.style.display = 'block';
+                updateImageGallery();
+            }
         } else {
-            // Single image
-            document.getElementById('single-image').style.display = 'block';
-            document.getElementById('book-image').src = fileUrl;
+            const singleImage = document.getElementById('single-image');
+            const bookImage = document.getElementById('book-image');
+            if (singleImage && bookImage) {
+                singleImage.style.display = 'block';
+                bookImage.src = fileUrl;
+            }
         }
     } else {
-        // Other file types - show download option
-        document.getElementById('file-options').style.display = 'block';
-        document.getElementById('file-preview').innerHTML = `
-            <i class="fas fa-file-${getFileIconClass(fileExt)} fa-5x" style="color: var(--primary-color); margin-bottom: 1.5rem;"></i>
-            <h4 style="color: var(--dark-color); margin-bottom: 0.5rem;">${chapter}</h4>
-            <p style="color: #666;">This ${fileExt.toUpperCase()} file requires download to view.</p>
-        `;
+        const fileOptions = document.getElementById('file-options');
+        const filePreview = document.getElementById('file-preview');
+        const downloadFileBtn = document.getElementById('download-file-btn');
         
-        // Set up download button
-        document.getElementById('download-file-btn').onclick = () => downloadFile(fileUrl, fileName);
+        if (fileOptions && filePreview && downloadFileBtn) {
+            fileOptions.style.display = 'block';
+            filePreview.innerHTML = `
+                <i class="fas fa-file-${getFileIconClass(fileExt)} fa-5x" style="color: var(--primary-color); margin-bottom: 1.5rem;"></i>
+                <h4 style="color: var(--dark-color); margin-bottom: 0.5rem;">${chapter}</h4>
+                <p style="color: #666;">This ${fileExt.toUpperCase()} file requires download to view.</p>
+            `;
+            
+            downloadFileBtn.onclick = () => downloadFile(fileUrl, fileName);
+        }
     }
 }
 
@@ -1429,44 +1421,69 @@ async function initEnhancedSubjective() {
     await renderSubjectCategories();
     setupBookReaderEvents();
     
-    // Add back button events
-    document.getElementById('back-to-categories')?.addEventListener('click', () => {
-        document.getElementById('subject-books-view').style.display = 'none';
-        document.getElementById('subject-categories-view').style.display = 'block';
-    });
+    const backToCategories = document.getElementById('back-to-categories');
+    const backToSubjectBooks = document.getElementById('back-to-subject-books');
     
-    document.getElementById('back-to-subject-books')?.addEventListener('click', () => {
-        document.getElementById('book-reader').style.display = 'none';
-        document.getElementById('subject-books-view').style.display = 'block';
-    });
+    if (backToCategories) {
+        backToCategories.addEventListener('click', () => {
+            const booksView = document.getElementById('subject-books-view');
+            const categoriesView = document.getElementById('subject-categories-view');
+            if (booksView && categoriesView) {
+                booksView.style.display = 'none';
+                categoriesView.style.display = 'block';
+            }
+        });
+    }
+    
+    if (backToSubjectBooks) {
+        backToSubjectBooks.addEventListener('click', () => {
+            const bookReader = document.getElementById('book-reader');
+            const booksView = document.getElementById('subject-books-view');
+            if (bookReader && booksView) {
+                bookReader.style.display = 'none';
+                booksView.style.display = 'block';
+            }
+        });
+    }
 }
 
 function setupBookReaderEvents() {
-    // Close reader button
-    document.getElementById('close-reader')?.addEventListener('click', () => {
-        document.getElementById('book-reader').style.display = 'none';
-        document.getElementById('subject-books-view').style.display = 'block';
-    });
+    const closeReader = document.getElementById('close-reader');
+    const prevImage = document.getElementById('prev-image');
+    const nextImage = document.getElementById('next-image');
     
-    // Image gallery navigation
-    document.getElementById('prev-image')?.addEventListener('click', () => {
-        if (imageGalleryState.currentImageIndex > 0) {
-            imageGalleryState.currentImageIndex--;
-            updateImageGallery();
-        }
-    });
+    if (closeReader) {
+        closeReader.addEventListener('click', () => {
+            const bookReader = document.getElementById('book-reader');
+            const booksView = document.getElementById('subject-books-view');
+            if (bookReader && booksView) {
+                bookReader.style.display = 'none';
+                booksView.style.display = 'block';
+            }
+        });
+    }
     
-    document.getElementById('next-image')?.addEventListener('click', () => {
-        if (imageGalleryState.currentImageIndex < imageGalleryState.totalImages - 1) {
-            imageGalleryState.currentImageIndex++;
-            updateImageGallery();
-        }
-    });
+    if (prevImage) {
+        prevImage.addEventListener('click', () => {
+            if (imageGalleryState.currentImageIndex > 0) {
+                imageGalleryState.currentImageIndex--;
+                updateImageGallery();
+            }
+        });
+    }
     
-    // Keyboard navigation for image gallery
+    if (nextImage) {
+        nextImage.addEventListener('click', () => {
+            if (imageGalleryState.currentImageIndex < imageGalleryState.totalImages - 1) {
+                imageGalleryState.currentImageIndex++;
+                updateImageGallery();
+            }
+        });
+    }
+    
     document.addEventListener('keydown', (e) => {
-        const readerVisible = document.getElementById('book-reader').style.display === 'block';
-        if (!readerVisible) return;
+        const bookReader = document.getElementById('book-reader');
+        if (!bookReader || bookReader.style.display !== 'block') return;
         
         if (e.key === 'ArrowLeft' && imageGalleryState.currentImageIndex > 0) {
             imageGalleryState.currentImageIndex--;
@@ -1477,14 +1494,17 @@ function setupBookReaderEvents() {
             updateImageGallery();
             e.preventDefault();
         } else if (e.key === 'Escape') {
-            document.getElementById('book-reader').style.display = 'none';
-            document.getElementById('subject-books-view').style.display = 'block';
+            const booksView = document.getElementById('subject-books-view');
+            if (bookReader && booksView) {
+                bookReader.style.display = 'none';
+                booksView.style.display = 'block';
+            }
         }
     });
 }
 
 // ==============================================
-// EXAM SET DISCOVERY FUNCTIONS (WORKING VERSION)
+// EXAM SET DISCOVERY FUNCTIONS
 // ==============================================
 
 async function discoverMCQExamSets() {
@@ -1682,7 +1702,7 @@ function generateDemoSubjectiveSets() {
 }
 
 // ==============================================
-// EXAM SET SELECTION (WORKING VERSION)
+// EXAM SET SELECTION
 // ==============================================
 
 async function showMCQExamSetSelection() {
@@ -1866,7 +1886,7 @@ function renderSubjectiveExamSetSelection(examSets) {
 }
 
 // ==============================================
-// EXAM LOADING FUNCTIONS (WORKING VERSION)
+// EXAM LOADING FUNCTIONS
 // ==============================================
 
 async function loadAndStartMCQExam(selectedSet) {
@@ -2004,8 +2024,11 @@ async function loadSubjectiveExamContent(fileName, displayName) {
             questionsContainer.innerHTML = contentHtml;
         }
         
-        document.getElementById('subjective-total-questions').textContent = totalQuestions;
-        document.getElementById('subjective-total-marks').textContent = totalMarks;
+        const totalQuestionsElement = document.getElementById('subjective-total-questions');
+        const totalMarksElement = document.getElementById('subjective-total-marks');
+        
+        if (totalQuestionsElement) totalQuestionsElement.textContent = totalQuestions;
+        if (totalMarksElement) totalMarksElement.textContent = totalMarks;
         
         console.log(`Loaded subjective exam: ${totalQuestions} questions, ${totalMarks} total marks`);
         
@@ -2096,8 +2119,11 @@ function displayDemoSubjectiveContent(displayName) {
     const totalQuestions = demoQuestions.length;
     const totalMarks = demoQuestions.reduce((sum, q) => sum + q.marks, 0);
     
-    document.getElementById('subjective-total-questions').textContent = totalQuestions;
-    document.getElementById('subjective-total-marks').textContent = totalMarks;
+    const totalQuestionsElement = document.getElementById('subjective-total-questions');
+    const totalMarksElement = document.getElementById('subjective-total-marks');
+    
+    if (totalQuestionsElement) totalQuestionsElement.textContent = totalQuestions;
+    if (totalMarksElement) totalMarksElement.textContent = totalMarks;
 }
 
 function getEmptyQuestionSet(subject, chapter) {
@@ -2348,24 +2374,6 @@ function resetExamTypeSelection() {
 // ==============================================
 // PAYMENT SYSTEM
 // ==============================================
-
-const PAYMENT_CONFIG = {
-    prices: {
-        subjective: 100,
-        mcq: 50
-    },
-    esewa: {
-        merchantId: 'EPAYTEST',
-        serviceCode: 'EPAYTEST',
-        endpoint: 'https://uat.esewa.com.np/epay/main',
-        testMode: true
-    },
-    khalti: {
-        publicKey: 'test_public_key_dc74e0fd57cb46cd93832aee0a507256',
-        endpoint: 'https://a.khalti.com/api/v2/epayment/initiate/',
-        testMode: true
-    }
-};
 
 const purchasedSets = {
     subjective: JSON.parse(localStorage.getItem('purchasedSubjectiveSets') || '[]'),
@@ -2653,147 +2661,8 @@ async function openMCQExamAfterPayment(selectedSet) {
 }
 
 // ==============================================
-// INITIALIZATION FUNCTIONS
-// ==============================================
-
-function init() {
-    console.log("Initializing application...");
-    initializeDOMReferences();
-    setupEventListeners();
-    setupExamEventListeners();
-    loadField('civil');
-    updateFieldIndicators();
-    initPaymentSystem();
-    console.log("Application initialized successfully");
-}
-
-function loadField(field) {
-    console.log(`Loading field: ${field}`);
-    
-    clearGitHubCache();
-    AppState.currentField = field;
-    const config = FIELD_CONFIG[field];
-    
-    const currentField = getDOMElement('current-field');
-    const userField = getDOMElement('user-field');
-    
-    if (currentField) {
-        currentField.innerHTML = `<i class="fas ${config.icon}"></i> ${config.name}`;
-    }
-    
-    if (userField) {
-        userField.textContent = config.name;
-    }
-    
-    document.documentElement.style.setProperty('--primary-color', config.color);
-    
-    const header = document.querySelector('header');
-    if (header) {
-        header.style.background = `linear-gradient(to right, ${config.color}, ${lightenColor(config.color, 20)})`;
-    }
-    
-    updateFieldIndicators();
-    setupExamEventListeners();
-    loadNoticeFiles();
-    loadSyllabusFiles();
-    loadOldQuestionFiles();
-    loadMCQSubjects();
-    initEnhancedSubjective();
-
-    resetPracticeSessions();
-    
-    const activeSection = document.querySelector('.section.active');
-    if (activeSection) {
-        loadSectionData(activeSection.id);
-    }
-    
-    console.log(`Field loaded: ${field}`);
-}
-
-function updateFieldIndicators() {
-    const config = FIELD_CONFIG[AppState.currentField];
-    const indicators = [
-        'notice-field-indicator',
-        'syllabus-field-indicator', 
-        'old-questions-field-indicator',
-        'mcq-field-indicator',
-        'subjective-field-indicator',
-        'exam-field-indicator'
-    ];
-    
-    indicators.forEach(id => {
-        const indicator = getDOMElement(id);
-        if (indicator) {
-            indicator.innerHTML = `<i class="fas ${config.icon}"></i> ${config.name.split(' ')[0]}`;
-            indicator.style.backgroundColor = config.color;
-        }
-    });
-}
-
-function resetPracticeSessions() {
-    const elements = {
-        'mcq-practice': 'none',
-        'chapter-selection': 'none',
-        'subject-grid': 'block',
-        'subjective-content': 'none',
-        'subjective-chapter-selection': 'none',
-        'subjective-set-grid': 'block'
-    };
-    
-    Object.entries(elements).forEach(([id, display]) => {
-        const element = getDOMElement(id);
-        if (element) element.style.display = display;
-    });
-    
-    resetExamTypeSelection();
-    
-    AppState.mcqState = {
-        currentSubject: null,
-        currentChapter: null,
-        currentPage: 1,
-        questionsPerPage: 5,
-        questions: [],
-        userAnswers: {},
-        currentQuestions: []
-    };
-    AppState.subjectiveState = {
-        currentSubject: null,
-        currentChapter: null,
-        chapters: []
-    };
-}
-
-function loadSectionData(section) {
-    switch(section) {
-        case 'notice':
-            loadNoticeFiles();
-            break;
-        case 'syllabus':
-            loadSyllabusFiles();
-            break;
-        case 'old-questions':
-            loadOldQuestionFiles();
-            break;
-        case 'objective-mcqs':
-            loadMCQSubjects();
-            break;
-        case 'subjective':
-            initEnhancedSubjective();
-            break;
-        case 'take-exam':
-            // Already handled by resetExamTypeSelection
-            break;
-    }
-}
-
-
-// ==============================================
 // EVENT LISTENERS
 // ==============================================
-
-
-
-
 
 function setupEventListeners() {
     console.log("Setting up event listeners");
@@ -2852,112 +2721,30 @@ function setupEventListeners() {
         });
     });
     
-     // MCQ subject selection
+    // Event delegation for MCQ and Subjective sections
     document.addEventListener('click', (e) => {
-        const subjectCard = e.target.closest('.subject-card[data-subject]');
-        if (subjectCard && !subjectCard.dataset.chapter && !subjectCard.dataset.examIndex) {
+        // MCQ Subject Cards
+        const mcqSubjectCard = e.target.closest('.subject-card[data-subject][data-type="mcq"]');
+        if (mcqSubjectCard) {
+            const subject = mcqSubjectCard.dataset.subject;
             e.preventDefault();
-            const subject = subjectCard.dataset.subject;
             showChapterSelection(subject);
         }
-    });
-
-    // MCQ chapter selection
-    document.addEventListener('click', (e) => {
+        
+        // MCQ Chapter Cards
         const chapterCard = e.target.closest('.subject-card[data-chapter]');
         if (chapterCard && chapterCard.dataset.subject && chapterCard.dataset.filename) {
-            e.preventDefault();
             const subject = chapterCard.dataset.subject;
             const chapterDisplayName = chapterCard.dataset.chapter;
             const chapterFileName = chapterCard.dataset.filename;
+            e.preventDefault();
             startMCQPractice(subject, chapterDisplayName, chapterFileName);
         }
-    });
-
-    // MCQ pagination
-    DOM.firstPageBtn.addEventListener('click', () => {
-        AppState.mcqState.currentPage = 1;
-        renderCurrentPage();
-    });
-
-    DOM.prevPageBtn.addEventListener('click', () => {
-        if (AppState.mcqState.currentPage > 1) {
-            AppState.mcqState.currentPage--;
-            renderCurrentPage();
-        }
-    });
-
-    DOM.nextPageBtn.addEventListener('click', () => {
-        const totalPages = parseInt(DOM.totalPages.textContent);
-        if (AppState.mcqState.currentPage < totalPages) {
-            AppState.mcqState.currentPage++;
-            renderCurrentPage();
-        }
-    });
-
-    DOM.lastPageBtn.addEventListener('click', () => {
-        AppState.mcqState.currentPage = parseInt(DOM.totalPages.textContent);
-        renderCurrentPage();
-    });
-
-    DOM.questionsPerPageSelect.addEventListener('change', (e) => {
-        const value = e.target.value;
-        AppState.mcqState.questionsPerPage = value === 'all' ? 'all' : parseInt(value);
-        AppState.mcqState.currentPage = 1;
-        setupPagination();
-        renderCurrentPage();
-    });
-
-    // MCQ navigation
-    DOM.backToSubjectsBtn.addEventListener('click', () => {
-        DOM.mcqPractice.style.display = 'none';
-        DOM.chapterSelection.style.display = 'block';
-    });
-
-    DOM.backToSubjectsFromChapterBtn.addEventListener('click', () => {
-        DOM.chapterSelection.style.display = 'none';
-        DOM.subjectGrid.style.display = 'block';
-    });
-
-    // Subjective navigation
-    document.addEventListener('click', (e) => {
-        const subjectCard = e.target.closest('.subject-card[data-subject]');
-        if (subjectCard && subjectCard.parentElement === DOM.subjectiveSetGrid) {
-            e.preventDefault();
-            const subject = subjectCard.dataset.subject;
-            showSubjectiveChapterSelection(subject);
-        }
-    });
-
-    document.addEventListener('click', (e) => {
-        const chapterCard = e.target.closest('.subject-card[data-chapter]');
-        if (chapterCard && chapterCard.parentElement === DOM.subjectiveChapterGrid) {
-            e.preventDefault();
-            const subject = chapterCard.dataset.subject;
-            const chapter = chapterCard.dataset.chapter;
-            const fileName = chapterCard.dataset.filename;
-            viewSubjectiveContent(subject, chapter, fileName);
-        }
-    });
-
-    DOM.backToSubjectiveSetsBtn.addEventListener('click', () => {
-        DOM.subjectiveContent.style.display = 'none';
-        DOM.subjectiveChapterSelection.style.display = 'block';
-    });
-
-    DOM.backToSubjectiveSubjectsBtn.addEventListener('click', () => {
-        DOM.subjectiveChapterSelection.style.display = 'none';
-        DOM.subjectiveSetGrid.style.display = 'block';
-    });
-    
-       
-    // Event delegation for MCQ and Subjective sections
-    document.addEventListener('click', (e) => {
-                
+        
         // Exam Type Cards
-        if (e.target.closest('.exam-type-card[data-exam-type]')) {
-            const card = e.target.closest('.exam-type-card[data-exam-type]');
-            const examType = card.dataset.examType;
+        const examTypeCard = e.target.closest('.exam-type-card[data-exam-type]');
+        if (examTypeCard) {
+            const examType = examTypeCard.dataset.examType;
             e.preventDefault();
             
             if (examType === 'subjective') {
@@ -2968,11 +2755,89 @@ function setupEventListeners() {
         }
     });
     
+    // MCQ pagination
+    setupMCQPaginationListeners();
+    
     // Exam navigation buttons
     setupExamNavigationListeners();
     
     // Setup search
     setupSearch();
+}
+
+function setupMCQPaginationListeners() {
+    const firstPageBtn = getDOMElement('first-page');
+    const prevPageBtn = getDOMElement('prev-page');
+    const nextPageBtn = getDOMElement('next-page');
+    const lastPageBtn = getDOMElement('last-page');
+    const questionsPerPageSelect = getDOMElement('questions-per-page');
+    const backToSubjectsBtn = getDOMElement('back-to-subjects');
+    const backToSubjectsFromChapterBtn = getDOMElement('back-to-subjects-from-chapter');
+    
+    if (firstPageBtn) {
+        firstPageBtn.addEventListener('click', () => {
+            AppState.mcqState.currentPage = 1;
+            renderCurrentPage();
+        });
+    }
+    
+    if (prevPageBtn) {
+        prevPageBtn.addEventListener('click', () => {
+            if (AppState.mcqState.currentPage > 1) {
+                AppState.mcqState.currentPage--;
+                renderCurrentPage();
+            }
+        });
+    }
+    
+    if (nextPageBtn) {
+        nextPageBtn.addEventListener('click', () => {
+            const totalPages = parseInt(getDOMElement('total-pages').textContent);
+            if (AppState.mcqState.currentPage < totalPages) {
+                AppState.mcqState.currentPage++;
+                renderCurrentPage();
+            }
+        });
+    }
+    
+    if (lastPageBtn) {
+        lastPageBtn.addEventListener('click', () => {
+            AppState.mcqState.currentPage = parseInt(getDOMElement('total-pages').textContent);
+            renderCurrentPage();
+        });
+    }
+    
+    if (questionsPerPageSelect) {
+        questionsPerPageSelect.addEventListener('change', (e) => {
+            const value = e.target.value;
+            AppState.mcqState.questionsPerPage = value === 'all' ? 'all' : parseInt(value);
+            AppState.mcqState.currentPage = 1;
+            setupPagination();
+            renderCurrentPage();
+        });
+    }
+    
+    if (backToSubjectsBtn) {
+        backToSubjectsBtn.addEventListener('click', () => {
+            const mcqPractice = getDOMElement('mcq-practice');
+            const chapterSelection = getDOMElement('chapter-selection');
+            if (mcqPractice && chapterSelection) {
+                mcqPractice.style.display = 'none';
+                chapterSelection.style.display = 'block';
+            }
+        });
+    }
+    
+    if (backToSubjectsFromChapterBtn) {
+        backToSubjectsFromChapterBtn.addEventListener('click', () => {
+            const chapterSelection = getDOMElement('chapter-selection');
+            const subjectGrid = getDOMElement('subject-grid');
+            if (chapterSelection && subjectGrid) {
+                chapterSelection.style.display = 'none';
+                subjectGrid.style.display = 'block';
+            }
+        });
+    }
 }
 
 function setupExamNavigationListeners() {
@@ -3109,14 +2974,133 @@ function showExamAnswers() {
             document.body.removeChild(modal);
         }
     });
-
-   // Exam navigation back buttons
-    DOM.backToExamTypeBtn.addEventListener('click', resetExamTypeSelection);
-    DOM.backToExamTypeMcqBtn.addEventListener('click', resetExamTypeSelection);
-    DOM.backToExamTypeResultsBtn.addEventListener('click', resetExamTypeSelection);
-
 }
 
+// ==============================================
+// INITIALIZATION FUNCTIONS
+// ==============================================
+
+function init() {
+    console.log("Initializing application...");
+    initializeDOMReferences();
+    setupEventListeners();
+    loadField('civil');
+    updateFieldIndicators();
+    initPaymentSystem();
+    console.log("Application initialized successfully");
+}
+
+function loadField(field) {
+    console.log(`Loading field: ${field}`);
+    
+    clearGitHubCache();
+    AppState.currentField = field;
+    const config = FIELD_CONFIG[field];
+    
+    const currentField = getDOMElement('current-field');
+    const userField = getDOMElement('user-field');
+    
+    if (currentField) {
+        currentField.innerHTML = `<i class="fas ${config.icon}"></i> ${config.name}`;
+    }
+    
+    if (userField) {
+        userField.textContent = config.name;
+    }
+    
+    document.documentElement.style.setProperty('--primary-color', config.color);
+    
+    const header = document.querySelector('header');
+    if (header) {
+        header.style.background = `linear-gradient(to right, ${config.color}, ${lightenColor(config.color, 20)})`;
+    }
+    
+    updateFieldIndicators();
+    resetPracticeSessions();
+    
+    const activeSection = document.querySelector('.section.active');
+    if (activeSection) {
+        loadSectionData(activeSection.id);
+    }
+    
+    console.log(`Field loaded: ${field}`);
+}
+
+function updateFieldIndicators() {
+    const config = FIELD_CONFIG[AppState.currentField];
+    const indicators = [
+        'notice-field-indicator',
+        'syllabus-field-indicator', 
+        'old-questions-field-indicator',
+        'mcq-field-indicator',
+        'subjective-field-indicator',
+        'exam-field-indicator'
+    ];
+    
+    indicators.forEach(id => {
+        const indicator = getDOMElement(id);
+        if (indicator) {
+            indicator.innerHTML = `<i class="fas ${config.icon}"></i> ${config.name.split(' ')[0]}`;
+            indicator.style.backgroundColor = config.color;
+        }
+    });
+}
+
+function resetPracticeSessions() {
+    const elements = {
+        'mcq-practice': 'none',
+        'chapter-selection': 'none',
+        'subject-grid': 'block',
+        'subjective-content': 'none',
+        'subjective-chapter-selection': 'none',
+        'subjective-set-grid': 'block'
+    };
+    
+    Object.entries(elements).forEach(([id, display]) => {
+        const element = getDOMElement(id);
+        if (element) element.style.display = display;
+    });
+    
+    resetExamTypeSelection();
+    
+    AppState.mcqState = {
+        currentSubject: null,
+        currentChapter: null,
+        currentPage: 1,
+        questionsPerPage: 5,
+        questions: [],
+        userAnswers: {},
+        currentQuestions: []
+    };
+    AppState.subjectiveState = {
+        currentSubject: null,
+        currentChapter: null,
+        chapters: []
+    };
+}
+
+function loadSectionData(section) {
+    switch(section) {
+        case 'notice':
+            loadNoticeFiles();
+            break;
+        case 'syllabus':
+            loadSyllabusFiles();
+            break;
+        case 'old-questions':
+            loadOldQuestionFiles();
+            break;
+        case 'objective-mcqs':
+            loadMCQSubjects();
+            break;
+        case 'subjective':
+            initEnhancedSubjective();
+            break;
+        case 'take-exam':
+            // Already handled by resetExamTypeSelection
+            break;
+    }
+}
 
 // ==============================================
 // GLOBAL FUNCTIONS
@@ -3146,8 +3130,13 @@ window.downloadFile = function(fileUrl, fileName) {
 };
 
 window.goBackToSubjectiveChapters = function() {
-    DOM.subjectiveContent.style.display = 'none';
-    DOM.subjectiveChapterSelection.style.display = 'block';
+    const subjectiveContent = getDOMElement('subjective-content');
+    const subjectiveChapterSelection = getDOMElement('subjective-chapter-selection');
+    
+    if (subjectiveContent && subjectiveChapterSelection) {
+        subjectiveContent.style.display = 'none';
+        subjectiveChapterSelection.style.display = 'block';
+    }
 };
 
 // ==============================================
