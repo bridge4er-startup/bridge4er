@@ -1,0 +1,44 @@
+{
+  "sets": {
+    "set_a_fundamentals.json": {
+      "displayName": "Set A - Fundamentals",
+      "price": 0,
+      "time": 10800,
+      "questions": 5,
+      "description": "Basic concepts and fundamental principles",
+      "free": true
+    },
+    "set_b_application.json": {
+      "displayName": "Set B - Application Based",
+      "price": 0,
+      "time": 10800,
+      "questions": 6,
+      "description": "Real-world application problems",
+      "free": true
+    },
+    "set_c_case_studies.json": {
+      "displayName": "Set C - Case Studies",
+      "price": 150,
+      "time": 14400,
+      "questions": 4,
+      "description": "Complex case studies and analysis",
+      "free": false,
+      "features": ["Detailed solutions", "Professional evaluation"]
+    },
+    "set_d_professional.json": {
+      "displayName": "Set D - Professional Practice",
+      "price": 200,
+      "time": 14400,
+      "questions": 3,
+      "description": "Advanced professional practice questions",
+      "free": false,
+      "features": ["Industry standards", "Expert feedback available"]
+    }
+  },
+  "defaults": {
+    "price": 100,
+    "time": 10800,
+    "freeSets": 2,
+    "currency": "NPR"
+  }
+}
