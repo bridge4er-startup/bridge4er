@@ -1,1 +1,44 @@
-xyz
+{
+  "sets": {
+    "set_a_basic_concepts.json": {
+      "displayName": "Set A - Basic Concepts",
+      "price": 0,
+      "time": 1800,
+      "questions": 20,
+      "difficulty": "Easy",
+      "free": true
+    },
+    "set_b_intermediate.json": {
+      "displayName": "Set B - Intermediate Level",
+      "price": 0,
+      "time": 1800,
+      "questions": 25,
+      "difficulty": "Medium",
+      "free": true
+    },
+    "set_c_advanced.json": {
+      "displayName": "Set C - Advanced Problems",
+      "price": 75,
+      "time": 2700,
+      "questions": 30,
+      "difficulty": "Hard",
+      "free": false,
+      "features": ["Time-bound", "Detailed explanations"]
+    },
+    "set_d_expert.json": {
+      "displayName": "Set D - Expert Challenge",
+      "price": 100,
+      "time": 3600,
+      "questions": 35,
+      "difficulty": "Expert",
+      "free": false,
+      "features": ["Challenging questions", "Performance analytics"]
+    }
+  },
+  "defaults": {
+    "price": 50,
+    "time": 1800,
+    "freeSets": 2,
+    "currency": "NPR"
+  }
+}
