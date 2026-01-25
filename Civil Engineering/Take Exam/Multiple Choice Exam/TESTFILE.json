@@ -1,0 +1,14 @@
+[
+  {
+    "question": "What is the SI unit of force?",
+    "options": ["Newton", "Pascal", "Joule", "Watt"],
+    "correct": "Newton",
+    "explanation": "Force is measured in Newtons (N) in the SI system."
+  },
+  {
+    "question": "Which material has the highest compressive strength?",
+    "options": ["Concrete", "Steel", "Wood", "Aluminum"],
+    "correct": "Concrete",
+    "explanation": "Concrete has very high compressive strength but low tensile strength."
+  }
+]
