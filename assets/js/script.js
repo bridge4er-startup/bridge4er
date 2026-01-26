@@ -26,77 +26,6 @@ function clearGitHubCache() {
 }
 
 // ==============================================
-// DEBUG FUNCTION - ADD THIS AT THE TOP OF SCRIPT.JS
-// ==============================================
-
-window.debugExamLoading = async function() {
-    console.log("=== DEBUG: Checking Exam Loading ===");
-    
-    const field = AppState.currentField;
-    console.log("Current field:", field);
-    
-    // Test loading MCQ exam sets
-    console.log("Testing MCQ exam set discovery...");
-    const mcqSets = await discoverMCQExamSets();
-    console.log("Found MCQ sets:", mcqSets);
-    
-    if (mcqSets.length > 0) {
-        const firstSet = mcqSets[0];
-        console.log("\n=== Testing set:", firstSet.displayName, "===");
-        console.log("File name:", firstSet.fileName);
-        
-        // Try to load the JSON directly
-        const filePath = `${FIELD_CONFIG[field].folderPrefix}Take Exam/Multiple Choice Exam/${firstSet.fileName}`;
-        console.log("Full path:", filePath);
-        
-        const rawUrl = getRawFileUrl(filePath);
-        console.log("Raw URL:", rawUrl);
-        
-        try {
-            const response = await fetch(rawUrl);
-            console.log("Response status:", response.status);
-            
-            if (response.ok) {
-                const jsonText = await response.text();
-                console.log("Raw JSON text (first 500 chars):", jsonText.substring(0, 500));
-                
-                try {
-                    const jsonData = JSON.parse(jsonText);
-                    console.log("Parsed JSON structure:");
-                    console.log("Type:", typeof jsonData);
-                    console.log("Is array?", Array.isArray(jsonData));
-                    
-                    if (Array.isArray(jsonData)) {
-                        console.log("Array length:", jsonData.length);
-                        if (jsonData.length > 0) {
-                            console.log("First question:", jsonData[0]);
-                        }
-                    } else if (typeof jsonData === 'object') {
-                        console.log("Object keys:", Object.keys(jsonData));
-                        if (jsonData.questions && Array.isArray(jsonData.questions)) {
-                            console.log("Found 'questions' array, length:", jsonData.questions.length);
-                        }
-                        if (jsonData.mcqs && Array.isArray(jsonData.mcqs)) {
-                            console.log("Found 'mcqs' array, length:", jsonData.mcqs.length);
-                        }
-                    }
-                } catch (parseError) {
-                    console.error("JSON parse error:", parseError);
-                    console.log("Raw text that failed to parse:", jsonText);
-                }
-            } else {
-                console.error("Failed to fetch JSON file");
-            }
-        } catch (fetchError) {
-            console.error("Fetch error:", fetchError);
-        }
-    } else {
-        console.log("No MCQ sets found!");
-    }
-};
-
-
-// ==============================================
 // COMPONENT LOADING (OPTIMIZED)
 // ==============================================
 
@@ -1961,86 +1890,40 @@ function renderSubjectiveExamSetSelection(examSets) {
 // ==============================================
 
 async function loadAndStartMCQExam(selectedSet) {
-    console.log("🚀 Starting MCQ exam:", selectedSet.displayName);
+    console.log("Loading MCQ exam:", selectedSet.displayName);
     
     try {
-        // Clear previous state
-        AppState.examState = {
-            type: 'multiple-choice',
-            currentSet: selectedSet.displayName,
-            currentFileName: selectedSet.fileName,
-            currentQuestionIndex: 0,
-            questions: [],
-            answers: {},
-            flagged: {},
-            timer: null,
-            startTime: null,
-            totalTime: 30 * 60,
-            mcqSets: [],
-            subjectiveSets: []
-        };
+        const state = AppState.examState;
+        state.type = 'multiple-choice';
+        state.currentSet = selectedSet.displayName;
+        state.currentFileName = selectedSet.fileName;
+        state.currentQuestionIndex = 0;
+        state.answers = {};
+        state.flagged = {};
+        state.totalTime = 30 * 60;
         
-        console.log(`📥 Loading questions from: ${selectedSet.fileName}`);
+        state.questions = await loadMCQExam(selectedSet.fileName, selectedSet.displayName);
         
-        // Load questions
-        const questions = await loadMCQExam(selectedSet.fileName, selectedSet.displayName);
-        AppState.examState.questions = questions;
-        
-        console.log(`📊 Questions loaded: ${questions.length}`);
-        
-        if (questions.length === 0) {
-            throw new Error('No questions loaded from JSON file');
+        if (state.questions.length === 0) {
+            throw new Error('No questions loaded');
         }
         
-        // Show the exam interface
-        const examSetSelection = document.getElementById('exam-set-selection');
-        const mcqExam = document.getElementById('multiple-choice-exam');
-        const examTitle = document.getElementById('multiple-choice-exam-title');
+        const examSetSelection = getDOMElement('exam-set-selection');
+        const mcqExam = getDOMElement('multiple-choice-exam');
+        const examTitle = getDOMElement('multiple-choice-exam-title');
         
-        if (!examSetSelection || !mcqExam || !examTitle) {
-            throw new Error('Required DOM elements not found');
-        }
+        if (!examSetSelection || !mcqExam || !examTitle) return;
         
-        examSetSelection.style.display = 'none';
-        mcqExam.style.display = 'block';
+        hideElement(examSetSelection);
+        showElement(mcqExam);
         examTitle.textContent = `Multiple Choice Exam - ${selectedSet.displayName}`;
         
-        // Update progress indicators
-        updateMCQExamProgress();
-        
-        // Load and display the first question
         loadMCQExamQuestion();
-        
-        // Start the timer
         startTimer('mcq');
         
-        console.log("✅ MCQ exam started successfully");
-        
     } catch (error) {
-        console.error('❌ Error starting MCQ exam:', error);
-        
-        // Show error message in the container
-        const multipleChoiceContainer = document.getElementById('multiple-choice-container');
-        if (multipleChoiceContainer) {
-            multipleChoiceContainer.innerHTML = `
-                <div class="error-message" style="text-align: center; padding: 3rem;">
-                    <i class="fas fa-exclamation-triangle fa-3x"></i>
-                    <h3>Failed to load exam questions</h3>
-                    <p>${error.message}</p>
-                    <p>Please check:</p>
-                    <ul style="text-align: left; margin: 1rem auto; max-width: 500px;">
-                        <li>JSON file exists in GitHub repository</li>
-                        <li>JSON format is valid (array of questions)</li>
-                        <li>File path is correct</li>
-                    </ul>
-                    <button class="btn btn-primary" onclick="resetExamTypeSelection()">
-                        <i class="fas fa-arrow-left"></i> Back to Exam Selection
-                    </button>
-                </div>
-            `;
-        }
-        
-        alert(`Failed to start exam: ${error.message}`);
+        console.error('Error loading exam set:', error);
+        alert(`Failed to load exam questions from ${selectedSet.fileName}.`);
     }
 }
 
@@ -2075,162 +1958,33 @@ async function loadMCQExam(fileName, displayName) {
     
     try {
         const filePath = `${FIELD_CONFIG[field].folderPrefix}Take Exam/Multiple Choice Exam/${fileName}`;
-        console.log(`📂 Loading MCQ exam from: ${filePath}`);
+        const jsonData = await getJsonFileFromGitHub(filePath);
         
-        // Try to get the JSON file
-        let jsonData;
-        try {
-            const response = await fetch(getRawFileUrl(filePath));
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            const jsonText = await response.text();
-            console.log(`📄 Raw JSON received (${jsonText.length} chars)`);
-            
-            // Clean the JSON text (remove BOM if present)
-            const cleanJsonText = jsonText.replace(/^\uFEFF/, '');
-            
-            // Try to parse the JSON
-            jsonData = JSON.parse(cleanJsonText);
-            console.log(`✅ JSON parsed successfully, type: ${typeof jsonData}`);
-            
-        } catch (fetchError) {
-            console.error('❌ Error fetching JSON:', fetchError);
-            // Try using the cached version as fallback
-            jsonData = await getJsonFileFromGitHub(filePath);
-            if (!jsonData) {
-                throw new Error(`Could not load JSON file: ${fileName}`);
-            }
+        if (!jsonData) {
+            throw new Error('No JSON data received');
         }
         
         let questions = [];
         
-        // Handle different JSON formats
-        console.log(`🔍 Analyzing JSON structure...`);
-        
-        // FORMAT 1: Direct array of questions
         if (Array.isArray(jsonData)) {
-            console.log(`📊 Format detected: Direct array (${jsonData.length} items)`);
-            questions = jsonData.map((q, index) => {
-                // Handle different property names
-                const questionText = q.question || q.Question || q.text || `Question ${index + 1}`;
-                const options = q.options || q.Options || q.choices || ["Option A", "Option B", "Option C", "Option D"];
-                const correct = q.correct || q.correctAnswer || q.answer || q.Correct || (options && options[0]) || "A";
-                const explanation = q.explanation || q.Explanation || q.reason || "No explanation provided";
-                
-                return {
-                    id: `exam_${fileName}_${index}`,
-                    question: questionText,
-                    options: Array.isArray(options) ? options : 
-                            (typeof options === 'string' ? options.split(',') : ["Option A", "Option B", "Option C", "Option D"]),
-                    correct: correct,
-                    explanation: explanation
-                };
-            });
-        }
-        // FORMAT 2: Object with "questions" array
-        else if (jsonData.questions && Array.isArray(jsonData.questions)) {
-            console.log(`📊 Format detected: Object with 'questions' array (${jsonData.questions.length} items)`);
-            questions = jsonData.questions.map((q, index) => ({
+            questions = jsonData.map((q, index) => ({
                 id: `exam_${fileName}_${index}`,
-                question: q.question || q.Question || `Question ${index + 1}`,
-                options: q.options || q.Options || ["Option A", "Option B", "Option C", "Option D"],
-                correct: q.correct || q.correctAnswer || q.answer || (q.options ? q.options[0] : "A"),
-                explanation: q.explanation || q.Explanation || "No explanation provided"
+                question: q.question || `Question ${index + 1}`,
+                options: q.options || ["Option A", "Option B", "Option C", "Option D"],
+                correct: q.correct || (q.options ? q.options[0] : "A"),
+                explanation: q.explanation || "No explanation provided"
             }));
-        }
-        // FORMAT 3: Object with "mcqs" array
-        else if (jsonData.mcqs && Array.isArray(jsonData.mcqs)) {
-            console.log(`📊 Format detected: Object with 'mcqs' array (${jsonData.mcqs.length} items)`);
-            questions = jsonData.mcqs.map((q, index) => ({
-                id: `exam_${fileName}_${index}`,
-                question: q.question || q.Question || `Question ${index + 1}`,
-                options: q.options || q.Options || ["Option A", "Option B", "Option C", "Option D"],
-                correct: q.correct || q.correctAnswer || q.answer || (q.options ? q.options[0] : "A"),
-                explanation: q.explanation || q.Explanation || "No explanation provided"
-            }));
-        }
-        // FORMAT 4: Object with numbered questions (q1, q2, etc.)
-        else if (typeof jsonData === 'object') {
-            console.log(`📊 Format detected: Plain object with ${Object.keys(jsonData).length} keys`);
-            
-            // Extract all questions from object properties
-            Object.keys(jsonData).forEach((key, index) => {
-                const q = jsonData[key];
-                if (q && (q.question || q.Question)) {
-                    questions.push({
-                        id: `exam_${fileName}_${index}`,
-                        question: q.question || q.Question,
-                        options: q.options || q.Options || ["Option A", "Option B", "Option C", "Option D"],
-                        correct: q.correct || q.correctAnswer || q.answer || (q.options ? q.options[0] : "A"),
-                        explanation: q.explanation || q.Explanation || "No explanation provided"
-                    });
-                }
-            });
-            
-            // If no questions found in object properties, try to use the entire object as one question
-            if (questions.length === 0 && (jsonData.question || jsonData.Question)) {
-                console.log(`📊 Format detected: Single question object`);
-                questions.push({
-                    id: `exam_${fileName}_0`,
-                    question: jsonData.question || jsonData.Question,
-                    options: jsonData.options || jsonData.Options || ["Option A", "Option B", "Option C", "Option D"],
-                    correct: jsonData.correct || jsonData.correctAnswer || jsonData.answer || (jsonData.options ? jsonData.options[0] : "A"),
-                    explanation: jsonData.explanation || jsonData.Explanation || "No explanation provided"
-                });
-            }
         }
         
-        // If still no questions, create demo questions
         if (questions.length === 0) {
-            console.warn(`⚠️ No questions found in JSON file, creating demo questions`);
-            questions = [
-                {
-                    id: `demo_1`,
-                    question: "What is the primary purpose of structural analysis?",
-                    options: [
-                        "To calculate material costs",
-                        "To ensure structures can withstand loads",
-                        "To select construction sites",
-                        "To design architectural features"
-                    ],
-                    correct: "To ensure structures can withstand loads",
-                    explanation: "Structural analysis determines if a structure can safely support the intended loads."
-                },
-                {
-                    id: `demo_2`,
-                    question: "Which material is commonly used for reinforcement in concrete?",
-                    options: ["Wood", "Steel", "Plastic", "Glass"],
-                    correct: "Steel",
-                    explanation: "Steel reinforcement bars (rebar) are embedded in concrete to provide tensile strength."
-                }
-            ];
+            questions = [getEmptyQuestionSet('Exam', displayName)];
         }
-        
-        console.log(`✅ Successfully loaded ${questions.length} questions`);
-        console.log("Sample question:", questions[0]);
         
         return questions;
         
     } catch (error) {
-        console.error('❌ Error loading MCQ exam:', error);
-        
-        // Return demo questions as fallback
-        return [
-            {
-                id: `error_1`,
-                question: `Error loading exam: ${displayName}`,
-                options: [
-                    "Check your JSON file format",
-                    "Verify the file exists in GitHub",
-                    "Make sure the JSON is valid",
-                    "Contact administrator"
-                ],
-                correct: "Check your JSON file format",
-                explanation: `Could not load ${fileName}. Please check: 1) File exists at correct path, 2) JSON is valid, 3) File has proper permissions.`
-            }
-        ];
+        console.error('Error loading MCQ exam:', error);
+        return [getErrorQuestionSet('Exam', displayName, fileName)];
     }
 }
 
@@ -2397,64 +2151,37 @@ function getErrorQuestionSet(subject, chapter, fileName) {
 // ==============================================
 
 function loadMCQExamQuestion() {
-    console.log("Loading MCQ exam question...");
-    
     const state = AppState.examState;
     if (!state.questions || state.questions.length === 0) {
-        console.error("No questions available in state:", state);
-        
-        const multipleChoiceContainer = document.getElementById('multiple-choice-container');
-        if (multipleChoiceContainer) {
-            multipleChoiceContainer.innerHTML = `
-                <div style="text-align: center; padding: 3rem; color: #e74c3c;">
-                    <i class="fas fa-exclamation-circle fa-3x"></i>
-                    <h3>No Questions Available</h3>
-                    <p>Failed to load questions. Please try again or contact support.</p>
-                </div>
-            `;
-        }
+        console.error("No questions available");
         return;
     }
     
-    const questionIndex = state.currentQuestionIndex;
-    const question = state.questions[questionIndex];
+    const question = state.questions[state.currentQuestionIndex];
+    const multipleChoiceContainer = getDOMElement('multiple-choice-container');
+    const currentExamQuestion = getDOMElement('current-exam-question');
+    const totalExamQuestions = getDOMElement('total-exam-questions');
+    const prevExamQuestion = getDOMElement('prev-exam-question');
+    const nextExamQuestion = getDOMElement('next-exam-question');
+    const flagExamQuestion = getDOMElement('flag-exam-question');
     
-    console.log(`Displaying question ${questionIndex + 1} of ${state.questions.length}:`, question);
+    if (!multipleChoiceContainer || !currentExamQuestion || !totalExamQuestions) return;
     
-    const multipleChoiceContainer = document.getElementById('multiple-choice-container');
-    const currentExamQuestion = document.getElementById('current-exam-question');
-    const totalExamQuestions = document.getElementById('total-exam-questions');
-    
-    if (!multipleChoiceContainer || !currentExamQuestion || !totalExamQuestions) {
-        console.error("Required DOM elements not found");
-        return;
-    }
-    
-    // Build question HTML
-    const questionHtml = `
-        <div class="mcq-question-container" style="margin: 2rem 0;">
-            <div class="question-number-badge">Question ${questionIndex + 1}</div>
-            <div class="mcq-question" style="font-size: 1.2rem; margin: 1.5rem 0;">
-                ${question.question || 'No question text available'}
-            </div>
-            <div class="mcq-options">
+    multipleChoiceContainer.innerHTML = `
+        <div class="mcq-question-container">
+            <div class="question-number-badge">Question ${state.currentQuestionIndex + 1}</div>
+            <div class="mcq-question">${question.question}</div>
+            <div class="mcq-options" id="exam-options-container">
                 ${question.options.map((option, index) => {
                     const optionLetter = String.fromCharCode(65 + index);
-                    const isSelected = state.answers[questionIndex] === option;
+                    const isSelected = state.answers[state.currentQuestionIndex] === option;
                     let optionClass = 'mcq-option';
                     if (isSelected) optionClass += ' selected';
                     
                     return `
-                        <div class="${optionClass}" 
-                             onclick="handleExamOptionClick(this)"
-                             data-exam-option="${option.replace(/"/g, '&quot;')}"
-                             style="margin: 0.8rem 0; padding: 1rem; cursor: pointer; border-radius: 8px; border: 2px solid #ddd; transition: all 0.3s;">
-                            <div style="display: flex; align-items: center; gap: 1rem;">
-                                <div class="option-letter" style="width: 30px; height: 30px; background: #eee; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">
-                                    ${optionLetter}
-                                </div>
-                                <div>${option || 'No option text'}</div>
-                            </div>
+                        <div class="${optionClass}" data-exam-option="${option}" onclick="handleExamOptionClick(this)">
+                            <div class="option-letter">${optionLetter}</div>
+                            <div>${option}</div>
                         </div>
                     `;
                 }).join('')}
@@ -2462,27 +2189,19 @@ function loadMCQExamQuestion() {
         </div>
     `;
     
-    multipleChoiceContainer.innerHTML = questionHtml;
-    
-    // Update counters
-    currentExamQuestion.textContent = questionIndex + 1;
+    currentExamQuestion.textContent = state.currentQuestionIndex + 1;
     totalExamQuestions.textContent = state.questions.length;
     
-    // Update button states
-    const prevExamQuestion = document.getElementById('prev-exam-question');
-    const nextExamQuestion = document.getElementById('next-exam-question');
-    const flagExamQuestion = document.getElementById('flag-exam-question');
-    
     if (prevExamQuestion) {
-        prevExamQuestion.disabled = questionIndex === 0;
+        prevExamQuestion.disabled = state.currentQuestionIndex === 0;
     }
     
     if (nextExamQuestion) {
-        nextExamQuestion.disabled = questionIndex === state.questions.length - 1;
+        nextExamQuestion.disabled = state.currentQuestionIndex === state.questions.length - 1;
     }
     
     if (flagExamQuestion) {
-        if (state.flagged[questionIndex]) {
+        if (state.flagged[state.currentQuestionIndex]) {
             flagExamQuestion.innerHTML = '<i class="fas fa-flag"></i> Unflag';
             flagExamQuestion.style.backgroundColor = '#e74c3c';
         } else {
@@ -2491,7 +2210,6 @@ function loadMCQExamQuestion() {
         }
     }
     
-    // Update progress
     updateMCQExamProgress();
 }
 
@@ -2652,64 +2370,6 @@ function resetExamTypeSelection() {
         subjectiveSets: []
     };
 }
-
-
-// Add this function to test the exam loading
-window.testExamSetup = function() {
-    console.log("=== Testing Exam Setup ===");
-    
-    // Check if all required elements exist
-    const elements = [
-        'exam-type-selection',
-        'exam-set-selection',
-        'multiple-choice-exam',
-        'multiple-choice-container',
-        'current-exam-question',
-        'total-exam-questions'
-    ];
-    
-    elements.forEach(id => {
-        const element = document.getElementById(id);
-        console.log(`${id}: ${element ? 'FOUND' : 'NOT FOUND'}`);
-    });
-    
-    // Check current exam state
-    console.log("Current exam state:", AppState.examState);
-    
-    // Try to load a demo question directly
-    const container = document.getElementById('multiple-choice-container');
-    if (container) {
-        container.innerHTML = `
-            <div class="mcq-question-container" style="margin: 2rem 0;">
-                <div class="question-number-badge">Question 1</div>
-                <div class="mcq-question" style="font-size: 1.2rem; margin: 1.5rem 0;">
-                    What is 2 + 2?
-                </div>
-                <div class="mcq-options">
-                    <div class="mcq-option" onclick="alert('Option A clicked')" style="margin: 0.8rem 0; padding: 1rem; cursor: pointer; border-radius: 8px; border: 2px solid #ddd;">
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div class="option-letter" style="width: 30px; height: 30px; background: #eee; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">
-                                A
-                            </div>
-                            <div>3</div>
-                        </div>
-                    </div>
-                    <div class="mcq-option" onclick="alert('Option B clicked')" style="margin: 0.8rem 0; padding: 1rem; cursor: pointer; border-radius: 8px; border: 2px solid #ddd;">
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div class="option-letter" style="width: 30px; height: 30px; background: #eee; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">
-                                B
-                            </div>
-                            <div>4</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-        console.log("Demo question injected");
-    }
-    
-    alert("Test completed. Check console for details.");
-};
 
 // ==============================================
 // PAYMENT SYSTEM
@@ -3437,46 +3097,9 @@ function loadSectionData(section) {
             initEnhancedSubjective();
             break;
         case 'take-exam':
-            initExamSection();  // Add this line
-            resetExamTypeSelection();
+            // Already handled by resetExamTypeSelection
             break;
     }
-}
-
-function initExamSection() {
-    console.log("Initializing exam section...");
-    
-    // Clear any existing exam state
-    AppState.examState = {
-        type: null,
-        currentSet: null,
-        currentFileName: null,
-        currentQuestionIndex: 0,
-        questions: [],
-        answers: {},
-        flagged: {},
-        timer: null,
-        startTime: null,
-        totalTime: 0,
-        mcqSets: [],
-        subjectiveSets: []
-    };
-    
-    // Setup exam type selection
-    const examTypeCards = document.querySelectorAll('.exam-type-card');
-    examTypeCards.forEach(card => {
-        card.addEventListener('click', function() {
-            const examType = this.dataset.examType;
-            
-            if (examType === 'subjective') {
-                showSubjectiveExamSetSelection();
-            } else if (examType === 'multiple-choice') {
-                showMCQExamSetSelection();
-            }
-        });
-    });
-    
-    console.log("Exam section initialized");
 }
 
 // ==============================================
