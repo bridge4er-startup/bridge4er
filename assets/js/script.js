@@ -3013,61 +3013,11 @@ function init() {
     
     initializeDOMReferences();
     setupEventListeners();
-    setupExamEventListeners();
     loadField('civil');
     updateFieldIndicators();
     initPaymentSystem();
     console.log("Application initialized successfully");
 }
-
-function setupExamEventListeners() {
-    console.log('Setting up exam event listeners');
-    
-    // Exam type selection
-    document.querySelectorAll('.exam-type-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const examType = this.dataset.examType;
-            if (examType === 'multiple-choice') {
-                showMCQExamSets();
-            } else if (examType === 'subjective') {
-                showSubjectiveExamSets();
-            }
-        });
-    });
-    
-    // MCQ exam navigation
-    document.getElementById('prev-exam-question')?.addEventListener('click', () => {
-        if (AppState.examState.currentQuestionIndex > 0) {
-            AppState.examState.currentQuestionIndex--;
-            displayMCQQuestion();
-        }
-    });
-    
-    document.getElementById('next-exam-question')?.addEventListener('click', () => {
-        if (AppState.examState.currentQuestionIndex < AppState.examState.questions.length - 1) {
-            AppState.examState.currentQuestionIndex++;
-            displayMCQQuestion();
-        }
-    });
-    
-    document.getElementById('flag-exam-question')?.addEventListener('click', () => {
-        const index = AppState.examState.currentQuestionIndex;
-        AppState.examState.flagged[index] = !AppState.examState.flagged[index];
-        displayMCQQuestion();
-    });
-    
-    document.getElementById('submit-mcq-exam')?.addEventListener('click', () => {
-        if (confirm('Are you sure you want to submit your exam?')) {
-            submitMCQExam();
-        }
-    });
-    
-    // Back buttons
-    document.getElementById('back-to-exam-type')?.addEventListener('click', resetExamTypeSelection);
-    document.getElementById('back-to-exam-type-mcq')?.addEventListener('click', resetExamTypeSelection);
-    document.getElementById('back-to-exam-type-results')?.addEventListener('click', resetExamTypeSelection);
-}
-
 
 function loadField(field) {
     console.log(`Loading field: ${field}`);
