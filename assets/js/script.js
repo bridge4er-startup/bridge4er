@@ -26,6 +26,77 @@ function clearGitHubCache() {
 }
 
 // ==============================================
+// DEBUG FUNCTION - ADD THIS AT THE TOP OF SCRIPT.JS
+// ==============================================
+
+window.debugExamLoading = async function() {
+    console.log("=== DEBUG: Checking Exam Loading ===");
+    
+    const field = AppState.currentField;
+    console.log("Current field:", field);
+    
+    // Test loading MCQ exam sets
+    console.log("Testing MCQ exam set discovery...");
+    const mcqSets = await discoverMCQExamSets();
+    console.log("Found MCQ sets:", mcqSets);
+    
+    if (mcqSets.length > 0) {
+        const firstSet = mcqSets[0];
+        console.log("\n=== Testing set:", firstSet.displayName, "===");
+        console.log("File name:", firstSet.fileName);
+        
+        // Try to load the JSON directly
+        const filePath = `${FIELD_CONFIG[field].folderPrefix}Take Exam/Multiple Choice Exam/${firstSet.fileName}`;
+        console.log("Full path:", filePath);
+        
+        const rawUrl = getRawFileUrl(filePath);
+        console.log("Raw URL:", rawUrl);
+        
+        try {
+            const response = await fetch(rawUrl);
+            console.log("Response status:", response.status);
+            
+            if (response.ok) {
+                const jsonText = await response.text();
+                console.log("Raw JSON text (first 500 chars):", jsonText.substring(0, 500));
+                
+                try {
+                    const jsonData = JSON.parse(jsonText);
+                    console.log("Parsed JSON structure:");
+                    console.log("Type:", typeof jsonData);
+                    console.log("Is array?", Array.isArray(jsonData));
+                    
+                    if (Array.isArray(jsonData)) {
+                        console.log("Array length:", jsonData.length);
+                        if (jsonData.length > 0) {
+                            console.log("First question:", jsonData[0]);
+                        }
+                    } else if (typeof jsonData === 'object') {
+                        console.log("Object keys:", Object.keys(jsonData));
+                        if (jsonData.questions && Array.isArray(jsonData.questions)) {
+                            console.log("Found 'questions' array, length:", jsonData.questions.length);
+                        }
+                        if (jsonData.mcqs && Array.isArray(jsonData.mcqs)) {
+                            console.log("Found 'mcqs' array, length:", jsonData.mcqs.length);
+                        }
+                    }
+                } catch (parseError) {
+                    console.error("JSON parse error:", parseError);
+                    console.log("Raw text that failed to parse:", jsonText);
+                }
+            } else {
+                console.error("Failed to fetch JSON file");
+            }
+        } catch (fetchError) {
+            console.error("Fetch error:", fetchError);
+        }
+    } else {
+        console.log("No MCQ sets found!");
+    }
+};
+
+
+// ==============================================
 // COMPONENT LOADING (OPTIMIZED)
 // ==============================================
 
@@ -1890,7 +1961,7 @@ function renderSubjectiveExamSetSelection(examSets) {
 // ==============================================
 
 async function loadAndStartMCQExam(selectedSet) {
-    console.log("Loading MCQ exam:", selectedSet.displayName);
+    console.log("🚀 Starting MCQ exam:", selectedSet.displayName);
     
     try {
         const state = AppState.examState;
@@ -1902,28 +1973,44 @@ async function loadAndStartMCQExam(selectedSet) {
         state.flagged = {};
         state.totalTime = 30 * 60;
         
+        console.log(`📥 Loading questions from: ${selectedSet.fileName}`);
         state.questions = await loadMCQExam(selectedSet.fileName, selectedSet.displayName);
         
+        console.log(`📊 Questions loaded: ${state.questions.length}`);
+        
         if (state.questions.length === 0) {
-            throw new Error('No questions loaded');
+            throw new Error('No questions loaded from JSON file');
         }
         
         const examSetSelection = getDOMElement('exam-set-selection');
         const mcqExam = getDOMElement('multiple-choice-exam');
         const examTitle = getDOMElement('multiple-choice-exam-title');
         
-        if (!examSetSelection || !mcqExam || !examTitle) return;
+        if (!examSetSelection || !mcqExam || !examTitle) {
+            throw new Error('Required DOM elements not found');
+        }
         
         hideElement(examSetSelection);
         showElement(mcqExam);
         examTitle.textContent = `Multiple Choice Exam - ${selectedSet.displayName}`;
         
+        // Update progress indicators immediately
+        updateMCQExamProgress();
+        
+        // Load and display the first question
         loadMCQExamQuestion();
+        
+        // Start the timer
         startTimer('mcq');
         
+        console.log("✅ MCQ exam started successfully");
+        
     } catch (error) {
-        console.error('Error loading exam set:', error);
-        alert(`Failed to load exam questions from ${selectedSet.fileName}.`);
+        console.error('❌ Error starting MCQ exam:', error);
+        alert(`Failed to start exam: ${error.message}\n\nPlease check:\n1. JSON file exists in GitHub\n2. JSON format is correct\n3. File path is correct`);
+        
+        // Go back to exam set selection
+        resetExamTypeSelection();
     }
 }
 
@@ -1958,123 +2045,164 @@ async function loadMCQExam(fileName, displayName) {
     
     try {
         const filePath = `${FIELD_CONFIG[field].folderPrefix}Take Exam/Multiple Choice Exam/${fileName}`;
-        console.log(`Loading MCQ exam from: ${filePath}`);
-        const jsonData = await getJsonFileFromGitHub(filePath);
+        console.log(`📂 Loading MCQ exam from: ${filePath}`);
         
-        if (!jsonData) {
-            throw new Error('No JSON data received');
+        // Try to get the JSON file
+        let jsonData;
+        try {
+            const response = await fetch(getRawFileUrl(filePath));
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            
+            const jsonText = await response.text();
+            console.log(`📄 Raw JSON received (${jsonText.length} chars)`);
+            
+            // Clean the JSON text (remove BOM if present)
+            const cleanJsonText = jsonText.replace(/^\uFEFF/, '');
+            
+            // Try to parse the JSON
+            jsonData = JSON.parse(cleanJsonText);
+            console.log(`✅ JSON parsed successfully, type: ${typeof jsonData}`);
+            
+        } catch (fetchError) {
+            console.error('❌ Error fetching JSON:', fetchError);
+            // Try using the cached version as fallback
+            jsonData = await getJsonFileFromGitHub(filePath);
+            if (!jsonData) {
+                throw new Error(`Could not load JSON file: ${fileName}`);
+            }
         }
         
-        console.log('Received JSON data:', jsonData);
         let questions = [];
         
         // Handle different JSON formats
+        console.log(`🔍 Analyzing JSON structure...`);
+        
+        // FORMAT 1: Direct array of questions
         if (Array.isArray(jsonData)) {
-            // Format 1: Direct array of questions
-            questions = jsonData.map((q, index) => ({
-                id: `exam_${fileName}_${index}`,
-                question: q.question || q.Question || `Question ${index + 1}`,
-                options: q.options || q.Options || ["Option A", "Option B", "Option C", "Option D"],
-                correct: q.correct || q.correctAnswer || q.Correct || (q.options ? q.options[0] : "A"),
-                explanation: q.explanation || q.Explanation || "No explanation provided"
-            }));
-        } else if (jsonData.questions && Array.isArray(jsonData.questions)) {
-            // Format 2: Object with "questions" array
+            console.log(`📊 Format detected: Direct array (${jsonData.length} items)`);
+            questions = jsonData.map((q, index) => {
+                // Handle different property names
+                const questionText = q.question || q.Question || q.text || `Question ${index + 1}`;
+                const options = q.options || q.Options || q.choices || ["Option A", "Option B", "Option C", "Option D"];
+                const correct = q.correct || q.correctAnswer || q.answer || q.Correct || (options && options[0]) || "A";
+                const explanation = q.explanation || q.Explanation || q.reason || "No explanation provided";
+                
+                return {
+                    id: `exam_${fileName}_${index}`,
+                    question: questionText,
+                    options: Array.isArray(options) ? options : 
+                            (typeof options === 'string' ? options.split(',') : ["Option A", "Option B", "Option C", "Option D"]),
+                    correct: correct,
+                    explanation: explanation
+                };
+            });
+        }
+        // FORMAT 2: Object with "questions" array
+        else if (jsonData.questions && Array.isArray(jsonData.questions)) {
+            console.log(`📊 Format detected: Object with 'questions' array (${jsonData.questions.length} items)`);
             questions = jsonData.questions.map((q, index) => ({
                 id: `exam_${fileName}_${index}`,
                 question: q.question || q.Question || `Question ${index + 1}`,
                 options: q.options || q.Options || ["Option A", "Option B", "Option C", "Option D"],
-                correct: q.correct || q.correctAnswer || q.Correct || (q.options ? q.options[0] : "A"),
+                correct: q.correct || q.correctAnswer || q.answer || (q.options ? q.options[0] : "A"),
                 explanation: q.explanation || q.Explanation || "No explanation provided"
             }));
-        } else if (jsonData.mcqs && Array.isArray(jsonData.mcqs)) {
-            // Format 3: Object with "mcqs" array
+        }
+        // FORMAT 3: Object with "mcqs" array
+        else if (jsonData.mcqs && Array.isArray(jsonData.mcqs)) {
+            console.log(`📊 Format detected: Object with 'mcqs' array (${jsonData.mcqs.length} items)`);
             questions = jsonData.mcqs.map((q, index) => ({
                 id: `exam_${fileName}_${index}`,
                 question: q.question || q.Question || `Question ${index + 1}`,
                 options: q.options || q.Options || ["Option A", "Option B", "Option C", "Option D"],
-                correct: q.correct || q.correctAnswer || q.Correct || (q.options ? q.options[0] : "A"),
+                correct: q.correct || q.correctAnswer || q.answer || (q.options ? q.options[0] : "A"),
                 explanation: q.explanation || q.Explanation || "No explanation provided"
             }));
-        } else {
-            console.warn('Unexpected JSON format, trying to parse as array anyway:', jsonData);
-            // Try to extract questions from object keys
-            const keys = Object.keys(jsonData);
-            if (keys.length > 0) {
-                questions = keys.map((key, index) => {
-                    const q = jsonData[key];
-                    return {
+        }
+        // FORMAT 4: Object with numbered questions (q1, q2, etc.)
+        else if (typeof jsonData === 'object') {
+            console.log(`📊 Format detected: Plain object with ${Object.keys(jsonData).length} keys`);
+            
+            // Extract all questions from object properties
+            Object.keys(jsonData).forEach((key, index) => {
+                const q = jsonData[key];
+                if (q && (q.question || q.Question)) {
+                    questions.push({
                         id: `exam_${fileName}_${index}`,
-                        question: q.question || q.Question || `Question ${index + 1}`,
+                        question: q.question || q.Question,
                         options: q.options || q.Options || ["Option A", "Option B", "Option C", "Option D"],
-                        correct: q.correct || q.correctAnswer || q.Correct || (q.options ? q.options[0] : "A"),
+                        correct: q.correct || q.correctAnswer || q.answer || (q.options ? q.options[0] : "A"),
                         explanation: q.explanation || q.Explanation || "No explanation provided"
-                    };
+                    });
+                }
+            });
+            
+            // If no questions found in object properties, try to use the entire object as one question
+            if (questions.length === 0 && (jsonData.question || jsonData.Question)) {
+                console.log(`📊 Format detected: Single question object`);
+                questions.push({
+                    id: `exam_${fileName}_0`,
+                    question: jsonData.question || jsonData.Question,
+                    options: jsonData.options || jsonData.Options || ["Option A", "Option B", "Option C", "Option D"],
+                    correct: jsonData.correct || jsonData.correctAnswer || jsonData.answer || (jsonData.options ? jsonData.options[0] : "A"),
+                    explanation: jsonData.explanation || jsonData.Explanation || "No explanation provided"
                 });
             }
         }
         
+        // If still no questions, create demo questions
         if (questions.length === 0) {
-            console.warn('No questions loaded, creating demo questions');
-            questions = generateDemoQuestions();
+            console.warn(`⚠️ No questions found in JSON file, creating demo questions`);
+            questions = [
+                {
+                    id: `demo_1`,
+                    question: "What is the primary purpose of structural analysis?",
+                    options: [
+                        "To calculate material costs",
+                        "To ensure structures can withstand loads",
+                        "To select construction sites",
+                        "To design architectural features"
+                    ],
+                    correct: "To ensure structures can withstand loads",
+                    explanation: "Structural analysis determines if a structure can safely support the intended loads."
+                },
+                {
+                    id: `demo_2`,
+                    question: "Which material is commonly used for reinforcement in concrete?",
+                    options: ["Wood", "Steel", "Plastic", "Glass"],
+                    correct: "Steel",
+                    explanation: "Steel reinforcement bars (rebar) are embedded in concrete to provide tensile strength."
+                }
+            ];
         }
         
-        console.log(`Loaded ${questions.length} questions for exam: ${displayName}`);
+        console.log(`✅ Successfully loaded ${questions.length} questions`);
+        console.log("Sample question:", questions[0]);
+        
         return questions;
         
     } catch (error) {
-        console.error('Error loading MCQ exam:', error);
-        return generateDemoQuestions();
+        console.error('❌ Error loading MCQ exam:', error);
+        
+        // Return demo questions as fallback
+        return [
+            {
+                id: `error_1`,
+                question: `Error loading exam: ${displayName}`,
+                options: [
+                    "Check your JSON file format",
+                    "Verify the file exists in GitHub",
+                    "Make sure the JSON is valid",
+                    "Contact administrator"
+                ],
+                correct: "Check your JSON file format",
+                explanation: `Could not load ${fileName}. Please check: 1) File exists at correct path, 2) JSON is valid, 3) File has proper permissions.`
+            }
+        ];
     }
 }
-// Helper function for demo questions
-function generateDemoQuestions() {
-    return [
-        {
-            id: 'demo_1',
-            question: "What is the primary purpose of structural analysis in civil engineering?",
-            options: [
-                "To determine material costs",
-                "To ensure structures can withstand loads",
-                "To select construction site",
-                "To design architectural features"
-            ],
-            correct: "To ensure structures can withstand loads",
-            explanation: "Structural analysis ensures that structures can safely withstand the loads they will encounter during their lifespan."
-        },
-        {
-            id: 'demo_2',
-            question: "Which material is most commonly used in reinforced concrete construction?",
-            options: [
-                "Aluminum",
-                "Steel",
-                "Wood",
-                "Plastic"
-            ],
-            correct: "Steel",
-            explanation: "Steel reinforcement bars (rebar) are used in concrete to provide tensile strength."
-        }
-    ];
-}
-
-// Debug helper function - call this from browser console to test
-window.testMCQLoading = async function() {
-    console.log("Testing MCQ loading...");
-    const field = AppState.currentField;
-    const examSets = await discoverMCQExamSets();
-    console.log("Found exam sets:", examSets);
-    
-    if (examSets.length > 0) {
-        const firstSet = examSets[0];
-        console.log("Testing loading of:", firstSet.displayName);
-        const questions = await loadMCQExam(firstSet.fileName, firstSet.displayName);
-        console.log("Loaded questions:", questions);
-        alert(`Loaded ${questions.length} questions. Check console for details.`);
-    } else {
-        console.log("No exam sets found");
-        alert("No exam sets found. Check GitHub repository path.");
-    }
-};
 
 async function loadSubjectiveExamContent(fileName, displayName) {
     const field = AppState.currentField;
@@ -2131,10 +2259,10 @@ function createSubjectiveExamHTML(questions, examName) {
         <div class="exam-instructions">
             <h4><i class="fas fa-info-circle"></i> Exam Instructions:</h4>
             <ul>
-                <li>Answer all questions in the provided answer booklet or your own paper</li>
+                <li>Answer all questions on your own paper (V5)</li>
                 <li>Scan your answers as a single PDF file</li>
                 <li>Make sure your writing is clear and legible</li>
-                <li>Use Black Pen</li>
+                <li>Write your name and exam set on every page</li>
                 <li>Upload your answer sheet before time expires</li>
             </ul>
         </div>
