@@ -1,4 +1,3 @@
-
 // ==============================================
 // ENHANCED CACHE MANAGEMENT
 // ==============================================
@@ -1514,74 +1513,55 @@ async function discoverMCQExamSets() {
     console.log(`Looking for MCQ sets in: ${folderPath}`);
     
     try {
-        const apiUrl = getGitHubApiUrl(folderPath);
-        console.log(`Fetching from: ${apiUrl}`);
+        // Try to fetch directly from GitHub API
+        const apiUrl = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${encodeURIComponent(folderPath)}`;
+        console.log(`API URL: ${apiUrl}`);
+        
         const response = await fetch(apiUrl);
         
         if (!response.ok) {
-            console.warn(`GitHub API error: ${response.status} - ${response.statusText}`);
+            console.warn(`GitHub API error: ${response.status}`);
+            // Return demo sets if API fails
             return generateDemoMCQSets();
         }
         
         const data = await response.json();
+        console.log('GitHub API response:', data);
         
         if (!Array.isArray(data)) {
-            console.warn('GitHub API did not return an array');
+            console.warn('Expected array from GitHub API');
             return generateDemoMCQSets();
         }
         
+        // Filter for JSON files
         const jsonFiles = data.filter(item => {
-            // Handle both file objects and simple responses
-            const name = item.name || item;
-            return name.toLowerCase().endsWith('.json') && 
-                   (item.type === 'file' || !item.type);
+            return item.name && item.name.toLowerCase().endsWith('.json');
         });
         
-        console.log(`Found ${jsonFiles.length} JSON files`);
-        
         if (jsonFiles.length === 0) {
-            console.warn(`No JSON files found in: ${folderPath}`);
+            console.warn('No JSON files found, using demo sets');
             return generateDemoMCQSets();
         }
         
         const examSets = jsonFiles.map((file, index) => {
-            const fileName = file.name || file;
-            const baseName = fileName.replace(/\.json$/i, '');
-            const setName = baseName.replace(/[_-]/g, ' ').trim();
-            const isFree = index < EXAM_CONFIG.mcq.freeSets;
-            
+            const isFree = index < 2; // First 2 sets are free
             return {
-                name: setName,
-                fileName: fileName,
-                displayName: setName,
+                name: file.name,
+                fileName: file.name,
+                displayName: file.name.replace('.json', '').replace(/_/g, ' '),
                 isFree: isFree,
-                price: isFree ? 0 : PAYMENT_CONFIG.prices.mcq,
+                price: isFree ? 0 : 50,
                 setNumber: index + 1,
-                path: file.path || `${folderPath}/${fileName}`,
-                downloadUrl: file.download_url || getRawFileUrl(`${folderPath}/${fileName}`)
+                path: file.path,
+                downloadUrl: file.download_url
             };
         });
         
-        examSets.sort((a, b) => {
-            const numA = a.displayName.match(/\d+/);
-            const numB = b.displayName.match(/\d+/);
-            if (numA && numB) {
-                return parseInt(numA[0]) - parseInt(numB[0]);
-            }
-            return a.displayName.localeCompare(b.displayName);
-        });
-        
-        examSets.forEach((set, index) => {
-            set.setNumber = index + 1;
-            set.isFree = index < EXAM_CONFIG.mcq.freeSets;
-            set.price = set.isFree ? 0 : PAYMENT_CONFIG.prices.mcq;
-        });
-        
-        console.log(`Processed ${examSets.length} MCQ exam sets:`, examSets.map(s => s.fileName));
+        console.log(`Found ${examSets.length} exam sets:`, examSets);
         return examSets;
         
     } catch (error) {
-        console.error('Error discovering MCQ sets:', error);
+        console.error('Error in discoverMCQExamSets:', error);
         return generateDemoMCQSets();
     }
 }
@@ -2314,17 +2294,214 @@ window.handleExamOptionClick = function(optionElement) {
     updateMCQExamProgress();
 };
 
+async function loadMCQExamQuestions(fileName) {
+    const field = AppState.currentField;
+    const filePath = `${FIELD_CONFIG[field].folderPrefix}Take Exam/Multiple Choice Exam/${fileName}`;
+    
+    console.log(`Loading questions from: ${filePath}`);
+    
+    try {
+        // Direct URL to raw JSON file
+        const rawUrl = `https://raw.githubusercontent.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/${GITHUB_CONFIG.branch}/${encodeURIComponent(filePath)}`;
+        console.log(`Raw URL: ${rawUrl}`);
+        
+        const response = await fetch(rawUrl);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const jsonData = await response.json();
+        console.log('Loaded JSON data:', jsonData);
+        
+        if (!Array.isArray(jsonData)) {
+            throw new Error('JSON data is not an array');
+        }
+        
+        // Process questions
+        const questions = jsonData.map((q, index) => {
+            return {
+                id: index + 1,
+                question: q.question || `Question ${index + 1}`,
+                options: q.options || ['Option A', 'Option B', 'Option C', 'Option D'],
+                correct: q.correct || 'A',
+                explanation: q.explanation || 'No explanation provided'
+            };
+        });
+        
+        console.log(`Processed ${questions.length} questions`);
+        return questions;
+        
+    } catch (error) {
+        console.error('Error loading MCQ exam questions:', error);
+        
+        // Return demo questions if loading fails
+        return [
+            {
+                id: 1,
+                question: "Sample Question 1: What is the capital of Nepal?",
+                options: ["Kathmandu", "Pokhara", "Birgunj", "Butwal"],
+                correct: "Kathmandu",
+                explanation: "Kathmandu is the capital city of Nepal."
+            },
+            {
+                id: 2,
+                question: "Sample Question 2: Which cement property is tested using Vicat apparatus?",
+                options: ["Fineness", "Consistency", "Soundness", "Compressive strength"],
+                correct: "Consistency",
+                explanation: "Vicat apparatus determines standard consistency of cement paste."
+            },
+            {
+                id: 3,
+                question: "Sample Question 3: The minimum compressive strength of first class brick is:",
+                options: ["3.5 MPa", "5.0 MPa", "7.5 MPa", "10.5 MPa"],
+                correct: "10.5 MPa",
+                explanation: "First class bricks should have minimum compressive strength of 10.5 MPa."
+            }
+        ];
+    }
+}
+
+async function startMCQExam(selectedSet) {
+    console.log('Starting MCQ exam with set:', selectedSet);
+    
+    try {
+        // Show loading state
+        const multipleChoiceContainer = document.getElementById('multiple-choice-container');
+        if (multipleChoiceContainer) {
+            multipleChoiceContainer.innerHTML = '<div class="loading">Loading questions...</div>';
+        }
+        
+        // Load questions
+        const questions = await loadMCQExamQuestions(selectedSet.fileName);
+        console.log('Questions loaded:', questions);
+        
+        if (questions.length === 0) {
+            throw new Error('No questions loaded');
+        }
+        
+        // Update app state
+        AppState.examState.type = 'mcq';
+        AppState.examState.currentSet = selectedSet.displayName;
+        AppState.examState.questions = questions;
+        AppState.examState.currentQuestionIndex = 0;
+        AppState.examState.answers = {};
+        AppState.examState.flagged = {};
+        
+        // Show MCQ exam section
+        document.getElementById('exam-type-selection').style.display = 'none';
+        document.getElementById('exam-set-selection').style.display = 'none';
+        document.getElementById('multiple-choice-exam').style.display = 'block';
+        
+        // Update title
+        const titleElement = document.getElementById('multiple-choice-exam-title');
+        if (titleElement) {
+            titleElement.textContent = `MCQ Exam - ${selectedSet.displayName}`;
+        }
+        
+        // Update progress
+        updateMCQExamProgress();
+        
+        // Display first question
+        displayMCQQuestion();
+        
+        // Start timer
+        startMCQTimer();
+        
+        console.log('MCQ exam started successfully');
+        
+    } catch (error) {
+        console.error('Error starting MCQ exam:', error);
+        alert(`Failed to start exam: ${error.message}`);
+        resetExamTypeSelection();
+    }
+}
+
+
+
+function displayMCQQuestion() {
+    const state = AppState.examState;
+    const question = state.questions[state.currentQuestionIndex];
+    const container = document.getElementById('multiple-choice-container');
+    
+    if (!container) return;
+    
+    const isFlagged = state.flagged[state.currentQuestionIndex] || false;
+    const userAnswer = state.answers[state.currentQuestionIndex];
+    
+    // Create question HTML
+    container.innerHTML = `
+        <div class="mcq-question-container">
+            <div class="question-number-badge">
+                Question ${state.currentQuestionIndex + 1}
+                ${isFlagged ? '<span style="color: #e74c3c; margin-left: 10px;"><i class="fas fa-flag"></i> Flagged</span>' : ''}
+            </div>
+            <div class="mcq-question">${question.question}</div>
+            <div class="mcq-options">
+                ${question.options.map((option, index) => {
+                    const optionLetter = String.fromCharCode(65 + index);
+                    const isSelected = userAnswer === option;
+                    const optionClass = `mcq-option ${isSelected ? 'selected' : ''}`;
+                    
+                    return `
+                        <div class="${optionClass}" data-option="${option}" onclick="selectMCQOption('${option}')">
+                            <div class="option-letter">${optionLetter}</div>
+                            <div>${option}</div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        </div>
+    `;
+    
+    // Update question counter
+    const currentElement = document.getElementById('current-exam-question');
+    const totalElement = document.getElementById('total-exam-questions');
+    
+    if (currentElement) currentElement.textContent = state.currentQuestionIndex + 1;
+    if (totalElement) totalElement.textContent = state.questions.length;
+    
+    // Update navigation buttons
+    const prevButton = document.getElementById('prev-exam-question');
+    const nextButton = document.getElementById('next-exam-question');
+    const flagButton = document.getElementById('flag-exam-question');
+    
+    if (prevButton) prevButton.disabled = state.currentQuestionIndex === 0;
+    if (nextButton) nextButton.disabled = state.currentQuestionIndex === state.questions.length - 1;
+    if (flagButton) {
+        flagButton.innerHTML = isFlagged ? 
+            '<i class="fas fa-flag"></i> Unflag' : 
+            '<i class="far fa-flag"></i> Flag';
+    }
+}
+
+function selectMCQOption(selectedOption) {
+    const state = AppState.examState;
+    const questionIndex = state.currentQuestionIndex;
+    
+    // Update user's answer
+    state.answers[questionIndex] = selectedOption;
+    
+    // Update the display
+    displayMCQQuestion();
+    
+    // Update progress
+    updateMCQExamProgress();
+}
+
+
 function updateMCQExamProgress() {
-    const total = AppState.examState.questions.length;
-    const answered = Object.keys(AppState.examState.answers).length;
+    const state = AppState.examState;
+    const total = state.questions.length;
+    const answered = Object.keys(state.answers).length;
     
-    const totalQuestionsElement = getDOMElement('mcq-total-questions');
-    const answeredQuestionsElement = getDOMElement('mcq-answered-questions');
-    const remainingQuestionsElement = getDOMElement('mcq-remaining-questions');
+    const totalElement = document.getElementById('mcq-total-questions');
+    const answeredElement = document.getElementById('mcq-answered-questions');
+    const remainingElement = document.getElementById('mcq-remaining-questions');
     
-    if (totalQuestionsElement) totalQuestionsElement.textContent = total;
-    if (answeredQuestionsElement) answeredQuestionsElement.textContent = answered;
-    if (remainingQuestionsElement) remainingQuestionsElement.textContent = total - answered;
+    if (totalElement) totalElement.textContent = total;
+    if (answeredElement) answeredElement.textContent = answered;
+    if (remainingElement) remainingElement.textContent = total - answered;
 }
 
 function startTimer(type) {
@@ -3073,11 +3250,61 @@ function init() {
     
     initializeDOMReferences();
     setupEventListeners();
+    setupExamEventListeners();
     loadField('civil');
     updateFieldIndicators();
     initPaymentSystem();
     console.log("Application initialized successfully");
 }
+
+function setupExamEventListeners() {
+    console.log('Setting up exam event listeners');
+    
+    // Exam type selection
+    document.querySelectorAll('.exam-type-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const examType = this.dataset.examType;
+            if (examType === 'multiple-choice') {
+                showMCQExamSets();
+            } else if (examType === 'subjective') {
+                showSubjectiveExamSets();
+            }
+        });
+    });
+    
+    // MCQ exam navigation
+    document.getElementById('prev-exam-question')?.addEventListener('click', () => {
+        if (AppState.examState.currentQuestionIndex > 0) {
+            AppState.examState.currentQuestionIndex--;
+            displayMCQQuestion();
+        }
+    });
+    
+    document.getElementById('next-exam-question')?.addEventListener('click', () => {
+        if (AppState.examState.currentQuestionIndex < AppState.examState.questions.length - 1) {
+            AppState.examState.currentQuestionIndex++;
+            displayMCQQuestion();
+        }
+    });
+    
+    document.getElementById('flag-exam-question')?.addEventListener('click', () => {
+        const index = AppState.examState.currentQuestionIndex;
+        AppState.examState.flagged[index] = !AppState.examState.flagged[index];
+        displayMCQQuestion();
+    });
+    
+    document.getElementById('submit-mcq-exam')?.addEventListener('click', () => {
+        if (confirm('Are you sure you want to submit your exam?')) {
+            submitMCQExam();
+        }
+    });
+    
+    // Back buttons
+    document.getElementById('back-to-exam-type')?.addEventListener('click', resetExamTypeSelection);
+    document.getElementById('back-to-exam-type-mcq')?.addEventListener('click', resetExamTypeSelection);
+    document.getElementById('back-to-exam-type-results')?.addEventListener('click', resetExamTypeSelection);
+}
+
 
 function loadField(field) {
     console.log(`Loading field: ${field}`);
