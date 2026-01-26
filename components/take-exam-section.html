@@ -1,55 +1,75 @@
-<section id="take-exam" class="section">
+<!-- Add this inside take-exam-section.html -->
+<div class="section" id="take-exam">
     <h2 class="section-title">
-        <i class="fas fa-clock"></i> Take Exam
-        <span class="field-indicator" id="exam-field-indicator">
-            <i class="fas fa-building"></i> Civil
-        </span>
+        <i class="fas fa-file-alt"></i> Take Exam
+        <span class="field-indicator" id="exam-field-indicator">Civil</span>
     </h2>
-    <p>Choose between Subjective or Multiple Choice exam formats.(v4) <strong>First 2 sets are free, additional sets require purchase.</strong></p>
     
-    <!-- Exam Type Selection -->
-    <div class="exam-type-selection" id="exam-type-selection">
+    <div id="exam-type-selection" style="display: block;">
         <h3>Select Exam Type:</h3>
         <div class="exam-type-grid">
             <div class="exam-type-card" data-exam-type="subjective">
                 <div class="exam-type-icon">
-                    <i class="fas fa-edit"></i>
+                    <i class="fas fa-pen-fancy"></i>
                 </div>
                 <div class="exam-type-info">
                     <h3>Subjective Exam</h3>
-                    <p>3-hour timer, upload PDF answers</p>
+                    <p>Answer descriptive questions in a timed exam setting</p>
                     <ul class="exam-features">
-                        <li><i class="fas fa-clock"></i> 3 hours time limit</li>
-                        <li><i class="fas fa-file-pdf"></i> PDF upload required</li>
-                        <li><i class="fas fa-envelope"></i> Results via email</li>
+                        <li><i class="fas fa-check-circle"></i> 3-hour time limit</li>
+                        <li><i class="fas fa-check-circle"></i> Answer sheet upload</li>
+                        <li><i class="fas fa-check-circle"></i> Free & paid sets available</li>
                     </ul>
                 </div>
             </div>
+            
             <div class="exam-type-card" data-exam-type="multiple-choice">
                 <div class="exam-type-icon">
-                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-question-circle"></i>
                 </div>
                 <div class="exam-type-info">
                     <h3>Multiple Choice Exam</h3>
-                    <p>30-minute timer, instant results</p>
+                    <p>MCQ-based timed exam with instant results</p>
                     <ul class="exam-features">
-                        <li><i class="fas fa-clock"></i> 30 minutes time limit</li>
-                        <li><i class="fas fa-chart-bar"></i> Instant scorecard</li>
-                        <li><i class="fas fa-lightbulb"></i> View explanations</li>
+                        <li><i class="fas fa-check-circle"></i> 30-minute time limit</li>
+                        <li><i class="fas fa-check-circle"></i> Instant scoring & feedback</li>
+                        <li><i class="fas fa-check-circle"></i> Free & paid sets available</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Exam Set Selection (Dynamic - Will be populated by JavaScript) -->
-    <div id="exam-set-selection" style="display: none;">
-        <div class="exam-set-selection-container">
-            <h3 id="exam-set-selection-title">Select Exam Set</h3>
-            <div id="exam-set-grid" class="exam-set-grid">
-                <!-- Exam sets will be dynamically added here -->
+    <!-- MCQ Exam Set Selection -->
+    <div id="exam-set-selection" style="display: none;"></div>
+    
+    <!-- Subjective Exam View -->
+    <div id="subjective-exam" style="display: none;">
+        <div class="subjective-exam-container">
+            <div class="exam-header">
+                <div class="timer-container">
+                    <i class="fas fa-clock"></i>
+                    <span id="subjective-timer">03:00:00</span>
+                </div>
+                <div class="exam-progress">
+                    <div class="progress-item">
+                        <i class="fas fa-file-alt"></i>
+                        Questions: <span id="subjective-total-questions">0</span>
+                    </div>
+                    <div class="progress-item">
+                        <i class="fas fa-star"></i>
+                        Total Marks: <span id="subjective-total-marks">0</span>
+                    </div>
+                </div>
             </div>
-            <div class="exam-set-actions">
+            
+            <h3 id="subjective-exam-title">Subjective Exam</h3>
+            <div id="subjective-exam-questions"></div>
+            
+            <div class="form-actions" style="margin-top: 2rem;">
+                <button class="btn btn-primary" id="submit-subjective-exam">
+                    <i class="fas fa-paper-plane"></i> Submit Exam
+                </button>
                 <button class="btn btn-secondary" id="back-to-exam-type">
                     <i class="fas fa-arrow-left"></i> Back to Exam Type
                 </button>
@@ -57,171 +77,104 @@
         </div>
     </div>
     
-    <!-- Subjective Exam Section -->
-    <div id="subjective-exam" style="display: none;">
-        <div class="exam-header">
-            <div>
-                <h3 id="subjective-exam-title">Subjective Exam</h3>
-                <p>Read all questions carefully before answering.</p>
-            </div>
-            <div class="timer-container">
-                <i class="fas fa-clock"></i>
-                <div class="timer" id="subjective-timer">03:00:00</div>
-            </div>
-            <div class="exam-progress">
-                <div class="progress-item">Questions: <span id="subjective-total-questions">0</span></div>
-                <div class="progress-item">Total Marks: <span id="subjective-total-marks">0</span></div>
-            </div>
-        </div>
-        
-        <div class="subjective-exam-content">
-            <!-- Exam Instructions -->
-            <div class="exam-instructions">
-                <h4><i class="fas fa-info-circle"></i> Exam Instructions:</h4>
-                <ul>
-                    <li>Answer all questions on your own paper</li>
-                    <li>Scan your answers as a single PDF file</li>
-                    <li>Make sure your writing is clear and legible</li>
-                    <li>Write your name and exam set on every page</li>
-                    <li>Upload your answer sheet before time expires</li>
-                </ul>
-            </div>
-            
-            <!-- Questions Container -->
-            <div class="subjective-questions-container" id="subjective-exam-questions">
-                <!-- Questions will be populated by JavaScript -->
-            </div>
-            
-            <!-- Submission Form -->
-            <div class="submission-form" id="subjective-submission-form">
-                <h4><i class="fas fa-paper-plane"></i> Submit Your Answers</h4>
-                <div class="form-group">
-                    <label for="user-email"><i class="fas fa-envelope"></i> Email Address</label>
-                    <input type="email" id="user-email" placeholder="Enter your email for results" required>
-                    <small>Results will be sent to this email within a week</small>
-                </div>
-                <div class="form-group">
-                    <label for="answer-pdf"><i class="fas fa-file-pdf"></i> Upload Answer Sheet (PDF only)</label>
-                    <input type="file" id="answer-pdf" accept=".pdf" required>
-                    <small>Maximum file size: 10MB. Upload your scanned answer sheet.</small>
-                </div>
-                <div class="form-actions">
-                    <button class="btn btn-primary" id="submit-subjective-exam">
-                        <i class="fas fa-paper-plane"></i> Submit Exam
-                    </button>
-                    <button class="btn btn-secondary" id="cancel-subjective-exam">
-                        <i class="fas fa-times"></i> Cancel
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Multiple Choice Exam Section -->
+    <!-- Multiple Choice Exam View -->
     <div id="multiple-choice-exam" style="display: none;">
-        <div class="exam-header">
-            <div>
-                <h3 id="multiple-choice-exam-title">Multiple Choice Exam</h3>
-                <p>Choose the correct answer for each question.</p>
-            </div>
-            <div class="timer-container">
-                <i class="fas fa-clock"></i>
-                <div class="timer" id="mcq-exam-timer">00:30:00</div>
-            </div>
-            <div class="exam-progress">
-                <div class="progress-item">Questions: <span id="mcq-total-questions">0</span></div>
-                <div class="progress-item">Answered: <span id="mcq-answered-questions">0</span></div>
-                <div class="progress-item">Remaining: <span id="mcq-remaining-questions">0</span></div>
-                <div class="progress-item">Flagged: <span id="mcq-flagged-questions">0</span></div>
-            </div>
-        </div>
-        
         <div class="mcq-exam-content">
-            <!-- Question Navigation -->
-            <div class="question-navigation" id="mcq-question-nav">
-                <!-- Question numbers will be dynamically added -->
+            <div class="exam-header">
+                <div class="timer-container">
+                    <i class="fas fa-clock"></i>
+                    <span id="mcq-exam-timer">30:00</span>
+                </div>
+                <div class="exam-progress">
+                    <div class="progress-item">
+                        Total: <span id="mcq-total-questions">0</span>
+                    </div>
+                    <div class="progress-item">
+                        Answered: <span id="mcq-answered-questions">0</span>
+                    </div>
+                    <div class="progress-item">
+                        Remaining: <span id="mcq-remaining-questions">0</span>
+                    </div>
+                </div>
             </div>
             
-            <!-- Question Container -->
-            <div class="mcq-question-exam-container" id="multiple-choice-container">
-                <!-- Questions will be populated by JavaScript -->
-            </div>
+            <h3 id="multiple-choice-exam-title">Multiple Choice Exam</h3>
             
-            <!-- Exam Controls -->
+            <div id="multiple-choice-container"></div>
+            
             <div class="exam-controls">
                 <div class="control-group">
                     <button class="btn btn-secondary" id="prev-exam-question">
-                        <i class="fas fa-chevron-left"></i> Previous
+                        <i class="fas fa-arrow-left"></i> Previous
                     </button>
                     <button class="btn btn-warning" id="flag-exam-question">
                         <i class="far fa-flag"></i> Flag
                     </button>
                     <button class="btn btn-secondary" id="next-exam-question">
-                        Next <i class="fas fa-chevron-right"></i>
+                        Next <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
+                
+                <div class="question-indicator">
+                    Question <span id="current-exam-question">1</span> of 
+                    <span id="total-exam-questions">0</span>
+                </div>
+                
                 <div class="control-group">
                     <button class="btn btn-primary" id="submit-mcq-exam">
                         <i class="fas fa-paper-plane"></i> Submit Exam
                     </button>
-                    <button class="btn btn-secondary" id="cancel-mcq-exam">
-                        <i class="fas fa-times"></i> Cancel
+                    <button class="btn btn-secondary" id="back-to-exam-type-mcq">
+                        <i class="fas fa-arrow-left"></i> Back
                     </button>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Exam Results Section -->
+    <!-- Exam Results View -->
     <div id="exam-results" style="display: none;">
         <div class="results-container">
             <div class="results-header">
-                <h3><i class="fas fa-trophy"></i> Exam Results</h3>
-                <p id="results-subtitle">Your performance summary</p>
+                <h3>Exam Results</h3>
+                <p class="results-subtitle" id="exam-results-subtitle">Multiple Choice Exam - Set 1</p>
             </div>
             
             <div class="score-card">
                 <div class="score-circle">
-                    <div class="score-value" id="exam-score">85%</div>
-                    <div class="score-label">Score</div>
+                    <div class="score-value" id="exam-score">0%</div>
+                    <div class="score-label">Your Score</div>
                 </div>
+                
                 <div class="score-details">
                     <div class="score-item correct">
-                        <div class="score-count" id="correct-count">17</div>
-                        <div class="score-type">Correct</div>
+                        <div class="score-count" id="correct-count">0</div>
+                        <div>Correct</div>
                     </div>
                     <div class="score-item wrong">
-                        <div class="score-count" id="wrong-count">2</div>
-                        <div class="score-type">Wrong</div>
+                        <div class="score-count" id="wrong-count">0</div>
+                        <div>Wrong</div>
                     </div>
                     <div class="score-item skipped">
-                        <div class="score-count" id="skipped-count">1</div>
-                        <div class="score-type">Skipped</div>
+                        <div class="score-count" id="skipped-count">0</div>
+                        <div>Skipped</div>
                     </div>
                 </div>
             </div>
             
             <div class="results-summary">
-                <p>You answered <strong id="exam-correct-answers">17</strong> out of <strong id="exam-total-questions">20</strong> questions correctly.</p>
-                <div class="time-taken">
-                    <i class="fas fa-clock"></i> Time taken: <span id="exam-time-taken">25:30</span>
-                </div>
+                <p>You answered <strong><span id="exam-correct-answers">0</span> out of <span id="exam-total-questions">0</span></strong> questions correctly.</p>
+                <p class="time-taken"><i class="fas fa-stopwatch"></i> Time taken: 30 minutes</p>
             </div>
             
             <div class="results-actions">
                 <button class="btn btn-primary" id="view-answers">
-                    <i class="fas fa-eye"></i> Review Answers
+                    <i class="fas fa-eye"></i> View Answers
                 </button>
                 <button class="btn btn-secondary" id="back-to-exam-type-results">
-                    <i class="fas fa-redo"></i> Take Another Exam
-                </button>
-                <button class="btn btn-success" id="download-certificate" style="display: none;">
-                    <i class="fas fa-download"></i> Download Certificate
+                    <i class="fas fa-redo"></i> Try Another Exam
                 </button>
             </div>
         </div>
     </div>
-    
-    <!-- Payment Modal (Will be dynamically created) -->
-    <!-- This will be created by JavaScript when needed -->
-</section>
+</div>
