@@ -1964,37 +1964,48 @@ async function loadAndStartMCQExam(selectedSet) {
     console.log("🚀 Starting MCQ exam:", selectedSet.displayName);
     
     try {
-        const state = AppState.examState;
-        state.type = 'multiple-choice';
-        state.currentSet = selectedSet.displayName;
-        state.currentFileName = selectedSet.fileName;
-        state.currentQuestionIndex = 0;
-        state.answers = {};
-        state.flagged = {};
-        state.totalTime = 30 * 60;
+        // Clear previous state
+        AppState.examState = {
+            type: 'multiple-choice',
+            currentSet: selectedSet.displayName,
+            currentFileName: selectedSet.fileName,
+            currentQuestionIndex: 0,
+            questions: [],
+            answers: {},
+            flagged: {},
+            timer: null,
+            startTime: null,
+            totalTime: 30 * 60,
+            mcqSets: [],
+            subjectiveSets: []
+        };
         
         console.log(`📥 Loading questions from: ${selectedSet.fileName}`);
-        state.questions = await loadMCQExam(selectedSet.fileName, selectedSet.displayName);
         
-        console.log(`📊 Questions loaded: ${state.questions.length}`);
+        // Load questions
+        const questions = await loadMCQExam(selectedSet.fileName, selectedSet.displayName);
+        AppState.examState.questions = questions;
         
-        if (state.questions.length === 0) {
+        console.log(`📊 Questions loaded: ${questions.length}`);
+        
+        if (questions.length === 0) {
             throw new Error('No questions loaded from JSON file');
         }
         
-        const examSetSelection = getDOMElement('exam-set-selection');
-        const mcqExam = getDOMElement('multiple-choice-exam');
-        const examTitle = getDOMElement('multiple-choice-exam-title');
+        // Show the exam interface
+        const examSetSelection = document.getElementById('exam-set-selection');
+        const mcqExam = document.getElementById('multiple-choice-exam');
+        const examTitle = document.getElementById('multiple-choice-exam-title');
         
         if (!examSetSelection || !mcqExam || !examTitle) {
             throw new Error('Required DOM elements not found');
         }
         
-        hideElement(examSetSelection);
-        showElement(mcqExam);
+        examSetSelection.style.display = 'none';
+        mcqExam.style.display = 'block';
         examTitle.textContent = `Multiple Choice Exam - ${selectedSet.displayName}`;
         
-        // Update progress indicators immediately
+        // Update progress indicators
         updateMCQExamProgress();
         
         // Load and display the first question
@@ -2007,10 +2018,29 @@ async function loadAndStartMCQExam(selectedSet) {
         
     } catch (error) {
         console.error('❌ Error starting MCQ exam:', error);
-        alert(`Failed to start exam: ${error.message}\n\nPlease check:\n1. JSON file exists in GitHub\n2. JSON format is correct\n3. File path is correct`);
         
-        // Go back to exam set selection
-        resetExamTypeSelection();
+        // Show error message in the container
+        const multipleChoiceContainer = document.getElementById('multiple-choice-container');
+        if (multipleChoiceContainer) {
+            multipleChoiceContainer.innerHTML = `
+                <div class="error-message" style="text-align: center; padding: 3rem;">
+                    <i class="fas fa-exclamation-triangle fa-3x"></i>
+                    <h3>Failed to load exam questions</h3>
+                    <p>${error.message}</p>
+                    <p>Please check:</p>
+                    <ul style="text-align: left; margin: 1rem auto; max-width: 500px;">
+                        <li>JSON file exists in GitHub repository</li>
+                        <li>JSON format is valid (array of questions)</li>
+                        <li>File path is correct</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="resetExamTypeSelection()">
+                        <i class="fas fa-arrow-left"></i> Back to Exam Selection
+                    </button>
+                </div>
+            `;
+        }
+        
+        alert(`Failed to start exam: ${error.message}`);
     }
 }
 
@@ -2259,7 +2289,7 @@ function createSubjectiveExamHTML(questions, examName) {
         <div class="exam-instructions">
             <h4><i class="fas fa-info-circle"></i> Exam Instructions:</h4>
             <ul>
-                <li>Answer all questions on your own paper (V5)</li>
+                <li>Answer all questions in the provided answer booklet or your own paper</li>
                 <li>Scan your answers as a single PDF file</li>
                 <li>Make sure your writing is clear and legible</li>
                 <li>Write your name and exam set on every page</li>
@@ -2367,37 +2397,64 @@ function getErrorQuestionSet(subject, chapter, fileName) {
 // ==============================================
 
 function loadMCQExamQuestion() {
+    console.log("Loading MCQ exam question...");
+    
     const state = AppState.examState;
     if (!state.questions || state.questions.length === 0) {
-        console.error("No questions available");
+        console.error("No questions available in state:", state);
+        
+        const multipleChoiceContainer = document.getElementById('multiple-choice-container');
+        if (multipleChoiceContainer) {
+            multipleChoiceContainer.innerHTML = `
+                <div style="text-align: center; padding: 3rem; color: #e74c3c;">
+                    <i class="fas fa-exclamation-circle fa-3x"></i>
+                    <h3>No Questions Available</h3>
+                    <p>Failed to load questions. Please try again or contact support.</p>
+                </div>
+            `;
+        }
         return;
     }
     
-    const question = state.questions[state.currentQuestionIndex];
-    const multipleChoiceContainer = getDOMElement('multiple-choice-container');
-    const currentExamQuestion = getDOMElement('current-exam-question');
-    const totalExamQuestions = getDOMElement('total-exam-questions');
-    const prevExamQuestion = getDOMElement('prev-exam-question');
-    const nextExamQuestion = getDOMElement('next-exam-question');
-    const flagExamQuestion = getDOMElement('flag-exam-question');
+    const questionIndex = state.currentQuestionIndex;
+    const question = state.questions[questionIndex];
     
-    if (!multipleChoiceContainer || !currentExamQuestion || !totalExamQuestions) return;
+    console.log(`Displaying question ${questionIndex + 1} of ${state.questions.length}:`, question);
     
-    multipleChoiceContainer.innerHTML = `
-        <div class="mcq-question-container">
-            <div class="question-number-badge">Question ${state.currentQuestionIndex + 1}</div>
-            <div class="mcq-question">${question.question}</div>
-            <div class="mcq-options" id="exam-options-container">
+    const multipleChoiceContainer = document.getElementById('multiple-choice-container');
+    const currentExamQuestion = document.getElementById('current-exam-question');
+    const totalExamQuestions = document.getElementById('total-exam-questions');
+    
+    if (!multipleChoiceContainer || !currentExamQuestion || !totalExamQuestions) {
+        console.error("Required DOM elements not found");
+        return;
+    }
+    
+    // Build question HTML
+    const questionHtml = `
+        <div class="mcq-question-container" style="margin: 2rem 0;">
+            <div class="question-number-badge">Question ${questionIndex + 1}</div>
+            <div class="mcq-question" style="font-size: 1.2rem; margin: 1.5rem 0;">
+                ${question.question || 'No question text available'}
+            </div>
+            <div class="mcq-options">
                 ${question.options.map((option, index) => {
                     const optionLetter = String.fromCharCode(65 + index);
-                    const isSelected = state.answers[state.currentQuestionIndex] === option;
+                    const isSelected = state.answers[questionIndex] === option;
                     let optionClass = 'mcq-option';
                     if (isSelected) optionClass += ' selected';
                     
                     return `
-                        <div class="${optionClass}" data-exam-option="${option}" onclick="handleExamOptionClick(this)">
-                            <div class="option-letter">${optionLetter}</div>
-                            <div>${option}</div>
+                        <div class="${optionClass}" 
+                             onclick="handleExamOptionClick(this)"
+                             data-exam-option="${option.replace(/"/g, '&quot;')}"
+                             style="margin: 0.8rem 0; padding: 1rem; cursor: pointer; border-radius: 8px; border: 2px solid #ddd; transition: all 0.3s;">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div class="option-letter" style="width: 30px; height: 30px; background: #eee; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                                    ${optionLetter}
+                                </div>
+                                <div>${option || 'No option text'}</div>
+                            </div>
                         </div>
                     `;
                 }).join('')}
@@ -2405,19 +2462,27 @@ function loadMCQExamQuestion() {
         </div>
     `;
     
-    currentExamQuestion.textContent = state.currentQuestionIndex + 1;
+    multipleChoiceContainer.innerHTML = questionHtml;
+    
+    // Update counters
+    currentExamQuestion.textContent = questionIndex + 1;
     totalExamQuestions.textContent = state.questions.length;
     
+    // Update button states
+    const prevExamQuestion = document.getElementById('prev-exam-question');
+    const nextExamQuestion = document.getElementById('next-exam-question');
+    const flagExamQuestion = document.getElementById('flag-exam-question');
+    
     if (prevExamQuestion) {
-        prevExamQuestion.disabled = state.currentQuestionIndex === 0;
+        prevExamQuestion.disabled = questionIndex === 0;
     }
     
     if (nextExamQuestion) {
-        nextExamQuestion.disabled = state.currentQuestionIndex === state.questions.length - 1;
+        nextExamQuestion.disabled = questionIndex === state.questions.length - 1;
     }
     
     if (flagExamQuestion) {
-        if (state.flagged[state.currentQuestionIndex]) {
+        if (state.flagged[questionIndex]) {
             flagExamQuestion.innerHTML = '<i class="fas fa-flag"></i> Unflag';
             flagExamQuestion.style.backgroundColor = '#e74c3c';
         } else {
@@ -2426,6 +2491,7 @@ function loadMCQExamQuestion() {
         }
     }
     
+    // Update progress
     updateMCQExamProgress();
 }
 
@@ -2586,6 +2652,64 @@ function resetExamTypeSelection() {
         subjectiveSets: []
     };
 }
+
+
+// Add this function to test the exam loading
+window.testExamSetup = function() {
+    console.log("=== Testing Exam Setup ===");
+    
+    // Check if all required elements exist
+    const elements = [
+        'exam-type-selection',
+        'exam-set-selection',
+        'multiple-choice-exam',
+        'multiple-choice-container',
+        'current-exam-question',
+        'total-exam-questions'
+    ];
+    
+    elements.forEach(id => {
+        const element = document.getElementById(id);
+        console.log(`${id}: ${element ? 'FOUND' : 'NOT FOUND'}`);
+    });
+    
+    // Check current exam state
+    console.log("Current exam state:", AppState.examState);
+    
+    // Try to load a demo question directly
+    const container = document.getElementById('multiple-choice-container');
+    if (container) {
+        container.innerHTML = `
+            <div class="mcq-question-container" style="margin: 2rem 0;">
+                <div class="question-number-badge">Question 1</div>
+                <div class="mcq-question" style="font-size: 1.2rem; margin: 1.5rem 0;">
+                    What is 2 + 2?
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-option" onclick="alert('Option A clicked')" style="margin: 0.8rem 0; padding: 1rem; cursor: pointer; border-radius: 8px; border: 2px solid #ddd;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div class="option-letter" style="width: 30px; height: 30px; background: #eee; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                                A
+                            </div>
+                            <div>3</div>
+                        </div>
+                    </div>
+                    <div class="mcq-option" onclick="alert('Option B clicked')" style="margin: 0.8rem 0; padding: 1rem; cursor: pointer; border-radius: 8px; border: 2px solid #ddd;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div class="option-letter" style="width: 30px; height: 30px; background: #eee; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                                B
+                            </div>
+                            <div>4</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        console.log("Demo question injected");
+    }
+    
+    alert("Test completed. Check console for details.");
+};
 
 // ==============================================
 // PAYMENT SYSTEM
@@ -3313,9 +3437,46 @@ function loadSectionData(section) {
             initEnhancedSubjective();
             break;
         case 'take-exam':
-            // Already handled by resetExamTypeSelection
+            initExamSection();  // Add this line
+            resetExamTypeSelection();
             break;
     }
+}
+
+function initExamSection() {
+    console.log("Initializing exam section...");
+    
+    // Clear any existing exam state
+    AppState.examState = {
+        type: null,
+        currentSet: null,
+        currentFileName: null,
+        currentQuestionIndex: 0,
+        questions: [],
+        answers: {},
+        flagged: {},
+        timer: null,
+        startTime: null,
+        totalTime: 0,
+        mcqSets: [],
+        subjectiveSets: []
+    };
+    
+    // Setup exam type selection
+    const examTypeCards = document.querySelectorAll('.exam-type-card');
+    examTypeCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const examType = this.dataset.examType;
+            
+            if (examType === 'subjective') {
+                showSubjectiveExamSetSelection();
+            } else if (examType === 'multiple-choice') {
+                showMCQExamSetSelection();
+            }
+        });
+    });
+    
+    console.log("Exam section initialized");
 }
 
 // ==============================================
