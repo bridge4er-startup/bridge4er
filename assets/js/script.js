@@ -1,3 +1,4 @@
+
 // ==============================================
 // ENHANCED CACHE MANAGEMENT
 // ==============================================
@@ -793,10 +794,17 @@ async function startMCQPractice(subject, chapterDisplayName, chapterFileName) {
 }
 
 function setupPagination() {
-    const questionsPerPage = AppState.mcqState.questionsPerPage;
+    // Ensure questionsPerPage is a number, not a string
+    const questionsPerPage = parseInt(AppState.mcqState.questionsPerPage) || 5;
+    AppState.mcqState.questionsPerPage = questionsPerPage;
+    
     const totalQuestions = AppState.mcqState.questions.length;
     const totalPages = questionsPerPage === 'all' ? 1 : Math.ceil(totalQuestions / questionsPerPage);
     
+    // Reset to page 1 if current page is out of bounds
+    if (AppState.mcqState.currentPage > totalPages) {
+        AppState.mcqState.currentPage = 1;
+    }
     const totalQuestionsCount = getDOMElement('total-questions-count');
     const totalPagesElement = getDOMElement('total-pages');
     const questionsPerPageSelect = getDOMElement('questions-per-page');
@@ -853,15 +861,25 @@ function updatePaginationButtons() {
     lastPageBtn.disabled = currentPage === totalPages;
 }
 
+// Add this at the beginning of renderCurrentPage() or loadMCQExamQuestion()
+console.log("DEBUG - Questions array:", AppState.mcqState.questions);
+console.log("DEBUG - Questions count:", AppState.mcqState.questions.length);
+console.log("DEBUG - Current page:", AppState.mcqState.currentPage);
+console.log("DEBUG - Questions per page:", AppState.mcqState.questionsPerPage);
+
+// For exam section:
+console.log("DEBUG - Exam questions:", AppState.examState.questions);
+console.log("DEBUG - Current question index:", AppState.examState.currentQuestionIndex);
+
 function renderCurrentPage() {
     const state = AppState.mcqState;
-    const questionsPerPage = state.questionsPerPage;
-    const currentPage = state.currentPage;
+    const questionsPerPage = parseInt(state.questionsPerPage) || 5; // Ensure it's a number
+    const currentPage = parseInt(state.currentPage) || 1; // Ensure it's a number
     const totalQuestions = state.questions.length;
     
     let startIndex, endIndex;
     
-    if (questionsPerPage === 'all') {
+    if (questionsPerPage === 'all' || questionsPerPage >= totalQuestions) {
         startIndex = 0;
         endIndex = totalQuestions;
     } else {
@@ -869,12 +887,15 @@ function renderCurrentPage() {
         endIndex = Math.min(startIndex + questionsPerPage, totalQuestions);
     }
     
+    // Fix: Make sure we're showing the correct range
+    console.log(`Page ${currentPage}: Showing questions ${startIndex + 1} to ${endIndex} of ${totalQuestions}`);
+    
     const currentPageElement = getDOMElement('current-page');
     const questionsRange = getDOMElement('questions-range');
     const mcqQuestionsContainer = getDOMElement('mcq-questions-container');
     
     if (currentPageElement) currentPageElement.textContent = currentPage;
-    if (questionsRange) questionsRange.textContent = `${startIndex + 1}-${endIndex}`;
+    if (questionsRange) questionsRange.textContent = `${startIndex + 1}-${endIndex} of ${totalQuestions}`;
     
     if (!mcqQuestionsContainer) return;
     
@@ -882,7 +903,7 @@ function renderCurrentPage() {
     
     for (let i = startIndex; i < endIndex; i++) {
         const question = state.questions[i];
-        const questionNumber = i + 1;
+        const questionNumber = i + 1; 
         const userAnswer = state.userAnswers[i];
         
         const questionDiv = document.createElement('div');
@@ -1570,54 +1591,37 @@ async function discoverSubjectiveExamSets() {
     const field = AppState.currentField;
     const folderPath = `${FIELD_CONFIG[field].folderPrefix}Take Exam/Subjective Exam`;
     
-    console.log(`Looking for subjective sets in: ${folderPath}`);
-    
     try {
-        const apiUrl = getGitHubApiUrl(folderPath);
-        console.log(`Fetching from: ${apiUrl}`);
-        const response = await fetch(apiUrl);
+        const files = await listFilesFromGitHub(folderPath);
         
-        if (!response.ok) {
-            console.warn(`GitHub API error: ${response.status} - ${response.statusText}`);
+        if (!files || files.length === 0) {
+            console.warn(`No files found in: ${folderPath}`);
             return generateDemoSubjectiveSets();
         }
         
-        const data = await response.json();
+        const examSets = [];
         
-        if (!Array.isArray(data)) {
-            console.warn('GitHub API did not return an array');
-            return generateDemoSubjectiveSets();
-        }
-        
-        const jsonFiles = data.filter(item => {
-            const name = item.name || item;
-            return name.toLowerCase().endsWith('.json') && 
-                   (item.type === 'file' || !item.type);
+        const jsonFiles = files.filter(file => {
+            const fileName = file.name.toLowerCase();
+            return fileName.endsWith('.json');
         });
         
-        console.log(`Found ${jsonFiles.length} JSON files`);
-        
-        if (jsonFiles.length === 0) {
-            console.warn(`No JSON files found in: ${folderPath}`);
-            return generateDemoSubjectiveSets();
-        }
-        
-        const examSets = jsonFiles.map((file, index) => {
-            const fileName = file.name || file;
+        jsonFiles.forEach((file, index) => {
+            const fileName = file.name;
             const baseName = fileName.replace(/\.json$/i, '');
-            const setName = baseName.replace(/[_-]/g, ' ').trim();
-            const isFree = index < EXAM_CONFIG.subjective.freeSets;
+            const setName = baseName.replace(/_/g, ' ').trim();
+            const isFree = index < 2;
             
-            return {
+            examSets.push({
                 name: setName,
                 fileName: fileName,
                 displayName: setName,
                 isFree: isFree,
                 price: isFree ? 0 : PAYMENT_CONFIG.prices.subjective,
                 setNumber: index + 1,
-                path: file.path || `${folderPath}/${fileName}`,
-                downloadUrl: file.download_url || getRawFileUrl(`${folderPath}/${fileName}`)
-            };
+                path: file.path,
+                downloadUrl: file.download_url
+            });
         });
         
         examSets.sort((a, b) => {
@@ -1631,11 +1635,10 @@ async function discoverSubjectiveExamSets() {
         
         examSets.forEach((set, index) => {
             set.setNumber = index + 1;
-            set.isFree = index < EXAM_CONFIG.subjective.freeSets;
-            set.price = set.isFree ? 0 : PAYMENT_CONFIG.prices.subjective;
+            set.isFree = index < 2;
         });
         
-        console.log(`Processed ${examSets.length} subjective exam sets:`, examSets.map(s => s.fileName));
+        console.log(`Found ${examSets.length} Subjective exam sets`);
         return examSets;
         
     } catch (error) {
@@ -2222,7 +2225,11 @@ function loadMCQExamQuestion() {
         return;
     }
     
-    const question = state.questions[state.currentQuestionIndex];
+    // FIX: Make sure we're accessing the correct question
+    const questionIndex = state.currentQuestionIndex;
+    const question = state.questions[questionIndex]; // This should get question 0, 1, 2, 3, etc.
+    console.log(`Loading question ${questionIndex + 1} of ${state.questions.length}`);
+
     const multipleChoiceContainer = getDOMElement('multiple-choice-container');
     const currentExamQuestion = getDOMElement('current-exam-question');
     const totalExamQuestions = getDOMElement('total-exam-questions');
