@@ -2005,7 +2005,7 @@ async function loadMCQExam(fileName, displayName) {
                 // Ensure all required fields exist
                 const questionObj = {
                     id: `exam_${fileName}_${index}`,
-                    question: q.question || `Question ${index + 1}`,
+                    question: q.question || `Question ${index}`,
                     options: Array.isArray(q.options) ? q.options : ["Option A", "Option B", "Option C", "Option D"],
                     correct: q.correct || (q.options && q.options[0]) || "A",
                     explanation: q.explanation || "No explanation provided"
@@ -2329,7 +2329,7 @@ async function loadMCQExamQuestions(fileName) {
         const questions = jsonData.map((q, index) => {
             return {
                 id: index + 1,
-                question: q.question || `Question ${index + 1}`,
+                question: q.question || `Question ${index}`,
                 options: q.options || ['Option A', 'Option B', 'Option C', 'Option D'],
                 correct: q.correct || 'A',
                 explanation: q.explanation || 'No explanation provided'
