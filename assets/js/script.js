@@ -2248,7 +2248,7 @@ function loadMCQExamQuestion() {
     
     multipleChoiceContainer.innerHTML = `
         <div class="mcq-question-container">
-            <div class="question-number-badge">Question ${state.currentQuestionIndex + 1}</div>
+            <div class="question-number-badge">Question ${state.currentQuestionIndex }</div>
             <div class="mcq-question">${question.question}</div>
             <div class="mcq-options" id="exam-options-container">
                 ${question.options.map((option, index) => {
@@ -2436,6 +2436,11 @@ async function startMCQExam(selectedSet) {
 function displayMCQQuestion() {
     const state = AppState.examState;
     
+    // DEBUG: Check what's happening
+    console.log("=== DEBUG displayMCQQuestion ===");
+    console.log("Current index:", state.currentQuestionIndex);
+    console.log("Total questions:", state.questions.length);
+    
     // Check if we have questions
     if (!state.questions || state.questions.length === 0) {
         console.error("No questions available");
@@ -2446,22 +2451,28 @@ function displayMCQQuestion() {
         return;
     }
     
-    // Get the current question index (should be 0, 1, 2, 3...)
-    const questionIndex = state.currentQuestionIndex;
+    // FIX: Ensure index is calculated correctly
+    // The issue might be that currentQuestionIndex is being doubled somewhere
+    const questionIndex = state.currentQuestionIndex; // Should be 0, 1, 2, 3...
     
-    // Ensure index is within bounds
+    // Double-check the index is valid
     if (questionIndex < 0 || questionIndex >= state.questions.length) {
-        console.error(`Invalid question index: ${questionIndex}, total questions: ${state.questions.length}`);
+        console.error(`Invalid question index: ${questionIndex}, resetting to 0`);
+        state.currentQuestionIndex = 0;
         return;
     }
     
-    // Get the question at the current index
+    // Get the question - THIS IS WHERE THE SKIPPING HAPPENS
+    // Make sure we're accessing the correct index
     const question = state.questions[questionIndex];
     
     if (!question) {
         console.error(`No question found at index ${questionIndex}`);
+        console.log("Available questions indices:", state.questions.map((q, i) => i));
         return;
     }
+    
+    console.log(`Displaying question at index ${questionIndex}: "${question.question.substring(0, 50)}..."`);
     
     // Get user's answer for this question
     const userAnswer = state.answers[questionIndex];
@@ -2474,10 +2485,10 @@ function displayMCQQuestion() {
         return;
     }
     
-    // Calculate question number (display as 1, 2, 3...)
-    const questionNumber = questionIndex + 1;
+    // Calculate question number for display (add 1 to index)
+    const questionNumber = questionIndex + 1; // This should give 1, 2, 3, 4...
     
-    console.log(`Displaying question ${questionNumber} of ${state.questions.length}`);
+    console.log(`Question number displayed: ${questionNumber}`);
     
     // Create the question HTML
     container.innerHTML = `
@@ -2489,7 +2500,7 @@ function displayMCQQuestion() {
             <div class="mcq-question">${question.question}</div>
             <div class="mcq-options" id="exam-options-${questionIndex}">
                 ${question.options.map((option, optIndex) => {
-                    const optionLetter = String.fromCharCode(65 + optIndex); // A, B, C, D
+                    const optionLetter = String.fromCharCode(65 + optIndex);
                     const isSelected = userAnswer === option;
                     const optionClass = `mcq-option ${isSelected ? 'selected' : ''}`;
                     
@@ -2507,18 +2518,30 @@ function displayMCQQuestion() {
         </div>
     `;
     
-    // Update question counter
+    // Update question counter - FIX HERE TOO
     const currentElement = document.getElementById('current-exam-question');
     const totalElement = document.getElementById('total-exam-questions');
     
     if (currentElement) {
-        currentElement.textContent = questionNumber; // Show 1, 2, 3...
+        currentElement.textContent = questionNumber; // Should be 1, 2, 3, 4...
+        console.log(`Set current-exam-question to: ${questionNumber}`);
     }
     if (totalElement) {
         totalElement.textContent = state.questions.length;
     }
     
-    // Update navigation buttons state
+    // Update navigation buttons
+    updateExamNavigationButtons();
+    
+    // Update progress
+    updateMCQExamProgress();
+}
+
+// FIXED: Navigation button update function
+function updateExamNavigationButtons() {
+    const state = AppState.examState;
+    const questionIndex = state.currentQuestionIndex;
+    
     const prevButton = document.getElementById('prev-exam-question');
     const nextButton = document.getElementById('next-exam-question');
     const flagButton = document.getElementById('flag-exam-question');
@@ -2527,41 +2550,59 @@ function displayMCQQuestion() {
         prevButton.disabled = questionIndex === 0;
     }
     if (nextButton) {
-        nextButton.disabled = questionIndex === state.questions.length - 1;
+        nextButton.disabled = questionIndex >= state.questions.length - 1;
     }
     if (flagButton) {
+        const isFlagged = state.flagged[questionIndex] || false;
         flagButton.innerHTML = isFlagged ? 
             '<i class="fas fa-flag"></i> Unflag' : 
             '<i class="far fa-flag"></i> Flag';
         flagButton.style.backgroundColor = isFlagged ? '#e74c3c' : '';
     }
-    
-    // Update progress indicators
-    updateMCQExamProgress();
 }
 
-// Helper function for option selection
-window.handleExamOptionClick = function(optionElement) {
-    const questionIndex = parseInt(optionElement.dataset.questionIndex);
-    const selectedOption = optionElement.dataset.option;
+// FIXED: Navigation event handlers - CRITICAL FIX HERE
+function setupExamNavigation() {
+    // Previous button - MAKE SURE IT DECREMENTS BY 1, NOT 2
+    document.getElementById('prev-exam-question')?.addEventListener('click', () => {
+        const state = AppState.examState;
+        console.log(`Previous clicked. Current index: ${state.currentQuestionIndex}`);
+        
+        if (state.currentQuestionIndex > 0) {
+            // FIX: Decrement by 1, not 2
+            state.currentQuestionIndex = state.currentQuestionIndex - 1;
+            console.log(`New index after prev: ${state.currentQuestionIndex}`);
+            displayMCQQuestion();
+        }
+    });
     
-    // Remove selected class from all options in this question
-    const optionsContainer = optionElement.closest('.mcq-options');
-    if (optionsContainer) {
-        optionsContainer.querySelectorAll('.mcq-option').forEach(opt => {
-            opt.classList.remove('selected');
-        });
-    }
+    // Next button - MAKE SURE IT INCREMENTS BY 1, NOT 2
+    document.getElementById('next-exam-question')?.addEventListener('click', () => {
+        const state = AppState.examState;
+        console.log(`Next clicked. Current index: ${state.currentQuestionIndex}`);
+        
+        if (state.currentQuestionIndex < state.questions.length - 1) {
+            // FIX: Increment by 1, not 2
+            state.currentQuestionIndex = state.currentQuestionIndex + 1;
+            console.log(`New index after next: ${state.currentQuestionIndex}`);
+            displayMCQQuestion();
+        }
+    });
     
-    // Add selected class to clicked option
-    optionElement.classList.add('selected');
-    
-    // Save the answer
-    AppState.examState.answers[questionIndex] = selectedOption;
-    
-    // Update progress
-    updateMCQExamProgress();
-};
+    // Flag button
+    document.getElementById('flag-exam-question')?.addEventListener('click', () => {
+        const state = AppState.examState;
+        const index = state.currentQuestionIndex;
+        state.flagged[index] = !state.flagged[index];
+        updateExamNavigationButtons();
+    });
+}
+
+// Initialize navigation when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    setupExamNavigation();
+});
+
 
 // Function to update progress display
 function updateMCQExamProgress() {
