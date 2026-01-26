@@ -2261,7 +2261,7 @@ function loadMCQExamQuestion() {
         </div>
     `;
     
-    currentExamQuestion.textContent = state.currentQuestionIndex + 1;
+    currentExamQuestion.textContent = state.currentQuestionIndex;
     totalExamQuestions.textContent = state.questions.length;
     
     if (prevExamQuestion) {
