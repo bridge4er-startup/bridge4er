@@ -873,23 +873,19 @@ console.log("DEBUG - Current question index:", AppState.examState.currentQuestio
 
 function renderCurrentPage() {
     const state = AppState.mcqState;
-    const questionsPerPage = parseInt(state.questionsPerPage) || 5; // Ensure it's a number
-    const currentPage = parseInt(state.currentPage) || 1; // Ensure it's a number
+    
+    // Ensure we have valid numbers
+    const questionsPerPage = parseInt(state.questionsPerPage) || 5;
+    const currentPage = parseInt(state.currentPage) || 1;
     const totalQuestions = state.questions.length;
     
-    let startIndex, endIndex;
+    // Calculate indices correctly
+    let startIndex = (currentPage - 1) * questionsPerPage;
+    let endIndex = Math.min(startIndex + questionsPerPage, totalQuestions);
     
-    if (questionsPerPage === 'all' || questionsPerPage >= totalQuestions) {
-        startIndex = 0;
-        endIndex = totalQuestions;
-    } else {
-        startIndex = (currentPage - 1) * questionsPerPage;
-        endIndex = Math.min(startIndex + questionsPerPage, totalQuestions);
-    }
+    console.log(`Displaying questions ${startIndex + 1} to ${endIndex} of ${totalQuestions}`);
     
-    // Fix: Make sure we're showing the correct range
-    console.log(`Page ${currentPage}: Showing questions ${startIndex + 1} to ${endIndex} of ${totalQuestions}`);
-    
+    // Update UI elements
     const currentPageElement = getDOMElement('current-page');
     const questionsRange = getDOMElement('questions-range');
     const mcqQuestionsContainer = getDOMElement('mcq-questions-container');
@@ -899,13 +895,22 @@ function renderCurrentPage() {
     
     if (!mcqQuestionsContainer) return;
     
+    // Clear container
     mcqQuestionsContainer.innerHTML = '';
     
+    // CRITICAL: Loop through ALL questions in the range
     for (let i = startIndex; i < endIndex; i++) {
         const question = state.questions[i];
-        const questionNumber = i + 1; 
+        
+        if (!question) {
+            console.error(`No question found at index ${i}`);
+            continue;
+        }
+        
+        const questionNumber = i + 1;  // Display numbers starting from 1
         const userAnswer = state.userAnswers[i];
         
+        // Create question HTML
         const questionDiv = document.createElement('div');
         questionDiv.className = 'mcq-question-container';
         questionDiv.innerHTML = `
@@ -934,6 +939,7 @@ function renderCurrentPage() {
         
         mcqQuestionsContainer.appendChild(questionDiv);
         
+        // Add event listeners
         questionDiv.querySelectorAll('.mcq-option').forEach(option => {
             option.addEventListener('click', function() {
                 const questionIndex = parseInt(this.dataset.questionIndex);
@@ -943,6 +949,7 @@ function renderCurrentPage() {
         });
     }
     
+    // Update pagination
     updatePageIndicators();
     updatePaginationButtons();
 }
@@ -2005,7 +2012,7 @@ async function loadMCQExam(fileName, displayName) {
                 // Ensure all required fields exist
                 const questionObj = {
                     id: `exam_${fileName}_${index}`,
-                    question: q.question || `Question ${index}`,
+                    question: q.question || `Question ${index + 1}`,
                     options: Array.isArray(q.options) ? q.options : ["Option A", "Option B", "Option C", "Option D"],
                     correct: q.correct || (q.options && q.options[0]) || "A",
                     explanation: q.explanation || "No explanation provided"
@@ -2228,7 +2235,7 @@ function loadMCQExamQuestion() {
     // FIX: Make sure we're accessing the correct question
     const questionIndex = state.currentQuestionIndex;
     const question = state.questions[questionIndex]; // This should get question 0, 1, 2, 3, etc.
-    console.log(`Loading question ${questionIndex} of ${state.questions.length}`);
+    console.log(`Loading question ${questionIndex + 1} of ${state.questions.length}`);
 
     const multipleChoiceContainer = getDOMElement('multiple-choice-container');
     const currentExamQuestion = getDOMElement('current-exam-question');
@@ -2241,7 +2248,7 @@ function loadMCQExamQuestion() {
     
     multipleChoiceContainer.innerHTML = `
         <div class="mcq-question-container">
-            <div class="question-number-badge">Question ${state.currentQuestionIndex}</div>
+            <div class="question-number-badge">Question ${state.currentQuestionIndex + 1}</div>
             <div class="mcq-question">${question.question}</div>
             <div class="mcq-options" id="exam-options-container">
                 ${question.options.map((option, index) => {
@@ -2261,7 +2268,7 @@ function loadMCQExamQuestion() {
         </div>
     `;
     
-    currentExamQuestion.textContent = state.currentQuestionIndex;
+    currentExamQuestion.textContent = state.currentQuestionIndex + 1;
     totalExamQuestions.textContent = state.questions.length;
     
     if (prevExamQuestion) {
@@ -2329,7 +2336,7 @@ async function loadMCQExamQuestions(fileName) {
         const questions = jsonData.map((q, index) => {
             return {
                 id: index + 1,
-                question: q.question || `Question ${index}`,
+                question: q.question || `Question ${index + 1}`,
                 options: q.options || ['Option A', 'Option B', 'Option C', 'Option D'],
                 correct: q.correct || 'A',
                 explanation: q.explanation || 'No explanation provided'
@@ -2428,30 +2435,69 @@ async function startMCQExam(selectedSet) {
 
 function displayMCQQuestion() {
     const state = AppState.examState;
-    const question = state.questions[state.currentQuestionIndex];
+    
+    // Check if we have questions
+    if (!state.questions || state.questions.length === 0) {
+        console.error("No questions available");
+        const container = document.getElementById('multiple-choice-container');
+        if (container) {
+            container.innerHTML = '<div class="error-message">No questions available</div>';
+        }
+        return;
+    }
+    
+    // Get the current question index (should be 0, 1, 2, 3...)
+    const questionIndex = state.currentQuestionIndex;
+    
+    // Ensure index is within bounds
+    if (questionIndex < 0 || questionIndex >= state.questions.length) {
+        console.error(`Invalid question index: ${questionIndex}, total questions: ${state.questions.length}`);
+        return;
+    }
+    
+    // Get the question at the current index
+    const question = state.questions[questionIndex];
+    
+    if (!question) {
+        console.error(`No question found at index ${questionIndex}`);
+        return;
+    }
+    
+    // Get user's answer for this question
+    const userAnswer = state.answers[questionIndex];
+    const isFlagged = state.flagged[questionIndex] || false;
+    
+    // Get the container
     const container = document.getElementById('multiple-choice-container');
+    if (!container) {
+        console.error("Multiple choice container not found");
+        return;
+    }
     
-    if (!container) return;
+    // Calculate question number (display as 1, 2, 3...)
+    const questionNumber = questionIndex + 1;
     
-    const isFlagged = state.flagged[state.currentQuestionIndex] || false;
-    const userAnswer = state.answers[state.currentQuestionIndex];
+    console.log(`Displaying question ${questionNumber} of ${state.questions.length}`);
     
-    // Create question HTML
+    // Create the question HTML
     container.innerHTML = `
         <div class="mcq-question-container">
             <div class="question-number-badge">
-                Question ${state.currentQuestionIndex + 1}
+                Question ${questionNumber}
                 ${isFlagged ? '<span style="color: #e74c3c; margin-left: 10px;"><i class="fas fa-flag"></i> Flagged</span>' : ''}
             </div>
             <div class="mcq-question">${question.question}</div>
-            <div class="mcq-options">
-                ${question.options.map((option, index) => {
-                    const optionLetter = String.fromCharCode(65 + index);
+            <div class="mcq-options" id="exam-options-${questionIndex}">
+                ${question.options.map((option, optIndex) => {
+                    const optionLetter = String.fromCharCode(65 + optIndex); // A, B, C, D
                     const isSelected = userAnswer === option;
                     const optionClass = `mcq-option ${isSelected ? 'selected' : ''}`;
                     
                     return `
-                        <div class="${optionClass}" data-option="${option}" onclick="selectMCQOption('${option}')">
+                        <div class="${optionClass}" 
+                             data-question-index="${questionIndex}" 
+                             data-option="${option}"
+                             onclick="handleExamOptionClick(this)">
                             <div class="option-letter">${optionLetter}</div>
                             <div>${option}</div>
                         </div>
@@ -2465,21 +2511,71 @@ function displayMCQQuestion() {
     const currentElement = document.getElementById('current-exam-question');
     const totalElement = document.getElementById('total-exam-questions');
     
-    if (currentElement) currentElement.textContent = state.currentQuestionIndex + 1;
-    if (totalElement) totalElement.textContent = state.questions.length;
+    if (currentElement) {
+        currentElement.textContent = questionNumber; // Show 1, 2, 3...
+    }
+    if (totalElement) {
+        totalElement.textContent = state.questions.length;
+    }
     
-    // Update navigation buttons
+    // Update navigation buttons state
     const prevButton = document.getElementById('prev-exam-question');
     const nextButton = document.getElementById('next-exam-question');
     const flagButton = document.getElementById('flag-exam-question');
     
-    if (prevButton) prevButton.disabled = state.currentQuestionIndex === 0;
-    if (nextButton) nextButton.disabled = state.currentQuestionIndex === state.questions.length - 1;
+    if (prevButton) {
+        prevButton.disabled = questionIndex === 0;
+    }
+    if (nextButton) {
+        nextButton.disabled = questionIndex === state.questions.length - 1;
+    }
     if (flagButton) {
         flagButton.innerHTML = isFlagged ? 
             '<i class="fas fa-flag"></i> Unflag' : 
             '<i class="far fa-flag"></i> Flag';
+        flagButton.style.backgroundColor = isFlagged ? '#e74c3c' : '';
     }
+    
+    // Update progress indicators
+    updateMCQExamProgress();
+}
+
+// Helper function for option selection
+window.handleExamOptionClick = function(optionElement) {
+    const questionIndex = parseInt(optionElement.dataset.questionIndex);
+    const selectedOption = optionElement.dataset.option;
+    
+    // Remove selected class from all options in this question
+    const optionsContainer = optionElement.closest('.mcq-options');
+    if (optionsContainer) {
+        optionsContainer.querySelectorAll('.mcq-option').forEach(opt => {
+            opt.classList.remove('selected');
+        });
+    }
+    
+    // Add selected class to clicked option
+    optionElement.classList.add('selected');
+    
+    // Save the answer
+    AppState.examState.answers[questionIndex] = selectedOption;
+    
+    // Update progress
+    updateMCQExamProgress();
+};
+
+// Function to update progress display
+function updateMCQExamProgress() {
+    const state = AppState.examState;
+    const total = state.questions.length;
+    const answered = Object.keys(state.answers).length;
+    
+    const totalElement = document.getElementById('mcq-total-questions');
+    const answeredElement = document.getElementById('mcq-answered-questions');
+    const remainingElement = document.getElementById('mcq-remaining-questions');
+    
+    if (totalElement) totalElement.textContent = total;
+    if (answeredElement) answeredElement.textContent = answered;
+    if (remainingElement) remainingElement.textContent = total - answered;
 }
 
 function selectMCQOption(selectedOption) {
@@ -2494,21 +2590,6 @@ function selectMCQOption(selectedOption) {
     
     // Update progress
     updateMCQExamProgress();
-}
-
-
-function updateMCQExamProgress() {
-    const state = AppState.examState;
-    const total = state.questions.length;
-    const answered = Object.keys(state.answers).length;
-    
-    const totalElement = document.getElementById('mcq-total-questions');
-    const answeredElement = document.getElementById('mcq-answered-questions');
-    const remainingElement = document.getElementById('mcq-remaining-questions');
-    
-    if (totalElement) totalElement.textContent = total;
-    if (answeredElement) answeredElement.textContent = answered;
-    if (remainingElement) remainingElement.textContent = total - answered;
 }
 
 function startTimer(type) {
