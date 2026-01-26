@@ -1298,15 +1298,23 @@ main {
     margin-bottom: 1.5rem;
 }
 
+/* Ensure exam elements are visible */
+#multiple-choice-exam {
+    display: none;
+}
+
+#multiple-choice-exam.active {
+    display: block;
+}
+
 .mcq-option {
-    padding: 1rem;
-    border: 2px solid #ddd;
-    border-radius: var(--border-radius);
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 8px 0;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 12px;
 }
 
 .mcq-option:hover {
@@ -1315,8 +1323,16 @@ main {
 }
 
 .mcq-option.selected {
-    border-color: var(--secondary-color);
-    background-color: rgba(87, 204, 153, 0.1);
+    border-color: var(--primary-color);
+    background-color: rgba(26, 95, 122, 0.1);
+}
+
+.exam-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
 }
 
 .mcq-option.correct {
@@ -1464,23 +1480,22 @@ main {
 
 /* Exam Timer */
 .exam-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
+    background: linear-gradient(to right, #f8f9fa, #ffffff);
+    border-radius: 8px;
     padding: 1rem;
-    background-color: #fff3cd;
-    border-radius: var(--border-radius);
-    border: 1px solid #ffeaa7;
+    margin-bottom: 2rem;
+    border: 1px solid #e0e0e0;
 }
 
 .timer-container {
-    display: flex;
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
-    font-weight: bold;
-    color: #e17055;
-    font-size: 1.2rem;
+    gap: 8px;
+    color: #856404;
 }
 
 .timer {
