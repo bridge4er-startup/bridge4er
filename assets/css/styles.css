@@ -1427,7 +1427,7 @@ main {
     transition: all 0.3s ease;
     border: 2px solid #e0e0e0;
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
     align-items: flex-start;
 }
 
@@ -1487,8 +1487,8 @@ main {
 .exam-set-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin: 1.5rem 0;
+    gap: 1rem;
+    margin: 1rem 0;
 }
 
 .exam-set-card {
