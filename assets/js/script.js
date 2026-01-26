@@ -1511,37 +1511,55 @@ async function discoverMCQExamSets() {
     const field = AppState.currentField;
     const folderPath = `${FIELD_CONFIG[field].folderPrefix}Take Exam/Multiple Choice Exam`;
     
+    console.log(`Looking for MCQ sets in: ${folderPath}`);
+    
     try {
-        const files = await listFilesFromGitHub(folderPath);
+        const apiUrl = getGitHubApiUrl(folderPath);
+        console.log(`Fetching from: ${apiUrl}`);
+        const response = await fetch(apiUrl);
         
-        if (!files || files.length === 0) {
-            console.warn(`No files found in: ${folderPath}`);
+        if (!response.ok) {
+            console.warn(`GitHub API error: ${response.status} - ${response.statusText}`);
             return generateDemoMCQSets();
         }
         
-        const examSets = [];
+        const data = await response.json();
         
-        const jsonFiles = files.filter(file => {
-            const fileName = file.name.toLowerCase();
-            return fileName.endsWith('.json');
+        if (!Array.isArray(data)) {
+            console.warn('GitHub API did not return an array');
+            return generateDemoMCQSets();
+        }
+        
+        const jsonFiles = data.filter(item => {
+            // Handle both file objects and simple responses
+            const name = item.name || item;
+            return name.toLowerCase().endsWith('.json') && 
+                   (item.type === 'file' || !item.type);
         });
         
-        jsonFiles.forEach((file, index) => {
-            const fileName = file.name;
+        console.log(`Found ${jsonFiles.length} JSON files`);
+        
+        if (jsonFiles.length === 0) {
+            console.warn(`No JSON files found in: ${folderPath}`);
+            return generateDemoMCQSets();
+        }
+        
+        const examSets = jsonFiles.map((file, index) => {
+            const fileName = file.name || file;
             const baseName = fileName.replace(/\.json$/i, '');
-            const setName = baseName.replace(/_/g, ' ').trim();
-            const isFree = index < 2;
+            const setName = baseName.replace(/[_-]/g, ' ').trim();
+            const isFree = index < EXAM_CONFIG.mcq.freeSets;
             
-            examSets.push({
+            return {
                 name: setName,
                 fileName: fileName,
                 displayName: setName,
                 isFree: isFree,
                 price: isFree ? 0 : PAYMENT_CONFIG.prices.mcq,
                 setNumber: index + 1,
-                path: file.path,
-                downloadUrl: file.download_url
-            });
+                path: file.path || `${folderPath}/${fileName}`,
+                downloadUrl: file.download_url || getRawFileUrl(`${folderPath}/${fileName}`)
+            };
         });
         
         examSets.sort((a, b) => {
@@ -1555,10 +1573,11 @@ async function discoverMCQExamSets() {
         
         examSets.forEach((set, index) => {
             set.setNumber = index + 1;
-            set.isFree = index < 2;
+            set.isFree = index < EXAM_CONFIG.mcq.freeSets;
+            set.price = set.isFree ? 0 : PAYMENT_CONFIG.prices.mcq;
         });
         
-        console.log(`Found ${examSets.length} MCQ exam sets`);
+        console.log(`Processed ${examSets.length} MCQ exam sets:`, examSets.map(s => s.fileName));
         return examSets;
         
     } catch (error) {
@@ -1571,37 +1590,54 @@ async function discoverSubjectiveExamSets() {
     const field = AppState.currentField;
     const folderPath = `${FIELD_CONFIG[field].folderPrefix}Take Exam/Subjective Exam`;
     
+    console.log(`Looking for subjective sets in: ${folderPath}`);
+    
     try {
-        const files = await listFilesFromGitHub(folderPath);
+        const apiUrl = getGitHubApiUrl(folderPath);
+        console.log(`Fetching from: ${apiUrl}`);
+        const response = await fetch(apiUrl);
         
-        if (!files || files.length === 0) {
-            console.warn(`No files found in: ${folderPath}`);
+        if (!response.ok) {
+            console.warn(`GitHub API error: ${response.status} - ${response.statusText}`);
             return generateDemoSubjectiveSets();
         }
         
-        const examSets = [];
+        const data = await response.json();
         
-        const jsonFiles = files.filter(file => {
-            const fileName = file.name.toLowerCase();
-            return fileName.endsWith('.json');
+        if (!Array.isArray(data)) {
+            console.warn('GitHub API did not return an array');
+            return generateDemoSubjectiveSets();
+        }
+        
+        const jsonFiles = data.filter(item => {
+            const name = item.name || item;
+            return name.toLowerCase().endsWith('.json') && 
+                   (item.type === 'file' || !item.type);
         });
         
-        jsonFiles.forEach((file, index) => {
-            const fileName = file.name;
+        console.log(`Found ${jsonFiles.length} JSON files`);
+        
+        if (jsonFiles.length === 0) {
+            console.warn(`No JSON files found in: ${folderPath}`);
+            return generateDemoSubjectiveSets();
+        }
+        
+        const examSets = jsonFiles.map((file, index) => {
+            const fileName = file.name || file;
             const baseName = fileName.replace(/\.json$/i, '');
-            const setName = baseName.replace(/_/g, ' ').trim();
-            const isFree = index < 2;
+            const setName = baseName.replace(/[_-]/g, ' ').trim();
+            const isFree = index < EXAM_CONFIG.subjective.freeSets;
             
-            examSets.push({
+            return {
                 name: setName,
                 fileName: fileName,
                 displayName: setName,
                 isFree: isFree,
                 price: isFree ? 0 : PAYMENT_CONFIG.prices.subjective,
                 setNumber: index + 1,
-                path: file.path,
-                downloadUrl: file.download_url
-            });
+                path: file.path || `${folderPath}/${fileName}`,
+                downloadUrl: file.download_url || getRawFileUrl(`${folderPath}/${fileName}`)
+            };
         });
         
         examSets.sort((a, b) => {
@@ -1615,10 +1651,11 @@ async function discoverSubjectiveExamSets() {
         
         examSets.forEach((set, index) => {
             set.setNumber = index + 1;
-            set.isFree = index < 2;
+            set.isFree = index < EXAM_CONFIG.subjective.freeSets;
+            set.price = set.isFree ? 0 : PAYMENT_CONFIG.prices.subjective;
         });
         
-        console.log(`Found ${examSets.length} Subjective exam sets`);
+        console.log(`Processed ${examSets.length} subjective exam sets:`, examSets.map(s => s.fileName));
         return examSets;
         
     } catch (error) {
@@ -1890,7 +1927,7 @@ function renderSubjectiveExamSetSelection(examSets) {
 // ==============================================
 
 async function loadAndStartMCQExam(selectedSet) {
-    console.log("Loading MCQ exam:", selectedSet.displayName);
+    console.log("Loading MCQ exam:", selectedSet.displayName, "File:", selectedSet.fileName);
     
     try {
         const state = AppState.examState;
@@ -1902,7 +1939,10 @@ async function loadAndStartMCQExam(selectedSet) {
         state.flagged = {};
         state.totalTime = 30 * 60;
         
+        console.log("Loading questions...");
         state.questions = await loadMCQExam(selectedSet.fileName, selectedSet.displayName);
+        
+        console.log(`Loaded ${state.questions.length} questions`);
         
         if (state.questions.length === 0) {
             throw new Error('No questions loaded');
@@ -1912,18 +1952,24 @@ async function loadAndStartMCQExam(selectedSet) {
         const mcqExam = getDOMElement('multiple-choice-exam');
         const examTitle = getDOMElement('multiple-choice-exam-title');
         
-        if (!examSetSelection || !mcqExam || !examTitle) return;
+        if (!examSetSelection || !mcqExam || !examTitle) {
+            console.error('Required DOM elements not found');
+            return;
+        }
         
         hideElement(examSetSelection);
         showElement(mcqExam);
         examTitle.textContent = `Multiple Choice Exam - ${selectedSet.displayName}`;
         
+        console.log("Loading first question...");
         loadMCQExamQuestion();
         startTimer('mcq');
         
+        console.log("MCQ exam started successfully");
+        
     } catch (error) {
         console.error('Error loading exam set:', error);
-        alert(`Failed to load exam questions from ${selectedSet.fileName}.`);
+        alert(`Failed to load exam questions from ${selectedSet.fileName}. Error: ${error.message}`);
     }
 }
 
@@ -1955,36 +2001,75 @@ async function loadAndStartSubjectiveExam(selectedSet) {
 
 async function loadMCQExam(fileName, displayName) {
     const field = AppState.currentField;
+    const filePath = `${FIELD_CONFIG[field].folderPrefix}Take Exam/Multiple Choice Exam/${fileName}`;
+    
+    console.log(`Loading MCQ exam from: ${filePath}`);
     
     try {
-        const filePath = `${FIELD_CONFIG[field].folderPrefix}Take Exam/Multiple Choice Exam/${fileName}`;
         const jsonData = await getJsonFileFromGitHub(filePath);
         
         if (!jsonData) {
+            console.error('No JSON data received for:', filePath);
             throw new Error('No JSON data received');
         }
+        
+        console.log(`JSON data loaded:`, Array.isArray(jsonData) ? `Array with ${jsonData.length} items` : 'Not an array');
         
         let questions = [];
         
         if (Array.isArray(jsonData)) {
-            questions = jsonData.map((q, index) => ({
-                id: `exam_${fileName}_${index}`,
-                question: q.question || `Question ${index + 1}`,
-                options: q.options || ["Option A", "Option B", "Option C", "Option D"],
-                correct: q.correct || (q.options ? q.options[0] : "A"),
-                explanation: q.explanation || "No explanation provided"
-            }));
+            questions = jsonData.map((q, index) => {
+                // Ensure all required fields exist
+                const questionObj = {
+                    id: `exam_${fileName}_${index}`,
+                    question: q.question || `Question ${index + 1}`,
+                    options: Array.isArray(q.options) ? q.options : ["Option A", "Option B", "Option C", "Option D"],
+                    correct: q.correct || (q.options && q.options[0]) || "A",
+                    explanation: q.explanation || "No explanation provided"
+                };
+                
+                // Validate options array
+                if (!Array.isArray(questionObj.options) || questionObj.options.length === 0) {
+                    console.warn(`Invalid options for question ${index + 1}, using defaults`);
+                    questionObj.options = ["Option A", "Option B", "Option C", "Option D"];
+                }
+                
+                // Ensure correct answer exists in options
+                if (!questionObj.options.includes(questionObj.correct)) {
+                    console.warn(`Correct answer "${questionObj.correct}" not in options for question ${index + 1}`);
+                    questionObj.correct = questionObj.options[0];
+                }
+                
+                return questionObj;
+            });
+        } else {
+            console.warn('Unexpected JSON format, expected array');
+            return [{
+                id: `exam_${fileName}_0`,
+                question: "Check your JSON file format. Expected an array of question objects.",
+                options: ["Should be: [{question:'...', options:[], correct:'', explanation:''}]", "Array format required", "Direct array of objects", "Check JSON structure"],
+                correct: "Should be: [{question:'...', options:[], correct:'', explanation:''}]",
+                explanation: "Your JSON should be a direct array of question objects with question, options, correct, and explanation fields."
+            }];
         }
         
         if (questions.length === 0) {
-            questions = [getEmptyQuestionSet('Exam', displayName)];
+            console.warn('No questions loaded from JSON');
+            return [getEmptyQuestionSet('Exam', displayName)];
         }
         
+        console.log(`Successfully loaded ${questions.length} questions`);
         return questions;
         
     } catch (error) {
-        console.error('Error loading MCQ exam:', error);
-        return [getErrorQuestionSet('Exam', displayName, fileName)];
+        console.error(`Error loading MCQ exam from ${fileName}:`, error);
+        return [{
+            id: `error_${fileName}_0`,
+            question: `Error loading questions for ${displayName}`,
+            options: ["JSON file not found", "Check GitHub path", "Verify file exists", "Contact admin"],
+            correct: "JSON file not found",
+            explanation: `Could not load ${fileName} from GitHub. Please check: 1) File exists, 2) JSON format is valid, 3) File is in correct folder.`
+        }];
     }
 }
 
@@ -2982,6 +3067,10 @@ function showExamAnswers() {
 
 function init() {
     console.log("Initializing application...");
+    console.log("GitHub Config:", GITHUB_CONFIG);
+    console.log("Field Config:", FIELD_CONFIG);
+    console.log("Current Field:", AppState.currentField);
+    
     initializeDOMReferences();
     setupEventListeners();
     loadField('civil');
