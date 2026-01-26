@@ -2241,7 +2241,7 @@ function loadMCQExamQuestion() {
     
     multipleChoiceContainer.innerHTML = `
         <div class="mcq-question-container">
-            <div class="question-number-badge">Question ${state.currentQuestionIndex + 1}</div>
+            <div class="question-number-badge">Question ${state.currentQuestionIndex}</div>
             <div class="mcq-question">${question.question}</div>
             <div class="mcq-options" id="exam-options-container">
                 ${question.options.map((option, index) => {
