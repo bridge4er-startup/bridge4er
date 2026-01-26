@@ -65,13 +65,26 @@
             <h3 id="subjective-exam-title">Subjective Exam</h3>
             <div id="subjective-exam-questions"></div>
             
-            <div class="form-actions" style="margin-top: 2rem;">
-                <button class="btn btn-primary" id="submit-subjective-exam">
-                    <i class="fas fa-paper-plane"></i> Submit Exam
-                </button>
-                <button class="btn btn-secondary" id="back-to-exam-type">
-                    <i class="fas fa-arrow-left"></i> Back to Exam Type
-                </button>
+            <div class="submission-form" id="subjective-submission-form">
+                <h4><i class="fas fa-paper-plane"></i> Submit Your Answers</h4>
+                <div class="form-group">
+                    <label for="user-email"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="user-email" placeholder="Enter your email for results" required>
+                    <small>Results will be sent to this email within a week</small>
+                </div>
+                <div class="form-group">
+                    <label for="answer-pdf"><i class="fas fa-file-pdf"></i> Upload Answer Sheet (PDF only)</label>
+                    <input type="file" id="answer-pdf" accept=".pdf" required>
+                    <small>Maximum file size: 10MB. Upload your scanned answer sheet.</small>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary" id="submit-subjective-exam">
+                        <i class="fas fa-paper-plane"></i> Submit Exam
+                    </button>
+                    <button class="btn btn-secondary" id="cancel-subjective-exam">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
             </div>
         </div>
     </div>
