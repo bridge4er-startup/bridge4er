@@ -2228,7 +2228,7 @@ function loadMCQExamQuestion() {
     // FIX: Make sure we're accessing the correct question
     const questionIndex = state.currentQuestionIndex;
     const question = state.questions[questionIndex]; // This should get question 0, 1, 2, 3, etc.
-    console.log(`Loading question ${questionIndex + 1} of ${state.questions.length}`);
+    console.log(`Loading question ${questionIndex} of ${state.questions.length}`);
 
     const multipleChoiceContainer = getDOMElement('multiple-choice-container');
     const currentExamQuestion = getDOMElement('current-exam-question');
