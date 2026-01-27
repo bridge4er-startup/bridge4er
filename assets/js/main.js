@@ -1,7 +1,7 @@
 // ==============================================
 // MAIN INITIALIZATION
 // ==============================================
-
+console.log("🚀 main.js: init() function is STARTING");
 document.addEventListener('DOMContentLoaded', loadComponents);
 
 function init() {
@@ -106,3 +106,5 @@ window.goBackToSubjectiveChapters = function() {
         subjectiveChapterSelection.style.display = 'block';
     }
 };
+
+document.addEventListener('DOMContentLoaded', loadComponents);
