@@ -2,9 +2,9 @@
 // COMPONENT LOADING (OPTIMIZED)
 // ==============================================
 
-console.log("📦 components.js: loadComponents() function is STARTING");
-
 async function loadComponents() {
+    console.log("📦 components.js: loadComponents() function is STARTING");
+
     const components = [
         { id: 'header-container', file: 'components/header.html' },
         { id: 'navigation-container', file: 'components/navigation.html' },
@@ -18,10 +18,10 @@ async function loadComponents() {
     ];
 
     const loadPromises = components.map(async (component) => {
-    console.log(`🔍 Attempting to load: ${component.file}`); // NEW: Log start
+        console.log(`🔍 Attempting to load: ${component.file}`);
         try {
             const response = await fetch(component.file);
-            console.log(`📡 Response for ${component.file}: Status ${response.status}, OK? ${response.ok}`); // NEW: Log fetch result
+            console.log(`📡 Response for ${component.file}: Status ${response.status}, OK? ${response.ok}`);
             
             if (!response.ok) {
                 console.error(`❌ HTTP Error for ${component.file}: ${response.status}`);
@@ -29,12 +29,12 @@ async function loadComponents() {
             }
             
             const html = await response.text();
-            console.log(`✓ Fetched ${component.file}. HTML length: ${html.length} chars`); // NEW: Log success
+            console.log(`✓ Fetched ${component.file}. HTML length: ${html.length} chars`);
             
             const element = document.getElementById(component.id);
             if (element) {
                 element.innerHTML = html;
-                console.log(`✔ Successfully injected HTML into #${component.id}`); // NEW: Log injection
+                console.log(`✔ Successfully injected HTML into #${component.id}`);
             } else {
                 console.error(`❌ CRITICAL: Target element #${component.id} not found in the page!`);
             }
@@ -47,11 +47,18 @@ async function loadComponents() {
         }
     });
 
+    // WAIT for ALL components to be injected into the page
     await Promise.all(loadPromises);
-    
+    console.log("✅ ALL components loaded and injected.");
+
+    // NOW initialize the rest of the app
     initializeDOMReferences();
     init();
 }
+
+// ==============================================
+// DOM ELEMENT REFERENCES (OPTIMIZED)
+// ==============================================
 
 function initializeDOMReferences() {
     DOMCache.clear();
