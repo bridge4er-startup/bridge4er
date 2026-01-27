@@ -18,19 +18,31 @@ async function loadComponents() {
     ];
 
     const loadPromises = components.map(async (component) => {
+    console.log(`🔍 Attempting to load: ${component.file}`); // NEW: Log start
         try {
             const response = await fetch(component.file);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            console.log(`📡 Response for ${component.file}: Status ${response.status}, OK? ${response.ok}`); // NEW: Log fetch result
+            
+            if (!response.ok) {
+                console.error(`❌ HTTP Error for ${component.file}: ${response.status}`);
+                throw new Error(`HTTP ${response.status}`);
+            }
+            
             const html = await response.text();
+            console.log(`✓ Fetched ${component.file}. HTML length: ${html.length} chars`); // NEW: Log success
+            
             const element = document.getElementById(component.id);
             if (element) {
                 element.innerHTML = html;
+                console.log(`✔ Successfully injected HTML into #${component.id}`); // NEW: Log injection
+            } else {
+                console.error(`❌ CRITICAL: Target element #${component.id} not found in the page!`);
             }
         } catch (error) {
-            console.error(`Error loading ${component.file}:`, error);
+            console.error(`💥 Error loading ${component.file}:`, error);
             const element = document.getElementById(component.id);
             if (element) {
-                element.innerHTML = `<div class="error-message">Failed to load component</div>`;
+                element.innerHTML = `<div class="error-message">Failed to load component: ${component.file}</div>`;
             }
         }
     });
