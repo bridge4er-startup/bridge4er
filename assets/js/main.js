@@ -2,7 +2,6 @@
 // MAIN INITIALIZATION
 // ==============================================
 console.log("🚀 main.js: init() function is STARTING");
-document.addEventListener('DOMContentLoaded', loadComponents);
 
 function init() {
     console.log("Initializing application...");
