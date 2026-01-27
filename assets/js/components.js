@@ -2,6 +2,8 @@
 // COMPONENT LOADING (OPTIMIZED)
 // ==============================================
 
+console.log("📦 components.js: loadComponents() function is STARTING");
+
 async function loadComponents() {
     const components = [
         { id: 'header-container', file: 'components/header.html' },
