@@ -1,38 +1,110 @@
 {
   "examInfo": {
-    "title": "प्रदेश लोक सेवा आयोग, मधेश प्रदेश",
-    "subtitle": "शून्यनियरिङ्ग सेवा, सिभिल समूह, जनरल, हाइवे, स्यानिटरी, ईग्रेसेन उपसमूह अधिकृत सातों तहको खुला समावेशी र अन्दर सेवा प्रतियोगितात्मक लिखित परीक्षा",
-    "date": "२०८२।१०।१२",
+    "title": "लोक सेवा आयोग, नेपाल",
+    "subtitle": "सिभिल इन्जिनियरिङ्ग, सातों तह, प्रतियोगितात्मक लिखित परीक्षा",
+    "date": "२०८२।११।०५",
     "time": "३ घण्टा",
-    "paper": "द्वितीय",
-    "subject": "Technical subject",
+    "paper": "तकनिकी विषय (Technical Subject)",
+    "subject": "सिभिल इन्जिनियरिङ्ग",
     "fullMarks": "१००"
   },
   "instructions": [
-    "निम्न प्रश्नहरुको उत्तर Section अनुसार छुट्टाई उत्तरपुस्तिकामा लेख्नुपर्नेछ, अन्यथा उत्तरपुस्तिका रहे नेतृत्व ।"
+    "सबै प्रश्नहरु अनिवार्य छन्।",
+    "प्रत्येक प्रश्नको उत्तर उत्तरपुस्तिकामा क्रमबद्ध रूपमा लेख्नुपर्नेछ।",
+    "प्रश्न नम्बर स्पष्ट रूपमा देखाउनुपर्नेछ।",
+    "गणना आवश्यक भएमा सबै चरणहरु देखाउनुपर्नेछ।",
+    "चित्र आवश्यक भएमा पेन्सिल प्रयोग गरेर खिच्नुपर्नेछ।"
   ],
   "sections": [
     {
       "section": "A",
-      "title": "Section A",
-      "marks": "30",
+      "title": "स्ट्रक्चरल इन्जिनियरिङ्ग (Structural Engineering)",
+      "marks": "25",
       "questions": [
         {
-          "question": "Explain the process of standard penetration test during soil exploration.",
+          "question": "What are the different types of loads considered in the design of a multi-storied RCC building? Explain each with examples.",
+          "marks": 6
+        },
+        {
+          "question": "Design a short RCC column of size 300mm x 400mm to carry an axial load of 1200 kN. Use M25 concrete and Fe500 steel.",
+          "marks": 7
+        },
+        {
+          "question": "Explain the concept of limit state design method. Differentiate between limit state of collapse and limit state of serviceability.",
+          "marks": 6
+        },
+        {
+          "question": "What is the purpose of providing development length in reinforced concrete? How is it calculated?",
+          "marks": 6
+        }
+      ]
+    },
+    {
+      "section": "B",
+      "title": "जलस्रोत इन्जिनियरिङ्ग (Water Resources Engineering)",
+      "marks": "25",
+      "questions": [
+        {
+          "question": "Explain the components of a typical hydropower project with a neat sketch.",
+          "marks": 7
+        },
+        {
+          "question": "What is the Rational Method for estimating peak runoff? State its assumptions and limitations.",
+          "marks": 6
+        },
+        {
+          "question": "Design a lined canal to carry a discharge of 10 m³/s with a bed slope of 1 in 2500. Use Manning's formula with n=0.014.",
+          "marks": 6
+        },
+        {
+          "question": "Explain the causes and effects of sedimentation in reservoirs. What measures can be taken to reduce sedimentation?",
+          "marks": 6
+        }
+      ]
+    },
+    {
+      "section": "C",
+      "title": "यातायात इन्जिनियरिङ्ग (Transportation Engineering)",
+      "marks": "25",
+      "questions": [
+        {
+          "question": "What are the different types of pavement failures? Explain their causes and remedial measures.",
+          "marks": 8
+        },
+        {
+          "question": "Explain the objectives and methods of highway drainage system design.",
+          "marks": 6
+        },
+        {
+          "question": "Calculate the stopping sight distance for a vehicle moving at 80 km/h on a level road. Take reaction time as 2.5 seconds and coefficient of friction as 0.35.",
+          "marks": 6
+        },
+        {
+          "question": "What are the factors affecting the selection of alignment for a highway in hilly region?",
+          "marks": 5
+        }
+      ]
+    },
+    {
+      "section": "D",
+      "title": "पर्यावरण इन्जिनियरिङ्ग (Environmental Engineering)",
+      "marks": "25",
+      "questions": [
+        {
+          "question": "Design a septic tank for a household of 10 persons. Assume per capita sewage flow as 120 liters/day and detention time as 24 hours.",
+          "marks": 8
+        },
+        {
+          "question": "Explain the process of activated sludge process for sewage treatment with a flow diagram.",
+          "marks": 7
+        },
+        {
+          "question": "What are the different methods of solid waste management? Explain the 3R principle.",
           "marks": 5
         },
         {
-          "question": "What are the main risks involved in bridge construction?",
+          "question": "Calculate the population after 20 years using arithmetic increase method for a town with the following data: Present population = 50,000, Population 10 years ago = 40,000, Population 20 years ago = 30,000.",
           "marks": 5
-        },
-        {
-          "question": "Distinguish between the 'Initial Load Test' and the 'Routine Load Test' for piles. Using the load-settlement curve, explain the 'Cyclic Load Test' method used to separate the skin friction from the end bearing component.",
-          "marks": 10,
-          "subquestions": [
-            "Explain the concept of skin friction",
-            "Describe the end bearing component",
-            "How does cyclic loading help in separation?"
-          ]
         }
       ]
     }
