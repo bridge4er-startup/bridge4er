@@ -1,0 +1,124 @@
+{
+  "examInfo": {
+    "title": "प्रदेश लोक सेवा आयोग, मधेश प्रदेश",
+    "subtitle": "शून्यनियरिङ्ग सेवा, सिभिल समूह, जनरल, हाइवे, स्यानिटरी, ईग्रेसेन उपसमूह अधिकृत सातों तहको खुला समावेशी र अन्दर सेवा प्रतियोगितात्मक लिखित परीक्षा",
+    "date": "२०८२।१०।१२",
+    "time": "३ घण्टा",
+    "paper": "द्वितीय",
+    "subject": "सिभिल इन्जिनियरिङ्ग (Civil Engineering)",
+    "fullMarks": "१००"
+  },
+  "instructions": [
+    "निम्न प्रश्नहरुको उत्तर Section अनुसार छुट्टाई उत्तरपुस्तिकामा लेख्नुपर्नेछ।",
+    "कुनै पनि प्रश्नको उत्तर उत्तरपुस्तिकामा नलेखिएमा उत्तरपुस्तिका रद्द हुनेछ।",
+    "सबै प्रश्नहरु अनिवार्य छन्।",
+    "प्रत्येक प्रश्नको उत्तर दिनु अघि प्रश्न नम्बर स्पष्ट रूपमा लेख्नुपर्नेछ।",
+    "सबै प्रश्नहरुको उत्तर नेपाली वा अंग्रेजी भाषामा लेख्न सकिन्छ।"
+  ],
+  "sections": [
+    {
+      "section": "A",
+      "title": "Section A - Structural Engineering",
+      "marks": "30",
+      "questions": [
+        {
+          "question": "Explain the process of standard penetration test during soil exploration. What are the factors affecting the test results and how are they interpreted?",
+          "marks": 8
+        },
+        {
+          "question": "Design a singly reinforced rectangular beam of size 230mm x 500mm (effective depth 450mm) for a factored moment of 150 kN-m. Use M20 concrete and Fe415 steel. Show all calculations and assumptions.",
+          "marks": 10,
+          "subquestions": [
+            "Calculate the limiting moment of resistance",
+            "Determine the area of steel required",
+            "Check for minimum and maximum steel requirements"
+          ]
+        },
+        {
+          "question": "What are the main risks involved in bridge construction? Explain the safety measures to be adopted during different stages of bridge construction.",
+          "marks": 7
+        },
+        {
+          "question": "Distinguish between the 'Initial Load Test' and the 'Routine Load Test' for piles. Using the load-settlement curve, explain the 'Cyclic Load Test' method used to separate the skin friction from the end bearing component.",
+          "marks": 5
+        }
+      ]
+    },
+    {
+      "section": "B",
+      "title": "Section B - Hydraulics & Water Resources",
+      "marks": "25",
+      "questions": [
+        {
+          "question": "Differentiate between firm power, secondary power, and average annual energy in the context of hydropower projects. Explain with suitable examples.",
+          "marks": 5
+        },
+        {
+          "question": "Derive Bernoulli's equation for steady, incompressible, and frictionless flow along a streamline, clearly stating all the assumptions involved. Explain the practical applications of Bernoulli's equation and discuss its limitations when applied to real fluid flow.",
+          "marks": 8
+        },
+        {
+          "question": "Discuss the salient features of Kennedy's Theory for the design of earth channels based on the critical velocity concept and mention its limitations?",
+          "marks": 7
+        },
+        {
+          "question": "A trapezoidal channel with side slope 1:1.5 is to carry 15 m³/s of water. The channel has a bed slope of 1 in 2000 and Manning's roughness coefficient of 0.015. Determine the dimensions of the channel for most economical section.",
+          "marks": 5
+        }
+      ]
+    },
+    {
+      "section": "C",
+      "title": "Section C - Transportation Engineering",
+      "marks": "25",
+      "questions": [
+        {
+          "question": "Briefly explain the various factors that influence the selection of a suitable location for an airport.",
+          "marks": 6
+        },
+        {
+          "question": "Define and explain the importance of camber, sight distance, and transition curves in highway geometric design. Provide sketches where necessary.",
+          "marks": 7
+        },
+        {
+          "question": "Explain the CBR method of pavement design. What are its advantages and limitations?",
+          "marks": 6,
+          "subquestions": [
+            "Explain the test procedure for CBR determination",
+            "How is CBR value used in pavement thickness design?",
+            "List three limitations of CBR method"
+          ]
+        },
+        {
+          "question": "Explain the objectives, type of materials and method of application of: (a) Prime coat (b) Tack coat",
+          "marks": 6
+        }
+      ]
+    },
+    {
+      "section": "D",
+      "title": "Section D - Environmental Engineering & Professional Practice",
+      "marks": "20",
+      "questions": [
+        {
+          "question": "Classify various types of filters used in water treatment. Differentiate between the slow sand and rapid sand gravity filters. Compare the two types of filters in terms of operation, maintenance, and efficiency.",
+          "marks": 8
+        },
+        {
+          "question": "Why is environmental assessment necessary in development projects? Distinguish between an Initial Environmental Examination (IEE) and an Environmental Impact Assessment (EIA) based on the Environmental Protection Act of Nepal.",
+          "marks": 7
+        },
+        {
+          "question": "Write short notes on any two of the following:",
+          "marks": 5,
+          "subquestions": [
+            "Value Engineering",
+            "CPM and PERT in project management",
+            "Quality control in construction",
+            "Professional ethics for engineers"
+          ]
+        }
+      ]
+    }
+  ]
+}
