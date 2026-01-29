@@ -1,0 +1,25 @@
+[
+    {
+        "section": "A",
+        "sectionTitle": "Section A",
+        "question": "Explain the process of standard penetration test during soil exploration.",
+        "marks": 5
+    },
+    {
+        "section": "A",
+        "sectionTitle": "Section A", 
+        "question": "What are the main risks involved in bridge construction?",
+        "marks": 5
+    },
+    {
+        "section": "A",
+        "sectionTitle": "Section A",
+        "question": "Distinguish between the 'Initial Load Test' and the 'Routine Load Test' for piles. Using the load-settlement curve, explain the 'Cyclic Load Test' method used to separate the skin friction from the end bearing component.",
+        "marks": 10,
+        "subquestions": [
+            "Explain the concept of skin friction",
+            "Describe the end bearing component", 
+            "How does cyclic loading help in separation?"
+        ]
+    }
+]
