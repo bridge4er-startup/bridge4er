@@ -24,6 +24,11 @@
         {
           "question": "What are the different types of loads considered in the design of a multi-storied RCC building? Explain each with examples.",
           "marks": 6
+          "subquestions": [
+            "Write the formula for limiting moment of resistance",
+            "Determine the area of steel required",
+            "Check for minimum and maximum steel requirements"
+          ]
         },
         {
           "question": "Design a short RCC column of size 300mm x 400mm to carry an axial load of 1200 kN. Use M25 concrete and Fe500 steel.",
