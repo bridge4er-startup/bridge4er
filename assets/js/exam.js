@@ -498,16 +498,46 @@ async function loadSubjectiveExamContent(fileName, displayName) {
         let totalQuestions = 0;
         let totalMarks = 0;
         
-        if (Array.isArray(jsonData)) {
+        // Check if it's the new format with examInfo
+        if (jsonData.examInfo) {
             contentHtml = createSubjectiveExamHTML(jsonData, displayName);
+            
+            // Calculate totals
+            if (jsonData.sections) {
+                jsonData.sections.forEach(section => {
+                    totalQuestions += section.questions.length;
+                    totalMarks += section.questions.reduce((sum, q) => sum + (q.marks || 0), 0);
+                });
+            }
+        }
+        // Old format (array of questions)
+        else if (Array.isArray(jsonData)) {
+            // Convert to new format
+            const examData = {
+                examInfo: {
+                    title: "प्रदेश लोक सेवा आयोग",
+                    subtitle: "इन्जिनियरिंग सेवा, सिभिल समूह, जनरल, हाइवे, स्यानिटरी, इर्रिगेशन उपसमूह अधिकृत सातौ तहको खुला समावेशी र अन्तर सेवा प्रतियोगितात्मक लिखित परीक्षा",
+                    date: "२०८२।१०।१२",
+                    time: "३ घण्टा",
+                    paper: "द्वितीय",
+                    subject: "Technical subject",
+                    fullMarks: "१००"
+                },
+                instructions: [
+                    "निम्न प्रश्नहरुको उत्तर Section अनुसार छुट्टाई उत्तरपुस्तिकामा लेख्नुपर्नेछ।"
+                ],
+                sections: [
+                    {
+                        section: "All",
+                        title: "All Questions",
+                        questions: jsonData
+                    }
+                ]
+            };
+            
+            contentHtml = createSubjectiveExamHTML(examData, displayName);
             totalQuestions = jsonData.length;
             totalMarks = jsonData.reduce((sum, q) => sum + (q.marks || 0), 0);
-            
-        } else if (jsonData.questions && Array.isArray(jsonData.questions)) {
-            contentHtml = createSubjectiveExamHTML(jsonData.questions, displayName);
-            totalQuestions = jsonData.questions.length;
-            totalMarks = jsonData.questions.reduce((sum, q) => sum + (q.marks || 0), 0);
-            
         } else {
             console.warn('Unexpected JSON format, using demo content');
             displayDemoSubjectiveContent(displayName);
@@ -530,86 +560,199 @@ async function loadSubjectiveExamContent(fileName, displayName) {
     }
 }
 
-function createSubjectiveExamHTML(questions, examName) {
+function createSubjectiveExamHTML(examData, examName) {
+    const { examInfo, instructions, sections } = examData;
+    
+    // Create a realistic exam paper header from JSON data
     let html = `
-        <div class="exam-instructions">
-            <h4><i class="fas fa-info-circle"></i> Exam Instructions:</h4>
-            <ul>
-                <li>Answer all questions in the provided answer booklet or your own paper</li>
-                <li>Scan your answers as a single PDF file</li>
-                <li>Make sure your writing is clear and legible</li>
-                <li>Write your name and exam set on every page</li>
-                <li>Upload your answer sheet before time expires</li>
-            </ul>
-        </div>
+        <div class="exam-paper-container">
+            <div class="exam-paper-header">
+                <h2 class="nepali-text">${examInfo.title}</h2>
+                <div class="exam-paper-subtitle nepali-text">${examInfo.subtitle}</div>
+                
+                <div class="exam-paper-details">
+                    <div class="exam-paper-detail"><strong>मिति:</strong> ${examInfo.date}</div>
+                    <div class="exam-paper-detail"><strong>समय:</strong> ${examInfo.time}</div>
+                    <div class="exam-paper-detail"><strong>पत्र:</strong> ${examInfo.paper}</div>
+                    <div class="exam-paper-detail"><strong>विषय:</strong> ${examInfo.subject}</div>
+                    <div class="exam-paper-detail"><strong>पूर्णांक:</strong> ${examInfo.fullMarks}</div>
+                </div>
+            </div>
+            
+            <div class="exam-instructions-box">
+                <h4 class="nepali-text">निर्देशनहरु:</h4>
+                ${instructions.map(instruction => `<p class="nepali-text">${instruction}</p>`).join('')}
+            </div>
     `;
     
-    questions.forEach((q, index) => {
-        const questionNum = index + 1;
-        const marks = q.marks || 5;
+    // Render each section
+    sections.forEach((section, sectionIndex) => {
+        // Calculate section marks if not provided
+        const sectionMarks = section.marks || section.questions.reduce((sum, q) => sum + (q.marks || 0), 0);
         
         html += `
-            <div class="subjective-question-item">
-                <div class="subjective-question-header">
-                    <div class="question-number-circle">${questionNum}</div>
-                    <div class="subjective-question-text">${q.question || `Question ${questionNum}`}</div>
-                </div>
-                <div class="question-marks">
-                    <i class="fas fa-star"></i> Marks: ${marks}
-                </div>
-                ${q.subquestions ? `
-                    <div class="subquestions">
-                        ${q.subquestions.map((sq, sqIndex) => `
-                            <div class="subquestion">
-                                <strong>(${String.fromCharCode(97 + sqIndex)})</strong> ${sq}
-                            </div>
-                        `).join('')}
-                    </div>
-                ` : ''}
-            </div>
+            <div class="exam-section">
+                <h3 class="exam-section-title">${section.title} (${sectionMarks} Marks)</h3>
         `;
+        
+        section.questions.forEach((question, qIndex) => {
+            const questionNum = (sectionIndex === 0 ? qIndex + 1 : 
+                sections.slice(0, sectionIndex).reduce((total, s) => total + s.questions.length, 0) + qIndex + 1);
+            const marks = question.marks || 5;
+            
+            html += createQuestionHTML(question, questionNum, marks);
+        });
+        
+        html += `</div>`;
     });
+    
+    // Close the container
+    html += `</div>`;
     
     return html;
 }
 
-function displayDemoSubjectiveContent(displayName) {
-    const demoQuestions = [
-        {
-            question: "Explain the fundamental principles of structural analysis and their applications in civil engineering design.",
-            marks: 10,
-            subquestions: [
-                "Define the three main types of structural loads",
-                "Explain the concept of stress and strain with examples",
-                "Describe the difference between static and dynamic analysis"
-            ]
-        },
-        {
-            question: "Discuss the factors affecting the selection of construction materials for different types of structures.",
-            marks: 8
-        },
-        {
-            question: "Calculate the required reinforcement for a simply supported beam with given dimensions and loading conditions.",
-            marks: 12
-        },
-        {
-            question: "Describe the quality control procedures for concrete construction projects.",
-            marks: 7
-        },
-        {
-            question: "Analyze the environmental impact assessment process for large infrastructure projects.",
-            marks: 10
-        }
-    ];
+// Helper function remains the same
+function createQuestionHTML(question, questionNum, marks) {
+    let html = `
+        <div class="exam-question">
+            <span class="exam-question-number">${questionNum}.</span>
+            <div class="exam-question-text">
+                ${question.question || `Question ${questionNum}`}
+                <span class="exam-question-marks">(${marks})</span>
+            </div>
+    `;
     
-    const contentHtml = createSubjectiveExamHTML(demoQuestions, displayName);
+    // Add subquestions if they exist
+    if (question.subquestions && Array.isArray(question.subquestions)) {
+        question.subquestions.forEach((sub, subIndex) => {
+            html += `
+                <div class="exam-sub-question">
+                    <span class="exam-sub-question-letter">(${String.fromCharCode(97 + subIndex)})</span>
+                    <div>${sub}</div>
+                </div>
+            `;
+        });
+    }
+    
+    // Add answer space
+    html += `
+            <div class="answer-space">
+                <span class="answer-space-label">Answer Space:</span>
+                <div class="answer-lines"></div>
+            </div>
+        </div>
+    `;
+    
+    return html;
+}
+
+function createQuestionHTML(question, questionNum, marks) {
+    let html = `
+        <div class="exam-question">
+            <span class="exam-question-number">${questionNum}.</span>
+            <div class="exam-question-text">
+                ${question.question || `Question ${questionNum}`}
+                <span class="exam-question-marks">(${marks})</span>
+            </div>
+    `;
+    
+    // Add subquestions if they exist
+    if (question.subquestions && Array.isArray(question.subquestions)) {
+        html += `<div class="exam-sub-question">`;
+        question.subquestions.forEach((sub, subIndex) => {
+            html += `
+                <div class="exam-sub-question">
+                    <span class="exam-sub-question-letter">(${String.fromCharCode(97 + subIndex)})</span>
+                    ${sub}
+                </div>
+            `;
+        });
+        html += `</div>`;
+    }
+    
+    html += `</div>`;
+    return html;
+}
+
+function displayDemoSubjectiveContent(displayName) {
+    const demoExamData = {
+        examInfo: {
+            title: "प्रदेश लोक सेवा आयोग, मधेश प्रदेश",
+            subtitle: "इन्जिनियरिंग सेवा, सिभिल समूह, जनरल, हाइवे, स्यानिटरी, इर्रिगेशन उपसमूह अधिकृत सातौ तहको खुला समावेशी र अन्तर सेवा प्रतियोगितात्मक लिखित परीक्षा",
+            date: "२०८२।१०।१२",
+            time: "३ घण्टा",
+            paper: "द्वितीय",
+            subject: "Technical subject",
+            fullMarks: "१००"
+        },
+        instructions: [
+            "निम्न प्रश्नहरुको उत्तर Section अनुसार छुट्टाई उत्तरपुस्तिकामा लेख्नुपर्नेछ।"
+        ],
+        sections: [
+            {
+                section: "A",
+                title: "Section A",
+                marks: 30,
+                questions: [
+                    {
+                        question: "Explain the process of standard penetration test during soil exploration.",
+                        marks: 5
+                    },
+                    {
+                        question: "What are the main risks involved in bridge construction?",
+                        marks: 5
+                    },
+                    {
+                        question: "Distinguish between the 'Initial Load Test' and the 'Routine Load Test' for piles. Using the load-settlement curve, explain the 'Cyclic Load Test' method used to separate the skin friction from the end bearing component.",
+                        marks: 10,
+                        subquestions: [
+                            "Explain the concept of skin friction",
+                            "Describe the end bearing component",
+                            "How does cyclic loading help in separation?"
+                        ]
+                    },
+                    {
+                        question: "What are the loads and the forces considered in design of a bridge foundation? Explain briefly with sketches?",
+                        marks: 10
+                    }
+                ]
+            },
+            {
+                section: "B",
+                title: "Section B",
+                marks: 25,
+                questions: [
+                    {
+                        question: "Differentiate between firm power, secondary power, and average annual energy.",
+                        marks: 5
+                    },
+                    {
+                        question: "Derive Bernoulli's equation for steady, incompressible, and frictionless flow along a streamline, clearly stating all the assumptions involved. Explain the practical applications of Bernoulli's equation and discuss its limitations when applied to real fluid flow.",
+                        marks: 10
+                    },
+                    {
+                        question: "Discuss the salient features of Kennedy's Theory for the design of earth channels based on the critical velocity concept and mention its limitations?",
+                        marks: 10
+                    }
+                ]
+            }
+        ]
+    };
+    
+    const contentHtml = createSubjectiveExamHTML(demoExamData, displayName);
     const questionsContainer = getDOMElement('subjective-exam-questions');
     if (questionsContainer) {
         questionsContainer.innerHTML = contentHtml;
     }
     
-    const totalQuestions = demoQuestions.length;
-    const totalMarks = demoQuestions.reduce((sum, q) => sum + q.marks, 0);
+    // Calculate totals
+    let totalQuestions = 0;
+    let totalMarks = 0;
+    demoExamData.sections.forEach(section => {
+        totalQuestions += section.questions.length;
+        totalMarks += section.questions.reduce((sum, q) => sum + q.marks, 0);
+    });
     
     document.getElementById('subjective-total-questions').textContent = totalQuestions;
     document.getElementById('subjective-total-marks').textContent = totalMarks;
