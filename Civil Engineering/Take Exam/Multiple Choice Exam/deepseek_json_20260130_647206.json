@@ -1,0 +1,790 @@
+{
+  "examInfo": {
+    "title": "प्रदेश लोक सेवा आयोग, कर्णाली प्रदेश",
+    "subtitle": "इन्जिनियरिंग सेवा, सिभिल समूह, जनरल, हाइवे, स्यानिटरी, ईग्रेसेन उपसमूह अधिकृत सातौं तहको खुला समावेशी र अन्दर सेवा प्रतियोगितात्मक लिखित परीक्षा",
+    "date": "२०८२।१०।१२",
+    "time": "1 घण्टा",
+    "paper": "प्रथम",
+    "subject": "Objective MCQs - Civil Engineering",
+    "fullMarks": "१००"
+  },
+  "instructions": [
+    "कृपया एउटा उत्तर मात्र छानुहोस",
+    "सबै प्रश्न अनिवार्य छन्",
+    "प्रत्येक प्रश्नको लागि १ अङ्क छ",
+    "कुनै पनि प्रश्नमा गलत उत्तरको लागि काट्ने प्रक्रिया छैन",
+    "समय सकिएपछि परीक्षा स्वतः जम्मा हुनेछ"
+  ],
+  "questions": [
+    {
+      "question": "What is the standard size of a modular brick?",
+      "options": [
+        "190 mm × 90 mm × 90 mm",
+        "200 mm × 100 mm × 100 mm",
+        "230 mm × 110 mm × 110 mm",
+        "250 mm × 120 mm × 120 mm"
+      ],
+      "correct": "190 mm × 90 mm × 90 mm",
+      "explanation": "As per IS 1077:1992, the standard size of modular brick is 190 mm × 90 mm × 90 mm."
+    },
+    {
+      "question": "The process of improving load bearing capacity of soil is called:",
+      "options": [
+        "Compaction",
+        "Consolidation",
+        "Stabilization",
+        "Liquefaction"
+      ],
+      "correct": "Stabilization",
+      "explanation": "Soil stabilization is the process of improving the engineering properties of soil to increase its bearing capacity."
+    },
+    {
+      "question": "What is the minimum grade of concrete recommended for RCC works as per IS 456?",
+      "options": [
+        "M10",
+        "M15",
+        "M20",
+        "M25"
+      ],
+      "correct": "M20",
+      "explanation": "As per IS 456:2000, the minimum grade of concrete for RCC works is M20."
+    },
+    {
+      "question": "The ratio of the volume of voids to the total volume of soil mass is called:",
+      "options": [
+        "Void ratio",
+        "Porosity",
+        "Degree of saturation",
+        "Air content"
+      ],
+      "correct": "Porosity",
+      "explanation": "Porosity (n) = Volume of voids / Total volume."
+    },
+    {
+      "question": "The instrument used for measuring angles in surveying is:",
+      "options": [
+        "Theodolite",
+        "Level",
+        "Plane table",
+        "Dumpy level"
+      ],
+      "correct": "Theodolite",
+      "explanation": "Theodolite is used for measuring horizontal and vertical angles in surveying."
+    },
+    {
+      "question": "The maximum permissible deflection for a cantilever beam of length L is:",
+      "options": [
+        "L/180",
+        "L/250",
+        "L/300",
+        "L/350"
+      ],
+      "correct": "L/250",
+      "explanation": "As per IS 456:2000, maximum deflection for cantilever = L/250."
+    },
+    {
+      "question": "Which of the following is NOT a method of concrete mixing?",
+      "options": [
+        "Hand mixing",
+        "Machine mixing",
+        "Ready mix",
+        "Dry mixing"
+      ],
+      "correct": "Dry mixing",
+      "explanation": "Dry mixing is not a standard method for concrete mixing."
+    },
+    {
+      "question": "The minimum number of longitudinal bars in a circular column should be:",
+      "options": [
+        "4",
+        "6",
+        "8",
+        "12"
+      ],
+      "correct": "6",
+      "explanation": "As per IS 456:2000, minimum 6 bars for circular columns."
+    },
+    {
+      "question": "The property of fresh concrete which determines its ability to flow is called:",
+      "options": [
+        "Workability",
+        "Durability",
+        "Strength",
+        "Permeability"
+      ],
+      "correct": "Workability",
+      "explanation": "Workability is the ease with which concrete can be mixed, placed, and compacted."
+    },
+    {
+      "question": "The most commonly used admixture in concrete to retard setting time is:",
+      "options": [
+        "Calcium chloride",
+        "Superplasticizer",
+        "Gypsum",
+        "Fly ash"
+      ],
+      "correct": "Gypsum",
+      "explanation": "Gypsum is added to cement to retard the setting time."
+    },
+    {
+      "question": "What is the standard size of A4 drawing sheet?",
+      "options": [
+        "210 mm × 297 mm",
+        "297 mm × 420 mm",
+        "420 mm × 594 mm",
+        "594 mm × 841 mm"
+      ],
+      "correct": "210 mm × 297 mm",
+      "explanation": "A4 size drawing sheet dimensions are 210 mm × 297 mm."
+    },
+    {
+      "question": "The longitudinal slope of a road in the direction of movement is called:",
+      "options": [
+        "Gradient",
+        "Camber",
+        "Super elevation",
+        "Berm"
+      ],
+      "correct": "Gradient",
+      "explanation": "Gradient is the longitudinal slope along the length of the road."
+    },
+    {
+      "question": "The unit of measurement for steel reinforcement in RCC is:",
+      "options": [
+        "Cubic meter",
+        "Square meter",
+        "Kilogram",
+        "Meter"
+      ],
+      "correct": "Kilogram",
+      "explanation": "Steel reinforcement is measured in kilograms as per IS 1200."
+    },
+    {
+      "question": "The type of foundation suitable for expansive soils is:",
+      "options": [
+        "Spread footing",
+        "Raft foundation",
+        "Pile foundation",
+        "Under-reamed pile foundation"
+      ],
+      "correct": "Under-reamed pile foundation",
+      "explanation": "Under-reamed piles are suitable for expansive soils to resist uplift forces."
+    },
+    {
+      "question": "Which instrument is used to measure the workability of concrete?",
+      "options": [
+        "Vicat apparatus",
+        "Slump cone",
+        "Compression testing machine",
+        "Flow table"
+      ],
+      "correct": "Slump cone",
+      "explanation": "Slump test using slump cone is the most common method to measure workability."
+    },
+    {
+      "question": "The process of removing air from the concrete is called:",
+      "options": [
+        "Compaction",
+        "Curing",
+        "Vibration",
+        "Consolidation"
+      ],
+      "correct": "Compaction",
+      "explanation": "Compaction removes entrapped air from fresh concrete."
+    },
+    {
+      "question": "The minimum cover for reinforcement in slab is:",
+      "options": [
+        "15 mm",
+        "20 mm",
+        "25 mm",
+        "40 mm"
+      ],
+      "correct": "20 mm",
+      "explanation": "As per IS 456:2000, minimum cover for slab is 20 mm."
+    },
+    {
+      "question": "The distance between two successive contours is called:",
+      "options": [
+        "Contour interval",
+        "Horizontal equivalent",
+        "Gradient",
+        "Slope"
+      ],
+      "correct": "Contour interval",
+      "explanation": "Contour interval is the vertical distance between two successive contours."
+    },
+    {
+      "question": "Which of the following is a non-destructive test for concrete?",
+      "options": [
+        "Ultrasonic pulse velocity test",
+        "Compression test",
+        "Split tensile test",
+        "Flexural test"
+      ],
+      "correct": "Ultrasonic pulse velocity test",
+      "explanation": "UPV test is non-destructive, others are destructive tests."
+    },
+    {
+      "question": "The steel bars used in prestressed concrete are:",
+      "options": [
+        "Mild steel bars",
+        "HYSD bars",
+        "Tor steel bars",
+        "High tensile steel wires"
+      ],
+      "correct": "High tensile steel wires",
+      "explanation": "High tensile steel wires are used in prestressed concrete."
+    },
+    {
+      "question": "The most common type of retaining wall for heights up to 6m is:",
+      "options": [
+        "Cantilever retaining wall",
+        "Counterfort retaining wall",
+        "Buttress retaining wall",
+        "Gravity retaining wall"
+      ],
+      "correct": "Cantilever retaining wall",
+      "explanation": "Cantilever retaining walls are economical for heights up to 6m."
+    },
+    {
+      "question": "The instrument used to measure the consistency of cement is:",
+      "options": [
+        "Vicat apparatus",
+        "Le Chatelier apparatus",
+        "Slump cone",
+        "Compaction factor apparatus"
+      ],
+      "correct": "Vicat apparatus",
+      "explanation": "Vicat apparatus is used to determine the consistency and setting time of cement."
+    },
+    {
+      "question": "The minimum curing period for ordinary Portland cement concrete is:",
+      "options": [
+        "3 days",
+        "7 days",
+        "14 days",
+        "28 days"
+      ],
+      "correct": "7 days",
+      "explanation": "Minimum curing period for OPC concrete is 7 days as per IS 456."
+    },
+    {
+      "question": "The most common type of lintel used in building construction is:",
+      "options": [
+        "Timber lintel",
+        "Stone lintel",
+        "RCC lintel",
+        "Steel lintel"
+      ],
+      "correct": "RCC lintel",
+      "explanation": "RCC lintels are most commonly used due to their strength and durability."
+    },
+    {
+      "question": "The ratio of stress to strain within elastic limit is called:",
+      "options": [
+        "Modulus of elasticity",
+        "Poisson's ratio",
+        "Bulk modulus",
+        "Shear modulus"
+      ],
+      "correct": "Modulus of elasticity",
+      "explanation": "Modulus of elasticity = Stress/Strain (within elastic limit)."
+    },
+    {
+      "question": "Which of the following is a flexible pavement?",
+      "options": [
+        "Concrete pavement",
+        "Brick pavement",
+        "Bituminous pavement",
+        "Interlocking concrete block pavement"
+      ],
+      "correct": "Bituminous pavement",
+      "explanation": "Bituminous pavements are flexible, concrete pavements are rigid."
+    },
+    {
+      "question": "The permissible limit for chloride content in concrete for RCC works is:",
+      "options": [
+        "0.1% by weight of cement",
+        "0.4% by weight of cement",
+        "0.6% by weight of cement",
+        "1.0% by weight of cement"
+      ],
+      "correct": "0.1% by weight of cement",
+      "explanation": "As per IS 456, maximum chloride content in RCC is 0.1% by weight of cement."
+    },
+    {
+      "question": "The type of pile which transfers load mainly by skin friction is called:",
+      "options": [
+        "End bearing pile",
+        "Friction pile",
+        "Compaction pile",
+        "Sheet pile"
+      ],
+      "correct": "Friction pile",
+      "explanation": "Friction piles transfer load through skin friction along the pile shaft."
+    },
+    {
+      "question": "The minimum width of staircase for residential buildings is:",
+      "options": [
+        "0.9 m",
+        "1.0 m",
+        "1.2 m",
+        "1.5 m"
+      ],
+      "correct": "0.9 m",
+      "explanation": "As per National Building Code, minimum width for residential staircase is 0.9 m."
+    },
+    {
+      "question": "The process of making the surface of concrete rough to improve bonding is called:",
+      "options": [
+        "Hacking",
+        "Grooving",
+        "Scarifying",
+        "Roughening"
+      ],
+      "correct": "Hacking",
+      "explanation": "Hacking is the process of making the concrete surface rough for better bonding."
+    },
+    {
+      "question": "The minimum number of days for removal of formwork for slab is:",
+      "options": [
+        "3 days",
+        "7 days",
+        "14 days",
+        "21 days"
+      ],
+      "correct": "7 days",
+      "explanation": "For slab, formwork can be removed after 7 days for OPC concrete."
+    },
+    {
+      "question": "Which of the following is a surface water source?",
+      "options": [
+        "River",
+        "Well",
+        "Tube well",
+        "Spring"
+      ],
+      "correct": "River",
+      "explanation": "River is a surface water source, others are groundwater sources."
+    },
+    {
+      "question": "The minimum thickness of slab for residential buildings is:",
+      "options": [
+        "75 mm",
+        "100 mm",
+        "125 mm",
+        "150 mm"
+      ],
+      "correct": "100 mm",
+      "explanation": "Minimum slab thickness for residential buildings is 100 mm as per IS 456."
+    },
+    {
+      "question": "The instrument used to measure the workability of very dry concrete is:",
+      "options": [
+        "Compaction factor test",
+        "Slump test",
+        "Vee-Bee test",
+        "Flow test"
+      ],
+      "correct": "Compaction factor test",
+      "explanation": "Compaction factor test is suitable for very dry concrete mixes."
+    },
+    {
+      "question": "The ratio of lateral strain to longitudinal strain is called:",
+      "options": [
+        "Poisson's ratio",
+        "Modulus of elasticity",
+        "Bulk modulus",
+        "Shear modulus"
+      ],
+      "correct": "Poisson's ratio",
+      "explanation": "Poisson's ratio = Lateral strain / Longitudinal strain."
+    },
+    {
+      "question": "The most common type of foundation for isolated columns is:",
+      "options": [
+        "Spread footing",
+        "Raft foundation",
+        "Pile foundation",
+        "Well foundation"
+      ],
+      "correct": "Spread footing",
+      "explanation": "Spread footing is the most common foundation for isolated columns."
+    },
+    {
+      "question": "The minimum diameter of longitudinal bar in column is:",
+      "options": [
+        "8 mm",
+        "10 mm",
+        "12 mm",
+        "16 mm"
+      ],
+      "correct": "12 mm",
+      "explanation": "Minimum diameter of longitudinal bar in column is 12 mm as per IS 456."
+    },
+    {
+      "question": "The process of mixing and transporting concrete by a single machine is called:",
+      "options": [
+        "Ready mix concrete",
+        "Transit mix concrete",
+        "Central mix concrete",
+        "Site mix concrete"
+      ],
+      "correct": "Transit mix concrete",
+      "explanation": "Transit mix concrete is mixed in a truck mixer during transportation."
+    },
+    {
+      "question": "The minimum compressive strength of brick as per IS 1077 is:",
+      "options": [
+        "3.5 N/mm²",
+        "5.0 N/mm²",
+        "7.5 N/mm²",
+        "10.0 N/mm²"
+      ],
+      "correct": "3.5 N/mm²",
+      "explanation": "Minimum compressive strength of common burnt clay brick is 3.5 N/mm²."
+    },
+    {
+      "question": "The type of beam which has reinforcement only in tension zone is:",
+      "options": [
+        "Singly reinforced beam",
+        "Doubly reinforced beam",
+        "Flanged beam",
+        "Cantilever beam"
+      ],
+      "correct": "Singly reinforced beam",
+      "explanation": "Singly reinforced beam has steel only in tension zone."
+    },
+    {
+      "question": "The permissible settlement for isolated foundation on clay is:",
+      "options": [
+        "25 mm",
+        "40 mm",
+        "65 mm",
+        "75 mm"
+      ],
+      "correct": "65 mm",
+      "explanation": "Permissible settlement for isolated foundation on clay is 65 mm as per IS 1904."
+    },
+    {
+      "question": "The most common type of stair used in residential buildings is:",
+      "options": [
+        "Straight stair",
+        "Dog-legged stair",
+        "Open well stair",
+        "Spiral stair"
+      ],
+      "correct": "Dog-legged stair",
+      "explanation": "Dog-legged stair is most common due to space efficiency."
+    },
+    {
+      "question": "The minimum cement content for M20 grade concrete exposed to severe conditions is:",
+      "options": [
+        "240 kg/m³",
+        "300 kg/m³",
+        "320 kg/m³",
+        "360 kg/m³"
+      ],
+      "correct": "320 kg/m³",
+      "explanation": "Minimum cement content for M20 concrete in severe exposure is 320 kg/m³ (IS 456)."
+    },
+    {
+      "question": "The type of bond used in brick masonry where headers and stretchers alternate is:",
+      "options": [
+        "English bond",
+        "Flemish bond",
+        "Stretcher bond",
+        "Header bond"
+      ],
+      "correct": "Flemish bond",
+      "explanation": "In Flemish bond, headers and stretchers alternate in each course."
+    },
+    {
+      "question": "The maximum spacing of main reinforcement in slab should not exceed:",
+      "options": [
+        "3 times the effective depth",
+        "300 mm",
+        "whichever is less",
+        "All of the above"
+      ],
+      "correct": "All of the above",
+      "explanation": "Maximum spacing = 3d or 300 mm, whichever is less (IS 456)."
+    },
+    {
+      "question": "The instrument used to measure the bearing of a line is:",
+      "options": [
+        "Prismatic compass",
+        "Surveyor's compass",
+        "Theodolite",
+        "All of the above"
+      ],
+      "correct": "All of the above",
+      "explanation": "All these instruments can be used to measure bearings."
+    },
+    {
+      "question": "The minimum edge distance for bolts in steel structures is:",
+      "options": [
+        "1.5 times bolt diameter",
+        "2.0 times bolt diameter",
+        "2.5 times bolt diameter",
+        "3.0 times bolt diameter"
+      ],
+      "correct": "1.5 times bolt diameter",
+      "explanation": "Minimum edge distance = 1.5d for rolled edges (IS 800)."
+    },
+    {
+      "question": "The type of cement suitable for mass concrete works is:",
+      "options": [
+        "Ordinary Portland cement",
+        "Portland pozzolana cement",
+        "Low heat cement",
+        "Rapid hardening cement"
+      ],
+      "correct": "Low heat cement",
+      "explanation": "Low heat cement generates less heat during hydration, suitable for mass concrete."
+    },
+    {
+      "question": "The process of converting a liquid into a solid mass is called:",
+      "options": [
+        "Setting",
+        "Hardening",
+        "Curing",
+        "Compaction"
+      ],
+      "correct": "Setting",
+      "explanation": "Setting is the process of changing from liquid to solid state."
+    },
+    {
+      "question": "The maximum water-cement ratio for M25 grade concrete is:",
+      "options": [
+        "0.40",
+        "0.45",
+        "0.50",
+        "0.55"
+      ],
+      "correct": "0.50",
+      "explanation": "Maximum w/c ratio for M25 concrete is 0.50 as per IS 456."
+    },
+    {
+      "question": "The type of foundation suitable for black cotton soil is:",
+      "options": [
+        "Strip foundation",
+        "Raft foundation",
+        "Pile foundation",
+        "Grillage foundation"
+      ],
+      "correct": "Raft foundation",
+      "explanation": "Raft foundation distributes load over large area, suitable for expansive soils."
+    },
+    {
+      "question": "The minimum thickness of one-way slab simply supported is:",
+      "options": [
+        "L/20",
+        "L/25",
+        "L/30",
+        "L/35"
+      ],
+      "correct": "L/20",
+      "explanation": "Minimum thickness for simply supported slab = L/20 (IS 456)."
+    },
+    {
+      "question": "The instrument used to measure the workability of self-compacting concrete is:",
+      "options": [
+        "Slump flow test",
+        "V-funnel test",
+        "L-box test",
+        "All of the above"
+      ],
+      "correct": "All of the above",
+      "explanation": "All these tests are used for self-compacting concrete."
+    },
+    {
+      "question": "The type of bond where all bricks are laid as stretchers is:",
+      "options": [
+        "Stretcher bond",
+        "Header bond",
+        "English bond",
+        "Flemish bond"
+      ],
+      "correct": "Stretcher bond",
+      "explanation": "In stretcher bond, all bricks are laid as stretchers."
+    },
+    {
+      "question": "The minimum number of samples for concrete testing per 100 m³ is:",
+      "options": [
+        "1",
+        "3",
+        "5",
+        "6"
+      ],
+      "correct": "6",
+      "explanation": "Minimum 6 samples per 100 m³ of concrete as per IS 456."
+    },
+    {
+      "question": "The type of pile which is driven and then the soil inside is removed is called:",
+      "options": [
+        "Bored pile",
+        "Driven pile",
+        "Cast-in-situ pile",
+        "Precast pile"
+      ],
+      "correct": "Bored pile",
+      "explanation": "Bored piles are installed by drilling and removing soil."
+    },
+    {
+      "question": "The maximum spacing of stirrups in beam should not exceed:",
+      "options": [
+        "0.75d",
+        "300 mm",
+        "whichever is less",
+        "All of the above"
+      ],
+      "correct": "All of the above",
+      "explanation": "Maximum spacing = 0.75d or 300 mm, whichever is less (IS 456)."
+    },
+    {
+      "question": "The instrument used to determine the particle size distribution of soil is:",
+      "options": [
+        "Sieve analysis",
+        "Hydrometer analysis",
+        "Both A and B",
+        "None of the above"
+      ],
+      "correct": "Both A and B",
+      "explanation": "Sieve for coarse particles, hydrometer for fine particles."
+    },
+    {
+      "question": "The type of cement suitable for underwater construction is:",
+      "options": [
+        "Sulphate resisting cement",
+        "High alumina cement",
+        "Quick setting cement",
+        "Hydrophobic cement"
+      ],
+      "correct": "Quick setting cement",
+      "explanation": "Quick setting cement sets quickly, suitable for underwater works."
+    },
+    {
+      "question": "The minimum width of tread in staircase for residential building is:",
+      "options": [
+        "200 mm",
+        "250 mm",
+        "300 mm",
+        "350 mm"
+      ],
+      "correct": "250 mm",
+      "explanation": "Minimum tread width for residential staircase is 250 mm."
+    },
+    {
+      "question": "The maximum size of aggregate for reinforced concrete is:",
+      "options": [
+        "20 mm",
+        "25 mm",
+        "40 mm",
+        "75 mm"
+      ],
+      "correct": "20 mm",
+      "explanation": "Maximum aggregate size for RCC is 20 mm generally."
+    },
+    {
+      "question": "The type of paint suitable for exterior walls is:",
+      "options": [
+        "Cement paint",
+        "Oil paint",
+        "Emulsion paint",
+        "All of the above"
+      ],
+      "correct": "All of the above",
+      "explanation": "All these paints can be used for exterior walls."
+    },
+    {
+      "question": "The minimum diameter of bar used in slab is:",
+      "options": [
+        "8 mm",
+        "10 mm",
+        "12 mm",
+        "16 mm"
+      ],
+      "correct": "8 mm",
+      "explanation": "Minimum diameter of bar in slab is 8 mm as per IS 456."
+    },
+    {
+      "question": "The instrument used to measure the consistency of cement paste is:",
+      "options": [
+        "Vicat apparatus",
+        "Le Chatelier apparatus",
+        "Autoclave",
+        "Compression testing machine"
+      ],
+      "correct": "Vicat apparatus",
+      "explanation": "Vicat apparatus measures consistency, initial and final setting time."
+    },
+    {
+      "question": "The type of foundation suitable for transmitting load through soft soil to hard stratum is:",
+      "options": [
+        "Floating foundation",
+        "Raft foundation",
+        "Pile foundation",
+        "Well foundation"
+      ],
+      "correct": "Pile foundation",
+      "explanation": "Pile foundation transfers load through soft soil to hard stratum."
+    },
+    {
+      "question": "The minimum rise in staircase for public buildings is:",
+      "options": [
+        "100 mm",
+        "125 mm",
+        "150 mm",
+        "175 mm"
+      ],
+      "correct": "150 mm",
+      "explanation": "Minimum rise for public buildings is 150 mm."
+    },
+    {
+      "question": "The type of beam supported at both ends is called:",
+      "options": [
+        "Simply supported beam",
+        "Cantilever beam",
+        "Fixed beam",
+        "Continuous beam"
+      ],
+      "correct": "Simply supported beam",
+      "explanation": "Simply supported beam has supports at both ends."
+    },
+    {
+      "question": "The maximum water-cement ratio for M40 grade concrete is:",
+      "options": [
+        "0.35",
+        "0.40",
+        "0.45",
+        "0.50"
+      ],
+      "correct": "0.45",
+      "explanation": "Maximum w/c ratio for M40 concrete is 0.45 as per IS 456."
+    },
+    {
+      "question": "The instrument used to measure the workability of cement mortar is:",
+      "options": [
+        "Flow table",
+        "Vicat apparatus",
+        "Slump cone",
+        "Compaction factor apparatus"
+      ],
+      "correct": "Flow table",
+      "explanation": "Flow table test measures workability of cement mortar."
+    },
+    {
+      "question": "The type of cement used for construction in sulphate-rich environment is:",
+      "options": [
+        "Portland pozzolana cement",
+        "Sulphate resisting cement",
+        "Rapid hardening cement",
+        "Low heat cement"
+      ],
+      "correct": "Sulphate resisting cement",
+      "explanation": "Sulphate resisting cement is used in sulphate-rich environments."
+    }
+  ]
+}
