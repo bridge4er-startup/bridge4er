@@ -6,14 +6,11 @@
     "time": "1 घण्टा",
     "paper": "प्रथम",
     "subject": "Objective MCQs - Civil Engineering",
-    "fullMarks": "१००",
-    "price": 50,
+    "fullMarks": 100,
     "negativeMarking": true,
     "negativePercentage": 20,
-    "premium": true,
-    "questionCount": 70,
-    "difficulty": "Medium",
-    "language": "English/Nepali"
+    "lock": true,
+    "price": 50,
   },
   "instructions": [
     "कृपया एउटा उत्तर मात्र छानुहोस",
@@ -28,7 +25,6 @@
   ],
   "questions": [
     {
-      "id": "q1",
       "question": "What is the standard size of a modular brick?",
       "options": [
         "190 mm × 90 mm × 90 mm",
@@ -39,11 +35,8 @@
       "correct": "190 mm × 90 mm × 90 mm",
       "explanation": "As per IS 1077:1992, the standard size of modular brick is 190 mm × 90 mm × 90 mm.",
       "marks": 1,
-      "topic": "Building Materials",
-      "difficulty": "Easy"
     },
     {
-      "id": "q2",
       "question": "The process of improving load bearing capacity of soil is called:",
       "options": [
         "Compaction",
@@ -53,12 +46,9 @@
       ],
       "correct": "Stabilization",
       "explanation": "Soil stabilization is the process of improving the engineering properties of soil to increase its bearing capacity.",
-      "marks": 1,
-      "topic": "Geotechnical Engineering",
-      "difficulty": "Medium"
+      "marks": 2,
     },
     {
-      "id": "q3",
       "question": "What is the minimum grade of concrete recommended for RCC works as per IS 456?",
       "options": [
         "M10",
@@ -68,12 +58,9 @@
       ],
       "correct": "M20",
       "explanation": "As per IS 456:2000, the minimum grade of concrete for RCC works is M20.",
-      "marks": 1,
-      "topic": "Concrete Technology",
-      "difficulty": "Easy"
+      "marks": 2,
     },
     {
-      "id": "q4",
       "question": "The ratio of the volume of voids to the total volume of soil mass is called:",
       "options": [
         "Void ratio",
@@ -83,12 +70,8 @@
       ],
       "correct": "Porosity",
       "explanation": "Porosity (n) = Volume of voids / Total volume.",
-      "marks": 1,
-      "topic": "Soil Mechanics",
-      "difficulty": "Easy"
     },
     {
-      "id": "q5",
       "question": "The instrument used for measuring angles in surveying is:",
       "options": [
         "Theodolite",
@@ -98,12 +81,8 @@
       ],
       "correct": "Theodolite",
       "explanation": "Theodolite is used for measuring horizontal and vertical angles in surveying.",
-      "marks": 1,
-      "topic": "Surveying",
-      "difficulty": "Easy"
     },
     {
-      "id": "q6",
       "question": "The maximum permissible deflection for a cantilever beam of length L is:",
       "options": [
         "L/180",
@@ -113,219 +92,7 @@
       ],
       "correct": "L/250",
       "explanation": "As per IS 456:2000, maximum deflection for cantilever = L/250.",
-      "marks": 1,
-      "topic": "Structural Analysis",
-      "difficulty": "Medium"
-    },
-    {
-      "id": "q7",
-      "question": "Which of the following is NOT a method of concrete mixing?",
-      "options": [
-        "Hand mixing",
-        "Machine mixing",
-        "Ready mix",
-        "Dry mixing"
-      ],
-      "correct": "Dry mixing",
-      "explanation": "Dry mixing is not a standard method for concrete mixing.",
-      "marks": 1,
-      "topic": "Concrete Technology",
-      "difficulty": "Easy"
-    },
-    {
-      "id": "q8",
-      "question": "The minimum number of longitudinal bars in a circular column should be:",
-      "options": [
-        "4",
-        "6",
-        "8",
-        "12"
-      ],
-      "correct": "6",
-      "explanation": "As per IS 456:2000, minimum 6 bars for circular columns.",
-      "marks": 1,
-      "topic": "RCC Design",
-      "difficulty": "Medium"
-    },
-    {
-      "id": "q9",
-      "question": "The property of fresh concrete which determines its ability to flow is called:",
-      "options": [
-        "Workability",
-        "Durability",
-        "Strength",
-        "Permeability"
-      ],
-      "correct": "Workability",
-      "explanation": "Workability is the ease with which concrete can be mixed, placed, and compacted.",
-      "marks": 1,
-      "topic": "Concrete Technology",
-      "difficulty": "Easy"
-    },
-    {
-      "id": "q10",
-      "question": "The most commonly used admixture in concrete to retard setting time is:",
-      "options": [
-        "Calcium chloride",
-        "Superplasticizer",
-        "Gypsum",
-        "Fly ash"
-      ],
-      "correct": "Gypsum",
-      "explanation": "Gypsum is added to cement to retard the setting time.",
-      "marks": 1,
-      "topic": "Building Materials",
-      "difficulty": "Medium"
-    },
-    {
-      "id": "q11",
-      "question": "What is the standard size of A4 drawing sheet?",
-      "options": [
-        "210 mm × 297 mm",
-        "297 mm × 420 mm",
-        "420 mm × 594 mm",
-        "594 mm × 841 mm"
-      ],
-      "correct": "210 mm × 297 mm",
-      "explanation": "A4 size drawing sheet dimensions are 210 mm × 297 mm.",
-      "marks": 1,
-      "topic": "Engineering Drawing",
-      "difficulty": "Easy"
-    },
-    {
-      "id": "q12",
-      "question": "The longitudinal slope of a road in the direction of movement is called:",
-      "options": [
-        "Gradient",
-        "Camber",
-        "Super elevation",
-        "Berm"
-      ],
-      "correct": "Gradient",
-      "explanation": "Gradient is the longitudinal slope along the length of the road.",
-      "marks": 1,
-      "topic": "Transportation Engineering",
-      "difficulty": "Easy"
-    },
-    {
-      "id": "q13",
-      "question": "The unit of measurement for steel reinforcement in RCC is:",
-      "options": [
-        "Cubic meter",
-        "Square meter",
-        "Kilogram",
-        "Meter"
-      ],
-      "correct": "Kilogram",
-      "explanation": "Steel reinforcement is measured in kilograms as per IS 1200.",
-      "marks": 1,
-      "topic": "Quantity Surveying",
-      "difficulty": "Easy"
-    },
-    {
-      "id": "q14",
-      "question": "The type of foundation suitable for expansive soils is:",
-      "options": [
-        "Spread footing",
-        "Raft foundation",
-        "Pile foundation",
-        "Under-reamed pile foundation"
-      ],
-      "correct": "Under-reamed pile foundation",
-      "explanation": "Under-reamed piles are suitable for expansive soils to resist uplift forces.",
-      "marks": 1,
-      "topic": "Foundation Engineering",
-      "difficulty": "Hard"
-    },
-    {
-      "id": "q15",
-      "question": "Which instrument is used to measure the workability of concrete?",
-      "options": [
-        "Vicat apparatus",
-        "Slump cone",
-        "Compression testing machine",
-        "Flow table"
-      ],
-      "correct": "Slump cone",
-      "explanation": "Slump test using slump cone is the most common method to measure workability.",
-      "marks": 1,
-      "topic": "Concrete Technology",
-      "difficulty": "Easy"
-    },
-    {
-      "id": "q16",
-      "question": "The process of removing air from the concrete is called:",
-      "options": [
-        "Compaction",
-        "Curing",
-        "Vibration",
-        "Consolidation"
-      ],
-      "correct": "Compaction",
-      "explanation": "Compaction removes entrapped air from fresh concrete.",
-      "marks": 1,
-      "topic": "Concrete Technology",
-      "difficulty": "Easy"
-    },
-    {
-      "id": "q17",
-      "question": "The minimum cover for reinforcement in slab is:",
-      "options": [
-        "15 mm",
-        "20 mm",
-        "25 mm",
-        "40 mm"
-      ],
-      "correct": "20 mm",
-      "explanation": "As per IS 456:2000, minimum cover for slab is 20 mm.",
-      "marks": 1,
-      "topic": "RCC Design",
-      "difficulty": "Easy"
-    },
-    {
-      "id": "q18",
-      "question": "The distance between two successive contours is called:",
-      "options": [
-        "Contour interval",
-        "Horizontal equivalent",
-        "Gradient",
-        "Slope"
-      ],
-      "correct": "Contour interval",
-      "explanation": "Contour interval is the vertical distance between two successive contours.",
-      "marks": 1,
-      "topic": "Surveying",
-      "difficulty": "Easy"
-    },
-    {
-      "id": "q19",
-      "question": "Which of the following is a non-destructive test for concrete?",
-      "options": [
-        "Ultrasonic pulse velocity test",
-        "Compression test",
-        "Split tensile test",
-        "Flexural test"
-      ],
-      "correct": "Ultrasonic pulse velocity test",
-      "explanation": "UPV test is non-destructive, others are destructive tests.",
-      "marks": 1,
-      "topic": "Concrete Technology",
-      "difficulty": "Medium"
-    },
-    {
-      "id": "q20",
-      "question": "The steel bars used in prestressed concrete are:",
-      "options": [
-        "Mild steel bars",
-        "HYSD bars",
-        "Tor steel bars",
-        "High tensile steel wires"
-      ],
-      "correct": "High tensile steel wires",
-      "explanation": "High tensile steel wires are used in prestressed concrete.",
-      "marks": 1,
-      "topic": "Prestressed Concrete",
-      "difficulty": "Hard"
+      "marks": 2,
     }
   ]
 }
