@@ -1094,7 +1094,7 @@ main {
 }
 
 /* ==============================================
-   MCQ SUBJECTS GRID - UPDATED TO MATCH SUBJECTIVE SECTION
+   MCQ SUBJECTS GRID - WORKING VERSION FINAL
    ============================================== */
 
 /* Modern Grid Container */
@@ -1117,11 +1117,12 @@ main {
     position: relative;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
     border: 1px solid #f0f0f0;
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 180px;
+    width: 300px;
     overflow: hidden;
 }
 
