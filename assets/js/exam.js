@@ -406,13 +406,16 @@ async function loadAndStartMCQExam(selectedSet) {
         const examSetSelection = getDOMElement('exam-set-selection');
         const mcqExam = getDOMElement('multiple-choice-exam');
         const examTitle = getDOMElement('multiple-choice-exam-title');
+        const examSetInfo = getDOMElement('exam-set-info');
         
-        if (!examSetSelection || !mcqExam || !examTitle) return;
+        if (!examSetSelection || !mcqExam || !examTitle || !examSetInfo) return;
         
         hideElement(examSetSelection);
         showElement(mcqExam);
-        examTitle.textContent = `Multiple Choice Exam - ${selectedSet.displayName}`;
+        examTitle.textContent = `Multiple Choice Exam`;
+        examSetInfo.textContent = selectedSet.displayName;
         
+        initializeExamProgress();
         loadMCQExamQuestion();
         startTimer('mcq');
         
@@ -421,6 +424,43 @@ async function loadAndStartMCQExam(selectedSet) {
         alert(`Failed to load exam questions from ${selectedSet.fileName}.`);
     }
 }
+
+// Add this new function to initialize progress display
+function initializeExamProgress() {
+    const state = AppState.examState;
+    const totalQuestions = state.questions.length;
+    
+    // Update summary counts
+    document.getElementById('mcq-total-questions').textContent = totalQuestions;
+    document.getElementById('mcq-answered-questions').textContent = 0;
+    document.getElementById('mcq-flagged-questions').textContent = 0;
+    document.getElementById('mcq-remaining-questions').textContent = totalQuestions;
+    document.getElementById('total-exam-questions').textContent = totalQuestions;
+    
+    // Create question grid
+    const questionGrid = document.getElementById('question-progress-grid');
+    if (questionGrid) {
+        questionGrid.innerHTML = '';
+        
+        for (let i = 0; i < totalQuestions; i++) {
+            const questionNumber = document.createElement('div');
+            questionNumber.className = 'question-number';
+            questionNumber.textContent = i + 1;
+            questionNumber.dataset.index = i;
+            
+            questionNumber.addEventListener('click', () => {
+                const index = parseInt(questionNumber.dataset.index);
+                AppState.examState.currentQuestionIndex = index;
+                loadMCQExamQuestion();
+            });
+            
+            questionGrid.appendChild(questionNumber);
+        }
+    }
+    
+    updateProgressGrid();
+}
+
 
 async function loadAndStartSubjectiveExam(selectedSet) {
     console.log("Loading subjective exam:", selectedSet.displayName);
@@ -782,6 +822,7 @@ function getErrorQuestionSet(subject, chapter, fileName) {
 // EXAM NAVIGATION FUNCTIONS
 // ==============================================
 
+// Update the loadMCQExamQuestion function
 function loadMCQExamQuestion() {
     const state = AppState.examState;
     if (!state.questions || state.questions.length === 0) {
@@ -790,40 +831,37 @@ function loadMCQExamQuestion() {
     }
     
     const question = state.questions[state.currentQuestionIndex];
-    const multipleChoiceContainer = getDOMElement('multiple-choice-container');
-    const currentExamQuestion = getDOMElement('current-exam-question');
-    const totalExamQuestions = getDOMElement('total-exam-questions');
+    const questionText = document.getElementById('mcq-question-text');
+    const optionsContainer = document.getElementById('exam-options-container');
+    const currentQuestion = document.getElementById('current-exam-question');
     const prevExamQuestion = getDOMElement('prev-exam-question');
     const nextExamQuestion = getDOMElement('next-exam-question');
     const flagExamQuestion = getDOMElement('flag-exam-question');
     
-    if (!multipleChoiceContainer || !currentExamQuestion || !totalExamQuestions) return;
+    if (!questionText || !optionsContainer || !currentQuestion) return;
     
-    multipleChoiceContainer.innerHTML = `
-        <div class="mcq-question-container">
-            <div class="question-number-badge">Question ${state.currentQuestionIndex + 1}</div>
-            <div class="mcq-question">${question.question}</div>
-            <div class="mcq-options" id="exam-options-container">
-                ${question.options.map((option, index) => {
-                    const optionLetter = String.fromCharCode(65 + index);
-                    const isSelected = state.answers[state.currentQuestionIndex] === option;
-                    let optionClass = 'mcq-option';
-                    if (isSelected) optionClass += ' selected';
-                    
-                    return `
-                        <div class="${optionClass}" data-exam-option="${option}" onclick="handleExamOptionClick(this)">
-                            <div class="option-letter">${optionLetter}</div>
-                            <div>${option}</div>
-                        </div>
-                    `;
-                }).join('')}
+    // Update question text
+    questionText.textContent = question.question;
+    
+    // Update current question number
+    currentQuestion.textContent = state.currentQuestionIndex + 1;
+    
+    // Create options
+    optionsContainer.innerHTML = question.options.map((option, index) => {
+        const optionLetter = String.fromCharCode(65 + index);
+        const isSelected = state.answers[state.currentQuestionIndex] === option;
+        let optionClass = 'mcq-option';
+        if (isSelected) optionClass += ' selected';
+        
+        return `
+            <div class="${optionClass}" data-exam-option="${option}" onclick="handleExamOptionClick(this)">
+                <div class="option-letter">${optionLetter}</div>
+                <div>${option}</div>
             </div>
-        </div>
-    `;
+        `;
+    }).join('');
     
-    currentExamQuestion.textContent = state.currentQuestionIndex + 1;
-    totalExamQuestions.textContent = state.questions.length;
-    
+    // Update navigation buttons
     if (prevExamQuestion) {
         prevExamQuestion.disabled = state.currentQuestionIndex === 0;
     }
@@ -842,7 +880,9 @@ function loadMCQExamQuestion() {
         }
     }
     
+    // Update progress
     updateMCQExamProgress();
+    updateProgressGrid();
 }
 
 // Global function for exam option clicks
@@ -860,43 +900,92 @@ window.handleExamOptionClick = function(optionElement) {
     optionElement.classList.add('selected');
     AppState.examState.answers[questionIndex] = optionValue;
     updateMCQExamProgress();
+    updateProgressGrid();
 };
 
 function updateMCQExamProgress() {
-    const total = AppState.examState.questions.length;
-    const answered = Object.keys(AppState.examState.answers).length;
+    const state = AppState.examState;
+    const total = state.questions.length;
+    const answered = Object.keys(state.answers).length;
+    const flagged = Object.keys(state.flagged).filter(index => state.flagged[index]).length;
+    const remaining = total - answered;
     
-    const totalQuestionsElement = getDOMElement('mcq-total-questions');
-    const answeredQuestionsElement = getDOMElement('mcq-answered-questions');
-    const remainingQuestionsElement = getDOMElement('mcq-remaining-questions');
-    
-    if (totalQuestionsElement) totalQuestionsElement.textContent = total;
-    if (answeredQuestionsElement) answeredQuestionsElement.textContent = answered;
-    if (remainingQuestionsElement) remainingQuestionsElement.textContent = total - answered;
+    document.getElementById('mcq-answered-questions').textContent = answered;
+    document.getElementById('mcq-flagged-questions').textContent = flagged;
+    document.getElementById('mcq-remaining-questions').textContent = remaining;
 }
 
+// Add new function to update question grid
+function updateProgressGrid() {
+    const state = AppState.examState;
+    const questionNumbers = document.querySelectorAll('.question-number');
+    
+    questionNumbers.forEach((numberEl, index) => {
+        // Reset classes
+        numberEl.className = 'question-number';
+        
+        // Add current class
+        if (index === state.currentQuestionIndex) {
+            numberEl.classList.add('current');
+        }
+        // Add answered class
+        else if (state.answers[index]) {
+            numberEl.classList.add('answered');
+        }
+        // Add flagged class
+        else if (state.flagged[index]) {
+            numberEl.classList.add('flagged');
+        }
+        // Add not-answered class
+        else {
+            numberEl.classList.add('not-answered');
+        }
+    });
+}
+
+
 function startTimer(type) {
-    let timerElement, totalTime;
+    let timerElement, progressFillElement, totalTime;
     
     if (type === 'subjective') {
         timerElement = document.getElementById('subjective-timer');
         totalTime = 3 * 60 * 60;
     } else {
         timerElement = document.getElementById('mcq-exam-timer');
+        progressFillElement = document.getElementById('timer-progress-fill');
         totalTime = 30 * 60;
     }
     
     if (!timerElement) return;
     
     let remaining = totalTime;
+    const startTime = Date.now();
     
     const updateTimer = () => {
         const hours = Math.floor(remaining / 3600);
         const minutes = Math.floor((remaining % 3600) / 60);
         const seconds = remaining % 60;
         
-        timerElement.textContent = 
-            `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        if (type === 'subjective') {
+            timerElement.textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        } else {
+            timerElement.textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Update progress bar
+            if (progressFillElement) {
+                const percentage = (remaining / totalTime) * 100;
+                progressFillElement.style.width = `${percentage}%`;
+                
+                // Change color based on remaining time
+                if (percentage <= 25) {
+                    progressFillElement.style.background = '#dc3545';
+                } else if (percentage <= 50) {
+                    progressFillElement.style.background = '#ffc107';
+                }
+            }
+        }
         
         if (remaining <= 0) {
             clearInterval(timer);
