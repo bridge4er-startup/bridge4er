@@ -231,8 +231,26 @@ function setupExamNavigationListeners() {
     const submitMcqExam = getDOMElement('submit-mcq-exam');
     if (submitMcqExam) {
         submitMcqExam.addEventListener('click', () => {
+            const unanswered = AppState.examState.questions.length - Object.keys(AppState.examState.answers).length;
+            
+            if (unanswered > 0) {
+                if (!confirm(`You have ${unanswered} unanswered questions. Are you sure you want to submit?`)) {
+                    return;
+                }
+            }
+            
             if (confirm('Are you sure you want to submit your MCQ exam?')) {
                 submitMCQExam();
+            }
+        });
+    }
+    
+    // Back to exam sets button
+    const backToExamTypeMcq = getDOMElement('back-to-exam-type-mcq');
+    if (backToExamTypeMcq) {
+        backToExamTypeMcq.addEventListener('click', () => {
+            if (confirm('Are you sure you want to go back? Your current progress will be lost.')) {
+                resetExamTypeSelection();
             }
         });
     }
