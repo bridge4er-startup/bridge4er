@@ -272,21 +272,50 @@ function renderMCQExamSetSelection(examSets) {
             ${examSets.map((set, index) => {
                 const isPurchased = isSetPurchased('mcq', set.displayName);
                 const canAccess = set.isFree || isPurchased;
-                const cardClass = canAccess ? '' : 'locked-set';
+                const paymentBadge = set.isFree ? 'free' : 'paid';
+                const paymentText = set.isFree ? 'Free' : `NPR ${set.price}`;
+                const cardClass = canAccess ? '' : 'locked';
                 
                 return `
-                    <div class="subject-card ${cardClass}" 
+                    <div class="exam-set-card ${cardClass} ${paymentBadge}" 
                          data-exam-index="${index}" 
                          data-set-name="${set.displayName}" 
                          data-is-free="${set.isFree}" 
                          data-can-access="${canAccess}"
                          data-exam-type="mcq">
-                        ${!canAccess ? '<div class="lock-badge"><i class="fas fa-lock"></i></div>' : ''}
+                        
+                           <!-- Payment Badge -->
+                        <div class="simple-payment-badge ${paymentBadge}">
+                            ${set.isFree ? 'Free Set' : 'Paid Set'}
+                        </div>
+                                                
+                        <!-- Lock Badge (only for locked sets) -->
+                        ${!canAccess ? `
+                            <div class="simple-lock-badge">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                        ` : ''}
+                        
                         <i class="fas fa-file-alt"></i>
                         <h3>${set.displayName}</h3>
                         <p>Multiple Choice Exam</p>
-                        <small>30 minutes • ${set.isFree ? '<span class="demo-badge">FREE</span>' : `<span class="paid-badge">NPR ${set.price}</span>`}</small>
-                        ${!canAccess ? '<p style="color: var(--accent-color); margin-top: 0.5rem; font-size: 0.9rem;"><i class="fas fa-lock"></i> Requires Purchase</p>' : ''}
+                        <small>30 minutes • <span class="price-tag ${paymentBadge}-price">${paymentText}</span></small>
+                        
+                        <!-- Access text -->
+                        <div class="access-text">
+                            ${canAccess ? 
+                                '<i class="fas fa-check-circle" style="color: var(--secondary-color);"></i> Available' : 
+                                '<i class="fas fa-lock" style="color: var(--accent-color);"></i> Requires Purchase'
+                            }
+                        </div>
+                        
+                        <!-- Lock Overlay (only for locked sets) -->
+                        ${!canAccess ? `
+                            <div class="simple-lock-overlay">
+                                <i class="fas fa-lock simple-lock-icon"></i>
+                                <div class="simple-lock-text">Purchase required to access</div>
+                            </div>
+                        ` : ''}
                     </div>
                 `;
             }).join('')}
@@ -298,9 +327,9 @@ function renderMCQExamSetSelection(examSets) {
             <i class="fas fa-arrow-left"></i> Back to Exam Type
         </button>
     `;
-    
+        
     setTimeout(() => {
-        document.querySelectorAll('#mcq-exam-set-grid .subject-card').forEach(card => {
+        document.querySelectorAll('#mcq-exam-set-grid .exam-set-card').forEach(card => {
             card.addEventListener('click', async () => {
                 const setIndex = parseInt(card.dataset.examIndex);
                 const selectedSet = examSets[setIndex];
@@ -331,21 +360,50 @@ function renderSubjectiveExamSetSelection(examSets) {
             ${examSets.map((set, index) => {
                 const isPurchased = isSetPurchased('subjective', set.displayName);
                 const canAccess = set.isFree || isPurchased;
-                const cardClass = canAccess ? '' : 'locked-set';
+                const paymentBadge = set.isFree ? 'free' : 'paid';
+                const paymentText = set.isFree ? 'Free' : `NPR ${set.price}`;
+                const cardClass = canAccess ? '' : 'locked';
                 
                 return `
-                    <div class="subject-card ${cardClass}" 
+                    <div class="exam-set-card ${cardClass} ${paymentBadge}" 
                          data-exam-index="${index}" 
                          data-set-name="${set.displayName}" 
                          data-is-free="${set.isFree}" 
                          data-can-access="${canAccess}"
                          data-exam-type="subjective">
-                        ${!canAccess ? '<div class="lock-badge"><i class="fas fa-lock"></i></div>' : ''}
+                        
+                           <!-- Payment Badge -->
+                        <div class="simple-payment-badge ${paymentBadge}">
+                            ${set.isFree ? 'Free Set' : 'Paid Set'}
+                        </div>                         
+
+                        <!-- Lock Badge (only for locked sets) -->
+                        ${!canAccess ? `
+                            <div class="simple-lock-badge">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                        ` : ''}
+                        
                         <i class="fas fa-file-pdf"></i>
                         <h3>${set.displayName}</h3>
                         <p>Subjective Exam</p>
-                        <small>3 hours • ${set.isFree ? '<span class="demo-badge">FREE</span>' : `<span class="paid-badge">NPR ${set.price}</span>`}</small>
-                        ${!canAccess ? '<p style="color: var(--accent-color); margin-top: 0.5rem; font-size: 0.9rem;"><i class="fas fa-lock"></i> Requires Purchase</p>' : ''}
+                        <small>3 hours • <span class="price-tag ${paymentBadge}-price">${paymentText}</span></small>
+                        
+                        <!-- Access text -->
+                        <div class="access-text">
+                            ${canAccess ? 
+                                '<i class="fas fa-check-circle" style="color: var(--secondary-color);"></i> Available' : 
+                                '<i class="fas fa-lock" style="color: var(--accent-color);"></i> Requires Purchase'
+                            }
+                        </div>
+                        
+                        <!-- Lock Overlay (only for locked sets) -->
+                        ${!canAccess ? `
+                            <div class="simple-lock-overlay">
+                                <i class="fas fa-lock simple-lock-icon"></i>
+                                <div class="simple-lock-text">Purchase required to access</div>
+                            </div>
+                        ` : ''}
                     </div>
                 `;
             }).join('')}
@@ -359,7 +417,7 @@ function renderSubjectiveExamSetSelection(examSets) {
     `;
     
     setTimeout(() => {
-        document.querySelectorAll('#subjective-exam-set-grid .subject-card').forEach(card => {
+        document.querySelectorAll('#subjective-exam-set-grid .exam-set-card').forEach(card => {
             card.addEventListener('click', async () => {
                 const setIndex = parseInt(card.dataset.examIndex);
                 const selectedSet = examSets[setIndex];
