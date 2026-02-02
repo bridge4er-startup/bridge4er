@@ -91,6 +91,10 @@
     
     <!-- Multiple Choice Exam View -->
     <div id="multiple-choice-exam" style="display: none;">
+        <div class="instructions-container" id="exam-instructions-container" style="display: none;">
+            <!-- Will be populated by JavaScript -->
+        </div>
+
         <div class="mcq-exam-container">
             <!-- Header with Submit and Back buttons -->
             <div class="exam-header-top">
@@ -124,12 +128,20 @@
                 </div>
             </div>
             
+            <!-- Exam Info and Instructions -->
+            <div class="exam-info-container" id="exam-info-container" style="display: none;">
+                <!-- Will be populated by JavaScript -->
+            </div>
+                       
             <!-- Main content area -->
             <div class="exam-main-content">
                 <!-- Left side: Question -->
                 <div class="question-panel">
                     <div class="question-container">
-                        <div class="question-number-badge">Question <span id="current-exam-question">1</span> of <span id="total-exam-questions">0</span></div>
+                        <div class="question-number-badge">
+                            Question <span id="current-exam-question">1</span> of <span id="total-exam-questions">0</span>
+                            <span class="question-marks-badge" id="current-question-marks">1 mark</span>
+                        </div>
                         <div class="mcq-question" id="mcq-question-text">
                             Loading question...
                         </div>
@@ -174,6 +186,10 @@
                             <div class="summary-label">Remaining</div>
                             <div class="summary-value remaining" id="mcq-remaining-questions">0</div>
                         </div>
+                        <div class="summary-item marks">
+                            <div class="summary-label">Total Marks</div>
+                            <div class="summary-value" id="total-marks-display">0</div>
+                        </div>
                     </div>
                     
                     <!-- Question Grid -->
@@ -208,7 +224,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Exam Results View -->
     <div id="exam-results" style="display: none;">
         <div class="results-container">
@@ -239,9 +255,24 @@
                 </div>
             </div>
             
+            <!-- Marks Display -->
+            <div class="marks-display">
+                <div class="marks-item">
+                    <div class="marks-label">Obtained Marks</div>
+                    <div class="marks-value" id="obtained-marks">0</div>
+                </div>
+                <div class="marks-item">
+                    <div class="marks-label">Total Marks</div>
+                    <div class="marks-value" id="total-marks">0</div>
+                </div>
+            </div>
+            
             <div class="results-summary">
                 <p>You answered <strong><span id="exam-correct-answers">0</span> out of <span id="exam-total-questions">0</span></strong> questions correctly.</p>
-                <p class="time-taken"><i class="fas fa-stopwatch"></i> Time taken: 30 minutes</p>
+                <p class="time-taken"><i class="fas fa-stopwatch"></i> Time taken: <span id="exam-time-taken">30 minutes</span></p>
+                <p class="negative-marking-info" id="negative-marking-info" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i> Negative marking applied (20% deduction for wrong answers)
+                </p>
             </div>
             
             <div class="results-actions">
