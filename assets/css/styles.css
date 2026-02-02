@@ -1414,6 +1414,185 @@ main {
 /* ==============================================
    REAL EXAM PAPER STYLES
    ============================================== */
+/* Add to styles.css - Exam Info and Instructions Styles */
+.exam-info-container {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid var(--primary-color);
+}
+
+.exam-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.exam-info-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.exam-info-subtitle {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 0.25rem;
+}
+
+.exam-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.exam-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.exam-detail-item i {
+    color: var(--primary-color);
+    width: 16px;
+}
+
+.exam-details-small {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.exam-details-small span {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.instructions-container {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e9ecef;
+}
+
+.instructions-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.instructions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.instructions-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed #dee2e6;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.instructions-list li:last-child {
+    border-bottom: none;
+}
+
+.instructions-list li:before {
+    content: "•";
+    color: var(--secondary-color);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+/*added to update above infor for MCQ Exam Questions display-------------------------------*/
+
+/* Update question marks display */
+.question-marks-badge {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+/* Update question marks display */
+.question-marks-badge {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+/* Results marks display */
+.marks-display {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.marks-item {
+    text-align: center;
+}
+
+.marks-label {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.25rem;
+}
+
+.marks-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.negative-marking-info {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+/* Update progress summary for marks */
+.summary-item.marks {
+    grid-column: span 2;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+/*Above are added to update above infor for MCQ Exam Questions display-------------------------------*/
+/* ==============================================
+   REAL EXAM PAPER STYLES
+   ============================================== */
 
 /* Exam Paper Container */
 .exam-paper-container {
@@ -3116,22 +3295,24 @@ footer {
 }
 
 #exam-set-info {
-    margin: 0.25rem 0 0 0;
+    margin: 0.25rem 2rem 0 0; /*what does this do?*/ /* Adjusted margin for better spacing */
     color: #666;
     font-size: 0.9rem;
 }
 
-.header-action-buttons {
+.header-action-buttons { /* Container for action buttons */
     display: flex;
     gap: 1rem;
+    max-width: 50%;
+    margin-left: 4rem;
 }
 
-.header-action-buttons .btn {
+.header-action-buttons .btn { /* Style for action buttons */
     padding: 0.5rem 1.5rem;
     font-weight: 600;
 }
 
-.exam-main-content {
+.exam-main-content { /* Main content area */
     display: flex;
     flex: 1;
     overflow: hidden;
@@ -3260,6 +3441,7 @@ footer {
     background-clip: text;
     text-shadow: 0 2px 4px rgba(139, 0, 0, 0.1); /* Subtle shadow for depth */
     position: relative;
+    margin: 0 1rem 0 1rem;
 }
 
 .progress-bar {
