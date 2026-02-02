@@ -9,6 +9,21 @@ function init() {
     loadField('civil');
     updateFieldIndicators();
     initPaymentSystem();
+    
+    // Add new DOM elements to cache
+    const additionalElements = [
+        'exam-info-container',
+        'exam-instructions-container',
+        'current-question-marks',
+        'total-marks-display',
+        'obtained-marks',
+        'total-marks',
+        'exam-time-taken',
+        'negative-marking-info'
+    ];
+    
+    additionalElements.forEach(id => getDOMElement(id));
+    
     console.log("Application initialized successfully");
 }
 
