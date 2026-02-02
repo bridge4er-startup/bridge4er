@@ -232,14 +232,17 @@ function setupExamNavigationListeners() {
     if (submitMcqExam) {
         submitMcqExam.addEventListener('click', () => {
             const unanswered = AppState.examState.questions.length - Object.keys(AppState.examState.answers).length;
+            const negativeMarking = AppState.examState.negativeMarking;
             
+            let message = 'Are you sure you want to submit your MCQ exam?';
             if (unanswered > 0) {
-                if (!confirm(`You have ${unanswered} unanswered questions. Are you sure you want to submit?`)) {
-                    return;
-                }
+                message = `You have ${unanswered} unanswered questions. ` + message;
+            }
+            if (negativeMarking) {
+                message += '\n\nNote: Negative marking is enabled (20% deduction for wrong answers).';
             }
             
-            if (confirm('Are you sure you want to submit your MCQ exam?')) {
+            if (confirm(message)) {
                 submitMCQExam();
             }
         });
