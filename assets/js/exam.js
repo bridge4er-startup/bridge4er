@@ -21,37 +21,78 @@ async function discoverMCQExamSets() {
             return fileName.endsWith('.json');
         });
         
-        jsonFiles.forEach((file, index) => {
-            const fileName = file.name;
-            const baseName = fileName.replace(/\.json$/i, '');
-            const setName = baseName.replace(/_/g, ' ').trim();
-            const isFree = index < 2;
-            
-            examSets.push({
-                name: setName,
-                fileName: fileName,
-                displayName: setName,
-                isFree: isFree,
-                price: isFree ? 0 : PAYMENT_CONFIG.prices.mcq,
-                setNumber: index + 1,
-                path: file.path,
-                downloadUrl: file.download_url
-            });
-        });
-        
-        examSets.sort((a, b) => {
-            const numA = a.displayName.match(/\d+/);
-            const numB = b.displayName.match(/\d+/);
-            if (numA && numB) {
-                return parseInt(numA[0]) - parseInt(numB[0]);
+        // Load each JSON to get exam info
+        for (const file of jsonFiles) {
+            try {
+                const filePath = `${folderPath}/${file.name}`;
+                const jsonData = await getJsonFileFromGitHub(filePath);
+                
+                if (!jsonData) continue;
+                
+                // Determine if it's new format or old format
+                let examInfo, instructions, questions;
+                
+                if (jsonData.examInfo) {
+                    // New format
+                    examInfo = jsonData.examInfo;
+                    instructions = jsonData.instructions || [];
+                    questions = jsonData.questions || [];
+                } else if (Array.isArray(jsonData)) {
+                    // Old format - convert to new format
+                    examInfo = {
+                        title: "प्रदेश लोक सेवा आयोग",
+                        subtitle: "Multiple Choice Exam",
+                        date: "२०८२।१०।१२",
+                        time: 30,
+                        paper: "प्रथम",
+                        subject: "Objective MCQs",
+                        fullMarks: 100,
+                        negativeMarking: true,
+                        negativePercentage: 20,
+                        lock: false,
+                        price: 0
+                    };
+                    instructions = [
+                        "कृपया एउटा उत्तर मात्र छानुहोस",
+                        "सबै प्रश्न अनिवार्य छन्",
+                        "Wrong answers have 20% negative marking",
+                        "Skipped questions are not penalized"
+                    ];
+                    questions = jsonData;
+                } else {
+                    continue; // Skip invalid format
+                }
+                
+                const baseName = file.name.replace(/\.json$/i, '');
+                const setName = baseName.replace(/_/g, ' ').trim();
+                
+                const isFree = !examInfo.lock;
+                const price = examInfo.price || 0;
+                const totalMarks = questions.reduce((sum, q) => sum + (q.marks || 1), 0);
+                
+                examSets.push({
+                    name: setName,
+                    fileName: file.name,
+                    displayName: setName,
+                    isFree: isFree,
+                    price: price,
+                    setNumber: examSets.length + 1,
+                    path: file.path,
+                    downloadUrl: file.download_url,
+                    examInfo: examInfo,
+                    instructions: instructions,
+                    totalQuestions: questions.length,
+                    totalMarks: totalMarks,
+                    duration: examInfo.time || 30
+                });
+                
+            } catch (error) {
+                console.error(`Error loading exam set ${file.name}:`, error);
+                continue;
             }
-            return a.displayName.localeCompare(b.displayName);
-        });
+        }
         
-        examSets.forEach((set, index) => {
-            set.setNumber = index + 1;
-            set.isFree = index < 2;
-        });
+        examSets.sort((a, b) => a.setNumber - b.setNumber);
         
         console.log(`Found ${examSets.length} MCQ exam sets`);
         return examSets;
@@ -262,6 +303,7 @@ async function showSubjectiveExamSetSelection() {
     }
 }
 
+// Update the renderMCQExamSetSelection to show price and lock status from JSON
 function renderMCQExamSetSelection(examSets) {
     const examSetSelection = getDOMElement('exam-set-selection');
     if (!examSetSelection) return;
@@ -275,6 +317,8 @@ function renderMCQExamSetSelection(examSets) {
                 const paymentBadge = set.isFree ? 'free' : 'paid';
                 const paymentText = set.isFree ? 'Free' : `NPR ${set.price}`;
                 const cardClass = canAccess ? '' : 'locked';
+                const duration = set.duration || 30;
+                const totalMarks = set.totalMarks || 100;
                 
                 return `
                     <div class="exam-set-card ${cardClass} ${paymentBadge}" 
@@ -299,7 +343,7 @@ function renderMCQExamSetSelection(examSets) {
                         <i class="fas fa-file-alt"></i>
                         <h3>${set.displayName}</h3>
                         <p>Multiple Choice Exam</p>
-                        <small>30 minutes • <span class="price-tag ${paymentBadge}-price">${paymentText}</span></small>
+                        <small>${duration} min • ${totalMarks} marks • <span class="price-tag ${paymentBadge}-price">${paymentText}</span></small>
                         
                         <!-- Access text -->
                         <div class="access-text">
@@ -313,7 +357,7 @@ function renderMCQExamSetSelection(examSets) {
                         ${!canAccess ? `
                             <div class="simple-lock-overlay">
                                 <i class="fas fa-lock simple-lock-icon"></i>
-                                <div class="simple-lock-text">Purchase required to access</div>
+                                <div class="simple-lock-text">Purchase required to access (NPR ${set.price})</div>
                             </div>
                         ` : ''}
                     </div>
@@ -321,7 +365,7 @@ function renderMCQExamSetSelection(examSets) {
             }).join('')}
         </div>
         <div class="demo-notice" style="margin-top: 1.5rem;">
-            <i class="fas fa-info-circle"></i> Sets A & B are free. Others require purchase. Demo payment system enabled.
+            <i class="fas fa-info-circle"></i> Free sets are marked with "Free Set" badge. Paid sets require purchase.
         </div>
         <button class="btn btn-secondary" id="back-to-exam-type-from-mcq-set" style="margin-top: 1.5rem;">
             <i class="fas fa-arrow-left"></i> Back to Exam Type
@@ -453,9 +497,59 @@ async function loadAndStartMCQExam(selectedSet) {
         state.currentQuestionIndex = 0;
         state.answers = {};
         state.flagged = {};
-        state.totalTime = 30 * 60;
         
-        state.questions = await loadMCQExam(selectedSet.fileName, selectedSet.displayName);
+        // Load exam data
+        const field = AppState.currentField;
+        const filePath = `${FIELD_CONFIG[field].folderPrefix}Take Exam/Multiple Choice Exam/${selectedSet.fileName}`;
+        const jsonData = await getJsonFileFromGitHub(filePath);
+        
+        if (!jsonData) {
+            throw new Error('No JSON data received');
+        }
+        
+        // Parse exam data
+        if (jsonData.examInfo) {
+            // New format
+            state.examInfo = jsonData.examInfo;
+            state.instructions = jsonData.instructions || [];
+            state.questions = jsonData.questions || [];
+        } else if (Array.isArray(jsonData)) {
+            // Old format
+            state.examInfo = {
+                title: "प्रदेश लोक सेवा आयोग",
+                subtitle: "Multiple Choice Exam",
+                date: "२०८२।१०।१२",
+                time: 30,
+                paper: "प्रथम",
+                subject: "Objective MCQs",
+                fullMarks: 100,
+                negativeMarking: true,
+                negativePercentage: 20,
+                lock: false,
+                price: 0
+            };
+            state.instructions = [
+                "कृपया एउटा उत्तर मात्र छानुहोस",
+                "सबै प्रश्न अनिवार्य छन्",
+                "Wrong answers have 20% negative marking",
+                "Skipped questions are not penalized"
+            ];
+            state.questions = jsonData;
+        } else {
+            throw new Error('Invalid JSON format');
+        }
+        
+        // Set default marks if not provided
+        state.questions = state.questions.map((q, index) => ({
+            ...q,
+            marks: q.marks || 1,
+            id: `exam_${selectedSet.fileName}_${index}`
+        }));
+        
+        // Calculate total time in seconds
+        state.totalTime = (state.examInfo.time || 30) * 60;
+        state.negativeMarking = state.examInfo.negativeMarking || false;
+        state.negativePercentage = state.examInfo.negativePercentage || 20;
         
         if (state.questions.length === 0) {
             throw new Error('No questions loaded');
@@ -463,15 +557,15 @@ async function loadAndStartMCQExam(selectedSet) {
         
         const examSetSelection = getDOMElement('exam-set-selection');
         const mcqExam = getDOMElement('multiple-choice-exam');
-        const examTitle = getDOMElement('multiple-choice-exam-title');
-        const examSetInfo = getDOMElement('exam-set-info');
         
-        if (!examSetSelection || !mcqExam || !examTitle || !examSetInfo) return;
+        if (!examSetSelection || !mcqExam) return;
         
         hideElement(examSetSelection);
         showElement(mcqExam);
-        examTitle.textContent = `Multiple Choice Exam`;
-        examSetInfo.textContent = selectedSet.displayName;
+        
+        // Display exam info
+        displayExamInfo(state.examInfo);
+        displayInstructions(state.instructions);
         
         initializeExamProgress();
         loadMCQExamQuestion();
@@ -481,6 +575,48 @@ async function loadAndStartMCQExam(selectedSet) {
         console.error('Error loading exam set:', error);
         alert(`Failed to load exam questions from ${selectedSet.fileName}.`);
     }
+}
+
+// New function to display exam info
+function displayExamInfo(examInfo) {
+    const examTitle = getDOMElement('multiple-choice-exam-title');
+    const examSetInfo = getDOMElement('exam-set-info');
+    
+    if (!examTitle || !examSetInfo) return;
+    
+    examTitle.textContent = examInfo.title || "Multiple Choice Exam";
+    examSetInfo.innerHTML = `
+        <div>${examInfo.subtitle || ""}</div>
+        <div class="exam-details-small">
+            <span><i class="fas fa-calendar"></i> ${examInfo.date || ""}</span>
+            <span><i class="fas fa-clock"></i> ${examInfo.time || 30} minutes</span>
+            <span><i class="fas fa-file-alt"></i> ${examInfo.paper || ""}</span>
+            <span><i class="fas fa-book"></i> ${examInfo.subject || ""}</span>
+            <span><i class="fas fa-star"></i> Full Marks: ${examInfo.fullMarks || 100}</span>
+        </div>
+    `;
+}
+
+// New function to display instructions
+function displayInstructions(instructions) {
+    const instructionsContainer = document.getElementById('exam-instructions-container');
+    if (!instructionsContainer) return;
+    
+    if (!instructions || instructions.length === 0) {
+        instructionsContainer.style.display = 'none';
+        return;
+    }
+    
+    instructionsContainer.style.display = 'block';
+    instructionsContainer.innerHTML = `
+        <div class="instructions-header">
+            <i class="fas fa-info-circle"></i>
+            <span>Instructions</span>
+        </div>
+        <ul class="instructions-list">
+            ${instructions.map(instruction => `<li>${instruction}</li>`).join('')}
+        </ul>
+    `;
 }
 
 // Add this new function to initialize progress display
@@ -892,6 +1028,8 @@ function loadMCQExamQuestion() {
     const questionText = document.getElementById('mcq-question-text');
     const optionsContainer = document.getElementById('exam-options-container');
     const currentQuestion = document.getElementById('current-exam-question');
+    const totalQuestions = document.getElementById('total-exam-questions');
+    const questionMarks = document.getElementById('current-question-marks');
     const prevExamQuestion = getDOMElement('prev-exam-question');
     const nextExamQuestion = getDOMElement('next-exam-question');
     const flagExamQuestion = getDOMElement('flag-exam-question');
@@ -903,6 +1041,13 @@ function loadMCQExamQuestion() {
     
     // Update current question number
     currentQuestion.textContent = state.currentQuestionIndex + 1;
+    if (totalQuestions) totalQuestions.textContent = state.questions.length;
+    
+    // Update question marks
+    if (questionMarks) {
+        const marks = question.marks || 1;
+        questionMarks.textContent = `${marks} mark${marks !== 1 ? 's' : ''}`;
+    }
     
     // Create options
     optionsContainer.innerHTML = question.options.map((option, index) => {
@@ -968,10 +1113,17 @@ function updateMCQExamProgress() {
     const flagged = Object.keys(state.flagged).filter(index => state.flagged[index]).length;
     const remaining = total - answered;
     
+    const totalMarksDisplay = document.getElementById('total-marks-display');
+    if (totalMarksDisplay) {
+        const totalMarks = state.questions.reduce((sum, q) => sum + (q.marks || 1), 0);
+        totalMarksDisplay.textContent = totalMarks;
+    }
+    
     document.getElementById('mcq-answered-questions').textContent = answered;
     document.getElementById('mcq-flagged-questions').textContent = flagged;
     document.getElementById('mcq-remaining-questions').textContent = remaining;
 }
+
 
 // Add new function to update question grid
 function updateProgressGrid() {
@@ -1001,7 +1153,7 @@ function updateProgressGrid() {
     });
 }
 
-
+// Update timer to use exam time
 function startTimer(type) {
     let timerElement, progressFillElement, totalTime;
     
@@ -1011,7 +1163,7 @@ function startTimer(type) {
     } else {
         timerElement = document.getElementById('mcq-exam-timer');
         progressFillElement = document.getElementById('timer-progress-fill');
-        totalTime = 30 * 60;
+        totalTime = AppState.examState.totalTime || 30 * 60;
     }
     
     if (!timerElement) return;
@@ -1070,26 +1222,43 @@ function startTimer(type) {
     AppState.examState.timer = timer;
 }
 
+
+// Update the submitMCQExam function to calculate marks with negative marking
 function submitMCQExam() {
     const state = AppState.examState;
     let correct = 0;
     let wrong = 0;
     let skipped = 0;
+    let totalMarks = 0;
+    let obtainedMarks = 0;
     
     state.questions.forEach((question, index) => {
         const userAnswer = state.answers[index];
+        const marks = question.marks || 1;
+        
+        totalMarks += marks;
+        
         if (userAnswer) {
             if (userAnswer === question.correct) {
                 correct++;
+                obtainedMarks += marks;
             } else {
                 wrong++;
+                if (state.negativeMarking) {
+                    // Deduct negative marks
+                    const deduction = (marks * state.negativePercentage) / 100;
+                    obtainedMarks -= deduction;
+                }
             }
         } else {
             skipped++;
         }
     });
     
-    const percentage = Math.round((correct / state.questions.length) * 100);
+    // Ensure marks don't go below 0
+    obtainedMarks = Math.max(0, obtainedMarks);
+    
+    const percentage = Math.round((obtainedMarks / totalMarks) * 100);
     
     if (AppState.timers.mcqExam) clearInterval(AppState.timers.mcqExam);
     
@@ -1107,6 +1276,10 @@ function submitMCQExam() {
     const correctCountElement = document.getElementById('correct-count');
     const wrongCountElement = document.getElementById('wrong-count');
     const skippedCountElement = document.getElementById('skipped-count');
+    const totalMarksElement = document.getElementById('total-marks');
+    const obtainedMarksElement = document.getElementById('obtained-marks');
+    const examTimeTaken = document.getElementById('exam-time-taken');
+    const negativeMarkingInfo = document.getElementById('negative-marking-info');
     
     if (scoreElement) scoreElement.textContent = percentage + '%';
     if (correctAnswersElement) correctAnswersElement.textContent = correct;
@@ -1114,6 +1287,31 @@ function submitMCQExam() {
     if (correctCountElement) correctCountElement.textContent = correct;
     if (wrongCountElement) wrongCountElement.textContent = wrong;
     if (skippedCountElement) skippedCountElement.textContent = skipped;
+    if (totalMarksElement) totalMarksElement.textContent = totalMarks;
+    if (obtainedMarksElement) obtainedMarksElement.textContent = obtainedMarks.toFixed(2);
+    
+    // Update time taken
+    if (examTimeTaken) {
+        const minutes = Math.floor((state.totalTime - AppState.examState.remainingTime) / 60);
+        examTimeTaken.textContent = `${minutes} minutes`;
+    }
+    
+    // Show negative marking info if applicable
+    if (negativeMarkingInfo) {
+        negativeMarkingInfo.style.display = state.negativeMarking ? 'block' : 'none';
+        if (state.negativeMarking) {
+            negativeMarkingInfo.innerHTML = `
+                <i class="fas fa-exclamation-triangle"></i> 
+                Negative marking applied (${state.negativePercentage}% deduction for wrong answers)
+            `;
+        }
+    }
+    
+    // Update results subtitle
+    const resultsSubtitle = document.getElementById('exam-results-subtitle');
+    if (resultsSubtitle) {
+        resultsSubtitle.textContent = `Multiple Choice Exam - ${state.currentSet}`;
+    }
 }
 
 function resetExamTypeSelection() {
@@ -1153,17 +1351,24 @@ function resetExamTypeSelection() {
 
 function showExamAnswers() {
     const state = AppState.examState;
-    let answersHtml = '<h4>Correct Answers:</h4><ol>';
+    let answersHtml = '<h4>Exam Review:</h4><ol>';
     
     state.questions.forEach((question, index) => {
         const userAnswer = state.answers[index];
         const isCorrect = userAnswer === question.correct;
+        const marks = question.marks || 1;
+        let marksDisplay = `(${marks} mark${marks !== 1 ? 's' : ''})`;
+        
         answersHtml += `
-            <li style="margin-bottom: 1rem; padding: 0.5rem; background-color: ${isCorrect ? '#d4edda' : '#f8d7da'}; border-radius: 4px;">
-                <strong>${question.question}</strong><br>
-                Your answer: <span style="color: ${isCorrect ? 'green' : 'red'}">${userAnswer || 'Not answered'}</span><br>
-                Correct answer: <span style="color: green">${question.correct}</span><br>
-                Explanation: ${question.explanation}
+            <li style="margin-bottom: 1.5rem; padding: 1rem; background-color: ${isCorrect ? '#d4edda' : '#f8d7da'}; border-radius: 8px;">
+                <strong>Q${index + 1} ${marksDisplay}: ${question.question}</strong><br>
+                Your answer: <span style="color: ${isCorrect ? 'green' : 'red'}; font-weight: bold;">${userAnswer || 'Not answered'}</span><br>
+                Correct answer: <span style="color: green; font-weight: bold;">${question.correct}</span><br>
+                ${question.explanation ? `Explanation: ${question.explanation}<br>` : ''}
+                ${!isCorrect && userAnswer && state.negativeMarking ? 
+                    `<span style="color: #dc3545; font-size: 0.9rem;">
+                        <i class="fas fa-exclamation-circle"></i> Penalty applied: -${(marks * state.negativePercentage / 100).toFixed(1)} marks
+                    </span>` : ''}
             </li>
         `;
     });
