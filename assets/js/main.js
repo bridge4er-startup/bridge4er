@@ -9,9 +9,15 @@ function init() {
     loadField('civil');
     updateFieldIndicators();
     initPaymentSystem();
+    initPdfModal();
     
     // Add new DOM elements to cache
     const additionalElements = [
+        'pdf-modal',
+        'pdf-modal-title',
+        'pdf-viewer-iframe',
+        'pdf-fallback',
+        'pdf-download-link',
         'exam-info-container',
         'exam-instructions-container',
         'current-question-marks',
