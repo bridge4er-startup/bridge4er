@@ -32,6 +32,7 @@ async function loadNoticeFiles() {
             const fileSize = formatFileSize(file.size || 0);
             const fileExt = fileName.split('.').pop().toLowerCase();
             const iconClass = getFileIconClass(fileExt);
+            const fileUrl = file.download_url || getRawFileUrl(file.path);
             
             return `
                 <li>
@@ -45,16 +46,39 @@ async function loadNoticeFiles() {
                         </div>
                     </div>
                     <div class="file-actions">
-                        <button class="btn btn-primary" onclick="viewFile('${file.download_url || getRawFileUrl(file.path)}', '${fileName}')">
+                        <button class="btn btn-primary view-file-btn" 
+                                data-file-url="${fileUrl}" 
+                                data-file-name="${fileName}"
+                                data-file-ext="${fileExt}">
                             <i class="fas fa-eye"></i> View
                         </button>
-                        <button class="btn btn-secondary" onclick="downloadFile('${file.download_url || getRawFileUrl(file.path)}', '${fileName}')">
+                        <button class="btn btn-secondary download-file-btn" 
+                                data-file-url="${fileUrl}" 
+                                data-file-name="${fileName}">
                             <i class="fas fa-download"></i> Download
                         </button>
                     </div>
                 </li>
             `;
         }).join('');
+        
+        // Add event listeners for the buttons
+        document.querySelectorAll('.view-file-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const fileUrl = e.target.dataset.fileUrl || e.target.closest('.view-file-btn').dataset.fileUrl;
+                const fileName = e.target.dataset.fileName || e.target.closest('.view-file-btn').dataset.fileName;
+                const fileExt = e.target.dataset.fileExt || e.target.closest('.view-file-btn').dataset.fileExt;
+                viewFile(fileUrl, fileName, fileExt);
+            });
+        });
+        
+        document.querySelectorAll('.download-file-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const fileUrl = e.target.dataset.fileUrl || e.target.closest('.download-file-btn').dataset.fileUrl;
+                const fileName = e.target.dataset.fileName || e.target.closest('.download-file-btn').dataset.fileName;
+                downloadFile(fileUrl, fileName);
+            });
+        });
         
     } catch (error) {
         console.error('Error loading notice files:', error);
@@ -96,6 +120,7 @@ async function loadSyllabusFiles() {
             const fileSize = formatFileSize(file.size || 0);
             const fileExt = fileName.split('.').pop().toLowerCase();
             const iconClass = getFileIconClass(fileExt);
+            const fileUrl = file.download_url || getRawFileUrl(file.path);
             
             return `
                 <li>
@@ -109,16 +134,39 @@ async function loadSyllabusFiles() {
                         </div>
                     </div>
                     <div class="file-actions">
-                        <button class="btn btn-primary" onclick="viewFile('${file.download_url || getRawFileUrl(file.path)}', '${fileName}')">
+                        <button class="btn btn-primary view-file-btn" 
+                                data-file-url="${fileUrl}" 
+                                data-file-name="${fileName}"
+                                data-file-ext="${fileExt}">
                             <i class="fas fa-eye"></i> View
                         </button>
-                        <button class="btn btn-secondary" onclick="downloadFile('${file.download_url || getRawFileUrl(file.path)}', '${fileName}')">
+                        <button class="btn btn-secondary download-file-btn" 
+                                data-file-url="${fileUrl}" 
+                                data-file-name="${fileName}">
                             <i class="fas fa-download"></i> Download
                         </button>
                     </div>
                 </li>
             `;
         }).join('');
+        
+        // Add event listeners for the buttons
+        document.querySelectorAll('.view-file-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const fileUrl = e.target.dataset.fileUrl || e.target.closest('.view-file-btn').dataset.fileUrl;
+                const fileName = e.target.dataset.fileName || e.target.closest('.view-file-btn').dataset.fileName;
+                const fileExt = e.target.dataset.fileExt || e.target.closest('.view-file-btn').dataset.fileExt;
+                viewFile(fileUrl, fileName, fileExt);
+            });
+        });
+        
+        document.querySelectorAll('.download-file-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const fileUrl = e.target.dataset.fileUrl || e.target.closest('.download-file-btn').dataset.fileUrl;
+                const fileName = e.target.dataset.fileName || e.target.closest('.download-file-btn').dataset.fileName;
+                downloadFile(fileUrl, fileName);
+            });
+        });
         
     } catch (error) {
         console.error('Error loading syllabus files:', error);
@@ -166,6 +214,7 @@ async function loadOldQuestionFiles() {
             const year = extractYearFromFilename(fileName);
             const fileExt = fileName.split('.').pop().toLowerCase();
             const iconClass = getFileIconClass(fileExt);
+            const fileUrl = file.download_url || getRawFileUrl(file.path);
             
             return `
                 <li>
@@ -179,16 +228,39 @@ async function loadOldQuestionFiles() {
                         </div>
                     </div>
                     <div class="file-actions">
-                        <button class="btn btn-primary" onclick="viewFile('${file.download_url || getRawFileUrl(file.path)}', '${fileName}')">
+                        <button class="btn btn-primary view-file-btn" 
+                                data-file-url="${fileUrl}" 
+                                data-file-name="${fileName}"
+                                data-file-ext="${fileExt}">
                             <i class="fas fa-eye"></i> View
                         </button>
-                        <button class="btn btn-secondary" onclick="downloadFile('${file.download_url || getRawFileUrl(file.path)}', '${fileName}')">
+                        <button class="btn btn-secondary download-file-btn" 
+                                data-file-url="${fileUrl}" 
+                                data-file-name="${fileName}">
                             <i class="fas fa-download"></i> Download
                         </button>
                     </div>
                 </li>
             `;
         }).join('');
+        
+        // Add event listeners for the buttons
+        document.querySelectorAll('.view-file-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const fileUrl = e.target.dataset.fileUrl || e.target.closest('.view-file-btn').dataset.fileUrl;
+                const fileName = e.target.dataset.fileName || e.target.closest('.view-file-btn').dataset.fileName;
+                const fileExt = e.target.dataset.fileExt || e.target.closest('.view-file-btn').dataset.fileExt;
+                viewFile(fileUrl, fileName, fileExt);
+            });
+        });
+        
+        document.querySelectorAll('.download-file-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const fileUrl = e.target.dataset.fileUrl || e.target.closest('.download-file-btn').dataset.fileUrl;
+                const fileName = e.target.dataset.fileName || e.target.closest('.download-file-btn').dataset.fileName;
+                downloadFile(fileUrl, fileName);
+            });
+        });
         
     } catch (error) {
         console.error('Error loading old questions:', error);
@@ -199,6 +271,204 @@ async function loadOldQuestionFiles() {
         }
     }
 }
+
+// ==============================================
+// PDF VIEWER FUNCTIONS
+// ==============================================
+
+// Global PDF viewer state
+const PDFViewerState = {
+    currentPdfUrl: null,
+    currentFileName: null
+};
+
+// Initialize PDF modal
+function initPdfModal() {
+    const pdfModal = document.getElementById('pdf-modal');
+    const closeBtn = document.querySelector('.close-pdf-modal');
+    const downloadLink = document.getElementById('pdf-download-link');
+    const pdfIframe = document.getElementById('pdf-viewer-iframe');
+    
+    if (!pdfModal || !closeBtn) return;
+    
+    // Close modal
+    closeBtn.addEventListener('click', () => {
+        pdfModal.classList.remove('active');
+        document.body.style.overflow = '';
+        
+        // Clear iframe src to stop loading
+        if (pdfIframe) {
+            pdfIframe.src = 'about:blank';
+        }
+        
+        // Clear state
+        PDFViewerState.currentPdfUrl = null;
+        PDFViewerState.currentFileName = null;
+    });
+    
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && pdfModal.classList.contains('active')) {
+            closeBtn.click();
+        }
+    });
+    
+    // Close on outside click
+    pdfModal.addEventListener('click', (e) => {
+        if (e.target === pdfModal) {
+            closeBtn.click();
+        }
+    });
+    
+    // Setup download link
+    if (downloadLink) {
+        downloadLink.addEventListener('click', (e) => {
+            if (PDFViewerState.currentPdfUrl && PDFViewerState.currentFileName) {
+                downloadFile(PDFViewerState.currentPdfUrl, PDFViewerState.currentFileName);
+            }
+        });
+    }
+}
+
+// Function to view PDF in modal
+function viewPdfInModal(fileUrl, fileName) {
+    const pdfModal = document.getElementById('pdf-modal');
+    const pdfTitle = document.getElementById('pdf-modal-title');
+    const pdfIframe = document.getElementById('pdf-viewer-iframe');
+    const pdfFallback = document.getElementById('pdf-fallback');
+    const downloadLink = document.getElementById('pdf-download-link');
+    
+    if (!pdfModal) {
+        // Fallback to window.open if modal not found
+        window.open(fileUrl, '_blank');
+        return;
+    }
+    
+    // Update state
+    PDFViewerState.currentPdfUrl = fileUrl;
+    PDFViewerState.currentFileName = fileName;
+    
+    // Update modal title
+    if (pdfTitle) {
+        pdfTitle.textContent = fileName.replace(/\.pdf$/i, '').replace(/[_-]/g, ' ');
+    }
+    
+    // Show modal
+    pdfModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Setup download link
+    if (downloadLink) {
+        downloadLink.href = fileUrl;
+        downloadLink.download = fileName;
+    }
+    
+    // Hide fallback initially
+    if (pdfFallback) {
+        pdfFallback.style.display = 'none';
+    }
+    
+    // Show iframe
+    if (pdfIframe) {
+        pdfIframe.style.display = 'block';
+        pdfIframe.src = 'about:blank';
+        
+        // Load PDF after a small delay
+        setTimeout(() => {
+            try {
+                // Convert GitHub blob URL to raw URL if needed
+                let pdfUrl = fileUrl;
+                
+                // Check if it's a GitHub blob URL
+                if (fileUrl.includes('github.com') && fileUrl.includes('/blob/')) {
+                    // Convert blob URL to raw URL
+                    pdfUrl = fileUrl.replace('github.com', 'raw.githubusercontent.com')
+                                   .replace('/blob/', '/');
+                }
+                
+                // Try direct embedding first
+                pdfIframe.src = pdfUrl;
+                
+                // Add error handler for iframe
+                pdfIframe.onerror = () => {
+                    console.log('Direct embedding failed, trying Google Docs viewer');
+                    // Try Google Docs viewer as fallback
+                    const googleViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(pdfUrl)}&embedded=true`;
+                    pdfIframe.src = googleViewerUrl;
+                    
+                    // Second error handler for Google Docs
+                    pdfIframe.onerror = () => {
+                        console.log('Google Docs viewer also failed');
+                        if (pdfIframe) {
+                            pdfIframe.style.display = 'none';
+                        }
+                        if (pdfFallback) {
+                            pdfFallback.style.display = 'flex';
+                        }
+                    };
+                };
+                
+                // Add load handler
+                pdfIframe.onload = () => {
+                    console.log('PDF loaded successfully');
+                    // PDF loaded successfully
+                };
+                
+            } catch (error) {
+                console.error('Error loading PDF:', error);
+                if (pdfIframe) {
+                    pdfIframe.style.display = 'none';
+                }
+                if (pdfFallback) {
+                    pdfFallback.style.display = 'flex';
+                }
+            }
+        }, 100);
+    }
+}
+
+// Global function to view files
+window.viewFile = function(fileUrl, fileName, fileExt) {
+    // If fileExt not provided, extract from fileName
+    if (!fileExt) {
+        fileExt = fileName.split('.').pop().toLowerCase();
+    }
+    
+    if (fileExt === 'pdf') {
+        // Use PDF modal for PDF files
+        viewPdfInModal(fileUrl, fileName);
+    } else if (['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg'].includes(fileExt)) {
+        // For images, open in new tab
+        window.open(fileUrl, '_blank');
+    } else if (['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'].includes(fileExt)) {
+        // For Office files, use Google Docs viewer
+        const googleViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(fileUrl)}&embedded=true`;
+        window.open(googleViewerUrl, '_blank');
+    } else {
+        // For other files, open in new tab
+        try {
+            window.open(fileUrl, '_blank');
+        } catch (error) {
+            console.error('Error viewing file:', error);
+            alert('Unable to open file. Please try downloading instead.');
+        }
+    }
+};
+
+// Global function to download files
+window.downloadFile = function(fileUrl, fileName) {
+    try {
+        const link = document.createElement('a');
+        link.href = fileUrl;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } catch (error) {
+        console.error('Error downloading file:', error);
+        alert('Unable to download file. Please try again.');
+    }
+};
 
 // ==============================================
 // SEARCH FUNCTIONALITY
