@@ -411,12 +411,18 @@ async function openBookReader(subject, chapter, fileName, fileExt) {
     if (fileTitle) fileTitle.textContent = chapter;
     
     if (fileExt === 'pdf') {
-        const pdfViewer = document.getElementById('pdf-viewer');
-        const pdfFrame = document.getElementById('pdf-frame');
-        if (pdfViewer && pdfFrame) {
-            pdfViewer.style.display = 'block';
-            pdfFrame.src = fileUrl;
+        // Use the PDF modal instead of inline viewer
+        viewPdfInModal(fileUrl, fileName);
+        
+        // Hide the book reader and go back to books view
+        const bookReader = document.getElementById('book-reader');
+        const booksView = document.getElementById('subject-books-view');
+        if (bookReader && booksView) {
+            bookReader.style.display = 'none';
+            booksView.style.display = 'block';
         }
+        return; // Exit function early
+ 
     } else if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExt)) {
         const imageGallery = document.getElementById('image-gallery');
         if (imageGallery) imageGallery.style.display = 'block';
